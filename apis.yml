@@ -1,0 +1,54 @@
+name: Google Tag Manager
+description: Google Tag Manager is a tag management system that allows you to quickly and easily update measurement codes and related code fragments collectively known as tags on your website or mobile app.
+image: https://www.gstatic.com/analytics-suite/header/suite/v2/ic_tag_manager.svg
+tags:
+- Tag Management
+- Analytics
+- Marketing
+- Tracking
+- Conversion Tracking
+created: '2024'
+modified: '2024'
+url: https://tagmanager.google.com/
+specificationVersion: '0.18'
+apis:
+- name: Google Tag Manager API
+  description: The Tag Manager API allows clients to access and modify container and tag configuration.
+  image: https://www.gstatic.com/analytics-suite/header/suite/v2/ic_tag_manager.svg
+  humanURL: https://developers.google.com/tag-manager
+  baseURL: https://tagmanager.googleapis.com
+  tags:
+  - Tag Management
+  - Analytics
+  - Containers
+  - Tags
+  - Triggers
+  - Variables
+  properties:
+  - type: OpenAPI
+    url: https://tagmanager.googleapis.com/$discovery/rest?version=v2
+  - type: Documentation
+    url: https://developers.google.com/tag-manager/api/v2
+  - type: Authentication
+    url: https://developers.google.com/tag-manager/api/v2/authorization
+  contact:
+  - FN: Google Support
+    url: https://support.google.com/tagmanager
+    email: ''
+common:
+- type: GettingStarted
+  url: https://developers.google.com/tag-manager/quickstart
+- type: Authentication
+  url: https://developers.google.com/tag-manager/api/v2/authorization
+- type: Status
+  url: https://status.cloud.google.com/
+- type: TermsOfService
+  url: https://policies.google.com/terms
+- type: Privacy
+  url: https://policies.google.com/privacy
+- type: Support
+  url: https://support.google.com/tagmanager
+maintainers:
+- FN: Google
+  email: ''
+  url: https://www.google.com
