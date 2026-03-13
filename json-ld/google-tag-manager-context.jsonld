@@ -1,0 +1,436 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "gtm": "https://developers.google.com/tag-platform/tag-manager/api/reference/rest/v2/",
+    "gtmAccount": "gtm:accounts#Account",
+    "gtmContainer": "gtm:accounts.containers#Container",
+    "gtmWorkspace": "gtm:accounts.containers.workspaces#Workspace",
+    "gtmTag": "gtm:accounts.containers.workspaces.tags#Tag",
+    "gtmTrigger": "gtm:accounts.containers.workspaces.triggers#Trigger",
+    "gtmVariable": "gtm:accounts.containers.workspaces.variables#Variable",
+    "gtmVersion": "gtm:accounts.containers.versions#ContainerVersion",
+    "gtmParameter": "gtm:Parameter",
+    "Account": {
+      "@id": "gtmAccount",
+      "@context": {
+        "path": {
+          "@id": "gtm:accounts#Account.path",
+          "@type": "xsd:string"
+        },
+        "accountId": {
+          "@id": "gtm:accounts#Account.accountId",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "shareData": {
+          "@id": "gtm:accounts#Account.shareData",
+          "@type": "xsd:boolean"
+        },
+        "fingerprint": {
+          "@id": "gtm:accounts#Account.fingerprint",
+          "@type": "xsd:string"
+        },
+        "tagManagerUrl": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "features": {
+          "@id": "gtm:accounts#Account.features",
+          "@type": "@id"
+        }
+      }
+    },
+    "Container": {
+      "@id": "gtmContainer",
+      "@context": {
+        "path": {
+          "@id": "gtm:accounts.containers#Container.path",
+          "@type": "xsd:string"
+        },
+        "accountId": {
+          "@id": "gtm:accounts.containers#Container.accountId",
+          "@type": "xsd:string"
+        },
+        "containerId": {
+          "@id": "gtm:accounts.containers#Container.containerId",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "domainName": {
+          "@id": "gtm:accounts.containers#Container.domainName",
+          "@container": "@list"
+        },
+        "publicId": {
+          "@id": "schema:identifier",
+          "@type": "xsd:string"
+        },
+        "tagIds": {
+          "@id": "gtm:accounts.containers#Container.tagIds",
+          "@container": "@list"
+        },
+        "notes": {
+          "@id": "schema:description",
+          "@type": "xsd:string"
+        },
+        "usageContext": {
+          "@id": "gtm:accounts.containers#Container.usageContext",
+          "@container": "@list"
+        },
+        "fingerprint": {
+          "@id": "gtm:accounts.containers#Container.fingerprint",
+          "@type": "xsd:string"
+        },
+        "tagManagerUrl": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "taggingServerUrls": {
+          "@id": "gtm:accounts.containers#Container.taggingServerUrls",
+          "@container": "@list"
+        },
+        "features": {
+          "@id": "gtm:accounts.containers#Container.features",
+          "@type": "@id"
+        }
+      }
+    },
+    "Workspace": {
+      "@id": "gtmWorkspace",
+      "@context": {
+        "path": {
+          "@id": "gtm:accounts.containers.workspaces#Workspace.path",
+          "@type": "xsd:string"
+        },
+        "accountId": {
+          "@id": "gtm:accounts.containers.workspaces#Workspace.accountId",
+          "@type": "xsd:string"
+        },
+        "containerId": {
+          "@id": "gtm:accounts.containers.workspaces#Workspace.containerId",
+          "@type": "xsd:string"
+        },
+        "workspaceId": {
+          "@id": "gtm:accounts.containers.workspaces#Workspace.workspaceId",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "schema:description",
+          "@type": "xsd:string"
+        },
+        "fingerprint": {
+          "@id": "gtm:accounts.containers.workspaces#Workspace.fingerprint",
+          "@type": "xsd:string"
+        },
+        "tagManagerUrl": {
+          "@id": "schema:url",
+          "@type": "@id"
+        }
+      }
+    },
+    "Tag": {
+      "@id": "gtmTag",
+      "@context": {
+        "path": {
+          "@id": "gtm:accounts.containers.workspaces.tags#Tag.path",
+          "@type": "xsd:string"
+        },
+        "accountId": {
+          "@id": "gtm:accounts.containers.workspaces.tags#Tag.accountId",
+          "@type": "xsd:string"
+        },
+        "containerId": {
+          "@id": "gtm:accounts.containers.workspaces.tags#Tag.containerId",
+          "@type": "xsd:string"
+        },
+        "workspaceId": {
+          "@id": "gtm:accounts.containers.workspaces.tags#Tag.workspaceId",
+          "@type": "xsd:string"
+        },
+        "tagId": {
+          "@id": "schema:identifier",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "type": {
+          "@id": "gtm:accounts.containers.workspaces.tags#Tag.type",
+          "@type": "xsd:string"
+        },
+        "liveOnly": {
+          "@id": "gtm:accounts.containers.workspaces.tags#Tag.liveOnly",
+          "@type": "xsd:boolean"
+        },
+        "notes": {
+          "@id": "schema:description",
+          "@type": "xsd:string"
+        },
+        "scheduleStartMs": {
+          "@id": "gtm:accounts.containers.workspaces.tags#Tag.scheduleStartMs",
+          "@type": "xsd:long"
+        },
+        "scheduleEndMs": {
+          "@id": "gtm:accounts.containers.workspaces.tags#Tag.scheduleEndMs",
+          "@type": "xsd:long"
+        },
+        "parameter": {
+          "@id": "gtm:accounts.containers.workspaces.tags#Tag.parameter",
+          "@container": "@list"
+        },
+        "fingerprint": {
+          "@id": "gtm:accounts.containers.workspaces.tags#Tag.fingerprint",
+          "@type": "xsd:string"
+        },
+        "firingTriggerId": {
+          "@id": "gtm:accounts.containers.workspaces.tags#Tag.firingTriggerId",
+          "@container": "@list"
+        },
+        "blockingTriggerId": {
+          "@id": "gtm:accounts.containers.workspaces.tags#Tag.blockingTriggerId",
+          "@container": "@list"
+        },
+        "parentFolderId": {
+          "@id": "gtm:accounts.containers.workspaces.tags#Tag.parentFolderId",
+          "@type": "xsd:string"
+        },
+        "tagFiringOption": {
+          "@id": "gtm:accounts.containers.workspaces.tags#Tag.tagFiringOption",
+          "@type": "xsd:string"
+        },
+        "tagManagerUrl": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "paused": {
+          "@id": "gtm:accounts.containers.workspaces.tags#Tag.paused",
+          "@type": "xsd:boolean"
+        },
+        "consentSettings": {
+          "@id": "gtm:accounts.containers.workspaces.tags#Tag.consentSettings",
+          "@type": "@id"
+        }
+      }
+    },
+    "Trigger": {
+      "@id": "gtmTrigger",
+      "@context": {
+        "path": {
+          "@id": "gtm:accounts.containers.workspaces.triggers#Trigger.path",
+          "@type": "xsd:string"
+        },
+        "accountId": {
+          "@id": "gtm:accounts.containers.workspaces.triggers#Trigger.accountId",
+          "@type": "xsd:string"
+        },
+        "containerId": {
+          "@id": "gtm:accounts.containers.workspaces.triggers#Trigger.containerId",
+          "@type": "xsd:string"
+        },
+        "workspaceId": {
+          "@id": "gtm:accounts.containers.workspaces.triggers#Trigger.workspaceId",
+          "@type": "xsd:string"
+        },
+        "triggerId": {
+          "@id": "schema:identifier",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "type": {
+          "@id": "gtm:accounts.containers.workspaces.triggers#Trigger.type",
+          "@type": "xsd:string"
+        },
+        "customEventFilter": {
+          "@id": "gtm:accounts.containers.workspaces.triggers#Trigger.customEventFilter",
+          "@container": "@list"
+        },
+        "filter": {
+          "@id": "gtm:accounts.containers.workspaces.triggers#Trigger.filter",
+          "@container": "@list"
+        },
+        "autoEventFilter": {
+          "@id": "gtm:accounts.containers.workspaces.triggers#Trigger.autoEventFilter",
+          "@container": "@list"
+        },
+        "fingerprint": {
+          "@id": "gtm:accounts.containers.workspaces.triggers#Trigger.fingerprint",
+          "@type": "xsd:string"
+        },
+        "parentFolderId": {
+          "@id": "gtm:accounts.containers.workspaces.triggers#Trigger.parentFolderId",
+          "@type": "xsd:string"
+        },
+        "tagManagerUrl": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "notes": {
+          "@id": "schema:description",
+          "@type": "xsd:string"
+        },
+        "parameter": {
+          "@id": "gtm:accounts.containers.workspaces.triggers#Trigger.parameter",
+          "@container": "@list"
+        }
+      }
+    },
+    "Variable": {
+      "@id": "gtmVariable",
+      "@context": {
+        "path": {
+          "@id": "gtm:accounts.containers.workspaces.variables#Variable.path",
+          "@type": "xsd:string"
+        },
+        "accountId": {
+          "@id": "gtm:accounts.containers.workspaces.variables#Variable.accountId",
+          "@type": "xsd:string"
+        },
+        "containerId": {
+          "@id": "gtm:accounts.containers.workspaces.variables#Variable.containerId",
+          "@type": "xsd:string"
+        },
+        "workspaceId": {
+          "@id": "gtm:accounts.containers.workspaces.variables#Variable.workspaceId",
+          "@type": "xsd:string"
+        },
+        "variableId": {
+          "@id": "schema:identifier",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "type": {
+          "@id": "gtm:accounts.containers.workspaces.variables#Variable.type",
+          "@type": "xsd:string"
+        },
+        "notes": {
+          "@id": "schema:description",
+          "@type": "xsd:string"
+        },
+        "scheduleStartMs": {
+          "@id": "gtm:accounts.containers.workspaces.variables#Variable.scheduleStartMs",
+          "@type": "xsd:long"
+        },
+        "scheduleEndMs": {
+          "@id": "gtm:accounts.containers.workspaces.variables#Variable.scheduleEndMs",
+          "@type": "xsd:long"
+        },
+        "parameter": {
+          "@id": "gtm:accounts.containers.workspaces.variables#Variable.parameter",
+          "@container": "@list"
+        },
+        "enablingTriggerId": {
+          "@id": "gtm:accounts.containers.workspaces.variables#Variable.enablingTriggerId",
+          "@container": "@list"
+        },
+        "disablingTriggerId": {
+          "@id": "gtm:accounts.containers.workspaces.variables#Variable.disablingTriggerId",
+          "@container": "@list"
+        },
+        "fingerprint": {
+          "@id": "gtm:accounts.containers.workspaces.variables#Variable.fingerprint",
+          "@type": "xsd:string"
+        },
+        "parentFolderId": {
+          "@id": "gtm:accounts.containers.workspaces.variables#Variable.parentFolderId",
+          "@type": "xsd:string"
+        },
+        "tagManagerUrl": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "formatValue": {
+          "@id": "gtm:accounts.containers.workspaces.variables#Variable.formatValue",
+          "@type": "@id"
+        }
+      }
+    },
+    "ContainerVersion": {
+      "@id": "gtmVersion",
+      "@context": {
+        "path": {
+          "@id": "gtm:accounts.containers.versions#ContainerVersion.path",
+          "@type": "xsd:string"
+        },
+        "accountId": {
+          "@id": "gtm:accounts.containers.versions#ContainerVersion.accountId",
+          "@type": "xsd:string"
+        },
+        "containerId": {
+          "@id": "gtm:accounts.containers.versions#ContainerVersion.containerId",
+          "@type": "xsd:string"
+        },
+        "containerVersionId": {
+          "@id": "schema:identifier",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "schema:description",
+          "@type": "xsd:string"
+        },
+        "fingerprint": {
+          "@id": "gtm:accounts.containers.versions#ContainerVersion.fingerprint",
+          "@type": "xsd:string"
+        },
+        "tagManagerUrl": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "deleted": {
+          "@id": "gtm:accounts.containers.versions#ContainerVersion.deleted",
+          "@type": "xsd:boolean"
+        }
+      }
+    },
+    "Parameter": {
+      "@id": "gtmParameter",
+      "@context": {
+        "type": {
+          "@id": "gtm:Parameter.type",
+          "@type": "xsd:string"
+        },
+        "key": {
+          "@id": "gtm:Parameter.key",
+          "@type": "xsd:string"
+        },
+        "value": {
+          "@id": "gtm:Parameter.value",
+          "@type": "xsd:string"
+        },
+        "list": {
+          "@id": "gtm:Parameter.list",
+          "@container": "@list"
+        },
+        "map": {
+          "@id": "gtm:Parameter.map",
+          "@container": "@list"
+        },
+        "isWeakReference": {
+          "@id": "gtm:Parameter.isWeakReference",
+          "@type": "xsd:boolean"
+        }
+      }
+    },
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/"
+  }
+}

@@ -8,14 +8,14 @@ tags:
 - Tracking
 - Conversion Tracking
 created: '2024'
-modified: '2024'
+modified: '2026-03-03'
 url: https://tagmanager.google.com/
 specificationVersion: '0.18'
 apis:
 - name: Google Tag Manager API
   description: The Tag Manager API allows clients to access and modify container and tag configuration.
   image: https://www.gstatic.com/analytics-suite/header/suite/v2/ic_tag_manager.svg
-  humanURL: https://developers.google.com/tag-manager
+  humanURL: https://developers.google.com/tag-platform/tag-manager/api/v2
   baseURL: https://tagmanager.googleapis.com
   tags:
   - Tag Management
@@ -24,31 +24,104 @@ apis:
   - Tags
   - Triggers
   - Variables
+  - Workspaces
+  - Versions
+  - Permissions
   properties:
   - type: OpenAPI
+    url: openapi/google-tag-manager-api-v2-openapi.yml
+  - type: x-openapi-original
     url: https://tagmanager.googleapis.com/$discovery/rest?version=v2
+  - type: JSONSchema
+    url: json-schema/google-tag-manager-container-schema.json
+  - type: JSONLD
+    url: json-ld/google-tag-manager-context.jsonld
   - type: Documentation
-    url: https://developers.google.com/tag-manager/api/v2
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2
+  - type: x-api-reference
+    url: https://developers.google.com/tag-platform/tag-manager/api/reference/rest
   - type: Authentication
-    url: https://developers.google.com/tag-manager/api/v2/authorization
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/authorization
+  - type: x-getting-started
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/devguide
+  - type: x-sdk
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/libraries
+  - type: x-rate-limits
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/limits-quotas
+  - type: x-change-log
+    url: https://support.google.com/tagmanager/answer/4620708
+  contact:
+  - FN: Google Support
+    url: https://support.google.com/tagmanager
+    email: ''
+- name: Google Tag Manager Server-side Tagging API
+  description: The Server-side Tagging API provides APIs for building custom tags, clients, and variables that run in a server-side container, enabling server-to-server data collection and processing.
+  image: https://www.gstatic.com/analytics-suite/header/suite/v2/ic_tag_manager.svg
+  humanURL: https://developers.google.com/tag-platform/tag-manager/server-side
+  baseURL: https://tagmanager.googleapis.com
+  tags:
+  - Tag Management
+  - Server-side Tagging
+  - Data Collection
+  - Privacy
+  - Analytics
+  properties:
+  - type: Documentation
+    url: https://developers.google.com/tag-platform/tag-manager/server-side
+  - type: x-api-reference
+    url: https://developers.google.com/tag-platform/tag-manager/server-side/api
+  - type: x-getting-started
+    url: https://developers.google.com/tag-platform/tag-manager/server-side/intro
+  - type: x-change-log
+    url: https://developers.google.com/tag-platform/tag-manager/server-side/release-notes
   contact:
   - FN: Google Support
     url: https://support.google.com/tagmanager
     email: ''
 common:
+- type: Portal
+  url: https://developers.google.com/tag-platform
+- type: Website
+  url: https://marketingplatform.google.com/about/tag-manager/
 - type: GettingStarted
-  url: https://developers.google.com/tag-manager/quickstart
+  url: https://developers.google.com/tag-platform/tag-manager/api/v2/devguide
 - type: Authentication
-  url: https://developers.google.com/tag-manager/api/v2/authorization
+  url: https://developers.google.com/tag-platform/tag-manager/api/v2/authorization
+- type: Documentation
+  url: https://developers.google.com/tag-platform/tag-manager
+- type: Blog
+  url: https://blog.google/products/marketingplatform/
+- type: x-sdk
+  url: https://developers.google.com/tag-platform/tag-manager/api/v2/libraries
+- type: Support
+  url: https://support.google.com/tagmanager
+- type: x-developer-support
+  url: https://developers.google.com/tag-platform/support
 - type: Status
   url: https://status.cloud.google.com/
 - type: TermsOfService
   url: https://policies.google.com/terms
 - type: Privacy
   url: https://policies.google.com/privacy
-- type: Support
-  url: https://support.google.com/tagmanager
+- type: SignUp
+  url: https://tagmanager.google.com/
+- type: Login
+  url: https://tagmanager.google.com/
+- type: x-rate-limits
+  url: https://developers.google.com/tag-platform/tag-manager/api/v2/limits-quotas
+- type: x-change-log
+  url: https://support.google.com/tagmanager/answer/4620708
+- type: x-community
+  url: https://support.google.com/tagmanager/community
+- type: x-stack-overflow
+  url: https://stackoverflow.com/questions/tagged/google-tag-manager
+- type: x-youtube
+  url: https://www.youtube.com/googlemarketingplatform
+- type: x-custom-templates
+  url: https://developers.google.com/tag-platform/tag-manager/templates
+- type: x-data-layer
+  url: https://developers.google.com/tag-platform/tag-manager/datalayer
 maintainers:
-- FN: Google
-  email: ''
-  url: https://www.google.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
+  url: https://apievangelist.com

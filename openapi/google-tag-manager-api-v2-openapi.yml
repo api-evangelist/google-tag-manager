@@ -1,0 +1,2240 @@
+openapi: 3.1.0
+info:
+  title: Google Tag Manager API
+  description: >-
+    The Google Tag Manager API v2 allows clients to access and modify Google Tag
+    Manager account, container, workspace, tag, trigger, and variable
+    configurations. It provides programmatic management of tag deployment,
+    trigger conditions, and variable definitions across web, mobile, and
+    server-side containers.
+  version: 2.0.0
+  termsOfService: https://policies.google.com/terms
+  contact:
+    name: Google Support
+    url: https://support.google.com/tagmanager
+  license:
+    name: Google APIs Terms of Service
+    url: https://developers.google.com/terms
+externalDocs:
+  description: Google Tag Manager API Documentation
+  url: https://developers.google.com/tag-platform/tag-manager/api/v2
+servers:
+  - url: https://tagmanager.googleapis.com
+    description: Google Tag Manager API Production Server
+security:
+  - oauth2:
+      - tagmanager.readonly
+      - tagmanager.edit.containers
+      - tagmanager.manage.accounts
+      - tagmanager.manage.users
+      - tagmanager.publish
+      - tagmanager.edit.containerversions
+      - tagmanager.delete.containers
+tags:
+  - name: Accounts
+    description: Operations for managing Google Tag Manager accounts.
+  - name: Containers
+    description: >-
+      Operations for managing containers within a Google Tag Manager account.
+  - name: Workspaces
+    description: >-
+      Operations for managing workspaces within a container, including version
+      creation and conflict resolution.
+  - name: Tags
+    description: >-
+      Operations for managing tags within a workspace, including creation,
+      configuration, and scheduling.
+  - name: Triggers
+    description: >-
+      Operations for managing triggers within a workspace that control when tags
+      fire.
+  - name: Variables
+    description: >-
+      Operations for managing variables within a workspace that provide dynamic
+      values to tags and triggers.
+  - name: Versions
+    description: >-
+      Operations for managing container versions, including publishing and
+      rollback.
+  - name: User Permissions
+    description: >-
+      Operations for managing user permissions on Google Tag Manager accounts.
+paths:
+  /tagmanager/v2/accounts:
+    get:
+      operationId: listAccounts
+      summary: List all Google Tag Manager accounts
+      description: >-
+        Lists all GTM Accounts that a user has access to. Returns a list of
+        Account resources.
+      tags:
+        - Accounts
+      parameters:
+        - name: pageToken
+          in: query
+          description: Continuation token for fetching the next page of results.
+          schema:
+            type: string
+        - name: includeGoogleTags
+          in: query
+          description: >-
+            Also retrieve accounts associated with Google Tag when true.
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Successful response containing a list of accounts.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAccountsResponse'
+        '401':
+          description: Authentication required.
+        '403':
+          description: Insufficient permissions.
+  /tagmanager/v2/{path}:
+    get:
+      operationId: getAccount
+      summary: Get a Google Tag Manager account
+      description: Gets a GTM Account by its resource path.
+      tags:
+        - Accounts
+      parameters:
+        - $ref: '#/components/parameters/pathParam'
+      responses:
+        '200':
+          description: Successful response containing the account.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '404':
+          description: Account not found.
+    put:
+      operationId: updateAccount
+      summary: Update a Google Tag Manager account
+      description: Updates a GTM Account.
+      tags:
+        - Accounts
+      parameters:
+        - $ref: '#/components/parameters/pathParam'
+        - name: fingerprint
+          in: query
+          description: >-
+            When provided, this fingerprint must match the fingerprint of the
+            account in storage.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Account'
+      responses:
+        '200':
+          description: Successful response containing the updated account.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '400':
+          description: Invalid request.
+        '409':
+          description: Fingerprint mismatch indicating a conflict.
+  /tagmanager/v2/{parent}/containers:
+    get:
+      operationId: listContainers
+      summary: List containers in an account
+      description: Lists all Containers that belongs to a GTM Account.
+      tags:
+        - Containers
+      parameters:
+        - $ref: '#/components/parameters/parentParam'
+        - name: pageToken
+          in: query
+          description: Continuation token for fetching the next page of results.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response containing a list of containers.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListContainersResponse'
+    post:
+      operationId: createContainer
+      summary: Create a container
+      description: Creates a Container within a GTM Account.
+      tags:
+        - Containers
+      parameters:
+        - $ref: '#/components/parameters/parentParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Container'
+      responses:
+        '200':
+          description: Successful response containing the created container.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Container'
+        '400':
+          description: Invalid request.
+  /tagmanager/v2/{containerPath}:
+    get:
+      operationId: getContainer
+      summary: Get a container
+      description: Gets a Container by its resource path.
+      tags:
+        - Containers
+      parameters:
+        - name: containerPath
+          in: path
+          required: true
+          description: >-
+            GTM Container's API relative path, e.g.
+            accounts/{accountId}/containers/{containerId}.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response containing the container.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Container'
+        '404':
+          description: Container not found.
+    put:
+      operationId: updateContainer
+      summary: Update a container
+      description: Updates a Container.
+      tags:
+        - Containers
+      parameters:
+        - name: containerPath
+          in: path
+          required: true
+          description: >-
+            GTM Container's API relative path.
+          schema:
+            type: string
+        - name: fingerprint
+          in: query
+          description: >-
+            When provided, this fingerprint must match the fingerprint of the
+            container in storage.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Container'
+      responses:
+        '200':
+          description: Successful response containing the updated container.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Container'
+    delete:
+      operationId: deleteContainer
+      summary: Delete a container
+      description: Deletes a Container.
+      tags:
+        - Containers
+      parameters:
+        - name: containerPath
+          in: path
+          required: true
+          description: >-
+            GTM Container's API relative path.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Container successfully deleted.
+        '404':
+          description: Container not found.
+  /tagmanager/v2/{parent}/workspaces:
+    get:
+      operationId: listWorkspaces
+      summary: List workspaces in a container
+      description: Lists all Workspaces that belong to a GTM Container.
+      tags:
+        - Workspaces
+      parameters:
+        - $ref: '#/components/parameters/parentParam'
+        - name: pageToken
+          in: query
+          description: Continuation token for fetching the next page of results.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response containing a list of workspaces.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListWorkspacesResponse'
+    post:
+      operationId: createWorkspace
+      summary: Create a workspace
+      description: Creates a Workspace within a GTM Container.
+      tags:
+        - Workspaces
+      parameters:
+        - $ref: '#/components/parameters/parentParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Workspace'
+      responses:
+        '200':
+          description: Successful response containing the created workspace.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workspace'
+  /tagmanager/v2/{workspacePath}:
+    get:
+      operationId: getWorkspace
+      summary: Get a workspace
+      description: Gets a Workspace by its resource path.
+      tags:
+        - Workspaces
+      parameters:
+        - name: workspacePath
+          in: path
+          required: true
+          description: >-
+            GTM Workspace's API relative path, e.g.
+            accounts/{accountId}/containers/{containerId}/workspaces/{workspaceId}.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response containing the workspace.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workspace'
+    put:
+      operationId: updateWorkspace
+      summary: Update a workspace
+      description: Updates a Workspace.
+      tags:
+        - Workspaces
+      parameters:
+        - name: workspacePath
+          in: path
+          required: true
+          description: >-
+            GTM Workspace's API relative path.
+          schema:
+            type: string
+        - name: fingerprint
+          in: query
+          description: >-
+            When provided, this fingerprint must match the fingerprint of the
+            workspace in storage.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Workspace'
+      responses:
+        '200':
+          description: Successful response containing the updated workspace.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workspace'
+    delete:
+      operationId: deleteWorkspace
+      summary: Delete a workspace
+      description: Deletes a Workspace.
+      tags:
+        - Workspaces
+      parameters:
+        - name: workspacePath
+          in: path
+          required: true
+          description: >-
+            GTM Workspace's API relative path.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Workspace successfully deleted.
+  /tagmanager/v2/{workspacePath}:create_version:
+    post:
+      operationId: createWorkspaceVersion
+      summary: Create a container version from a workspace
+      description: >-
+        Creates a Container Version from the entities present in the workspace,
+        deletes the workspace, and sets the base container version to the newly
+        created version.
+      tags:
+        - Workspaces
+      parameters:
+        - name: workspacePath
+          in: path
+          required: true
+          description: GTM Workspace's API relative path.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateContainerVersionRequestVersionOptions'
+      responses:
+        '200':
+          description: >-
+            Successful response containing the created container version.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateContainerVersionResponse'
+  /tagmanager/v2/{workspacePath}/status:
+    get:
+      operationId: getWorkspaceStatus
+      summary: Get the status of a workspace
+      description: >-
+        Finds conflicting and modified entities in the workspace. Returns status
+        information about the workspace including workspace changes and
+        conflicts.
+      tags:
+        - Workspaces
+      parameters:
+        - name: workspacePath
+          in: path
+          required: true
+          description: GTM Workspace's API relative path.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response containing workspace status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWorkspaceStatusResponse'
+  /tagmanager/v2/{workspacePath}:sync:
+    post:
+      operationId: syncWorkspace
+      summary: Sync a workspace to the latest container version
+      description: >-
+        Syncs a workspace to the latest container version by updating all
+        unmodified workspace entities and displaying conflicts for modified
+        entities.
+      tags:
+        - Workspaces
+      parameters:
+        - name: workspacePath
+          in: path
+          required: true
+          description: GTM Workspace's API relative path.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response containing the sync status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyncWorkspaceResponse'
+  /tagmanager/v2/{parent}/tags:
+    get:
+      operationId: listTags
+      summary: List tags in a workspace
+      description: Lists all GTM Tags of a GTM Container Workspace.
+      tags:
+        - Tags
+      parameters:
+        - $ref: '#/components/parameters/parentParam'
+        - name: pageToken
+          in: query
+          description: Continuation token for fetching the next page of results.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response containing a list of tags.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsResponse'
+    post:
+      operationId: createTag
+      summary: Create a tag
+      description: Creates a GTM Tag in a GTM Workspace.
+      tags:
+        - Tags
+      parameters:
+        - $ref: '#/components/parameters/parentParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tag'
+      responses:
+        '200':
+          description: Successful response containing the created tag.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+  /tagmanager/v2/{tagPath}:
+    get:
+      operationId: getTag
+      summary: Get a tag
+      description: Gets a GTM Tag by its resource path.
+      tags:
+        - Tags
+      parameters:
+        - name: tagPath
+          in: path
+          required: true
+          description: >-
+            GTM Tag's API relative path, e.g.
+            accounts/{accountId}/containers/{containerId}/workspaces/{workspaceId}/tags/{tagId}.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response containing the tag.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+    put:
+      operationId: updateTag
+      summary: Update a tag
+      description: Updates a GTM Tag.
+      tags:
+        - Tags
+      parameters:
+        - name: tagPath
+          in: path
+          required: true
+          description: GTM Tag's API relative path.
+          schema:
+            type: string
+        - name: fingerprint
+          in: query
+          description: >-
+            When provided, this fingerprint must match the fingerprint of the
+            tag in storage.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tag'
+      responses:
+        '200':
+          description: Successful response containing the updated tag.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+    delete:
+      operationId: deleteTag
+      summary: Delete a tag
+      description: Deletes a GTM Tag.
+      tags:
+        - Tags
+      parameters:
+        - name: tagPath
+          in: path
+          required: true
+          description: GTM Tag's API relative path.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Tag successfully deleted.
+  /tagmanager/v2/{tagPath}:revert:
+    post:
+      operationId: revertTag
+      summary: Revert changes to a tag in a workspace
+      description: >-
+        Reverts changes to a GTM Tag in a GTM Workspace, restoring it to its
+        original state.
+      tags:
+        - Tags
+      parameters:
+        - name: tagPath
+          in: path
+          required: true
+          description: GTM Tag's API relative path.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response confirming the tag was reverted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RevertTagResponse'
+  /tagmanager/v2/{parent}/triggers:
+    get:
+      operationId: listTriggers
+      summary: List triggers in a workspace
+      description: Lists all GTM Triggers of a GTM Container Workspace.
+      tags:
+        - Triggers
+      parameters:
+        - $ref: '#/components/parameters/parentParam'
+        - name: pageToken
+          in: query
+          description: Continuation token for fetching the next page of results.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response containing a list of triggers.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTriggersResponse'
+    post:
+      operationId: createTrigger
+      summary: Create a trigger
+      description: Creates a GTM Trigger in a GTM Workspace.
+      tags:
+        - Triggers
+      parameters:
+        - $ref: '#/components/parameters/parentParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Trigger'
+      responses:
+        '200':
+          description: Successful response containing the created trigger.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trigger'
+  /tagmanager/v2/{triggerPath}:
+    get:
+      operationId: getTrigger
+      summary: Get a trigger
+      description: Gets a GTM Trigger by its resource path.
+      tags:
+        - Triggers
+      parameters:
+        - name: triggerPath
+          in: path
+          required: true
+          description: >-
+            GTM Trigger's API relative path, e.g.
+            accounts/{accountId}/containers/{containerId}/workspaces/{workspaceId}/triggers/{triggerId}.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response containing the trigger.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trigger'
+    put:
+      operationId: updateTrigger
+      summary: Update a trigger
+      description: Updates a GTM Trigger.
+      tags:
+        - Triggers
+      parameters:
+        - name: triggerPath
+          in: path
+          required: true
+          description: GTM Trigger's API relative path.
+          schema:
+            type: string
+        - name: fingerprint
+          in: query
+          description: >-
+            When provided, this fingerprint must match the fingerprint of the
+            trigger in storage.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Trigger'
+      responses:
+        '200':
+          description: Successful response containing the updated trigger.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trigger'
+    delete:
+      operationId: deleteTrigger
+      summary: Delete a trigger
+      description: Deletes a GTM Trigger.
+      tags:
+        - Triggers
+      parameters:
+        - name: triggerPath
+          in: path
+          required: true
+          description: GTM Trigger's API relative path.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Trigger successfully deleted.
+  /tagmanager/v2/{triggerPath}:revert:
+    post:
+      operationId: revertTrigger
+      summary: Revert changes to a trigger in a workspace
+      description: >-
+        Reverts changes to a GTM Trigger in a GTM Workspace, restoring it to its
+        original state.
+      tags:
+        - Triggers
+      parameters:
+        - name: triggerPath
+          in: path
+          required: true
+          description: GTM Trigger's API relative path.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response confirming the trigger was reverted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RevertTriggerResponse'
+  /tagmanager/v2/{parent}/variables:
+    get:
+      operationId: listVariables
+      summary: List variables in a workspace
+      description: Lists all GTM Variables of a GTM Container Workspace.
+      tags:
+        - Variables
+      parameters:
+        - $ref: '#/components/parameters/parentParam'
+        - name: pageToken
+          in: query
+          description: Continuation token for fetching the next page of results.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response containing a list of variables.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListVariablesResponse'
+    post:
+      operationId: createVariable
+      summary: Create a variable
+      description: Creates a GTM Variable in a GTM Workspace.
+      tags:
+        - Variables
+      parameters:
+        - $ref: '#/components/parameters/parentParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Variable'
+      responses:
+        '200':
+          description: Successful response containing the created variable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Variable'
+  /tagmanager/v2/{variablePath}:
+    get:
+      operationId: getVariable
+      summary: Get a variable
+      description: Gets a GTM Variable by its resource path.
+      tags:
+        - Variables
+      parameters:
+        - name: variablePath
+          in: path
+          required: true
+          description: >-
+            GTM Variable's API relative path, e.g.
+            accounts/{accountId}/containers/{containerId}/workspaces/{workspaceId}/variables/{variableId}.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response containing the variable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Variable'
+    put:
+      operationId: updateVariable
+      summary: Update a variable
+      description: Updates a GTM Variable.
+      tags:
+        - Variables
+      parameters:
+        - name: variablePath
+          in: path
+          required: true
+          description: GTM Variable's API relative path.
+          schema:
+            type: string
+        - name: fingerprint
+          in: query
+          description: >-
+            When provided, this fingerprint must match the fingerprint of the
+            variable in storage.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Variable'
+      responses:
+        '200':
+          description: Successful response containing the updated variable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Variable'
+    delete:
+      operationId: deleteVariable
+      summary: Delete a variable
+      description: Deletes a GTM Variable.
+      tags:
+        - Variables
+      parameters:
+        - name: variablePath
+          in: path
+          required: true
+          description: GTM Variable's API relative path.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Variable successfully deleted.
+  /tagmanager/v2/{variablePath}:revert:
+    post:
+      operationId: revertVariable
+      summary: Revert changes to a variable in a workspace
+      description: >-
+        Reverts changes to a GTM Variable in a GTM Workspace, restoring it to
+        its original state.
+      tags:
+        - Variables
+      parameters:
+        - name: variablePath
+          in: path
+          required: true
+          description: GTM Variable's API relative path.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response confirming the variable was reverted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RevertVariableResponse'
+  /tagmanager/v2/{parent}/versions:
+    get:
+      operationId: listContainerVersionHeaders
+      summary: List all container version headers
+      description: >-
+        Lists all Container Version Headers of a GTM Container, providing
+        summary information about each version.
+      tags:
+        - Versions
+      parameters:
+        - $ref: '#/components/parameters/parentParam'
+        - name: pageToken
+          in: query
+          description: Continuation token for fetching the next page of results.
+          schema:
+            type: string
+        - name: includeDeleted
+          in: query
+          description: Also retrieve deleted (archived) versions when true.
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: >-
+            Successful response containing a list of container version headers.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListContainerVersionsResponse'
+  /tagmanager/v2/{versionPath}:
+    get:
+      operationId: getContainerVersion
+      summary: Get a container version
+      description: Gets a Container Version by its resource path.
+      tags:
+        - Versions
+      parameters:
+        - name: versionPath
+          in: path
+          required: true
+          description: GTM ContainerVersion's API relative path.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response containing the container version.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContainerVersion'
+    delete:
+      operationId: deleteContainerVersion
+      summary: Delete a container version
+      description: Deletes a Container Version.
+      tags:
+        - Versions
+      parameters:
+        - name: versionPath
+          in: path
+          required: true
+          description: GTM ContainerVersion's API relative path.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Container version successfully deleted.
+  /tagmanager/v2/{versionPath}:publish:
+    post:
+      operationId: publishContainerVersion
+      summary: Publish a container version
+      description: >-
+        Publishes a Container Version, making it the live version served to
+        users.
+      tags:
+        - Versions
+      parameters:
+        - name: versionPath
+          in: path
+          required: true
+          description: GTM ContainerVersion's API relative path.
+          schema:
+            type: string
+        - name: fingerprint
+          in: query
+          description: >-
+            When provided, this fingerprint must match the fingerprint of the
+            container version in storage.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: >-
+            Successful response containing the published container version.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishContainerVersionResponse'
+  /tagmanager/v2/{parent}/versions:live:
+    get:
+      operationId: getLiveContainerVersion
+      summary: Get the live container version
+      description: >-
+        Gets the live (published) container version for a GTM Container.
+      tags:
+        - Versions
+      parameters:
+        - $ref: '#/components/parameters/parentParam'
+      responses:
+        '200':
+          description: >-
+            Successful response containing the live container version.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContainerVersion'
+  /tagmanager/v2/{parent}/user_permissions:
+    get:
+      operationId: listUserPermissions
+      summary: List user permissions for an account
+      description: >-
+        List all users that have access to the account along with Account and
+        Container user access granted to each of them.
+      tags:
+        - User Permissions
+      parameters:
+        - $ref: '#/components/parameters/parentParam'
+        - name: pageToken
+          in: query
+          description: Continuation token for fetching the next page of results.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response containing a list of user permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListUserPermissionsResponse'
+    post:
+      operationId: createUserPermission
+      summary: Create a user permission
+      description: Creates a user's Account and Container access within a GTM Account.
+      tags:
+        - User Permissions
+      parameters:
+        - $ref: '#/components/parameters/parentParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserPermission'
+      responses:
+        '200':
+          description: Successful response containing the created user permission.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPermission'
+  /tagmanager/v2/{userPermissionPath}:
+    get:
+      operationId: getUserPermission
+      summary: Get a user permission
+      description: Gets a user's Account and Container access.
+      tags:
+        - User Permissions
+      parameters:
+        - name: userPermissionPath
+          in: path
+          required: true
+          description: GTM UserPermission's API relative path.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response containing the user permission.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPermission'
+    put:
+      operationId: updateUserPermission
+      summary: Update a user permission
+      description: Updates a user's Account and Container access.
+      tags:
+        - User Permissions
+      parameters:
+        - name: userPermissionPath
+          in: path
+          required: true
+          description: GTM UserPermission's API relative path.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserPermission'
+      responses:
+        '200':
+          description: Successful response containing the updated user permission.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPermission'
+    delete:
+      operationId: deleteUserPermission
+      summary: Delete a user permission
+      description: Removes a user from the account, revoking access.
+      tags:
+        - User Permissions
+      parameters:
+        - name: userPermissionPath
+          in: path
+          required: true
+          description: GTM UserPermission's API relative path.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: User permission successfully deleted.
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for Google Tag Manager API.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/v2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            tagmanager.readonly: View your Google Tag Manager container and its subcomponents.
+            tagmanager.edit.containers: >-
+              Manage your Google Tag Manager container and its subcomponents,
+              excluding versioning and publishing.
+            tagmanager.manage.accounts: >-
+              View and manage your Google Tag Manager accounts.
+            tagmanager.manage.users: >-
+              Manage user permissions of your Google Tag Manager account and
+              container.
+            tagmanager.publish: >-
+              Publish your Google Tag Manager container versions.
+            tagmanager.edit.containerversions: >-
+              Manage your Google Tag Manager container versions.
+            tagmanager.delete.containers: >-
+              Delete your Google Tag Manager containers.
+  parameters:
+    pathParam:
+      name: path
+      in: path
+      required: true
+      description: >-
+        GTM resource's API relative path, e.g. accounts/{accountId}.
+      schema:
+        type: string
+    parentParam:
+      name: parent
+      in: path
+      required: true
+      description: >-
+        GTM parent resource's API relative path, e.g. accounts/{accountId} for
+        listing containers.
+      schema:
+        type: string
+  schemas:
+    Account:
+      type: object
+      description: Represents a Google Tag Manager Account.
+      properties:
+        path:
+          type: string
+          description: GTM Account's API relative path.
+          readOnly: true
+        accountId:
+          type: string
+          description: The Account ID uniquely identifies the GTM Account.
+          readOnly: true
+        name:
+          type: string
+          description: Account display name.
+        shareData:
+          type: boolean
+          description: >-
+            Whether the account shares data anonymously with Google and others.
+            This flag enables benchmarking by sharing your data in an anonymous
+            form.
+        fingerprint:
+          type: string
+          description: >-
+            The fingerprint of the GTM Account as computed at storage time. This
+            value is recomputed whenever the account is modified.
+          readOnly: true
+        tagManagerUrl:
+          type: string
+          format: uri
+          description: Auto-generated link to the tag manager UI.
+          readOnly: true
+        features:
+          $ref: '#/components/schemas/AccountFeatures'
+      required:
+        - name
+    AccountFeatures:
+      type: object
+      description: Read-only account feature set.
+      properties:
+        supportUserPermissions:
+          type: boolean
+          description: Whether this account has user permissions management enabled.
+          readOnly: true
+        supportMultipleContainers:
+          type: boolean
+          description: Whether this account supports multiple containers.
+          readOnly: true
+    Container:
+      type: object
+      description: >-
+        Represents a Google Tag Manager Container, which is a collection of
+        tags, triggers, and variables used on a website or mobile app.
+      properties:
+        path:
+          type: string
+          description: GTM Container's API relative path.
+          readOnly: true
+        accountId:
+          type: string
+          description: GTM Account ID.
+          readOnly: true
+        containerId:
+          type: string
+          description: The Container ID uniquely identifies the GTM Container.
+          readOnly: true
+        name:
+          type: string
+          description: Container display name.
+        domainName:
+          type: array
+          description: >-
+            List of domain names associated with the Container. This is used for
+            auto-event tracking and link decoration.
+          items:
+            type: string
+        publicId:
+          type: string
+          description: Container Public ID (e.g., GTM-XXXX).
+          readOnly: true
+        tagIds:
+          type: array
+          description: All Tag IDs that refer to this Container.
+          items:
+            type: string
+          readOnly: true
+        notes:
+          type: string
+          description: Container Notes.
+        usageContext:
+          type: array
+          description: >-
+            List of Usage Contexts for the Container. Valid values include web,
+            android, ios, and server.
+          items:
+            type: string
+            enum:
+              - usageContextUnspecified
+              - web
+              - android
+              - ios
+              - androidSdk5
+              - iosSdk5
+              - amp
+              - server
+        fingerprint:
+          type: string
+          description: >-
+            The fingerprint of the GTM Container as computed at storage time.
+            This value is recomputed whenever the container is modified.
+          readOnly: true
+        tagManagerUrl:
+          type: string
+          format: uri
+          description: Auto-generated link to the tag manager UI.
+          readOnly: true
+        taggingServerUrls:
+          type: array
+          description: List of server-side container URLs for the Container.
+          items:
+            type: string
+            format: uri
+        features:
+          $ref: '#/components/schemas/ContainerFeatures'
+      required:
+        - name
+        - usageContext
+    ContainerFeatures:
+      type: object
+      description: Read-only container feature set.
+      properties:
+        supportUserPermissions:
+          type: boolean
+          readOnly: true
+        supportEnvironments:
+          type: boolean
+          readOnly: true
+        supportWorkspaces:
+          type: boolean
+          readOnly: true
+        supportGtagConfigs:
+          type: boolean
+          readOnly: true
+        supportBuiltInVariables:
+          type: boolean
+          readOnly: true
+        supportClients:
+          type: boolean
+          readOnly: true
+        supportFolders:
+          type: boolean
+          readOnly: true
+        supportTags:
+          type: boolean
+          readOnly: true
+        supportTemplates:
+          type: boolean
+          readOnly: true
+        supportTriggers:
+          type: boolean
+          readOnly: true
+        supportVariables:
+          type: boolean
+          readOnly: true
+        supportVersions:
+          type: boolean
+          readOnly: true
+        supportZones:
+          type: boolean
+          readOnly: true
+        supportTransformations:
+          type: boolean
+          readOnly: true
+    Workspace:
+      type: object
+      description: >-
+        Represents a Google Tag Manager Workspace. A workspace is an isolated
+        editing environment within a container where changes to tags, triggers,
+        and variables can be made and tested before being published.
+      properties:
+        path:
+          type: string
+          description: GTM Workspace's API relative path.
+          readOnly: true
+        accountId:
+          type: string
+          description: GTM Account ID.
+          readOnly: true
+        containerId:
+          type: string
+          description: GTM Container ID.
+          readOnly: true
+        workspaceId:
+          type: string
+          description: The Workspace ID uniquely identifies the GTM Workspace.
+          readOnly: true
+        name:
+          type: string
+          description: Workspace display name.
+        description:
+          type: string
+          description: Workspace description.
+        fingerprint:
+          type: string
+          description: >-
+            The fingerprint of the GTM Workspace as computed at storage time.
+            This value is recomputed whenever the workspace is modified.
+          readOnly: true
+        tagManagerUrl:
+          type: string
+          format: uri
+          description: Auto-generated link to the tag manager UI.
+          readOnly: true
+      required:
+        - name
+    Parameter:
+      type: object
+      description: >-
+        Represents a Google Tag Manager Parameter. Parameters are key-value
+        pairs that configure tags, triggers, and variables.
+      properties:
+        type:
+          type: string
+          description: The parameter type.
+          enum:
+            - typeUnspecified
+            - template
+            - integer
+            - boolean
+            - list
+            - map
+            - triggerReference
+            - tagReference
+        key:
+          type: string
+          description: >-
+            The named key that uniquely identifies a parameter. Required for
+            top-level parameters, as well as map values. Ignored for list values.
+        value:
+          type: string
+          description: >-
+            A parameter's value (may contain variable references) as appropriate
+            to the specified type.
+        list:
+          type: array
+          description: >-
+            This list parameter's parameters (keys will be ignored). Used when
+            type is list.
+          items:
+            $ref: '#/components/schemas/Parameter'
+        map:
+          type: array
+          description: >-
+            This map parameter's parameters (must have keys; keys must be
+            unique). Used when type is map.
+          items:
+            $ref: '#/components/schemas/Parameter'
+        isWeakReference:
+          type: boolean
+          description: >-
+            Whether or not the parameter is a weak reference. Used to determine
+            which parameters should be included in exported containers.
+      required:
+        - type
+    Condition:
+      type: object
+      description: >-
+        Represents a predicate that is evaluated against a data layer value
+        or variable. Used in trigger filter conditions.
+      properties:
+        type:
+          type: string
+          description: The type of operator for this condition.
+          enum:
+            - conditionTypeUnspecified
+            - equals
+            - contains
+            - startsWith
+            - endsWith
+            - matchRegex
+            - greater
+            - greaterOrEquals
+            - less
+            - lessOrEquals
+            - cssSelector
+            - urlMatches
+        parameter:
+          type: array
+          description: >-
+            A list of named parameters (key/value), depending on the condition's
+            type. The first parameter is the left-hand operand, the second is
+            the right-hand operand.
+          items:
+            $ref: '#/components/schemas/Parameter'
+    Tag:
+      type: object
+      description: >-
+        Represents a Google Tag Manager Tag. A tag is a snippet of code that
+        executes on a page when certain conditions (triggers) are met.
+      properties:
+        path:
+          type: string
+          description: GTM Tag's API relative path.
+          readOnly: true
+        accountId:
+          type: string
+          description: GTM Account ID.
+          readOnly: true
+        containerId:
+          type: string
+          description: GTM Container ID.
+          readOnly: true
+        workspaceId:
+          type: string
+          description: GTM Workspace ID.
+          readOnly: true
+        tagId:
+          type: string
+          description: The Tag ID uniquely identifies the GTM Tag.
+          readOnly: true
+        name:
+          type: string
+          description: Tag display name.
+        type:
+          type: string
+          description: >-
+            GTM Tag Type. Common types include ua (Universal Analytics), gaawc
+            (Google Analytics GA4 Configuration), gaawe (Google Analytics GA4
+            Event), awct (Google Ads Conversion Tracking), sp (Custom Script),
+            html (Custom HTML), img (Custom Image), and flc (Floodlight
+            Counter).
+        liveOnly:
+          type: boolean
+          description: >-
+            If set to true, this tag will only fire in the live environment
+            (not in preview or debug mode).
+        priority:
+          $ref: '#/components/schemas/Parameter'
+        notes:
+          type: string
+          description: >-
+            User notes on how to apply this tag in the container.
+        scheduleStartMs:
+          type: string
+          format: int64
+          description: >-
+            The start timestamp in milliseconds to schedule a tag. The tag will
+            only fire after this time.
+        scheduleEndMs:
+          type: string
+          format: int64
+          description: >-
+            The end timestamp in milliseconds to schedule a tag. The tag will
+            stop firing after this time.
+        parameter:
+          type: array
+          description: The tag's parameters, which configure its behavior.
+          items:
+            $ref: '#/components/schemas/Parameter'
+        fingerprint:
+          type: string
+          description: >-
+            The fingerprint of the GTM Tag as computed at storage time. This
+            value is recomputed whenever the tag is modified.
+          readOnly: true
+        firingTriggerId:
+          type: array
+          description: >-
+            Firing trigger IDs. A tag will fire when any of the listed triggers
+            are true and all of its blockingTriggerIds (if any specified) are
+            false.
+          items:
+            type: string
+        blockingTriggerId:
+          type: array
+          description: >-
+            Blocking trigger IDs. If any of the listed triggers evaluates to
+            true, the tag will not fire.
+          items:
+            type: string
+        setupTag:
+          type: array
+          description: >-
+            The list of setup tags. Currently, only one setup tag is allowed per
+            tag.
+          items:
+            $ref: '#/components/schemas/SetupTag'
+        teardownTag:
+          type: array
+          description: >-
+            The list of teardown tags. Currently, only one teardown tag is
+            allowed per tag.
+          items:
+            $ref: '#/components/schemas/TeardownTag'
+        parentFolderId:
+          type: string
+          description: Parent folder ID.
+        tagFiringOption:
+          type: string
+          description: Option to fire this tag.
+          enum:
+            - tagFiringOptionUnspecified
+            - unlimited
+            - oncePerEvent
+            - oncePerLoad
+        tagManagerUrl:
+          type: string
+          format: uri
+          description: Auto-generated link to the tag manager UI.
+          readOnly: true
+        paused:
+          type: boolean
+          description: >-
+            Indicates whether the tag is paused, which prevents the tag from
+            firing.
+        monitoringMetadata:
+          $ref: '#/components/schemas/Parameter'
+        monitoringMetadataTagNameKey:
+          type: string
+          description: >-
+            If non-empty, then the tag display name will be included in the
+            monitoring metadata map using the key specified.
+        consentSettings:
+          $ref: '#/components/schemas/ConsentSettings'
+      required:
+        - name
+        - type
+    SetupTag:
+      type: object
+      description: >-
+        Represents a setup tag relationship. A setup tag fires before the main
+        tag.
+      properties:
+        tagName:
+          type: string
+          description: The name of the setup tag.
+        stopOnSetupFailure:
+          type: boolean
+          description: >-
+            If true, fire the main tag only if the setup tag fires successfully.
+            If false, fire the main tag regardless of setup tag firing status.
+    TeardownTag:
+      type: object
+      description: >-
+        Represents a teardown tag relationship. A teardown tag fires after the
+        main tag.
+      properties:
+        tagName:
+          type: string
+          description: The name of the teardown tag.
+        stopTeardownOnFailure:
+          type: boolean
+          description: >-
+            If true, fire the teardown tag if and only if the main tag fires
+            successfully. If false, fire the teardown tag regardless of main tag
+            firing status.
+    ConsentSettings:
+      type: object
+      description: Tag consent settings.
+      properties:
+        consentStatus:
+          type: string
+          description: The tag's consent status.
+          enum:
+            - notSet
+            - notNeeded
+            - needed
+        consentType:
+          $ref: '#/components/schemas/Parameter'
+    Trigger:
+      type: object
+      description: >-
+        Represents a Google Tag Manager Trigger. A trigger defines conditions
+        under which tags should fire, such as page views, clicks, form
+        submissions, or custom events.
+      properties:
+        path:
+          type: string
+          description: GTM Trigger's API relative path.
+          readOnly: true
+        accountId:
+          type: string
+          description: GTM Account ID.
+          readOnly: true
+        containerId:
+          type: string
+          description: GTM Container ID.
+          readOnly: true
+        workspaceId:
+          type: string
+          description: GTM Workspace ID.
+          readOnly: true
+        triggerId:
+          type: string
+          description: The Trigger ID uniquely identifies the GTM Trigger.
+          readOnly: true
+        name:
+          type: string
+          description: Trigger display name.
+        type:
+          type: string
+          description: Defines the data layer event that causes this trigger.
+          enum:
+            - eventTypeUnspecified
+            - pageview
+            - domReady
+            - windowLoaded
+            - customEvent
+            - triggerGroup
+            - init
+            - consentInit
+            - serverPageview
+            - always
+            - firebaseAppException
+            - firebaseAppUpdate
+            - firebaseCampaign
+            - firebaseFirstOpen
+            - firebaseInAppPurchase
+            - firebaseNotificationDismiss
+            - firebaseNotificationForeground
+            - firebaseNotificationOpen
+            - firebaseNotificationReceive
+            - firebaseOsUpdate
+            - firebaseSessionStart
+            - firebaseUserEngagement
+            - formSubmission
+            - click
+            - linkClick
+            - jsError
+            - historyChange
+            - timer
+            - ampClick
+            - ampTimer
+            - ampScroll
+            - ampVisibility
+            - youTubeVideo
+            - scrollDepth
+            - elementVisibility
+        customEventFilter:
+          type: array
+          description: >-
+            Used in the case of custom event, which is fired if and only if all
+            Conditions are true.
+          items:
+            $ref: '#/components/schemas/Condition'
+        filter:
+          type: array
+          description: >-
+            The trigger will only fire if and only if all Conditions are true.
+          items:
+            $ref: '#/components/schemas/Condition'
+        autoEventFilter:
+          type: array
+          description: >-
+            Used in the case of auto event tracking for filtering events.
+          items:
+            $ref: '#/components/schemas/Condition'
+        waitForTags:
+          $ref: '#/components/schemas/Parameter'
+        checkValidation:
+          $ref: '#/components/schemas/Parameter'
+        waitForTagsTimeout:
+          $ref: '#/components/schemas/Parameter'
+        uniqueTriggerId:
+          $ref: '#/components/schemas/Parameter'
+        eventName:
+          $ref: '#/components/schemas/Parameter'
+        interval:
+          $ref: '#/components/schemas/Parameter'
+        limit:
+          $ref: '#/components/schemas/Parameter'
+        fingerprint:
+          type: string
+          description: >-
+            The fingerprint of the GTM Trigger as computed at storage time.
+            This value is recomputed whenever the trigger is modified.
+          readOnly: true
+        parentFolderId:
+          type: string
+          description: Parent folder ID.
+        selector:
+          $ref: '#/components/schemas/Parameter'
+        intervalSeconds:
+          $ref: '#/components/schemas/Parameter'
+        maxTimerLengthSeconds:
+          $ref: '#/components/schemas/Parameter'
+        verticalScrollPercentageList:
+          $ref: '#/components/schemas/Parameter'
+        horizontalScrollPercentageList:
+          $ref: '#/components/schemas/Parameter'
+        visibilitySelector:
+          $ref: '#/components/schemas/Parameter'
+        visiblePercentageMin:
+          $ref: '#/components/schemas/Parameter'
+        visiblePercentageMax:
+          $ref: '#/components/schemas/Parameter'
+        continuousTimeMinMilliseconds:
+          $ref: '#/components/schemas/Parameter'
+        totalTimeMinMilliseconds:
+          $ref: '#/components/schemas/Parameter'
+        tagManagerUrl:
+          type: string
+          format: uri
+          description: Auto-generated link to the tag manager UI.
+          readOnly: true
+        notes:
+          type: string
+          description: >-
+            User notes on how to apply this trigger in the container.
+        parameter:
+          type: array
+          description: Additional parameters for the trigger.
+          items:
+            $ref: '#/components/schemas/Parameter'
+      required:
+        - name
+        - type
+    Variable:
+      type: object
+      description: >-
+        Represents a Google Tag Manager Variable. A variable provides dynamic
+        values that can be used in tags and triggers, such as page URL,
+        click text, or custom JavaScript values.
+      properties:
+        path:
+          type: string
+          description: GTM Variable's API relative path.
+          readOnly: true
+        accountId:
+          type: string
+          description: GTM Account ID.
+          readOnly: true
+        containerId:
+          type: string
+          description: GTM Container ID.
+          readOnly: true
+        workspaceId:
+          type: string
+          description: GTM Workspace ID.
+          readOnly: true
+        variableId:
+          type: string
+          description: The Variable ID uniquely identifies the GTM Variable.
+          readOnly: true
+        name:
+          type: string
+          description: Variable display name.
+        type:
+          type: string
+          description: >-
+            GTM Variable Type. Common types include v (Data Layer Variable),
+            j (1st Party Cookie), k (Custom JavaScript), jsm (Custom
+            JavaScript Variable), u (URL), c (Constant), and e (DOM Element).
+        notes:
+          type: string
+          description: >-
+            User notes on how to apply this variable in the container.
+        scheduleStartMs:
+          type: string
+          format: int64
+          description: >-
+            The start timestamp in milliseconds to schedule a variable.
+        scheduleEndMs:
+          type: string
+          format: int64
+          description: >-
+            The end timestamp in milliseconds to schedule a variable.
+        parameter:
+          type: array
+          description: The variable's parameters, which configure its behavior.
+          items:
+            $ref: '#/components/schemas/Parameter'
+        enablingTriggerId:
+          type: array
+          description: >-
+            For mobile containers only. A list of trigger IDs for enabling
+            conditional variables. The variable is enabled if one of the
+            enabling triggers is true while all of the disabling triggers are
+            false.
+          items:
+            type: string
+        disablingTriggerId:
+          type: array
+          description: >-
+            For mobile containers only. A list of trigger IDs for disabling
+            conditional variables.
+          items:
+            type: string
+        fingerprint:
+          type: string
+          description: >-
+            The fingerprint of the GTM Variable as computed at storage time.
+            This value is recomputed whenever the variable is modified.
+          readOnly: true
+        parentFolderId:
+          type: string
+          description: Parent folder ID.
+        tagManagerUrl:
+          type: string
+          format: uri
+          description: Auto-generated link to the tag manager UI.
+          readOnly: true
+        formatValue:
+          $ref: '#/components/schemas/FormatValue'
+      required:
+        - name
+        - type
+    FormatValue:
+      type: object
+      description: Option to convert a variable value to another value.
+      properties:
+        caseConversionType:
+          type: string
+          description: >-
+            The option to convert a string-type variable value to either
+            lowercase or uppercase.
+          enum:
+            - none
+            - lowercase
+            - uppercase
+        convertNullToValue:
+          $ref: '#/components/schemas/Parameter'
+        convertUndefinedToValue:
+          $ref: '#/components/schemas/Parameter'
+        convertTrueToValue:
+          $ref: '#/components/schemas/Parameter'
+        convertFalseToValue:
+          $ref: '#/components/schemas/Parameter'
+    ContainerVersion:
+      type: object
+      description: >-
+        Represents a version of a Google Tag Manager Container. A container
+        version is a snapshot of all tags, triggers, variables, and
+        configuration at a point in time.
+      properties:
+        path:
+          type: string
+          description: GTM ContainerVersion's API relative path.
+          readOnly: true
+        accountId:
+          type: string
+          description: GTM Account ID.
+          readOnly: true
+        containerId:
+          type: string
+          description: GTM Container ID.
+          readOnly: true
+        containerVersionId:
+          type: string
+          description: The Container Version ID uniquely identifies the GTM Container Version.
+          readOnly: true
+        name:
+          type: string
+          description: Container version display name.
+        description:
+          type: string
+          description: Container version description.
+        container:
+          $ref: '#/components/schemas/Container'
+        tag:
+          type: array
+          description: The tags in the container that this version was taken from.
+          items:
+            $ref: '#/components/schemas/Tag'
+        trigger:
+          type: array
+          description: The triggers in the container that this version was taken from.
+          items:
+            $ref: '#/components/schemas/Trigger'
+        variable:
+          type: array
+          description: The variables in the container that this version was taken from.
+          items:
+            $ref: '#/components/schemas/Variable'
+        fingerprint:
+          type: string
+          description: >-
+            The fingerprint of the GTM Container Version as computed at storage
+            time.
+          readOnly: true
+        tagManagerUrl:
+          type: string
+          format: uri
+          description: Auto-generated link to the tag manager UI.
+          readOnly: true
+        deleted:
+          type: boolean
+          description: A value of true indicates this version has been deleted.
+          readOnly: true
+    UserPermission:
+      type: object
+      description: >-
+        Represents a user's permission settings for a Google Tag Manager Account
+        and its Containers.
+      properties:
+        path:
+          type: string
+          description: GTM UserPermission's API relative path.
+          readOnly: true
+        accountId:
+          type: string
+          description: The Account ID uniquely identifies the GTM Account.
+          readOnly: true
+        emailAddress:
+          type: string
+          format: email
+          description: User's email address.
+        accountAccess:
+          $ref: '#/components/schemas/AccountAccess'
+        containerAccess:
+          type: array
+          description: GTM Container access permissions.
+          items:
+            $ref: '#/components/schemas/ContainerAccess'
+    AccountAccess:
+      type: object
+      description: Defines the Google Tag Manager Account access permissions.
+      properties:
+        permission:
+          type: string
+          description: >-
+            Whether the user has no access, user access, or admin access to the
+            account.
+          enum:
+            - accountPermissionUnspecified
+            - noAccess
+            - user
+            - admin
+    ContainerAccess:
+      type: object
+      description: Defines the Google Tag Manager Container access permissions.
+      properties:
+        containerId:
+          type: string
+          description: GTM Container ID.
+        permission:
+          type: string
+          description: >-
+            List of Container permissions. Valid values include noAccess, read,
+            edit, approve, and publish.
+          enum:
+            - containerPermissionUnspecified
+            - noAccess
+            - read
+            - edit
+            - approve
+            - publish
+    ListAccountsResponse:
+      type: object
+      description: List Accounts Response.
+      properties:
+        account:
+          type: array
+          description: List of GTM Accounts that a user has access to.
+          items:
+            $ref: '#/components/schemas/Account'
+        nextPageToken:
+          type: string
+          description: Continuation token for fetching the next page of results.
+    ListContainersResponse:
+      type: object
+      description: List Containers Response.
+      properties:
+        container:
+          type: array
+          description: All Containers of a GTM Account.
+          items:
+            $ref: '#/components/schemas/Container'
+        nextPageToken:
+          type: string
+          description: Continuation token for fetching the next page of results.
+    ListWorkspacesResponse:
+      type: object
+      description: List Workspaces Response.
+      properties:
+        workspace:
+          type: array
+          description: All Workspaces of a GTM Container.
+          items:
+            $ref: '#/components/schemas/Workspace'
+        nextPageToken:
+          type: string
+          description: Continuation token for fetching the next page of results.
+    ListTagsResponse:
+      type: object
+      description: List Tags Response.
+      properties:
+        tag:
+          type: array
+          description: All GTM Tags of a GTM Container Workspace.
+          items:
+            $ref: '#/components/schemas/Tag'
+        nextPageToken:
+          type: string
+          description: Continuation token for fetching the next page of results.
+    ListTriggersResponse:
+      type: object
+      description: List Triggers Response.
+      properties:
+        trigger:
+          type: array
+          description: All GTM Triggers of a GTM Container Workspace.
+          items:
+            $ref: '#/components/schemas/Trigger'
+        nextPageToken:
+          type: string
+          description: Continuation token for fetching the next page of results.
+    ListVariablesResponse:
+      type: object
+      description: List Variables Response.
+      properties:
+        variable:
+          type: array
+          description: All GTM Variables of a GTM Container Workspace.
+          items:
+            $ref: '#/components/schemas/Variable'
+        nextPageToken:
+          type: string
+          description: Continuation token for fetching the next page of results.
+    ListContainerVersionsResponse:
+      type: object
+      description: List Container Versions Response.
+      properties:
+        containerVersionHeader:
+          type: array
+          description: All container version headers of a GTM Container.
+          items:
+            $ref: '#/components/schemas/ContainerVersionHeader'
+        nextPageToken:
+          type: string
+          description: Continuation token for fetching the next page of results.
+    ContainerVersionHeader:
+      type: object
+      description: >-
+        Represents a summary of a container version, without the full tag,
+        trigger, and variable details.
+      properties:
+        path:
+          type: string
+          description: GTM Container Version's API relative path.
+          readOnly: true
+        accountId:
+          type: string
+          readOnly: true
+        containerId:
+          type: string
+          readOnly: true
+        containerVersionId:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          description: Container version display name.
+        numTags:
+          type: string
+          description: Number of tags in the container version.
+        numTriggers:
+          type: string
+          description: Number of triggers in the container version.
+        numVariables:
+          type: string
+          description: Number of variables in the container version.
+        deleted:
+          type: boolean
+          readOnly: true
+    ListUserPermissionsResponse:
+      type: object
+      description: List user permissions response.
+      properties:
+        userPermission:
+          type: array
+          description: All GTM UserPermissions of a GTM Account.
+          items:
+            $ref: '#/components/schemas/UserPermission'
+        nextPageToken:
+          type: string
+          description: Continuation token for fetching the next page of results.
+    CreateContainerVersionRequestVersionOptions:
+      type: object
+      description: Options for new container versions.
+      properties:
+        name:
+          type: string
+          description: The name of the container version to be created.
+        notes:
+          type: string
+          description: The notes of the container version to be created.
+    CreateContainerVersionResponse:
+      type: object
+      description: Create container version response.
+      properties:
+        containerVersion:
+          $ref: '#/components/schemas/ContainerVersion'
+        newWorkspacePath:
+          type: string
+          description: >-
+            Auto-generated workspace path for the new default workspace, if one
+            was created.
+        compilerError:
+          type: boolean
+          description: >-
+            Compiler errors or not. True indicates that there were compiler
+            errors.
+        syncStatus:
+          $ref: '#/components/schemas/SyncStatus'
+    PublishContainerVersionResponse:
+      type: object
+      description: Publish container version response.
+      properties:
+        containerVersion:
+          $ref: '#/components/schemas/ContainerVersion'
+        compilerError:
+          type: boolean
+          description: >-
+            Compiler errors or not. True indicates that there were compiler
+            errors.
+    GetWorkspaceStatusResponse:
+      type: object
+      description: >-
+        The changes and conflicts in a workspace, providing information about
+        which entities have been modified and any merge conflicts.
+      properties:
+        workspaceChange:
+          type: array
+          description: Entities that have been changed in the workspace.
+          items:
+            $ref: '#/components/schemas/Entity'
+        mergeConflict:
+          type: array
+          description: The merge conflict after sync.
+          items:
+            $ref: '#/components/schemas/MergeConflict'
+    SyncWorkspaceResponse:
+      type: object
+      description: Sync workspace response.
+      properties:
+        mergeConflict:
+          type: array
+          description: The merge conflict after sync.
+          items:
+            $ref: '#/components/schemas/MergeConflict'
+        syncStatus:
+          $ref: '#/components/schemas/SyncStatus'
+    SyncStatus:
+      type: object
+      description: The status of a workspace after syncing.
+      properties:
+        mergeConflict:
+          type: boolean
+          description: >-
+            Synchornization operation detected a merge conflict.
+        syncError:
+          type: boolean
+          description: >-
+            An error occurred during the sync operation.
+    Entity:
+      type: object
+      description: >-
+        A workspace entity that can represent a tag, trigger, variable, or
+        folder that has been changed.
+      properties:
+        tag:
+          $ref: '#/components/schemas/Tag'
+        trigger:
+          $ref: '#/components/schemas/Trigger'
+        variable:
+          $ref: '#/components/schemas/Variable'
+        changeStatus:
+          type: string
+          description: The status of the entity change.
+          enum:
+            - changeStatusUnspecified
+            - none
+            - added
+            - deleted
+            - updated
+    MergeConflict:
+      type: object
+      description: Represents a merge conflict between workspace and version.
+      properties:
+        entityInWorkspace:
+          $ref: '#/components/schemas/Entity'
+        entityInBaseVersion:
+          $ref: '#/components/schemas/Entity'
+    RevertTagResponse:
+      type: object
+      description: The result of reverting a tag in a workspace.
+      properties:
+        tag:
+          $ref: '#/components/schemas/Tag'
+    RevertTriggerResponse:
+      type: object
+      description: The result of reverting a trigger in a workspace.
+      properties:
+        trigger:
+          $ref: '#/components/schemas/Trigger'
+    RevertVariableResponse:
+      type: object
+      description: The result of reverting a variable in a workspace.
+      properties:
+        variable:
+          $ref: '#/components/schemas/Variable'

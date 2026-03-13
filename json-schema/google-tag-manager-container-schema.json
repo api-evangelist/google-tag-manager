@@ -1,0 +1,740 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/google-tag-manager/json-schema/google-tag-manager-container-schema.json",
+  "title": "Google Tag Manager Container",
+  "description": "A Google Tag Manager Container represents a collection of tags, triggers, and variables deployed to a website, mobile app, or server-side environment. Containers organize measurement codes and related code fragments that are collectively managed through Google Tag Manager.",
+  "type": "object",
+  "properties": {
+    "path": {
+      "type": "string",
+      "description": "GTM Container's API relative path. Example: accounts/123456/containers/789012.",
+      "readOnly": true,
+      "examples": [
+        "accounts/123456/containers/789012"
+      ]
+    },
+    "accountId": {
+      "type": "string",
+      "description": "GTM Account ID that this container belongs to.",
+      "readOnly": true,
+      "examples": [
+        "123456"
+      ]
+    },
+    "containerId": {
+      "type": "string",
+      "description": "The Container ID uniquely identifies the GTM Container within the account.",
+      "readOnly": true,
+      "examples": [
+        "789012"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "Container display name. This is the human-readable name shown in the Tag Manager interface.",
+      "minLength": 1,
+      "examples": [
+        "My Website Container",
+        "Mobile App - Android",
+        "Server-side Container"
+      ]
+    },
+    "domainName": {
+      "type": "array",
+      "description": "List of domain names associated with the Container. Used for auto-event tracking and link decoration across domains.",
+      "items": {
+        "type": "string",
+        "format": "hostname"
+      },
+      "examples": [
+        ["www.example.com", "example.com"]
+      ]
+    },
+    "publicId": {
+      "type": "string",
+      "description": "Container Public ID. This is the identifier used in the GTM snippet installed on websites (e.g., GTM-XXXX).",
+      "readOnly": true,
+      "pattern": "^GTM-[A-Z0-9]+$",
+      "examples": [
+        "GTM-ABCD12"
+      ]
+    },
+    "tagIds": {
+      "type": "array",
+      "description": "All Tag IDs that refer to this Container. These are the Google Tag IDs associated with this container.",
+      "items": {
+        "type": "string"
+      },
+      "readOnly": true
+    },
+    "notes": {
+      "type": "string",
+      "description": "Container notes. Free-text field for describing the purpose, ownership, or other metadata about the container."
+    },
+    "usageContext": {
+      "type": "array",
+      "description": "List of Usage Contexts for the Container. Defines the platform or environment where this container will be deployed.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "usageContextUnspecified",
+          "web",
+          "android",
+          "ios",
+          "androidSdk5",
+          "iosSdk5",
+          "amp",
+          "server"
+        ]
+      },
+      "minItems": 1,
+      "examples": [
+        ["web"],
+        ["android", "ios"],
+        ["server"]
+      ]
+    },
+    "fingerprint": {
+      "type": "string",
+      "description": "The fingerprint of the GTM Container as computed at storage time. This value is recomputed whenever the container is modified and is used for optimistic locking to prevent concurrent modification conflicts.",
+      "readOnly": true
+    },
+    "tagManagerUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "Auto-generated link to the tag manager UI for this container.",
+      "readOnly": true,
+      "examples": [
+        "https://tagmanager.google.com/#/container/accounts/123456/containers/789012/workspaces?apiLink=container"
+      ]
+    },
+    "taggingServerUrls": {
+      "type": "array",
+      "description": "List of server-side container URLs. Only applicable for server-side containers. These are the URLs where the server-side tagging server is deployed.",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      },
+      "examples": [
+        ["https://gtm.example.com"]
+      ]
+    },
+    "features": {
+      "type": "object",
+      "description": "Read-only Container feature set indicating which capabilities are available for this container type.",
+      "readOnly": true,
+      "properties": {
+        "supportUserPermissions": {
+          "type": "boolean",
+          "description": "Whether this container supports user permissions management.",
+          "readOnly": true
+        },
+        "supportEnvironments": {
+          "type": "boolean",
+          "description": "Whether this container supports environments for testing and staging.",
+          "readOnly": true
+        },
+        "supportWorkspaces": {
+          "type": "boolean",
+          "description": "Whether this container supports multiple workspaces for parallel development.",
+          "readOnly": true
+        },
+        "supportGtagConfigs": {
+          "type": "boolean",
+          "description": "Whether this container supports Google Tag configurations.",
+          "readOnly": true
+        },
+        "supportBuiltInVariables": {
+          "type": "boolean",
+          "description": "Whether this container supports built-in variables.",
+          "readOnly": true
+        },
+        "supportClients": {
+          "type": "boolean",
+          "description": "Whether this container supports clients (server-side tagging).",
+          "readOnly": true
+        },
+        "supportFolders": {
+          "type": "boolean",
+          "description": "Whether this container supports organizing entities into folders.",
+          "readOnly": true
+        },
+        "supportTags": {
+          "type": "boolean",
+          "description": "Whether this container supports tags.",
+          "readOnly": true
+        },
+        "supportTemplates": {
+          "type": "boolean",
+          "description": "Whether this container supports custom templates.",
+          "readOnly": true
+        },
+        "supportTriggers": {
+          "type": "boolean",
+          "description": "Whether this container supports triggers.",
+          "readOnly": true
+        },
+        "supportVariables": {
+          "type": "boolean",
+          "description": "Whether this container supports variables.",
+          "readOnly": true
+        },
+        "supportVersions": {
+          "type": "boolean",
+          "description": "Whether this container supports versioning.",
+          "readOnly": true
+        },
+        "supportZones": {
+          "type": "boolean",
+          "description": "Whether this container supports zones for scoped tag firing.",
+          "readOnly": true
+        },
+        "supportTransformations": {
+          "type": "boolean",
+          "description": "Whether this container supports data transformations.",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "name",
+    "usageContext"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "Tag": {
+      "type": "object",
+      "title": "Tag",
+      "description": "A Google Tag Manager Tag. A tag is a snippet of code that executes on a page when certain conditions (triggers) are met. Tags are used for analytics tracking, conversion measurement, remarketing, and other marketing purposes.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "GTM Tag's API relative path.",
+          "readOnly": true
+        },
+        "accountId": {
+          "type": "string",
+          "description": "GTM Account ID.",
+          "readOnly": true
+        },
+        "containerId": {
+          "type": "string",
+          "description": "GTM Container ID.",
+          "readOnly": true
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "GTM Workspace ID.",
+          "readOnly": true
+        },
+        "tagId": {
+          "type": "string",
+          "description": "The Tag ID uniquely identifies the GTM Tag.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Tag display name.",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "description": "GTM Tag Type identifier. Specifies the type of tag to deploy (e.g., Google Analytics, Google Ads, Custom HTML)."
+        },
+        "liveOnly": {
+          "type": "boolean",
+          "description": "If set to true, this tag will only fire in the live environment (not in preview or debug mode).",
+          "default": false
+        },
+        "priority": {
+          "$ref": "#/$defs/Parameter",
+          "description": "User defined numeric priority of the tag. Tags with higher priority fire first."
+        },
+        "notes": {
+          "type": "string",
+          "description": "User notes on how to apply this tag in the container."
+        },
+        "scheduleStartMs": {
+          "type": "string",
+          "description": "The start timestamp in milliseconds to schedule a tag."
+        },
+        "scheduleEndMs": {
+          "type": "string",
+          "description": "The end timestamp in milliseconds to schedule a tag."
+        },
+        "parameter": {
+          "type": "array",
+          "description": "The tag's parameters that configure its behavior.",
+          "items": {
+            "$ref": "#/$defs/Parameter"
+          }
+        },
+        "fingerprint": {
+          "type": "string",
+          "description": "The fingerprint of the GTM Tag as computed at storage time.",
+          "readOnly": true
+        },
+        "firingTriggerId": {
+          "type": "array",
+          "description": "Firing trigger IDs. A tag will fire when any of the listed triggers are true.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "blockingTriggerId": {
+          "type": "array",
+          "description": "Blocking trigger IDs. If any of the listed triggers evaluates to true, the tag will not fire.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "parentFolderId": {
+          "type": "string",
+          "description": "Parent folder ID."
+        },
+        "tagFiringOption": {
+          "type": "string",
+          "description": "Option to control tag firing frequency.",
+          "enum": [
+            "tagFiringOptionUnspecified",
+            "unlimited",
+            "oncePerEvent",
+            "oncePerLoad"
+          ]
+        },
+        "tagManagerUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Auto-generated link to the tag manager UI.",
+          "readOnly": true
+        },
+        "paused": {
+          "type": "boolean",
+          "description": "Indicates whether the tag is paused, which prevents the tag from firing.",
+          "default": false
+        },
+        "consentSettings": {
+          "$ref": "#/$defs/ConsentSettings"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "Trigger": {
+      "type": "object",
+      "title": "Trigger",
+      "description": "A Google Tag Manager Trigger. A trigger defines conditions under which tags should fire, such as page views, clicks, form submissions, or custom events.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "GTM Trigger's API relative path.",
+          "readOnly": true
+        },
+        "accountId": {
+          "type": "string",
+          "description": "GTM Account ID.",
+          "readOnly": true
+        },
+        "containerId": {
+          "type": "string",
+          "description": "GTM Container ID.",
+          "readOnly": true
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "GTM Workspace ID.",
+          "readOnly": true
+        },
+        "triggerId": {
+          "type": "string",
+          "description": "The Trigger ID uniquely identifies the GTM Trigger.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Trigger display name.",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "description": "Defines the data layer event that causes this trigger.",
+          "enum": [
+            "eventTypeUnspecified",
+            "pageview",
+            "domReady",
+            "windowLoaded",
+            "customEvent",
+            "triggerGroup",
+            "init",
+            "consentInit",
+            "serverPageview",
+            "always",
+            "firebaseAppException",
+            "firebaseAppUpdate",
+            "firebaseCampaign",
+            "firebaseFirstOpen",
+            "firebaseInAppPurchase",
+            "firebaseNotificationDismiss",
+            "firebaseNotificationForeground",
+            "firebaseNotificationOpen",
+            "firebaseNotificationReceive",
+            "firebaseOsUpdate",
+            "firebaseSessionStart",
+            "firebaseUserEngagement",
+            "formSubmission",
+            "click",
+            "linkClick",
+            "jsError",
+            "historyChange",
+            "timer",
+            "ampClick",
+            "ampTimer",
+            "ampScroll",
+            "ampVisibility",
+            "youTubeVideo",
+            "scrollDepth",
+            "elementVisibility"
+          ]
+        },
+        "customEventFilter": {
+          "type": "array",
+          "description": "Used in the case of custom event, which is fired if and only if all Conditions are true.",
+          "items": {
+            "$ref": "#/$defs/Condition"
+          }
+        },
+        "filter": {
+          "type": "array",
+          "description": "The trigger will only fire if and only if all Conditions are true.",
+          "items": {
+            "$ref": "#/$defs/Condition"
+          }
+        },
+        "autoEventFilter": {
+          "type": "array",
+          "description": "Used in the case of auto event tracking for filtering events.",
+          "items": {
+            "$ref": "#/$defs/Condition"
+          }
+        },
+        "fingerprint": {
+          "type": "string",
+          "description": "The fingerprint of the GTM Trigger as computed at storage time.",
+          "readOnly": true
+        },
+        "parentFolderId": {
+          "type": "string",
+          "description": "Parent folder ID."
+        },
+        "tagManagerUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Auto-generated link to the tag manager UI.",
+          "readOnly": true
+        },
+        "notes": {
+          "type": "string",
+          "description": "User notes on how to apply this trigger in the container."
+        },
+        "parameter": {
+          "type": "array",
+          "description": "Additional parameters for the trigger.",
+          "items": {
+            "$ref": "#/$defs/Parameter"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "Variable": {
+      "type": "object",
+      "title": "Variable",
+      "description": "A Google Tag Manager Variable. A variable provides dynamic values that can be used in tags and triggers, such as page URL, click text, or custom JavaScript values.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "GTM Variable's API relative path.",
+          "readOnly": true
+        },
+        "accountId": {
+          "type": "string",
+          "description": "GTM Account ID.",
+          "readOnly": true
+        },
+        "containerId": {
+          "type": "string",
+          "description": "GTM Container ID.",
+          "readOnly": true
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "GTM Workspace ID.",
+          "readOnly": true
+        },
+        "variableId": {
+          "type": "string",
+          "description": "The Variable ID uniquely identifies the GTM Variable.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Variable display name.",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "description": "GTM Variable Type identifier."
+        },
+        "notes": {
+          "type": "string",
+          "description": "User notes on how to apply this variable in the container."
+        },
+        "scheduleStartMs": {
+          "type": "string",
+          "description": "The start timestamp in milliseconds to schedule a variable."
+        },
+        "scheduleEndMs": {
+          "type": "string",
+          "description": "The end timestamp in milliseconds to schedule a variable."
+        },
+        "parameter": {
+          "type": "array",
+          "description": "The variable's parameters that configure its behavior.",
+          "items": {
+            "$ref": "#/$defs/Parameter"
+          }
+        },
+        "enablingTriggerId": {
+          "type": "array",
+          "description": "For mobile containers only. A list of trigger IDs for enabling conditional variables.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "disablingTriggerId": {
+          "type": "array",
+          "description": "For mobile containers only. A list of trigger IDs for disabling conditional variables.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fingerprint": {
+          "type": "string",
+          "description": "The fingerprint of the GTM Variable as computed at storage time.",
+          "readOnly": true
+        },
+        "parentFolderId": {
+          "type": "string",
+          "description": "Parent folder ID."
+        },
+        "tagManagerUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Auto-generated link to the tag manager UI.",
+          "readOnly": true
+        },
+        "formatValue": {
+          "$ref": "#/$defs/FormatValue"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "Workspace": {
+      "type": "object",
+      "title": "Workspace",
+      "description": "A Google Tag Manager Workspace. A workspace is an isolated editing environment within a container where changes to tags, triggers, and variables can be made and tested before being published.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "GTM Workspace's API relative path.",
+          "readOnly": true
+        },
+        "accountId": {
+          "type": "string",
+          "description": "GTM Account ID.",
+          "readOnly": true
+        },
+        "containerId": {
+          "type": "string",
+          "description": "GTM Container ID.",
+          "readOnly": true
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "The Workspace ID uniquely identifies the GTM Workspace.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Workspace display name.",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "description": "Workspace description."
+        },
+        "fingerprint": {
+          "type": "string",
+          "description": "The fingerprint of the GTM Workspace as computed at storage time.",
+          "readOnly": true
+        },
+        "tagManagerUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Auto-generated link to the tag manager UI.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "Parameter": {
+      "type": "object",
+      "title": "Parameter",
+      "description": "A Google Tag Manager Parameter. Parameters are key-value pairs that configure tags, triggers, and variables. Parameters can be nested using list and map types.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The parameter type. Determines how the value field is interpreted.",
+          "enum": [
+            "typeUnspecified",
+            "template",
+            "integer",
+            "boolean",
+            "list",
+            "map",
+            "triggerReference",
+            "tagReference"
+          ]
+        },
+        "key": {
+          "type": "string",
+          "description": "The named key that uniquely identifies a parameter. Required for top-level parameters and map values. Ignored for list values."
+        },
+        "value": {
+          "type": "string",
+          "description": "A parameter's value (may contain variable references such as {{variableName}}) as appropriate to the specified type."
+        },
+        "list": {
+          "type": "array",
+          "description": "This list parameter's parameters (keys will be ignored). Used when type is list.",
+          "items": {
+            "$ref": "#/$defs/Parameter"
+          }
+        },
+        "map": {
+          "type": "array",
+          "description": "This map parameter's parameters (must have keys; keys must be unique). Used when type is map.",
+          "items": {
+            "$ref": "#/$defs/Parameter"
+          }
+        },
+        "isWeakReference": {
+          "type": "boolean",
+          "description": "Whether or not the parameter is a weak reference. Used to determine which parameters should be included in exported containers."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "Condition": {
+      "type": "object",
+      "title": "Condition",
+      "description": "A predicate that is evaluated against a data layer value or variable. Used in trigger filter conditions to determine whether a trigger should fire.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of operator for this condition.",
+          "enum": [
+            "conditionTypeUnspecified",
+            "equals",
+            "contains",
+            "startsWith",
+            "endsWith",
+            "matchRegex",
+            "greater",
+            "greaterOrEquals",
+            "less",
+            "lessOrEquals",
+            "cssSelector",
+            "urlMatches"
+          ]
+        },
+        "parameter": {
+          "type": "array",
+          "description": "A list of named parameters. The first parameter is the left-hand operand, the second is the right-hand operand.",
+          "items": {
+            "$ref": "#/$defs/Parameter"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ConsentSettings": {
+      "type": "object",
+      "title": "ConsentSettings",
+      "description": "Tag consent settings that determine whether additional consent is required before the tag fires.",
+      "properties": {
+        "consentStatus": {
+          "type": "string",
+          "description": "The tag's consent status.",
+          "enum": [
+            "notSet",
+            "notNeeded",
+            "needed"
+          ]
+        },
+        "consentType": {
+          "$ref": "#/$defs/Parameter",
+          "description": "The types of consent required. Must be of type LIST where each list item is of type STRING."
+        }
+      }
+    },
+    "FormatValue": {
+      "type": "object",
+      "title": "FormatValue",
+      "description": "Option to convert a variable value to another value. Supports case conversion and type coercion for null, undefined, true, and false values.",
+      "properties": {
+        "caseConversionType": {
+          "type": "string",
+          "description": "The option to convert a string-type variable value to either lowercase or uppercase.",
+          "enum": [
+            "none",
+            "lowercase",
+            "uppercase"
+          ]
+        },
+        "convertNullToValue": {
+          "$ref": "#/$defs/Parameter",
+          "description": "The value to convert if variable value is null."
+        },
+        "convertUndefinedToValue": {
+          "$ref": "#/$defs/Parameter",
+          "description": "The value to convert if variable value is undefined."
+        },
+        "convertTrueToValue": {
+          "$ref": "#/$defs/Parameter",
+          "description": "The value to convert if variable value is true."
+        },
+        "convertFalseToValue": {
+          "$ref": "#/$defs/Parameter",
+          "description": "The value to convert if variable value is false."
+        }
+      }
+    }
+  }
+}
