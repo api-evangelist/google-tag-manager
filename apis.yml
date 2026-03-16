@@ -1,16 +1,18 @@
+aid: google-tag-manager
 name: Google Tag Manager
 description: Google Tag Manager is a tag management system that allows you to quickly and easily update measurement codes and related code fragments collectively known as tags on your website or mobile app.
 image: https://www.gstatic.com/analytics-suite/header/suite/v2/ic_tag_manager.svg
-tags:
-- Tag Management
-- Analytics
-- Marketing
-- Tracking
-- Conversion Tracking
-created: '2024'
-modified: '2026-03-03'
 url: https://tagmanager.google.com/
-specificationVersion: '0.18'
+created: '2024-01-01'
+modified: '2026-03-16'
+specificationVersion: '0.19'
+type: Index
+tags:
+  - Tag Management
+  - Analytics
+  - Marketing
+  - Tracking
+  - Conversion Tracking
 apis:
 - name: Google Tag Manager API
   description: The Tag Manager API allows clients to access and modify container and tag configuration.
@@ -124,4 +126,3 @@ common:
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
-  url: https://apievangelist.com
