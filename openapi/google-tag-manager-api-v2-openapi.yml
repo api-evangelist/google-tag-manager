@@ -36,18 +36,13 @@ tags:
   - name: Containers
     description: >-
       Operations for managing containers within a Google Tag Manager account.
-  - name: Workspaces
-    description: >-
-      Operations for managing workspaces within a container, including version
-      creation and conflict resolution.
-  - name: Tags
-    description: >-
-      Operations for managing tags within a workspace, including creation,
-      configuration, and scheduling.
   - name: Triggers
     description: >-
       Operations for managing triggers within a workspace that control when tags
       fire.
+  - name: User Permissions
+    description: >-
+      Operations for managing user permissions on Google Tag Manager accounts.
   - name: Variables
     description: >-
       Operations for managing variables within a workspace that provide dynamic
@@ -56,9 +51,10 @@ tags:
     description: >-
       Operations for managing container versions, including publishing and
       rollback.
-  - name: User Permissions
+  - name: Workspaces
     description: >-
-      Operations for managing user permissions on Google Tag Manager accounts.
+      Operations for managing workspaces within a container, including version
+      creation and conflict resolution.
 paths:
   /tagmanager/v2/accounts:
     get:
@@ -464,8 +460,7 @@ paths:
       operationId: listTags
       summary: Google Tag Manager List tags in a workspace
       description: Lists all GTM Tags of a GTM Container Workspace.
-      tags:
-        - Tags
+      tags: []
       parameters:
         - $ref: '#/components/parameters/parentParam'
         - name: pageToken
@@ -484,8 +479,7 @@ paths:
       operationId: createTag
       summary: Google Tag Manager Create a tag
       description: Creates a GTM Tag in a GTM Workspace.
-      tags:
-        - Tags
+      tags: []
       parameters:
         - $ref: '#/components/parameters/parentParam'
       requestBody:
@@ -506,8 +500,7 @@ paths:
       operationId: getTag
       summary: Google Tag Manager Get a tag
       description: Gets a GTM Tag by its resource path.
-      tags:
-        - Tags
+      tags: []
       parameters:
         - name: tagPath
           in: path
@@ -528,8 +521,7 @@ paths:
       operationId: updateTag
       summary: Google Tag Manager Update a tag
       description: Updates a GTM Tag.
-      tags:
-        - Tags
+      tags: []
       parameters:
         - name: tagPath
           in: path
@@ -561,8 +553,7 @@ paths:
       operationId: deleteTag
       summary: Google Tag Manager Delete a tag
       description: Deletes a GTM Tag.
-      tags:
-        - Tags
+      tags: []
       parameters:
         - name: tagPath
           in: path
@@ -580,8 +571,7 @@ paths:
       description: >-
         Reverts changes to a GTM Tag in a GTM Workspace, restoring it to its
         original state.
-      tags:
-        - Tags
+      tags: []
       parameters:
         - name: tagPath
           in: path
