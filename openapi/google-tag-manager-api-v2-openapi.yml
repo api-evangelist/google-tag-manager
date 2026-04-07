@@ -145,7 +145,7 @@ paths:
   /tagmanager/v2/{parent}/containers:
     get:
       operationId: listContainers
-      summary: List containers in an account
+      summary: Google Tag Manager List containers in an account
       description: Lists all Containers that belongs to a GTM Account.
       tags:
         - Containers
@@ -165,7 +165,7 @@ paths:
                 $ref: '#/components/schemas/ListContainersResponse'
     post:
       operationId: createContainer
-      summary: Create a container
+      summary: Google Tag Manager Create a container
       description: Creates a Container within a GTM Account.
       tags:
         - Containers
@@ -189,7 +189,7 @@ paths:
   /tagmanager/v2/{containerPath}:
     get:
       operationId: getContainer
-      summary: Get a container
+      summary: Google Tag Manager Get a container
       description: Gets a Container by its resource path.
       tags:
         - Containers
@@ -213,7 +213,7 @@ paths:
           description: Container not found.
     put:
       operationId: updateContainer
-      summary: Update a container
+      summary: Google Tag Manager Update a container
       description: Updates a Container.
       tags:
         - Containers
@@ -247,7 +247,7 @@ paths:
                 $ref: '#/components/schemas/Container'
     delete:
       operationId: deleteContainer
-      summary: Delete a container
+      summary: Google Tag Manager Delete a container
       description: Deletes a Container.
       tags:
         - Containers
@@ -267,7 +267,7 @@ paths:
   /tagmanager/v2/{parent}/workspaces:
     get:
       operationId: listWorkspaces
-      summary: List workspaces in a container
+      summary: Google Tag Manager List workspaces in a container
       description: Lists all Workspaces that belong to a GTM Container.
       tags:
         - Workspaces
@@ -287,7 +287,7 @@ paths:
                 $ref: '#/components/schemas/ListWorkspacesResponse'
     post:
       operationId: createWorkspace
-      summary: Create a workspace
+      summary: Google Tag Manager Create a workspace
       description: Creates a Workspace within a GTM Container.
       tags:
         - Workspaces
@@ -309,7 +309,7 @@ paths:
   /tagmanager/v2/{workspacePath}:
     get:
       operationId: getWorkspace
-      summary: Get a workspace
+      summary: Google Tag Manager Get a workspace
       description: Gets a Workspace by its resource path.
       tags:
         - Workspaces
@@ -331,7 +331,7 @@ paths:
                 $ref: '#/components/schemas/Workspace'
     put:
       operationId: updateWorkspace
-      summary: Update a workspace
+      summary: Google Tag Manager Update a workspace
       description: Updates a Workspace.
       tags:
         - Workspaces
@@ -365,7 +365,7 @@ paths:
                 $ref: '#/components/schemas/Workspace'
     delete:
       operationId: deleteWorkspace
-      summary: Delete a workspace
+      summary: Google Tag Manager Delete a workspace
       description: Deletes a Workspace.
       tags:
         - Workspaces
@@ -383,7 +383,7 @@ paths:
   /tagmanager/v2/{workspacePath}:create_version:
     post:
       operationId: createWorkspaceVersion
-      summary: Create a container version from a workspace
+      summary: Google Tag Manager Create a container version from a workspace
       description: >-
         Creates a Container Version from the entities present in the workspace,
         deletes the workspace, and sets the base container version to the newly
@@ -414,7 +414,7 @@ paths:
   /tagmanager/v2/{workspacePath}/status:
     get:
       operationId: getWorkspaceStatus
-      summary: Get the status of a workspace
+      summary: Google Tag Manager Get the status of a workspace
       description: >-
         Finds conflicting and modified entities in the workspace. Returns status
         information about the workspace including workspace changes and
@@ -438,7 +438,7 @@ paths:
   /tagmanager/v2/{workspacePath}:sync:
     post:
       operationId: syncWorkspace
-      summary: Sync a workspace to the latest container version
+      summary: Google Tag Manager Sync a workspace to the latest container version
       description: >-
         Syncs a workspace to the latest container version by updating all
         unmodified workspace entities and displaying conflicts for modified
@@ -462,7 +462,7 @@ paths:
   /tagmanager/v2/{parent}/tags:
     get:
       operationId: listTags
-      summary: List tags in a workspace
+      summary: Google Tag Manager List tags in a workspace
       description: Lists all GTM Tags of a GTM Container Workspace.
       tags:
         - Tags
@@ -482,7 +482,7 @@ paths:
                 $ref: '#/components/schemas/ListTagsResponse'
     post:
       operationId: createTag
-      summary: Create a tag
+      summary: Google Tag Manager Create a tag
       description: Creates a GTM Tag in a GTM Workspace.
       tags:
         - Tags
@@ -504,7 +504,7 @@ paths:
   /tagmanager/v2/{tagPath}:
     get:
       operationId: getTag
-      summary: Get a tag
+      summary: Google Tag Manager Get a tag
       description: Gets a GTM Tag by its resource path.
       tags:
         - Tags
@@ -526,7 +526,7 @@ paths:
                 $ref: '#/components/schemas/Tag'
     put:
       operationId: updateTag
-      summary: Update a tag
+      summary: Google Tag Manager Update a tag
       description: Updates a GTM Tag.
       tags:
         - Tags
@@ -559,7 +559,7 @@ paths:
                 $ref: '#/components/schemas/Tag'
     delete:
       operationId: deleteTag
-      summary: Delete a tag
+      summary: Google Tag Manager Delete a tag
       description: Deletes a GTM Tag.
       tags:
         - Tags
@@ -576,7 +576,7 @@ paths:
   /tagmanager/v2/{tagPath}:revert:
     post:
       operationId: revertTag
-      summary: Revert changes to a tag in a workspace
+      summary: Google Tag Manager Revert changes to a tag in a workspace
       description: >-
         Reverts changes to a GTM Tag in a GTM Workspace, restoring it to its
         original state.
@@ -599,7 +599,7 @@ paths:
   /tagmanager/v2/{parent}/triggers:
     get:
       operationId: listTriggers
-      summary: List triggers in a workspace
+      summary: Google Tag Manager List triggers in a workspace
       description: Lists all GTM Triggers of a GTM Container Workspace.
       tags:
         - Triggers
@@ -619,7 +619,7 @@ paths:
                 $ref: '#/components/schemas/ListTriggersResponse'
     post:
       operationId: createTrigger
-      summary: Create a trigger
+      summary: Google Tag Manager Create a trigger
       description: Creates a GTM Trigger in a GTM Workspace.
       tags:
         - Triggers
@@ -641,7 +641,7 @@ paths:
   /tagmanager/v2/{triggerPath}:
     get:
       operationId: getTrigger
-      summary: Get a trigger
+      summary: Google Tag Manager Get a trigger
       description: Gets a GTM Trigger by its resource path.
       tags:
         - Triggers
@@ -663,7 +663,7 @@ paths:
                 $ref: '#/components/schemas/Trigger'
     put:
       operationId: updateTrigger
-      summary: Update a trigger
+      summary: Google Tag Manager Update a trigger
       description: Updates a GTM Trigger.
       tags:
         - Triggers
@@ -696,7 +696,7 @@ paths:
                 $ref: '#/components/schemas/Trigger'
     delete:
       operationId: deleteTrigger
-      summary: Delete a trigger
+      summary: Google Tag Manager Delete a trigger
       description: Deletes a GTM Trigger.
       tags:
         - Triggers
@@ -713,7 +713,7 @@ paths:
   /tagmanager/v2/{triggerPath}:revert:
     post:
       operationId: revertTrigger
-      summary: Revert changes to a trigger in a workspace
+      summary: Google Tag Manager Revert changes to a trigger in a workspace
       description: >-
         Reverts changes to a GTM Trigger in a GTM Workspace, restoring it to its
         original state.
@@ -736,7 +736,7 @@ paths:
   /tagmanager/v2/{parent}/variables:
     get:
       operationId: listVariables
-      summary: List variables in a workspace
+      summary: Google Tag Manager List variables in a workspace
       description: Lists all GTM Variables of a GTM Container Workspace.
       tags:
         - Variables
@@ -756,7 +756,7 @@ paths:
                 $ref: '#/components/schemas/ListVariablesResponse'
     post:
       operationId: createVariable
-      summary: Create a variable
+      summary: Google Tag Manager Create a variable
       description: Creates a GTM Variable in a GTM Workspace.
       tags:
         - Variables
@@ -778,7 +778,7 @@ paths:
   /tagmanager/v2/{variablePath}:
     get:
       operationId: getVariable
-      summary: Get a variable
+      summary: Google Tag Manager Get a variable
       description: Gets a GTM Variable by its resource path.
       tags:
         - Variables
@@ -800,7 +800,7 @@ paths:
                 $ref: '#/components/schemas/Variable'
     put:
       operationId: updateVariable
-      summary: Update a variable
+      summary: Google Tag Manager Update a variable
       description: Updates a GTM Variable.
       tags:
         - Variables
@@ -833,7 +833,7 @@ paths:
                 $ref: '#/components/schemas/Variable'
     delete:
       operationId: deleteVariable
-      summary: Delete a variable
+      summary: Google Tag Manager Delete a variable
       description: Deletes a GTM Variable.
       tags:
         - Variables
@@ -850,7 +850,7 @@ paths:
   /tagmanager/v2/{variablePath}:revert:
     post:
       operationId: revertVariable
-      summary: Revert changes to a variable in a workspace
+      summary: Google Tag Manager Revert changes to a variable in a workspace
       description: >-
         Reverts changes to a GTM Variable in a GTM Workspace, restoring it to
         its original state.
@@ -873,7 +873,7 @@ paths:
   /tagmanager/v2/{parent}/versions:
     get:
       operationId: listContainerVersionHeaders
-      summary: List all container version headers
+      summary: Google Tag Manager List all container version headers
       description: >-
         Lists all Container Version Headers of a GTM Container, providing
         summary information about each version.
@@ -902,7 +902,7 @@ paths:
   /tagmanager/v2/{versionPath}:
     get:
       operationId: getContainerVersion
-      summary: Get a container version
+      summary: Google Tag Manager Get a container version
       description: Gets a Container Version by its resource path.
       tags:
         - Versions
@@ -922,7 +922,7 @@ paths:
                 $ref: '#/components/schemas/ContainerVersion'
     delete:
       operationId: deleteContainerVersion
-      summary: Delete a container version
+      summary: Google Tag Manager Delete a container version
       description: Deletes a Container Version.
       tags:
         - Versions
@@ -939,7 +939,7 @@ paths:
   /tagmanager/v2/{versionPath}:publish:
     post:
       operationId: publishContainerVersion
-      summary: Publish a container version
+      summary: Google Tag Manager Publish a container version
       description: >-
         Publishes a Container Version, making it the live version served to
         users.
@@ -970,7 +970,7 @@ paths:
   /tagmanager/v2/{parent}/versions:live:
     get:
       operationId: getLiveContainerVersion
-      summary: Get the live container version
+      summary: Google Tag Manager Get the live container version
       description: >-
         Gets the live (published) container version for a GTM Container.
       tags:
@@ -988,7 +988,7 @@ paths:
   /tagmanager/v2/{parent}/user_permissions:
     get:
       operationId: listUserPermissions
-      summary: List user permissions for an account
+      summary: Google Tag Manager List user permissions for an account
       description: >-
         List all users that have access to the account along with Account and
         Container user access granted to each of them.
@@ -1010,7 +1010,7 @@ paths:
                 $ref: '#/components/schemas/ListUserPermissionsResponse'
     post:
       operationId: createUserPermission
-      summary: Create a user permission
+      summary: Google Tag Manager Create a user permission
       description: Creates a user's Account and Container access within a GTM Account.
       tags:
         - User Permissions
@@ -1032,7 +1032,7 @@ paths:
   /tagmanager/v2/{userPermissionPath}:
     get:
       operationId: getUserPermission
-      summary: Get a user permission
+      summary: Google Tag Manager Get a user permission
       description: Gets a user's Account and Container access.
       tags:
         - User Permissions
@@ -1052,7 +1052,7 @@ paths:
                 $ref: '#/components/schemas/UserPermission'
     put:
       operationId: updateUserPermission
-      summary: Update a user permission
+      summary: Google Tag Manager Update a user permission
       description: Updates a user's Account and Container access.
       tags:
         - User Permissions
@@ -1078,7 +1078,7 @@ paths:
                 $ref: '#/components/schemas/UserPermission'
     delete:
       operationId: deleteUserPermission
-      summary: Delete a user permission
+      summary: Google Tag Manager Delete a user permission
       description: Removes a user from the account, revoking access.
       tags:
         - User Permissions
