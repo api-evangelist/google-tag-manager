@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ContainerFeatures",
+  "type": "object",
+  "description": "Read-only container feature set.",
+  "properties": {
+    "supportUserPermissions": {
+      "type": "boolean"
+    },
+    "supportEnvironments": {
+      "type": "boolean"
+    },
+    "supportWorkspaces": {
+      "type": "boolean"
+    },
+    "supportGtagConfigs": {
+      "type": "boolean"
+    },
+    "supportBuiltInVariables": {
+      "type": "boolean"
+    },
+    "supportClients": {
+      "type": "boolean"
+    },
+    "supportFolders": {
+      "type": "boolean"
+    },
+    "supportTags": {
+      "type": "boolean"
+    },
+    "supportTemplates": {
+      "type": "boolean"
+    },
+    "supportTriggers": {
+      "type": "boolean"
+    },
+    "supportVariables": {
+      "type": "boolean"
+    },
+    "supportVersions": {
+      "type": "boolean"
+    },
+    "supportZones": {
+      "type": "boolean"
+    },
+    "supportTransformations": {
+      "type": "boolean"
+    }
+  }
+}

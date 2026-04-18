@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Account",
+  "type": "object",
+  "properties": {
+    "path": {
+      "type": "string"
+    },
+    "accountId": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "shareData": {
+      "type": "boolean"
+    },
+    "fingerprint": {
+      "type": "string"
+    },
+    "tagManagerUrl": {
+      "type": "string"
+    }
+  }
+}

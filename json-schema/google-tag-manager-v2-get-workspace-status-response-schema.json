@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GetWorkspaceStatusResponse",
+  "type": "object",
+  "description": "The changes and conflicts in a workspace, providing information about which entities have been modified and any merge conflicts.",
+  "properties": {
+    "workspaceChange": {
+      "type": "array",
+      "description": "Entities that have been changed in the workspace."
+    },
+    "mergeConflict": {
+      "type": "array",
+      "description": "The merge conflict after sync."
+    }
+  }
+}

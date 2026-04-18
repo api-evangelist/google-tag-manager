@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ContainerAccess",
+  "type": "object",
+  "description": "Defines the Google Tag Manager Container access permissions.",
+  "properties": {
+    "containerId": {
+      "type": "string",
+      "description": "GTM Container ID."
+    },
+    "permission": {
+      "type": "string",
+      "description": "List of Container permissions. Valid values include noAccess, read, edit, approve, and publish."
+    }
+  }
+}

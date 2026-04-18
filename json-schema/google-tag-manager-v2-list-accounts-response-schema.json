@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ListAccountsResponse",
+  "type": "object",
+  "description": "List Accounts Response.",
+  "properties": {
+    "account": {
+      "type": "array",
+      "description": "List of GTM Accounts that a user has access to."
+    },
+    "nextPageToken": {
+      "type": "string",
+      "description": "Continuation token for fetching the next page of results."
+    }
+  }
+}

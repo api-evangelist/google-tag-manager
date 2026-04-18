@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "UserPermission",
+  "type": "object",
+  "properties": {
+    "path": {
+      "type": "string"
+    },
+    "accountId": {
+      "type": "string"
+    },
+    "emailAddress": {
+      "type": "string"
+    },
+    "containerAccess": {
+      "type": "array"
+    }
+  }
+}

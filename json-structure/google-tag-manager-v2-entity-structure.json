@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Entity",
+  "type": "object",
+  "properties": {
+    "changeStatus": {
+      "type": "string"
+    }
+  }
+}

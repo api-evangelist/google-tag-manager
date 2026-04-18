@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AccountAccess",
+  "type": "object",
+  "description": "Defines the Google Tag Manager Account access permissions.",
+  "properties": {
+    "permission": {
+      "type": "string",
+      "description": "Whether the user has no access, user access, or admin access to the account."
+    }
+  }
+}

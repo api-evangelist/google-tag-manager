@@ -1,0 +1,14 @@
+{
+  "path": "example_value",
+  "accountId": "500123",
+  "containerId": "500123",
+  "containerVersionId": "500123",
+  "name": "Example Title",
+  "description": "A sample description.",
+  "tag": [],
+  "trigger": [],
+  "variable": [],
+  "fingerprint": "example_value",
+  "tagManagerUrl": "https://www.example.com",
+  "deleted": true
+}

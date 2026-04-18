@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ListUserPermissionsResponse",
+  "type": "object",
+  "description": "List user permissions response.",
+  "properties": {
+    "userPermission": {
+      "type": "array",
+      "description": "All GTM UserPermissions of a GTM Account."
+    },
+    "nextPageToken": {
+      "type": "string",
+      "description": "Continuation token for fetching the next page of results."
+    }
+  }
+}

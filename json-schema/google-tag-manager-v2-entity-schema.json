@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Entity",
+  "type": "object",
+  "description": "A workspace entity that can represent a tag, trigger, variable, or folder that has been changed.",
+  "properties": {
+    "changeStatus": {
+      "type": "string",
+      "description": "The status of the entity change."
+    }
+  }
+}

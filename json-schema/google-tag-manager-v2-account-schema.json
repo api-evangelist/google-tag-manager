@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Account",
+  "type": "object",
+  "description": "Represents a Google Tag Manager Account.",
+  "properties": {
+    "path": {
+      "type": "string",
+      "description": "GTM Account's API relative path."
+    },
+    "accountId": {
+      "type": "string",
+      "description": "The Account ID uniquely identifies the GTM Account."
+    },
+    "name": {
+      "type": "string",
+      "description": "Account display name."
+    },
+    "shareData": {
+      "type": "boolean",
+      "description": "Whether the account shares data anonymously with Google and others. This flag enables benchmarking by sharing your data in an anonymous form."
+    },
+    "fingerprint": {
+      "type": "string",
+      "description": "The fingerprint of the GTM Account as computed at storage time. This value is recomputed whenever the account is modified."
+    },
+    "tagManagerUrl": {
+      "type": "string",
+      "description": "Auto-generated link to the tag manager UI."
+    }
+  }
+}

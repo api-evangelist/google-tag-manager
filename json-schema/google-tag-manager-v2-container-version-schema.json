@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ContainerVersion",
+  "type": "object",
+  "description": "Represents a version of a Google Tag Manager Container. A container version is a snapshot of all tags, triggers, variables, and configuration at a point in time.",
+  "properties": {
+    "path": {
+      "type": "string",
+      "description": "GTM ContainerVersion's API relative path."
+    },
+    "accountId": {
+      "type": "string",
+      "description": "GTM Account ID."
+    },
+    "containerId": {
+      "type": "string",
+      "description": "GTM Container ID."
+    },
+    "containerVersionId": {
+      "type": "string",
+      "description": "The Container Version ID uniquely identifies the GTM Container Version."
+    },
+    "name": {
+      "type": "string",
+      "description": "Container version display name."
+    },
+    "description": {
+      "type": "string",
+      "description": "Container version description."
+    },
+    "tag": {
+      "type": "array",
+      "description": "The tags in the container that this version was taken from."
+    },
+    "trigger": {
+      "type": "array",
+      "description": "The triggers in the container that this version was taken from."
+    },
+    "variable": {
+      "type": "array",
+      "description": "The variables in the container that this version was taken from."
+    },
+    "fingerprint": {
+      "type": "string",
+      "description": "The fingerprint of the GTM Container Version as computed at storage time."
+    },
+    "tagManagerUrl": {
+      "type": "string",
+      "description": "Auto-generated link to the tag manager UI."
+    },
+    "deleted": {
+      "type": "boolean",
+      "description": "A value of true indicates this version has been deleted."
+    }
+  }
+}

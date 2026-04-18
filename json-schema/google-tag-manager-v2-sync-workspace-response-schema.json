@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SyncWorkspaceResponse",
+  "type": "object",
+  "description": "Sync workspace response.",
+  "properties": {
+    "mergeConflict": {
+      "type": "array",
+      "description": "The merge conflict after sync."
+    }
+  }
+}

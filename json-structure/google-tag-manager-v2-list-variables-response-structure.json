@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ListVariablesResponse",
+  "type": "object",
+  "properties": {
+    "variable": {
+      "type": "array"
+    },
+    "nextPageToken": {
+      "type": "string"
+    }
+  }
+}

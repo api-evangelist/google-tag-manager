@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ListWorkspacesResponse",
+  "type": "object",
+  "description": "List Workspaces Response.",
+  "properties": {
+    "workspace": {
+      "type": "array",
+      "description": "All Workspaces of a GTM Container."
+    },
+    "nextPageToken": {
+      "type": "string",
+      "description": "Continuation token for fetching the next page of results."
+    }
+  }
+}

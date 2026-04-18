@@ -4,7 +4,7 @@ description: Google Tag Manager is a tag management system that allows you to qu
 image: https://www.gstatic.com/analytics-suite/header/suite/v2/ic_tag_manager.svg
 url: https://tagmanager.google.com/
 created: '2024-01-01'
-modified: '2026-03-16'
+modified: '2026-04-18'
 specificationVersion: '0.19'
 type: Index
 tags:
@@ -31,25 +31,23 @@ apis:
     properties:
       - type: OpenAPI
         url: openapi/google-tag-manager-api-v2-openapi.yml
-      - type: x-openapi-original
-        url: https://tagmanager.googleapis.com/$discovery/rest?version=v2
       - type: JSONSchema
         url: json-schema/google-tag-manager-container-schema.json
       - type: JSONLD
         url: json-ld/google-tag-manager-context.jsonld
       - type: Documentation
         url: https://developers.google.com/tag-platform/tag-manager/api/v2
-      - type: x-api-reference
+      - type: APIReference
         url: https://developers.google.com/tag-platform/tag-manager/api/reference/rest
       - type: Authentication
         url: https://developers.google.com/tag-platform/tag-manager/api/v2/authorization
-      - type: x-getting-started
+      - type: GettingStarted
         url: https://developers.google.com/tag-platform/tag-manager/api/v2/devguide
-      - type: x-sdk
+      - type: SDK
         url: https://developers.google.com/tag-platform/tag-manager/api/v2/libraries
-      - type: x-rate-limits
+      - type: RateLimits
         url: https://developers.google.com/tag-platform/tag-manager/api/v2/limits-quotas
-      - type: x-change-log
+      - type: ChangeLog
         url: https://support.google.com/tagmanager/answer/4620708
     contact:
       - FN: Google Support
@@ -69,11 +67,11 @@ apis:
     properties:
       - type: Documentation
         url: https://developers.google.com/tag-platform/tag-manager/server-side
-      - type: x-api-reference
+      - type: APIReference
         url: https://developers.google.com/tag-platform/tag-manager/server-side/api
-      - type: x-getting-started
+      - type: GettingStarted
         url: https://developers.google.com/tag-platform/tag-manager/server-side/intro
-      - type: x-change-log
+      - type: ReleaseNotes
         url: https://developers.google.com/tag-platform/tag-manager/server-side/release-notes
     contact:
       - FN: Google Support
@@ -82,8 +80,6 @@ apis:
 common:
   - type: Portal
     url: https://developers.google.com/tag-platform
-  - type: Website
-    url: https://marketingplatform.google.com/about/tag-manager/
   - type: GettingStarted
     url: https://developers.google.com/tag-platform/tag-manager/api/v2/devguide
   - type: Authentication
@@ -92,36 +88,82 @@ common:
     url: https://developers.google.com/tag-platform/tag-manager
   - type: Blog
     url: https://blog.google/products/marketingplatform/
-  - type: x-sdk
+  - type: SDK
     url: https://developers.google.com/tag-platform/tag-manager/api/v2/libraries
   - type: Support
     url: https://support.google.com/tagmanager
-  - type: x-developer-support
-    url: https://developers.google.com/tag-platform/support
-  - type: Status
+  - type: StatusPage
     url: https://status.cloud.google.com/
   - type: TermsOfService
     url: https://policies.google.com/terms
-  - type: Privacy
+  - type: PrivacyPolicy
     url: https://policies.google.com/privacy
   - type: SignUp
     url: https://tagmanager.google.com/
   - type: Login
     url: https://tagmanager.google.com/
-  - type: x-rate-limits
+  - type: RateLimits
     url: https://developers.google.com/tag-platform/tag-manager/api/v2/limits-quotas
-  - type: x-change-log
+  - type: ChangeLog
     url: https://support.google.com/tagmanager/answer/4620708
-  - type: x-community
-    url: https://support.google.com/tagmanager/community
-  - type: x-stack-overflow
+  - type: StackOverflow
     url: https://stackoverflow.com/questions/tagged/google-tag-manager
-  - type: x-youtube
+  - type: YouTube
     url: https://www.youtube.com/googlemarketingplatform
-  - type: x-custom-templates
-    url: https://developers.google.com/tag-platform/tag-manager/templates
-  - type: x-data-layer
-    url: https://developers.google.com/tag-platform/tag-manager/datalayer
+  - type: SpectralRules
+    url: rules/google-tag-manager-spectral-rules.yml
+  - type: NaftikoCapability
+    url: capabilities/shared/tag-manager.yaml
+    title: Tag Manager API Shared Definition
+  - type: NaftikoCapability
+    url: capabilities/tag-deployment-management.yaml
+    title: Tag Deployment Management Workflow
+  - type: Features
+    data:
+      - name: Account Management
+        description: List and manage Google Tag Manager accounts with full access control.
+      - name: Container Management
+        description: Create, update, delete, and configure containers for web, mobile, and server-side tagging.
+      - name: Workspace Management
+        description: Create and manage workspaces for collaborative tag development with conflict resolution.
+      - name: Tag Configuration
+        description: Create, update, delete, and revert tags with full parameter and firing trigger configuration.
+      - name: Trigger Configuration
+        description: Define triggers that control when and how tags fire based on events and conditions.
+      - name: Variable Management
+        description: Create and manage variables that provide dynamic values to tags and triggers.
+      - name: Version Control
+        description: Create, publish, and manage container versions with rollback capabilities.
+      - name: User Permissions
+        description: Manage user access and permissions at the account and container level.
+      - name: Server-Side Tagging
+        description: Build custom server-side tags, clients, and variables for server-to-server data collection.
+      - name: Data Layer
+        description: Structured data layer for passing information between your website and Tag Manager.
+  - type: UseCases
+    data:
+      - name: Marketing Tag Deployment
+        description: Deploy and manage marketing and analytics tags without modifying website code.
+      - name: Conversion Tracking
+        description: Track conversions across multiple advertising platforms with centralized tag management.
+      - name: Privacy Compliance
+        description: Implement consent-based tag firing and data collection policies for GDPR and CCPA compliance.
+      - name: A/B Testing
+        description: Deploy and manage A/B testing tags and experiment configurations across web properties.
+      - name: Server-Side Data Collection
+        description: Process data server-side for improved performance, accuracy, and privacy compliance.
+  - type: Integrations
+    data:
+      - name: Google Analytics
+        description: Native integration with Google Analytics 4 for event tracking and measurement.
+      - name: Google Ads
+        description: Deploy Google Ads conversion tracking and remarketing tags with built-in templates.
+      - name: Google Marketing Platform
+        description: Integrate with Campaign Manager, Display & Video 360, and Search Ads 360.
+      - name: Facebook Pixel
+        description: Deploy and manage Facebook Pixel tracking with community template support.
+      - name: Consent Management Platforms
+        description: Integrate with consent management platforms for privacy-compliant tag firing.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

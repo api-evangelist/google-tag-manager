@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Variable",
+  "type": "object",
+  "description": "Represents a Google Tag Manager Variable. A variable provides dynamic values that can be used in tags and triggers, such as page URL, click text, or custom JavaScript values.",
+  "properties": {
+    "path": {
+      "type": "string",
+      "description": "GTM Variable's API relative path."
+    },
+    "accountId": {
+      "type": "string",
+      "description": "GTM Account ID."
+    },
+    "containerId": {
+      "type": "string",
+      "description": "GTM Container ID."
+    },
+    "workspaceId": {
+      "type": "string",
+      "description": "GTM Workspace ID."
+    },
+    "variableId": {
+      "type": "string",
+      "description": "The Variable ID uniquely identifies the GTM Variable."
+    },
+    "name": {
+      "type": "string",
+      "description": "Variable display name."
+    },
+    "type": {
+      "type": "string",
+      "description": "GTM Variable Type. Common types include v (Data Layer Variable), j (1st Party Cookie), k (Custom JavaScript), jsm (Custom JavaScript Variable), u (URL), c (Constant), and e (DOM Element)."
+    },
+    "notes": {
+      "type": "string",
+      "description": "User notes on how to apply this variable in the container."
+    },
+    "scheduleStartMs": {
+      "type": "string",
+      "description": "The start timestamp in milliseconds to schedule a variable."
+    },
+    "scheduleEndMs": {
+      "type": "string",
+      "description": "The end timestamp in milliseconds to schedule a variable."
+    },
+    "parameter": {
+      "type": "array",
+      "description": "The variable's parameters, which configure its behavior."
+    },
+    "enablingTriggerId": {
+      "type": "array",
+      "description": "For mobile containers only. A list of trigger IDs for enabling conditional variables. The variable is enabled if one of the enabling triggers is true while all of the disabling triggers are false."
+    },
+    "disablingTriggerId": {
+      "type": "array",
+      "description": "For mobile containers only. A list of trigger IDs for disabling conditional variables."
+    },
+    "fingerprint": {
+      "type": "string",
+      "description": "The fingerprint of the GTM Variable as computed at storage time. This value is recomputed whenever the variable is modified."
+    },
+    "parentFolderId": {
+      "type": "string",
+      "description": "Parent folder ID."
+    },
+    "tagManagerUrl": {
+      "type": "string",
+      "description": "Auto-generated link to the tag manager UI."
+    }
+  }
+}

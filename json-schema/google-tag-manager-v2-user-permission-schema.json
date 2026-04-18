@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "UserPermission",
+  "type": "object",
+  "description": "Represents a user's permission settings for a Google Tag Manager Account and its Containers.",
+  "properties": {
+    "path": {
+      "type": "string",
+      "description": "GTM UserPermission's API relative path."
+    },
+    "accountId": {
+      "type": "string",
+      "description": "The Account ID uniquely identifies the GTM Account."
+    },
+    "emailAddress": {
+      "type": "string",
+      "description": "User's email address."
+    },
+    "containerAccess": {
+      "type": "array",
+      "description": "GTM Container access permissions."
+    }
+  }
+}

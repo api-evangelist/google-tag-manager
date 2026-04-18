@@ -1,0 +1,14 @@
+{
+  "path": "example_value",
+  "accountId": "500123",
+  "containerId": "500123",
+  "name": "Example Title",
+  "domainName": [],
+  "publicId": "500123",
+  "tagIds": [],
+  "notes": "example_value",
+  "usageContext": [],
+  "fingerprint": "example_value",
+  "tagManagerUrl": "https://www.example.com",
+  "taggingServerUrls": "https://www.example.com"
+}

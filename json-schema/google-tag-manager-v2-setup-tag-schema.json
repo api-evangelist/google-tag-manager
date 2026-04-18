@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SetupTag",
+  "type": "object",
+  "description": "Represents a setup tag relationship. A setup tag fires before the main tag.",
+  "properties": {
+    "tagName": {
+      "type": "string",
+      "description": "The name of the setup tag."
+    },
+    "stopOnSetupFailure": {
+      "type": "boolean",
+      "description": "If true, fire the main tag only if the setup tag fires successfully. If false, fire the main tag regardless of setup tag firing status."
+    }
+  }
+}

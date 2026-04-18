@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "TeardownTag",
+  "type": "object",
+  "properties": {
+    "tagName": {
+      "type": "string"
+    },
+    "stopTeardownOnFailure": {
+      "type": "boolean"
+    }
+  }
+}

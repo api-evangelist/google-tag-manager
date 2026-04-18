@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Variable",
+  "type": "object",
+  "properties": {
+    "path": {
+      "type": "string"
+    },
+    "accountId": {
+      "type": "string"
+    },
+    "containerId": {
+      "type": "string"
+    },
+    "workspaceId": {
+      "type": "string"
+    },
+    "variableId": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "scheduleStartMs": {
+      "type": "string"
+    },
+    "scheduleEndMs": {
+      "type": "string"
+    },
+    "parameter": {
+      "type": "array"
+    },
+    "enablingTriggerId": {
+      "type": "array"
+    },
+    "disablingTriggerId": {
+      "type": "array"
+    },
+    "fingerprint": {
+      "type": "string"
+    },
+    "parentFolderId": {
+      "type": "string"
+    },
+    "tagManagerUrl": {
+      "type": "string"
+    }
+  }
+}

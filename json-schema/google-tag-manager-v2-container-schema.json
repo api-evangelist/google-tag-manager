@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Container",
+  "type": "object",
+  "description": "Represents a Google Tag Manager Container, which is a collection of tags, triggers, and variables used on a website or mobile app.",
+  "properties": {
+    "path": {
+      "type": "string",
+      "description": "GTM Container's API relative path."
+    },
+    "accountId": {
+      "type": "string",
+      "description": "GTM Account ID."
+    },
+    "containerId": {
+      "type": "string",
+      "description": "The Container ID uniquely identifies the GTM Container."
+    },
+    "name": {
+      "type": "string",
+      "description": "Container display name."
+    },
+    "domainName": {
+      "type": "array",
+      "description": "List of domain names associated with the Container. This is used for auto-event tracking and link decoration."
+    },
+    "publicId": {
+      "type": "string",
+      "description": "Container Public ID (e.g., GTM-XXXX)."
+    },
+    "tagIds": {
+      "type": "array",
+      "description": "All Tag IDs that refer to this Container."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Container Notes."
+    },
+    "usageContext": {
+      "type": "array",
+      "description": "List of Usage Contexts for the Container. Valid values include web, android, ios, and server."
+    },
+    "fingerprint": {
+      "type": "string",
+      "description": "The fingerprint of the GTM Container as computed at storage time. This value is recomputed whenever the container is modified."
+    },
+    "tagManagerUrl": {
+      "type": "string",
+      "description": "Auto-generated link to the tag manager UI."
+    },
+    "taggingServerUrls": {
+      "type": "array",
+      "description": "List of server-side container URLs for the Container."
+    }
+  }
+}

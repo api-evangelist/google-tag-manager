@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "AccountFeatures",
+  "type": "object",
+  "properties": {
+    "supportUserPermissions": {
+      "type": "boolean"
+    },
+    "supportMultipleContainers": {
+      "type": "boolean"
+    }
+  }
+}

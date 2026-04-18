@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PublishContainerVersionResponse",
+  "type": "object",
+  "description": "Publish container version response.",
+  "properties": {
+    "compilerError": {
+      "type": "boolean",
+      "description": "Compiler errors or not. True indicates that there were compiler errors."
+    }
+  }
+}

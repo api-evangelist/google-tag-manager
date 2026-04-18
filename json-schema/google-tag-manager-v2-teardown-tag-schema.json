@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TeardownTag",
+  "type": "object",
+  "description": "Represents a teardown tag relationship. A teardown tag fires after the main tag.",
+  "properties": {
+    "tagName": {
+      "type": "string",
+      "description": "The name of the teardown tag."
+    },
+    "stopTeardownOnFailure": {
+      "type": "boolean",
+      "description": "If true, fire the teardown tag if and only if the main tag fires successfully. If false, fire the teardown tag regardless of main tag firing status."
+    }
+  }
+}

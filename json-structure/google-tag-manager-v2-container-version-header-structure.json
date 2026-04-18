@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ContainerVersionHeader",
+  "type": "object",
+  "properties": {
+    "path": {
+      "type": "string"
+    },
+    "accountId": {
+      "type": "string"
+    },
+    "containerId": {
+      "type": "string"
+    },
+    "containerVersionId": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "numTags": {
+      "type": "string"
+    },
+    "numTriggers": {
+      "type": "string"
+    },
+    "numVariables": {
+      "type": "string"
+    },
+    "deleted": {
+      "type": "boolean"
+    }
+  }
+}

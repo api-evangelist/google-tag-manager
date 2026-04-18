@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ConsentSettings",
+  "type": "object",
+  "description": "Tag consent settings.",
+  "properties": {
+    "consentStatus": {
+      "type": "string",
+      "description": "The tag's consent status."
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "CreateContainerVersionResponse",
+  "type": "object",
+  "properties": {
+    "newWorkspacePath": {
+      "type": "string"
+    },
+    "compilerError": {
+      "type": "boolean"
+    }
+  }
+}

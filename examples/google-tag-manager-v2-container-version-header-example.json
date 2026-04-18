@@ -1,0 +1,11 @@
+{
+  "path": "example_value",
+  "accountId": "500123",
+  "containerId": "500123",
+  "containerVersionId": "500123",
+  "name": "Example Title",
+  "numTags": "example_value",
+  "numTriggers": "example_value",
+  "numVariables": "example_value",
+  "deleted": true
+}

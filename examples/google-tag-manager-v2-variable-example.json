@@ -1,0 +1,18 @@
+{
+  "path": "example_value",
+  "accountId": "500123",
+  "containerId": "500123",
+  "workspaceId": "500123",
+  "variableId": "500123",
+  "name": "Example Title",
+  "type": "example_value",
+  "notes": "example_value",
+  "scheduleStartMs": "example_value",
+  "scheduleEndMs": "example_value",
+  "parameter": [],
+  "enablingTriggerId": "500123",
+  "disablingTriggerId": "500123",
+  "fingerprint": "example_value",
+  "parentFolderId": "500123",
+  "tagManagerUrl": "https://www.example.com"
+}

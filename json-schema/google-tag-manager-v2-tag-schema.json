@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Tag",
+  "type": "object",
+  "description": "Represents a Google Tag Manager Tag. A tag is a snippet of code that executes on a page when certain conditions (triggers) are met.",
+  "properties": {
+    "path": {
+      "type": "string",
+      "description": "GTM Tag's API relative path."
+    },
+    "accountId": {
+      "type": "string",
+      "description": "GTM Account ID."
+    },
+    "containerId": {
+      "type": "string",
+      "description": "GTM Container ID."
+    },
+    "workspaceId": {
+      "type": "string",
+      "description": "GTM Workspace ID."
+    },
+    "tagId": {
+      "type": "string",
+      "description": "The Tag ID uniquely identifies the GTM Tag."
+    },
+    "name": {
+      "type": "string",
+      "description": "Tag display name."
+    },
+    "type": {
+      "type": "string",
+      "description": "GTM Tag Type. Common types include ua (Universal Analytics), gaawc (Google Analytics GA4 Configuration), gaawe (Google Analytics GA4 Event), awct (Google Ads Conversion Tracking), sp (Custom Script), html (Custom HTML), img (Custom Image), and flc (Floodlight Counter)."
+    },
+    "liveOnly": {
+      "type": "boolean",
+      "description": "If set to true, this tag will only fire in the live environment (not in preview or debug mode)."
+    },
+    "notes": {
+      "type": "string",
+      "description": "User notes on how to apply this tag in the container."
+    },
+    "scheduleStartMs": {
+      "type": "string",
+      "description": "The start timestamp in milliseconds to schedule a tag. The tag will only fire after this time."
+    },
+    "scheduleEndMs": {
+      "type": "string",
+      "description": "The end timestamp in milliseconds to schedule a tag. The tag will stop firing after this time."
+    },
+    "parameter": {
+      "type": "array",
+      "description": "The tag's parameters, which configure its behavior."
+    },
+    "fingerprint": {
+      "type": "string",
+      "description": "The fingerprint of the GTM Tag as computed at storage time. This value is recomputed whenever the tag is modified."
+    },
+    "firingTriggerId": {
+      "type": "array",
+      "description": "Firing trigger IDs. A tag will fire when any of the listed triggers are true and all of its blockingTriggerIds (if any specified) are false."
+    },
+    "blockingTriggerId": {
+      "type": "array",
+      "description": "Blocking trigger IDs. If any of the listed triggers evaluates to true, the tag will not fire."
+    },
+    "setupTag": {
+      "type": "array",
+      "description": "The list of setup tags. Currently, only one setup tag is allowed per tag."
+    },
+    "teardownTag": {
+      "type": "array",
+      "description": "The list of teardown tags. Currently, only one teardown tag is allowed per tag."
+    },
+    "parentFolderId": {
+      "type": "string",
+      "description": "Parent folder ID."
+    },
+    "tagFiringOption": {
+      "type": "string",
+      "description": "Option to fire this tag."
+    },
+    "tagManagerUrl": {
+      "type": "string",
+      "description": "Auto-generated link to the tag manager UI."
+    },
+    "paused": {
+      "type": "boolean",
+      "description": "Indicates whether the tag is paused, which prevents the tag from firing."
+    },
+    "monitoringMetadataTagNameKey": {
+      "type": "string",
+      "description": "If non-empty, then the tag display name will be included in the monitoring metadata map using the key specified."
+    }
+  }
+}

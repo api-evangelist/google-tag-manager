@@ -1,0 +1,8 @@
+{
+  "type": "example_value",
+  "key": "example_value",
+  "value": "example_value",
+  "list": [],
+  "map": [],
+  "isWeakReference": true
+}

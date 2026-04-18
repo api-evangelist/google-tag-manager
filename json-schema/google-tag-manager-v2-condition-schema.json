@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Condition",
+  "type": "object",
+  "description": "Represents a predicate that is evaluated against a data layer value or variable. Used in trigger filter conditions.",
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "The type of operator for this condition."
+    },
+    "parameter": {
+      "type": "array",
+      "description": "A list of named parameters (key/value), depending on the condition's type. The first parameter is the left-hand operand, the second is the right-hand operand."
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CreateContainerVersionResponse",
+  "type": "object",
+  "description": "Create container version response.",
+  "properties": {
+    "newWorkspacePath": {
+      "type": "string",
+      "description": "Auto-generated workspace path for the new default workspace, if one was created."
+    },
+    "compilerError": {
+      "type": "boolean",
+      "description": "Compiler errors or not. True indicates that there were compiler errors."
+    }
+  }
+}

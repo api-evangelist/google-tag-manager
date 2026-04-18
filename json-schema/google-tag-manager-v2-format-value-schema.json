@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FormatValue",
+  "type": "object",
+  "description": "Option to convert a variable value to another value.",
+  "properties": {
+    "caseConversionType": {
+      "type": "string",
+      "description": "The option to convert a string-type variable value to either lowercase or uppercase."
+    }
+  }
+}

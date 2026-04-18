@@ -1,0 +1,36 @@
+rules:
+  info-title-required:
+    description: Info title must be present
+    severity: error
+    given: $.info
+    then: {field: title, function: truthy}
+  info-description-required:
+    description: Info description must be present
+    severity: error
+    given: $.info
+    then: {field: description, function: truthy}
+  operation-operationid-required:
+    description: Every operation must have an operationId
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then: {field: operationId, function: truthy}
+  operation-summary-required:
+    description: Every operation must have a summary
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then: {field: summary, function: truthy}
+  operation-tags-required:
+    description: Every operation must have tags
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then: {field: tags, function: truthy}
+  response-description-required:
+    description: Every response must have a description
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete].responses[*]
+    then: {field: description, function: truthy}
+  no-empty-descriptions:
+    description: Descriptions must not be empty
+    severity: error
+    given: $..description
+    then: {function: truthy}

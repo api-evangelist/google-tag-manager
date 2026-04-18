@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ContainerFeatures",
+  "type": "object",
+  "properties": {
+    "supportUserPermissions": {
+      "type": "boolean"
+    },
+    "supportEnvironments": {
+      "type": "boolean"
+    },
+    "supportWorkspaces": {
+      "type": "boolean"
+    },
+    "supportGtagConfigs": {
+      "type": "boolean"
+    },
+    "supportBuiltInVariables": {
+      "type": "boolean"
+    },
+    "supportClients": {
+      "type": "boolean"
+    },
+    "supportFolders": {
+      "type": "boolean"
+    },
+    "supportTags": {
+      "type": "boolean"
+    },
+    "supportTemplates": {
+      "type": "boolean"
+    },
+    "supportTriggers": {
+      "type": "boolean"
+    },
+    "supportVariables": {
+      "type": "boolean"
+    },
+    "supportVersions": {
+      "type": "boolean"
+    },
+    "supportZones": {
+      "type": "boolean"
+    },
+    "supportTransformations": {
+      "type": "boolean"
+    }
+  }
+}

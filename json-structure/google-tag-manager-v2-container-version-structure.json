@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ContainerVersion",
+  "type": "object",
+  "properties": {
+    "path": {
+      "type": "string"
+    },
+    "accountId": {
+      "type": "string"
+    },
+    "containerId": {
+      "type": "string"
+    },
+    "containerVersionId": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "tag": {
+      "type": "array"
+    },
+    "trigger": {
+      "type": "array"
+    },
+    "variable": {
+      "type": "array"
+    },
+    "fingerprint": {
+      "type": "string"
+    },
+    "tagManagerUrl": {
+      "type": "string"
+    },
+    "deleted": {
+      "type": "boolean"
+    }
+  }
+}

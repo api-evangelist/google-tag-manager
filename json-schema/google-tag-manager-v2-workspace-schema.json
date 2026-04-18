@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Workspace",
+  "type": "object",
+  "description": "Represents a Google Tag Manager Workspace. A workspace is an isolated editing environment within a container where changes to tags, triggers, and variables can be made and tested before being published.",
+  "properties": {
+    "path": {
+      "type": "string",
+      "description": "GTM Workspace's API relative path."
+    },
+    "accountId": {
+      "type": "string",
+      "description": "GTM Account ID."
+    },
+    "containerId": {
+      "type": "string",
+      "description": "GTM Container ID."
+    },
+    "workspaceId": {
+      "type": "string",
+      "description": "The Workspace ID uniquely identifies the GTM Workspace."
+    },
+    "name": {
+      "type": "string",
+      "description": "Workspace display name."
+    },
+    "description": {
+      "type": "string",
+      "description": "Workspace description."
+    },
+    "fingerprint": {
+      "type": "string",
+      "description": "The fingerprint of the GTM Workspace as computed at storage time. This value is recomputed whenever the workspace is modified."
+    },
+    "tagManagerUrl": {
+      "type": "string",
+      "description": "Auto-generated link to the tag manager UI."
+    }
+  }
+}

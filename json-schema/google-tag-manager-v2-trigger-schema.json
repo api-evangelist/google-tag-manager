@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Trigger",
+  "type": "object",
+  "description": "Represents a Google Tag Manager Trigger. A trigger defines conditions under which tags should fire, such as page views, clicks, form submissions, or custom events.",
+  "properties": {
+    "path": {
+      "type": "string",
+      "description": "GTM Trigger's API relative path."
+    },
+    "accountId": {
+      "type": "string",
+      "description": "GTM Account ID."
+    },
+    "containerId": {
+      "type": "string",
+      "description": "GTM Container ID."
+    },
+    "workspaceId": {
+      "type": "string",
+      "description": "GTM Workspace ID."
+    },
+    "triggerId": {
+      "type": "string",
+      "description": "The Trigger ID uniquely identifies the GTM Trigger."
+    },
+    "name": {
+      "type": "string",
+      "description": "Trigger display name."
+    },
+    "type": {
+      "type": "string",
+      "description": "Defines the data layer event that causes this trigger."
+    },
+    "customEventFilter": {
+      "type": "array",
+      "description": "Used in the case of custom event, which is fired if and only if all Conditions are true."
+    },
+    "filter": {
+      "type": "array",
+      "description": "The trigger will only fire if and only if all Conditions are true."
+    },
+    "autoEventFilter": {
+      "type": "array",
+      "description": "Used in the case of auto event tracking for filtering events."
+    },
+    "fingerprint": {
+      "type": "string",
+      "description": "The fingerprint of the GTM Trigger as computed at storage time. This value is recomputed whenever the trigger is modified."
+    },
+    "parentFolderId": {
+      "type": "string",
+      "description": "Parent folder ID."
+    },
+    "tagManagerUrl": {
+      "type": "string",
+      "description": "Auto-generated link to the tag manager UI."
+    },
+    "notes": {
+      "type": "string",
+      "description": "User notes on how to apply this trigger in the container."
+    },
+    "parameter": {
+      "type": "array",
+      "description": "Additional parameters for the trigger."
+    }
+  }
+}

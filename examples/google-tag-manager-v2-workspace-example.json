@@ -1,0 +1,10 @@
+{
+  "path": "example_value",
+  "accountId": "500123",
+  "containerId": "500123",
+  "workspaceId": "500123",
+  "name": "Example Title",
+  "description": "A sample description.",
+  "fingerprint": "example_value",
+  "tagManagerUrl": "https://www.example.com"
+}

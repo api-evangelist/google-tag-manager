@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SyncStatus",
+  "type": "object",
+  "description": "The status of a workspace after syncing.",
+  "properties": {
+    "mergeConflict": {
+      "type": "boolean",
+      "description": "Synchornization operation detected a merge conflict."
+    },
+    "syncError": {
+      "type": "boolean",
+      "description": "An error occurred during the sync operation."
+    }
+  }
+}

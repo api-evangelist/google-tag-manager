@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MergeConflict",
+  "type": "object",
+  "description": "Represents a merge conflict between workspace and version.",
+  "properties": {}
+}

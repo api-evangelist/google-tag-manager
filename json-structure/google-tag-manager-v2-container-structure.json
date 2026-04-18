@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Container",
+  "type": "object",
+  "properties": {
+    "path": {
+      "type": "string"
+    },
+    "accountId": {
+      "type": "string"
+    },
+    "containerId": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "domainName": {
+      "type": "array"
+    },
+    "publicId": {
+      "type": "string"
+    },
+    "tagIds": {
+      "type": "array"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "usageContext": {
+      "type": "array"
+    },
+    "fingerprint": {
+      "type": "string"
+    },
+    "tagManagerUrl": {
+      "type": "string"
+    },
+    "taggingServerUrls": {
+      "type": "array"
+    }
+  }
+}

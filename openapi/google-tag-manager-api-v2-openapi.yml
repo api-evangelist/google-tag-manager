@@ -19,64 +19,66 @@ externalDocs:
   description: Google Tag Manager API Documentation
   url: https://developers.google.com/tag-platform/tag-manager/api/v2
 servers:
-  - url: https://tagmanager.googleapis.com
-    description: Google Tag Manager API Production Server
+- url: https://tagmanager.googleapis.com
+  description: Google Tag Manager API Production Server
 security:
-  - oauth2:
-      - tagmanager.readonly
-      - tagmanager.edit.containers
-      - tagmanager.manage.accounts
-      - tagmanager.manage.users
-      - tagmanager.publish
-      - tagmanager.edit.containerversions
-      - tagmanager.delete.containers
+- oauth2:
+  - tagmanager.readonly
+  - tagmanager.edit.containers
+  - tagmanager.manage.accounts
+  - tagmanager.manage.users
+  - tagmanager.publish
+  - tagmanager.edit.containerversions
+  - tagmanager.delete.containers
 tags:
-  - name: Accounts
-    description: Operations for managing Google Tag Manager accounts.
-  - name: Containers
-    description: >-
-      Operations for managing containers within a Google Tag Manager account.
-  - name: Triggers
-    description: >-
-      Operations for managing triggers within a workspace that control when tags
-      fire.
-  - name: User Permissions
-    description: >-
-      Operations for managing user permissions on Google Tag Manager accounts.
-  - name: Variables
-    description: >-
-      Operations for managing variables within a workspace that provide dynamic
-      values to tags and triggers.
-  - name: Versions
-    description: >-
-      Operations for managing container versions, including publishing and
-      rollback.
-  - name: Workspaces
-    description: >-
-      Operations for managing workspaces within a container, including version
-      creation and conflict resolution.
+- name: Accounts
+  description: Operations for managing Google Tag Manager accounts.
+- name: Containers
+  description: >-
+    Operations for managing containers within a Google Tag Manager account.
+- name: Triggers
+  description: >-
+    Operations for managing triggers within a workspace that control when tags
+    fire.
+- name: User Permissions
+  description: >-
+    Operations for managing user permissions on Google Tag Manager accounts.
+- name: Variables
+  description: >-
+    Operations for managing variables within a workspace that provide dynamic
+    values to tags and triggers.
+- name: Versions
+  description: >-
+    Operations for managing container versions, including publishing and
+    rollback.
+- name: Workspaces
+  description: >-
+    Operations for managing workspaces within a container, including version
+    creation and conflict resolution.
 paths:
   /tagmanager/v2/accounts:
     get:
       operationId: listAccounts
-      summary: List all Google Tag Manager accounts
+      summary: List All Google Tag Manager Accounts
       description: >-
         Lists all GTM Accounts that a user has access to. Returns a list of
         Account resources.
       tags:
-        - Accounts
+      - Accounts
       parameters:
-        - name: pageToken
-          in: query
-          description: Continuation token for fetching the next page of results.
-          schema:
-            type: string
-        - name: includeGoogleTags
-          in: query
-          description: >-
-            Also retrieve accounts associated with Google Tag when true.
-          schema:
-            type: boolean
+      - name: pageToken
+        in: query
+        description: Continuation token for fetching the next page of results.
+        schema:
+          type: string
+        example: example_value
+      - name: includeGoogleTags
+        in: query
+        description: >-
+          Also retrieve accounts associated with Google Tag when true.
+        schema:
+          type: boolean
+        example: true
       responses:
         '200':
           description: Successful response containing a list of accounts.
@@ -84,19 +86,35 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListAccountsResponse'
+              examples:
+                Listaccounts200Example:
+                  summary: Default listAccounts 200 response
+                  x-microcks-default: true
+                  value:
+                    account:
+                    - path: example_value
+                      accountId: '500123'
+                      name: Example Title
+                      shareData: true
+                      fingerprint: example_value
+                      tagManagerUrl: https://www.example.com
+                    nextPageToken: example_value
         '401':
           description: Authentication required.
         '403':
           description: Insufficient permissions.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /tagmanager/v2/{path}:
     get:
       operationId: getAccount
-      summary: Get a Google Tag Manager account
+      summary: Get a Google Tag Manager Account
       description: Gets a GTM Account by its resource path.
       tags:
-        - Accounts
+      - Accounts
       parameters:
-        - $ref: '#/components/parameters/pathParam'
+      - $ref: '#/components/parameters/pathParam'
       responses:
         '200':
           description: Successful response containing the account.
@@ -104,29 +122,61 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Account'
+              examples:
+                Getaccount200Example:
+                  summary: Default getAccount 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    name: Example Title
+                    shareData: true
+                    fingerprint: example_value
+                    tagManagerUrl: https://www.example.com
+                    features:
+                      supportUserPermissions: true
+                      supportMultipleContainers: true
         '404':
           description: Account not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: updateAccount
-      summary: Update a Google Tag Manager account
+      summary: Update a Google Tag Manager Account
       description: Updates a GTM Account.
       tags:
-        - Accounts
+      - Accounts
       parameters:
-        - $ref: '#/components/parameters/pathParam'
-        - name: fingerprint
-          in: query
-          description: >-
-            When provided, this fingerprint must match the fingerprint of the
-            account in storage.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/pathParam'
+      - name: fingerprint
+        in: query
+        description: >-
+          When provided, this fingerprint must match the fingerprint of the
+          account in storage.
+        schema:
+          type: string
+        example: example_value
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Account'
+            examples:
+              UpdateaccountRequestExample:
+                summary: Default updateAccount request
+                x-microcks-default: true
+                value:
+                  path: example_value
+                  accountId: '500123'
+                  name: Example Title
+                  shareData: true
+                  fingerprint: example_value
+                  tagManagerUrl: https://www.example.com
+                  features:
+                    supportUserPermissions: true
+                    supportMultipleContainers: true
       responses:
         '200':
           description: Successful response containing the updated account.
@@ -134,24 +184,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Account'
+              examples:
+                Updateaccount200Example:
+                  summary: Default updateAccount 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    name: Example Title
+                    shareData: true
+                    fingerprint: example_value
+                    tagManagerUrl: https://www.example.com
+                    features:
+                      supportUserPermissions: true
+                      supportMultipleContainers: true
         '400':
           description: Invalid request.
         '409':
           description: Fingerprint mismatch indicating a conflict.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /tagmanager/v2/{parent}/containers:
     get:
       operationId: listContainers
-      summary: Google Tag Manager List containers in an account
+      summary: Google Tag Manager List Containers in an Account
       description: Lists all Containers that belongs to a GTM Account.
       tags:
-        - Containers
+      - Containers
       parameters:
-        - $ref: '#/components/parameters/parentParam'
-        - name: pageToken
-          in: query
-          description: Continuation token for fetching the next page of results.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/parentParam'
+      - name: pageToken
+        in: query
+        description: Continuation token for fetching the next page of results.
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Successful response containing a list of containers.
@@ -159,20 +227,78 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListContainersResponse'
+              examples:
+                Listcontainers200Example:
+                  summary: Default listContainers 200 response
+                  x-microcks-default: true
+                  value:
+                    container:
+                    - path: example_value
+                      accountId: '500123'
+                      containerId: '500123'
+                      name: Example Title
+                      domainName: {}
+                      publicId: '500123'
+                      tagIds: {}
+                      notes: example_value
+                      usageContext: {}
+                      fingerprint: example_value
+                      tagManagerUrl: https://www.example.com
+                      taggingServerUrls: {}
+                    nextPageToken: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createContainer
-      summary: Google Tag Manager Create a container
+      summary: Google Tag Manager Create a Container
       description: Creates a Container within a GTM Account.
       tags:
-        - Containers
+      - Containers
       parameters:
-        - $ref: '#/components/parameters/parentParam'
+      - $ref: '#/components/parameters/parentParam'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Container'
+            examples:
+              CreatecontainerRequestExample:
+                summary: Default createContainer request
+                x-microcks-default: true
+                value:
+                  path: example_value
+                  accountId: '500123'
+                  containerId: '500123'
+                  name: Example Title
+                  domainName:
+                  - example_value
+                  publicId: '500123'
+                  tagIds:
+                  - example_value
+                  notes: example_value
+                  usageContext:
+                  - usageContextUnspecified
+                  fingerprint: example_value
+                  tagManagerUrl: https://www.example.com
+                  taggingServerUrls:
+                  - https://www.example.com
+                  features:
+                    supportUserPermissions: true
+                    supportEnvironments: true
+                    supportWorkspaces: true
+                    supportGtagConfigs: true
+                    supportBuiltInVariables: true
+                    supportClients: true
+                    supportFolders: true
+                    supportTags: true
+                    supportTemplates: true
+                    supportTriggers: true
+                    supportVariables: true
+                    supportVersions: true
+                    supportZones: true
+                    supportTransformations: true
       responses:
         '200':
           description: Successful response containing the created container.
@@ -180,24 +306,64 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Container'
+              examples:
+                Createcontainer200Example:
+                  summary: Default createContainer 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    containerId: '500123'
+                    name: Example Title
+                    domainName:
+                    - example_value
+                    publicId: '500123'
+                    tagIds:
+                    - example_value
+                    notes: example_value
+                    usageContext:
+                    - usageContextUnspecified
+                    fingerprint: example_value
+                    tagManagerUrl: https://www.example.com
+                    taggingServerUrls:
+                    - https://www.example.com
+                    features:
+                      supportUserPermissions: true
+                      supportEnvironments: true
+                      supportWorkspaces: true
+                      supportGtagConfigs: true
+                      supportBuiltInVariables: true
+                      supportClients: true
+                      supportFolders: true
+                      supportTags: true
+                      supportTemplates: true
+                      supportTriggers: true
+                      supportVariables: true
+                      supportVersions: true
+                      supportZones: true
+                      supportTransformations: true
         '400':
           description: Invalid request.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /tagmanager/v2/{containerPath}:
     get:
       operationId: getContainer
-      summary: Google Tag Manager Get a container
+      summary: Google Tag Manager Get a Container
       description: Gets a Container by its resource path.
       tags:
-        - Containers
+      - Containers
       parameters:
-        - name: containerPath
-          in: path
-          required: true
-          description: >-
-            GTM Container's API relative path, e.g.
-            accounts/{accountId}/containers/{containerId}.
-          schema:
-            type: string
+      - name: containerPath
+        in: path
+        required: true
+        description: >-
+          GTM Container's API relative path, e.g.
+          accounts/{accountId}/containers/{containerId}.
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Successful response containing the container.
@@ -205,35 +371,112 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Container'
+              examples:
+                Getcontainer200Example:
+                  summary: Default getContainer 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    containerId: '500123'
+                    name: Example Title
+                    domainName:
+                    - example_value
+                    publicId: '500123'
+                    tagIds:
+                    - example_value
+                    notes: example_value
+                    usageContext:
+                    - usageContextUnspecified
+                    fingerprint: example_value
+                    tagManagerUrl: https://www.example.com
+                    taggingServerUrls:
+                    - https://www.example.com
+                    features:
+                      supportUserPermissions: true
+                      supportEnvironments: true
+                      supportWorkspaces: true
+                      supportGtagConfigs: true
+                      supportBuiltInVariables: true
+                      supportClients: true
+                      supportFolders: true
+                      supportTags: true
+                      supportTemplates: true
+                      supportTriggers: true
+                      supportVariables: true
+                      supportVersions: true
+                      supportZones: true
+                      supportTransformations: true
         '404':
           description: Container not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: updateContainer
-      summary: Google Tag Manager Update a container
+      summary: Google Tag Manager Update a Container
       description: Updates a Container.
       tags:
-        - Containers
+      - Containers
       parameters:
-        - name: containerPath
-          in: path
-          required: true
-          description: >-
-            GTM Container's API relative path.
-          schema:
-            type: string
-        - name: fingerprint
-          in: query
-          description: >-
-            When provided, this fingerprint must match the fingerprint of the
-            container in storage.
-          schema:
-            type: string
+      - name: containerPath
+        in: path
+        required: true
+        description: >-
+          GTM Container's API relative path.
+        schema:
+          type: string
+        example: example_value
+      - name: fingerprint
+        in: query
+        description: >-
+          When provided, this fingerprint must match the fingerprint of the
+          container in storage.
+        schema:
+          type: string
+        example: example_value
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Container'
+            examples:
+              UpdatecontainerRequestExample:
+                summary: Default updateContainer request
+                x-microcks-default: true
+                value:
+                  path: example_value
+                  accountId: '500123'
+                  containerId: '500123'
+                  name: Example Title
+                  domainName:
+                  - example_value
+                  publicId: '500123'
+                  tagIds:
+                  - example_value
+                  notes: example_value
+                  usageContext:
+                  - usageContextUnspecified
+                  fingerprint: example_value
+                  tagManagerUrl: https://www.example.com
+                  taggingServerUrls:
+                  - https://www.example.com
+                  features:
+                    supportUserPermissions: true
+                    supportEnvironments: true
+                    supportWorkspaces: true
+                    supportGtagConfigs: true
+                    supportBuiltInVariables: true
+                    supportClients: true
+                    supportFolders: true
+                    supportTags: true
+                    supportTemplates: true
+                    supportTriggers: true
+                    supportVariables: true
+                    supportVersions: true
+                    supportZones: true
+                    supportTransformations: true
       responses:
         '200':
           description: Successful response containing the updated container.
@@ -241,39 +484,83 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Container'
+              examples:
+                Updatecontainer200Example:
+                  summary: Default updateContainer 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    containerId: '500123'
+                    name: Example Title
+                    domainName:
+                    - example_value
+                    publicId: '500123'
+                    tagIds:
+                    - example_value
+                    notes: example_value
+                    usageContext:
+                    - usageContextUnspecified
+                    fingerprint: example_value
+                    tagManagerUrl: https://www.example.com
+                    taggingServerUrls:
+                    - https://www.example.com
+                    features:
+                      supportUserPermissions: true
+                      supportEnvironments: true
+                      supportWorkspaces: true
+                      supportGtagConfigs: true
+                      supportBuiltInVariables: true
+                      supportClients: true
+                      supportFolders: true
+                      supportTags: true
+                      supportTemplates: true
+                      supportTriggers: true
+                      supportVariables: true
+                      supportVersions: true
+                      supportZones: true
+                      supportTransformations: true
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteContainer
-      summary: Google Tag Manager Delete a container
+      summary: Google Tag Manager Delete a Container
       description: Deletes a Container.
       tags:
-        - Containers
+      - Containers
       parameters:
-        - name: containerPath
-          in: path
-          required: true
-          description: >-
-            GTM Container's API relative path.
-          schema:
-            type: string
+      - name: containerPath
+        in: path
+        required: true
+        description: >-
+          GTM Container's API relative path.
+        schema:
+          type: string
+        example: example_value
       responses:
         '204':
           description: Container successfully deleted.
         '404':
           description: Container not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /tagmanager/v2/{parent}/workspaces:
     get:
       operationId: listWorkspaces
-      summary: Google Tag Manager List workspaces in a container
+      summary: Google Tag Manager List Workspaces in a Container
       description: Lists all Workspaces that belong to a GTM Container.
       tags:
-        - Workspaces
+      - Workspaces
       parameters:
-        - $ref: '#/components/parameters/parentParam'
-        - name: pageToken
-          in: query
-          description: Continuation token for fetching the next page of results.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/parentParam'
+      - name: pageToken
+        in: query
+        description: Continuation token for fetching the next page of results.
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Successful response containing a list of workspaces.
@@ -281,20 +568,51 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListWorkspacesResponse'
+              examples:
+                Listworkspaces200Example:
+                  summary: Default listWorkspaces 200 response
+                  x-microcks-default: true
+                  value:
+                    workspace:
+                    - path: example_value
+                      accountId: '500123'
+                      containerId: '500123'
+                      workspaceId: '500123'
+                      name: Example Title
+                      description: A sample description.
+                      fingerprint: example_value
+                      tagManagerUrl: https://www.example.com
+                    nextPageToken: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createWorkspace
-      summary: Google Tag Manager Create a workspace
+      summary: Google Tag Manager Create a Workspace
       description: Creates a Workspace within a GTM Container.
       tags:
-        - Workspaces
+      - Workspaces
       parameters:
-        - $ref: '#/components/parameters/parentParam'
+      - $ref: '#/components/parameters/parentParam'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Workspace'
+            examples:
+              CreateworkspaceRequestExample:
+                summary: Default createWorkspace request
+                x-microcks-default: true
+                value:
+                  path: example_value
+                  accountId: '500123'
+                  containerId: '500123'
+                  workspaceId: '500123'
+                  name: Example Title
+                  description: A sample description.
+                  fingerprint: example_value
+                  tagManagerUrl: https://www.example.com
       responses:
         '200':
           description: Successful response containing the created workspace.
@@ -302,22 +620,39 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Workspace'
+              examples:
+                Createworkspace200Example:
+                  summary: Default createWorkspace 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    containerId: '500123'
+                    workspaceId: '500123'
+                    name: Example Title
+                    description: A sample description.
+                    fingerprint: example_value
+                    tagManagerUrl: https://www.example.com
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /tagmanager/v2/{workspacePath}:
     get:
       operationId: getWorkspace
-      summary: Google Tag Manager Get a workspace
+      summary: Google Tag Manager Get a Workspace
       description: Gets a Workspace by its resource path.
       tags:
-        - Workspaces
+      - Workspaces
       parameters:
-        - name: workspacePath
-          in: path
-          required: true
-          description: >-
-            GTM Workspace's API relative path, e.g.
-            accounts/{accountId}/containers/{containerId}/workspaces/{workspaceId}.
-          schema:
-            type: string
+      - name: workspacePath
+        in: path
+        required: true
+        description: >-
+          GTM Workspace's API relative path, e.g.
+          accounts/{accountId}/containers/{containerId}/workspaces/{workspaceId}.
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Successful response containing the workspace.
@@ -325,33 +660,64 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Workspace'
+              examples:
+                Getworkspace200Example:
+                  summary: Default getWorkspace 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    containerId: '500123'
+                    workspaceId: '500123'
+                    name: Example Title
+                    description: A sample description.
+                    fingerprint: example_value
+                    tagManagerUrl: https://www.example.com
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: updateWorkspace
-      summary: Google Tag Manager Update a workspace
+      summary: Google Tag Manager Update a Workspace
       description: Updates a Workspace.
       tags:
-        - Workspaces
+      - Workspaces
       parameters:
-        - name: workspacePath
-          in: path
-          required: true
-          description: >-
-            GTM Workspace's API relative path.
-          schema:
-            type: string
-        - name: fingerprint
-          in: query
-          description: >-
-            When provided, this fingerprint must match the fingerprint of the
-            workspace in storage.
-          schema:
-            type: string
+      - name: workspacePath
+        in: path
+        required: true
+        description: >-
+          GTM Workspace's API relative path.
+        schema:
+          type: string
+        example: example_value
+      - name: fingerprint
+        in: query
+        description: >-
+          When provided, this fingerprint must match the fingerprint of the
+          workspace in storage.
+        schema:
+          type: string
+        example: example_value
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Workspace'
+            examples:
+              UpdateworkspaceRequestExample:
+                summary: Default updateWorkspace request
+                x-microcks-default: true
+                value:
+                  path: example_value
+                  accountId: '500123'
+                  containerId: '500123'
+                  workspaceId: '500123'
+                  name: Example Title
+                  description: A sample description.
+                  fingerprint: example_value
+                  tagManagerUrl: https://www.example.com
       responses:
         '200':
           description: Successful response containing the updated workspace.
@@ -359,46 +725,74 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Workspace'
+              examples:
+                Updateworkspace200Example:
+                  summary: Default updateWorkspace 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    containerId: '500123'
+                    workspaceId: '500123'
+                    name: Example Title
+                    description: A sample description.
+                    fingerprint: example_value
+                    tagManagerUrl: https://www.example.com
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteWorkspace
-      summary: Google Tag Manager Delete a workspace
+      summary: Google Tag Manager Delete a Workspace
       description: Deletes a Workspace.
       tags:
-        - Workspaces
+      - Workspaces
       parameters:
-        - name: workspacePath
-          in: path
-          required: true
-          description: >-
-            GTM Workspace's API relative path.
-          schema:
-            type: string
+      - name: workspacePath
+        in: path
+        required: true
+        description: >-
+          GTM Workspace's API relative path.
+        schema:
+          type: string
+        example: example_value
       responses:
         '204':
           description: Workspace successfully deleted.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /tagmanager/v2/{workspacePath}:create_version:
     post:
       operationId: createWorkspaceVersion
-      summary: Google Tag Manager Create a container version from a workspace
+      summary: Google Tag Manager Create a Container Version From a Workspace
       description: >-
         Creates a Container Version from the entities present in the workspace,
         deletes the workspace, and sets the base container version to the newly
         created version.
       tags:
-        - Workspaces
+      - Workspaces
       parameters:
-        - name: workspacePath
-          in: path
-          required: true
-          description: GTM Workspace's API relative path.
-          schema:
-            type: string
+      - name: workspacePath
+        in: path
+        required: true
+        description: GTM Workspace's API relative path.
+        schema:
+          type: string
+        example: example_value
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateContainerVersionRequestVersionOptions'
+            examples:
+              CreateworkspaceversionRequestExample:
+                summary: Default createWorkspaceVersion request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  notes: example_value
       responses:
         '200':
           description: >-
@@ -407,23 +801,53 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CreateContainerVersionResponse'
+              examples:
+                Createworkspaceversion200Example:
+                  summary: Default createWorkspaceVersion 200 response
+                  x-microcks-default: true
+                  value:
+                    containerVersion:
+                      path: example_value
+                      accountId: '500123'
+                      containerId: '500123'
+                      containerVersionId: '500123'
+                      name: Example Title
+                      description: A sample description.
+                      tag:
+                      - {}
+                      trigger:
+                      - {}
+                      variable:
+                      - {}
+                      fingerprint: example_value
+                      tagManagerUrl: https://www.example.com
+                      deleted: true
+                    newWorkspacePath: example_value
+                    compilerError: true
+                    syncStatus:
+                      mergeConflict: true
+                      syncError: true
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /tagmanager/v2/{workspacePath}/status:
     get:
       operationId: getWorkspaceStatus
-      summary: Google Tag Manager Get the status of a workspace
+      summary: Google Tag Manager Get the Status of a Workspace
       description: >-
         Finds conflicting and modified entities in the workspace. Returns status
         information about the workspace including workspace changes and
         conflicts.
       tags:
-        - Workspaces
+      - Workspaces
       parameters:
-        - name: workspacePath
-          in: path
-          required: true
-          description: GTM Workspace's API relative path.
-          schema:
-            type: string
+      - name: workspacePath
+        in: path
+        required: true
+        description: GTM Workspace's API relative path.
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Successful response containing workspace status.
@@ -431,23 +855,36 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetWorkspaceStatusResponse'
+              examples:
+                Getworkspacestatus200Example:
+                  summary: Default getWorkspaceStatus 200 response
+                  x-microcks-default: true
+                  value:
+                    workspaceChange:
+                    - changeStatus: changeStatusUnspecified
+                    mergeConflict:
+                    - {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /tagmanager/v2/{workspacePath}:sync:
     post:
       operationId: syncWorkspace
-      summary: Google Tag Manager Sync a workspace to the latest container version
+      summary: Google Tag Manager Sync a Workspace to the Latest Container Version
       description: >-
         Syncs a workspace to the latest container version by updating all
         unmodified workspace entities and displaying conflicts for modified
         entities.
       tags:
-        - Workspaces
+      - Workspaces
       parameters:
-        - name: workspacePath
-          in: path
-          required: true
-          description: GTM Workspace's API relative path.
-          schema:
-            type: string
+      - name: workspacePath
+        in: path
+        required: true
+        description: GTM Workspace's API relative path.
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Successful response containing the sync status.
@@ -455,19 +892,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SyncWorkspaceResponse'
+              examples:
+                Syncworkspace200Example:
+                  summary: Default syncWorkspace 200 response
+                  x-microcks-default: true
+                  value:
+                    mergeConflict:
+                    - {}
+                    syncStatus:
+                      mergeConflict: true
+                      syncError: true
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /tagmanager/v2/{parent}/tags:
     get:
       operationId: listTags
-      summary: Google Tag Manager List tags in a workspace
+      summary: Google Tag Manager List Tags in a Workspace
       description: Lists all GTM Tags of a GTM Container Workspace.
       tags: []
       parameters:
-        - $ref: '#/components/parameters/parentParam'
-        - name: pageToken
-          in: query
-          description: Continuation token for fetching the next page of results.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/parentParam'
+      - name: pageToken
+        in: query
+        description: Continuation token for fetching the next page of results.
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Successful response containing a list of tags.
@@ -475,19 +926,110 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListTagsResponse'
+              examples:
+                Listtags200Example:
+                  summary: Default listTags 200 response
+                  x-microcks-default: true
+                  value:
+                    tag:
+                    - path: example_value
+                      accountId: '500123'
+                      containerId: '500123'
+                      workspaceId: '500123'
+                      tagId: '500123'
+                      name: Example Title
+                      type: example_value
+                      liveOnly: true
+                      notes: example_value
+                      scheduleStartMs: example_value
+                      scheduleEndMs: example_value
+                      parameter: {}
+                      fingerprint: example_value
+                      firingTriggerId: {}
+                      blockingTriggerId: {}
+                      setupTag: {}
+                      teardownTag: {}
+                      parentFolderId: '500123'
+                      tagFiringOption: tagFiringOptionUnspecified
+                      tagManagerUrl: https://www.example.com
+                      paused: true
+                      monitoringMetadataTagNameKey: example_value
+                    nextPageToken: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createTag
-      summary: Google Tag Manager Create a tag
+      summary: Google Tag Manager Create a Tag
       description: Creates a GTM Tag in a GTM Workspace.
       tags: []
       parameters:
-        - $ref: '#/components/parameters/parentParam'
+      - $ref: '#/components/parameters/parentParam'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Tag'
+            examples:
+              CreatetagRequestExample:
+                summary: Default createTag request
+                x-microcks-default: true
+                value:
+                  path: example_value
+                  accountId: '500123'
+                  containerId: '500123'
+                  workspaceId: '500123'
+                  tagId: '500123'
+                  name: Example Title
+                  type: example_value
+                  liveOnly: true
+                  priority:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  notes: example_value
+                  scheduleStartMs: example_value
+                  scheduleEndMs: example_value
+                  parameter:
+                  - type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list: {}
+                    map: {}
+                    isWeakReference: true
+                  fingerprint: example_value
+                  firingTriggerId:
+                  - example_value
+                  blockingTriggerId:
+                  - example_value
+                  setupTag:
+                  - tagName: example_value
+                    stopOnSetupFailure: true
+                  teardownTag:
+                  - tagName: example_value
+                    stopTeardownOnFailure: true
+                  parentFolderId: '500123'
+                  tagFiringOption: tagFiringOptionUnspecified
+                  tagManagerUrl: https://www.example.com
+                  paused: true
+                  monitoringMetadata:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  monitoringMetadataTagNameKey: example_value
+                  consentSettings:
+                    consentStatus: notSet
       responses:
         '200':
           description: Successful response containing the created tag.
@@ -495,21 +1037,84 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Tag'
+              examples:
+                Createtag200Example:
+                  summary: Default createTag 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    containerId: '500123'
+                    workspaceId: '500123'
+                    tagId: '500123'
+                    name: Example Title
+                    type: example_value
+                    liveOnly: true
+                    priority:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    notes: example_value
+                    scheduleStartMs: example_value
+                    scheduleEndMs: example_value
+                    parameter:
+                    - type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list: {}
+                      map: {}
+                      isWeakReference: true
+                    fingerprint: example_value
+                    firingTriggerId:
+                    - example_value
+                    blockingTriggerId:
+                    - example_value
+                    setupTag:
+                    - tagName: example_value
+                      stopOnSetupFailure: true
+                    teardownTag:
+                    - tagName: example_value
+                      stopTeardownOnFailure: true
+                    parentFolderId: '500123'
+                    tagFiringOption: tagFiringOptionUnspecified
+                    tagManagerUrl: https://www.example.com
+                    paused: true
+                    monitoringMetadata:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    monitoringMetadataTagNameKey: example_value
+                    consentSettings:
+                      consentStatus: notSet
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /tagmanager/v2/{tagPath}:
     get:
       operationId: getTag
-      summary: Google Tag Manager Get a tag
+      summary: Google Tag Manager Get a Tag
       description: Gets a GTM Tag by its resource path.
       tags: []
       parameters:
-        - name: tagPath
-          in: path
-          required: true
-          description: >-
-            GTM Tag's API relative path, e.g.
-            accounts/{accountId}/containers/{containerId}/workspaces/{workspaceId}/tags/{tagId}.
-          schema:
-            type: string
+      - name: tagPath
+        in: path
+        required: true
+        description: >-
+          GTM Tag's API relative path, e.g.
+          accounts/{accountId}/containers/{containerId}/workspaces/{workspaceId}/tags/{tagId}.
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Successful response containing the tag.
@@ -517,31 +1122,154 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Tag'
+              examples:
+                Gettag200Example:
+                  summary: Default getTag 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    containerId: '500123'
+                    workspaceId: '500123'
+                    tagId: '500123'
+                    name: Example Title
+                    type: example_value
+                    liveOnly: true
+                    priority:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    notes: example_value
+                    scheduleStartMs: example_value
+                    scheduleEndMs: example_value
+                    parameter:
+                    - type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list: {}
+                      map: {}
+                      isWeakReference: true
+                    fingerprint: example_value
+                    firingTriggerId:
+                    - example_value
+                    blockingTriggerId:
+                    - example_value
+                    setupTag:
+                    - tagName: example_value
+                      stopOnSetupFailure: true
+                    teardownTag:
+                    - tagName: example_value
+                      stopTeardownOnFailure: true
+                    parentFolderId: '500123'
+                    tagFiringOption: tagFiringOptionUnspecified
+                    tagManagerUrl: https://www.example.com
+                    paused: true
+                    monitoringMetadata:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    monitoringMetadataTagNameKey: example_value
+                    consentSettings:
+                      consentStatus: notSet
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: updateTag
-      summary: Google Tag Manager Update a tag
+      summary: Google Tag Manager Update a Tag
       description: Updates a GTM Tag.
       tags: []
       parameters:
-        - name: tagPath
-          in: path
-          required: true
-          description: GTM Tag's API relative path.
-          schema:
-            type: string
-        - name: fingerprint
-          in: query
-          description: >-
-            When provided, this fingerprint must match the fingerprint of the
-            tag in storage.
-          schema:
-            type: string
+      - name: tagPath
+        in: path
+        required: true
+        description: GTM Tag's API relative path.
+        schema:
+          type: string
+        example: example_value
+      - name: fingerprint
+        in: query
+        description: >-
+          When provided, this fingerprint must match the fingerprint of the
+          tag in storage.
+        schema:
+          type: string
+        example: example_value
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Tag'
+            examples:
+              UpdatetagRequestExample:
+                summary: Default updateTag request
+                x-microcks-default: true
+                value:
+                  path: example_value
+                  accountId: '500123'
+                  containerId: '500123'
+                  workspaceId: '500123'
+                  tagId: '500123'
+                  name: Example Title
+                  type: example_value
+                  liveOnly: true
+                  priority:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  notes: example_value
+                  scheduleStartMs: example_value
+                  scheduleEndMs: example_value
+                  parameter:
+                  - type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list: {}
+                    map: {}
+                    isWeakReference: true
+                  fingerprint: example_value
+                  firingTriggerId:
+                  - example_value
+                  blockingTriggerId:
+                  - example_value
+                  setupTag:
+                  - tagName: example_value
+                    stopOnSetupFailure: true
+                  teardownTag:
+                  - tagName: example_value
+                    stopTeardownOnFailure: true
+                  parentFolderId: '500123'
+                  tagFiringOption: tagFiringOptionUnspecified
+                  tagManagerUrl: https://www.example.com
+                  paused: true
+                  monitoringMetadata:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  monitoringMetadataTagNameKey: example_value
+                  consentSettings:
+                    consentStatus: notSet
       responses:
         '200':
           description: Successful response containing the updated tag.
@@ -549,36 +1277,103 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Tag'
+              examples:
+                Updatetag200Example:
+                  summary: Default updateTag 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    containerId: '500123'
+                    workspaceId: '500123'
+                    tagId: '500123'
+                    name: Example Title
+                    type: example_value
+                    liveOnly: true
+                    priority:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    notes: example_value
+                    scheduleStartMs: example_value
+                    scheduleEndMs: example_value
+                    parameter:
+                    - type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list: {}
+                      map: {}
+                      isWeakReference: true
+                    fingerprint: example_value
+                    firingTriggerId:
+                    - example_value
+                    blockingTriggerId:
+                    - example_value
+                    setupTag:
+                    - tagName: example_value
+                      stopOnSetupFailure: true
+                    teardownTag:
+                    - tagName: example_value
+                      stopTeardownOnFailure: true
+                    parentFolderId: '500123'
+                    tagFiringOption: tagFiringOptionUnspecified
+                    tagManagerUrl: https://www.example.com
+                    paused: true
+                    monitoringMetadata:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    monitoringMetadataTagNameKey: example_value
+                    consentSettings:
+                      consentStatus: notSet
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteTag
-      summary: Google Tag Manager Delete a tag
+      summary: Google Tag Manager Delete a Tag
       description: Deletes a GTM Tag.
       tags: []
       parameters:
-        - name: tagPath
-          in: path
-          required: true
-          description: GTM Tag's API relative path.
-          schema:
-            type: string
+      - name: tagPath
+        in: path
+        required: true
+        description: GTM Tag's API relative path.
+        schema:
+          type: string
+        example: example_value
       responses:
         '204':
           description: Tag successfully deleted.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /tagmanager/v2/{tagPath}:revert:
     post:
       operationId: revertTag
-      summary: Google Tag Manager Revert changes to a tag in a workspace
+      summary: Google Tag Manager Revert Changes to a Tag in a Workspace
       description: >-
         Reverts changes to a GTM Tag in a GTM Workspace, restoring it to its
         original state.
       tags: []
       parameters:
-        - name: tagPath
-          in: path
-          required: true
-          description: GTM Tag's API relative path.
-          schema:
-            type: string
+      - name: tagPath
+        in: path
+        required: true
+        description: GTM Tag's API relative path.
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Successful response confirming the tag was reverted.
@@ -586,20 +1381,57 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RevertTagResponse'
+              examples:
+                Reverttag200Example:
+                  summary: Default revertTag 200 response
+                  x-microcks-default: true
+                  value:
+                    tag:
+                      path: example_value
+                      accountId: '500123'
+                      containerId: '500123'
+                      workspaceId: '500123'
+                      tagId: '500123'
+                      name: Example Title
+                      type: example_value
+                      liveOnly: true
+                      notes: example_value
+                      scheduleStartMs: example_value
+                      scheduleEndMs: example_value
+                      parameter:
+                      - {}
+                      fingerprint: example_value
+                      firingTriggerId:
+                      - {}
+                      blockingTriggerId:
+                      - {}
+                      setupTag:
+                      - {}
+                      teardownTag:
+                      - {}
+                      parentFolderId: '500123'
+                      tagFiringOption: tagFiringOptionUnspecified
+                      tagManagerUrl: https://www.example.com
+                      paused: true
+                      monitoringMetadataTagNameKey: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /tagmanager/v2/{parent}/triggers:
     get:
       operationId: listTriggers
-      summary: Google Tag Manager List triggers in a workspace
+      summary: Google Tag Manager List Triggers in a Workspace
       description: Lists all GTM Triggers of a GTM Container Workspace.
       tags:
-        - Triggers
+      - Triggers
       parameters:
-        - $ref: '#/components/parameters/parentParam'
-        - name: pageToken
-          in: query
-          description: Continuation token for fetching the next page of results.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/parentParam'
+      - name: pageToken
+        in: query
+        description: Continuation token for fetching the next page of results.
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Successful response containing a list of triggers.
@@ -607,20 +1439,230 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListTriggersResponse'
+              examples:
+                Listtriggers200Example:
+                  summary: Default listTriggers 200 response
+                  x-microcks-default: true
+                  value:
+                    trigger:
+                    - path: example_value
+                      accountId: '500123'
+                      containerId: '500123'
+                      workspaceId: '500123'
+                      triggerId: '500123'
+                      name: Example Title
+                      type: eventTypeUnspecified
+                      customEventFilter: {}
+                      filter: {}
+                      autoEventFilter: {}
+                      fingerprint: example_value
+                      parentFolderId: '500123'
+                      tagManagerUrl: https://www.example.com
+                      notes: example_value
+                      parameter: {}
+                    nextPageToken: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createTrigger
-      summary: Google Tag Manager Create a trigger
+      summary: Google Tag Manager Create a Trigger
       description: Creates a GTM Trigger in a GTM Workspace.
       tags:
-        - Triggers
+      - Triggers
       parameters:
-        - $ref: '#/components/parameters/parentParam'
+      - $ref: '#/components/parameters/parentParam'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Trigger'
+            examples:
+              CreatetriggerRequestExample:
+                summary: Default createTrigger request
+                x-microcks-default: true
+                value:
+                  path: example_value
+                  accountId: '500123'
+                  containerId: '500123'
+                  workspaceId: '500123'
+                  triggerId: '500123'
+                  name: Example Title
+                  type: eventTypeUnspecified
+                  customEventFilter:
+                  - type: conditionTypeUnspecified
+                    parameter: {}
+                  filter:
+                  - type: conditionTypeUnspecified
+                    parameter: {}
+                  autoEventFilter:
+                  - type: conditionTypeUnspecified
+                    parameter: {}
+                  waitForTags:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  checkValidation:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  waitForTagsTimeout:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  uniqueTriggerId:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  eventName:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  interval:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  limit:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  fingerprint: example_value
+                  parentFolderId: '500123'
+                  selector:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  intervalSeconds:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  maxTimerLengthSeconds:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  verticalScrollPercentageList:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  horizontalScrollPercentageList:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  visibilitySelector:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  visiblePercentageMin:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  visiblePercentageMax:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  continuousTimeMinMilliseconds:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  totalTimeMinMilliseconds:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  tagManagerUrl: https://www.example.com
+                  notes: example_value
+                  parameter:
+                  - type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list: {}
+                    map: {}
+                    isWeakReference: true
       responses:
         '200':
           description: Successful response containing the created trigger.
@@ -628,22 +1670,211 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Trigger'
+              examples:
+                Createtrigger200Example:
+                  summary: Default createTrigger 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    containerId: '500123'
+                    workspaceId: '500123'
+                    triggerId: '500123'
+                    name: Example Title
+                    type: eventTypeUnspecified
+                    customEventFilter:
+                    - type: conditionTypeUnspecified
+                      parameter: {}
+                    filter:
+                    - type: conditionTypeUnspecified
+                      parameter: {}
+                    autoEventFilter:
+                    - type: conditionTypeUnspecified
+                      parameter: {}
+                    waitForTags:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    checkValidation:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    waitForTagsTimeout:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    uniqueTriggerId:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    eventName:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    interval:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    limit:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    fingerprint: example_value
+                    parentFolderId: '500123'
+                    selector:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    intervalSeconds:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    maxTimerLengthSeconds:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    verticalScrollPercentageList:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    horizontalScrollPercentageList:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    visibilitySelector:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    visiblePercentageMin:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    visiblePercentageMax:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    continuousTimeMinMilliseconds:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    totalTimeMinMilliseconds:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    tagManagerUrl: https://www.example.com
+                    notes: example_value
+                    parameter:
+                    - type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list: {}
+                      map: {}
+                      isWeakReference: true
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /tagmanager/v2/{triggerPath}:
     get:
       operationId: getTrigger
-      summary: Google Tag Manager Get a trigger
+      summary: Google Tag Manager Get a Trigger
       description: Gets a GTM Trigger by its resource path.
       tags:
-        - Triggers
+      - Triggers
       parameters:
-        - name: triggerPath
-          in: path
-          required: true
-          description: >-
-            GTM Trigger's API relative path, e.g.
-            accounts/{accountId}/containers/{containerId}/workspaces/{workspaceId}/triggers/{triggerId}.
-          schema:
-            type: string
+      - name: triggerPath
+        in: path
+        required: true
+        description: >-
+          GTM Trigger's API relative path, e.g.
+          accounts/{accountId}/containers/{containerId}/workspaces/{workspaceId}/triggers/{triggerId}.
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Successful response containing the trigger.
@@ -651,32 +1882,407 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Trigger'
+              examples:
+                Gettrigger200Example:
+                  summary: Default getTrigger 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    containerId: '500123'
+                    workspaceId: '500123'
+                    triggerId: '500123'
+                    name: Example Title
+                    type: eventTypeUnspecified
+                    customEventFilter:
+                    - type: conditionTypeUnspecified
+                      parameter: {}
+                    filter:
+                    - type: conditionTypeUnspecified
+                      parameter: {}
+                    autoEventFilter:
+                    - type: conditionTypeUnspecified
+                      parameter: {}
+                    waitForTags:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    checkValidation:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    waitForTagsTimeout:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    uniqueTriggerId:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    eventName:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    interval:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    limit:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    fingerprint: example_value
+                    parentFolderId: '500123'
+                    selector:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    intervalSeconds:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    maxTimerLengthSeconds:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    verticalScrollPercentageList:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    horizontalScrollPercentageList:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    visibilitySelector:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    visiblePercentageMin:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    visiblePercentageMax:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    continuousTimeMinMilliseconds:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    totalTimeMinMilliseconds:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    tagManagerUrl: https://www.example.com
+                    notes: example_value
+                    parameter:
+                    - type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list: {}
+                      map: {}
+                      isWeakReference: true
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: updateTrigger
-      summary: Google Tag Manager Update a trigger
+      summary: Google Tag Manager Update a Trigger
       description: Updates a GTM Trigger.
       tags:
-        - Triggers
+      - Triggers
       parameters:
-        - name: triggerPath
-          in: path
-          required: true
-          description: GTM Trigger's API relative path.
-          schema:
-            type: string
-        - name: fingerprint
-          in: query
-          description: >-
-            When provided, this fingerprint must match the fingerprint of the
-            trigger in storage.
-          schema:
-            type: string
+      - name: triggerPath
+        in: path
+        required: true
+        description: GTM Trigger's API relative path.
+        schema:
+          type: string
+        example: example_value
+      - name: fingerprint
+        in: query
+        description: >-
+          When provided, this fingerprint must match the fingerprint of the
+          trigger in storage.
+        schema:
+          type: string
+        example: example_value
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Trigger'
+            examples:
+              UpdatetriggerRequestExample:
+                summary: Default updateTrigger request
+                x-microcks-default: true
+                value:
+                  path: example_value
+                  accountId: '500123'
+                  containerId: '500123'
+                  workspaceId: '500123'
+                  triggerId: '500123'
+                  name: Example Title
+                  type: eventTypeUnspecified
+                  customEventFilter:
+                  - type: conditionTypeUnspecified
+                    parameter: {}
+                  filter:
+                  - type: conditionTypeUnspecified
+                    parameter: {}
+                  autoEventFilter:
+                  - type: conditionTypeUnspecified
+                    parameter: {}
+                  waitForTags:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  checkValidation:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  waitForTagsTimeout:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  uniqueTriggerId:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  eventName:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  interval:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  limit:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  fingerprint: example_value
+                  parentFolderId: '500123'
+                  selector:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  intervalSeconds:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  maxTimerLengthSeconds:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  verticalScrollPercentageList:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  horizontalScrollPercentageList:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  visibilitySelector:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  visiblePercentageMin:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  visiblePercentageMax:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  continuousTimeMinMilliseconds:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  totalTimeMinMilliseconds:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  tagManagerUrl: https://www.example.com
+                  notes: example_value
+                  parameter:
+                  - type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list: {}
+                    map: {}
+                    isWeakReference: true
       responses:
         '200':
           description: Successful response containing the updated trigger.
@@ -684,38 +2290,231 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Trigger'
+              examples:
+                Updatetrigger200Example:
+                  summary: Default updateTrigger 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    containerId: '500123'
+                    workspaceId: '500123'
+                    triggerId: '500123'
+                    name: Example Title
+                    type: eventTypeUnspecified
+                    customEventFilter:
+                    - type: conditionTypeUnspecified
+                      parameter: {}
+                    filter:
+                    - type: conditionTypeUnspecified
+                      parameter: {}
+                    autoEventFilter:
+                    - type: conditionTypeUnspecified
+                      parameter: {}
+                    waitForTags:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    checkValidation:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    waitForTagsTimeout:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    uniqueTriggerId:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    eventName:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    interval:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    limit:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    fingerprint: example_value
+                    parentFolderId: '500123'
+                    selector:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    intervalSeconds:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    maxTimerLengthSeconds:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    verticalScrollPercentageList:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    horizontalScrollPercentageList:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    visibilitySelector:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    visiblePercentageMin:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    visiblePercentageMax:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    continuousTimeMinMilliseconds:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    totalTimeMinMilliseconds:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    tagManagerUrl: https://www.example.com
+                    notes: example_value
+                    parameter:
+                    - type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list: {}
+                      map: {}
+                      isWeakReference: true
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteTrigger
-      summary: Google Tag Manager Delete a trigger
+      summary: Google Tag Manager Delete a Trigger
       description: Deletes a GTM Trigger.
       tags:
-        - Triggers
+      - Triggers
       parameters:
-        - name: triggerPath
-          in: path
-          required: true
-          description: GTM Trigger's API relative path.
-          schema:
-            type: string
+      - name: triggerPath
+        in: path
+        required: true
+        description: GTM Trigger's API relative path.
+        schema:
+          type: string
+        example: example_value
       responses:
         '204':
           description: Trigger successfully deleted.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /tagmanager/v2/{triggerPath}:revert:
     post:
       operationId: revertTrigger
-      summary: Google Tag Manager Revert changes to a trigger in a workspace
+      summary: Google Tag Manager Revert Changes to a Trigger in a Workspace
       description: >-
         Reverts changes to a GTM Trigger in a GTM Workspace, restoring it to its
         original state.
       tags:
-        - Triggers
+      - Triggers
       parameters:
-        - name: triggerPath
-          in: path
-          required: true
-          description: GTM Trigger's API relative path.
-          schema:
-            type: string
+      - name: triggerPath
+        in: path
+        required: true
+        description: GTM Trigger's API relative path.
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Successful response confirming the trigger was reverted.
@@ -723,20 +2522,49 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RevertTriggerResponse'
+              examples:
+                Reverttrigger200Example:
+                  summary: Default revertTrigger 200 response
+                  x-microcks-default: true
+                  value:
+                    trigger:
+                      path: example_value
+                      accountId: '500123'
+                      containerId: '500123'
+                      workspaceId: '500123'
+                      triggerId: '500123'
+                      name: Example Title
+                      type: eventTypeUnspecified
+                      customEventFilter:
+                      - {}
+                      filter:
+                      - {}
+                      autoEventFilter:
+                      - {}
+                      fingerprint: example_value
+                      parentFolderId: '500123'
+                      tagManagerUrl: https://www.example.com
+                      notes: example_value
+                      parameter:
+                      - {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /tagmanager/v2/{parent}/variables:
     get:
       operationId: listVariables
-      summary: Google Tag Manager List variables in a workspace
+      summary: Google Tag Manager List Variables in a Workspace
       description: Lists all GTM Variables of a GTM Container Workspace.
       tags:
-        - Variables
+      - Variables
       parameters:
-        - $ref: '#/components/parameters/parentParam'
-        - name: pageToken
-          in: query
-          description: Continuation token for fetching the next page of results.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/parentParam'
+      - name: pageToken
+        in: query
+        description: Continuation token for fetching the next page of results.
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Successful response containing a list of variables.
@@ -744,20 +2572,77 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListVariablesResponse'
+              examples:
+                Listvariables200Example:
+                  summary: Default listVariables 200 response
+                  x-microcks-default: true
+                  value:
+                    variable:
+                    - path: example_value
+                      accountId: '500123'
+                      containerId: '500123'
+                      workspaceId: '500123'
+                      variableId: '500123'
+                      name: Example Title
+                      type: example_value
+                      notes: example_value
+                      scheduleStartMs: example_value
+                      scheduleEndMs: example_value
+                      parameter: {}
+                      enablingTriggerId: {}
+                      disablingTriggerId: {}
+                      fingerprint: example_value
+                      parentFolderId: '500123'
+                      tagManagerUrl: https://www.example.com
+                    nextPageToken: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createVariable
-      summary: Google Tag Manager Create a variable
+      summary: Google Tag Manager Create a Variable
       description: Creates a GTM Variable in a GTM Workspace.
       tags:
-        - Variables
+      - Variables
       parameters:
-        - $ref: '#/components/parameters/parentParam'
+      - $ref: '#/components/parameters/parentParam'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Variable'
+            examples:
+              CreatevariableRequestExample:
+                summary: Default createVariable request
+                x-microcks-default: true
+                value:
+                  path: example_value
+                  accountId: '500123'
+                  containerId: '500123'
+                  workspaceId: '500123'
+                  variableId: '500123'
+                  name: Example Title
+                  type: example_value
+                  notes: example_value
+                  scheduleStartMs: example_value
+                  scheduleEndMs: example_value
+                  parameter:
+                  - type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list: {}
+                    map: {}
+                    isWeakReference: true
+                  enablingTriggerId:
+                  - example_value
+                  disablingTriggerId:
+                  - example_value
+                  fingerprint: example_value
+                  parentFolderId: '500123'
+                  tagManagerUrl: https://www.example.com
+                  formatValue:
+                    caseConversionType: none
       responses:
         '200':
           description: Successful response containing the created variable.
@@ -765,22 +2650,57 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Variable'
+              examples:
+                Createvariable200Example:
+                  summary: Default createVariable 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    containerId: '500123'
+                    workspaceId: '500123'
+                    variableId: '500123'
+                    name: Example Title
+                    type: example_value
+                    notes: example_value
+                    scheduleStartMs: example_value
+                    scheduleEndMs: example_value
+                    parameter:
+                    - type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list: {}
+                      map: {}
+                      isWeakReference: true
+                    enablingTriggerId:
+                    - example_value
+                    disablingTriggerId:
+                    - example_value
+                    fingerprint: example_value
+                    parentFolderId: '500123'
+                    tagManagerUrl: https://www.example.com
+                    formatValue:
+                      caseConversionType: none
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /tagmanager/v2/{variablePath}:
     get:
       operationId: getVariable
-      summary: Google Tag Manager Get a variable
+      summary: Google Tag Manager Get a Variable
       description: Gets a GTM Variable by its resource path.
       tags:
-        - Variables
+      - Variables
       parameters:
-        - name: variablePath
-          in: path
-          required: true
-          description: >-
-            GTM Variable's API relative path, e.g.
-            accounts/{accountId}/containers/{containerId}/workspaces/{workspaceId}/variables/{variableId}.
-          schema:
-            type: string
+      - name: variablePath
+        in: path
+        required: true
+        description: >-
+          GTM Variable's API relative path, e.g.
+          accounts/{accountId}/containers/{containerId}/workspaces/{workspaceId}/variables/{variableId}.
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Successful response containing the variable.
@@ -788,32 +2708,99 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Variable'
+              examples:
+                Getvariable200Example:
+                  summary: Default getVariable 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    containerId: '500123'
+                    workspaceId: '500123'
+                    variableId: '500123'
+                    name: Example Title
+                    type: example_value
+                    notes: example_value
+                    scheduleStartMs: example_value
+                    scheduleEndMs: example_value
+                    parameter:
+                    - type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list: {}
+                      map: {}
+                      isWeakReference: true
+                    enablingTriggerId:
+                    - example_value
+                    disablingTriggerId:
+                    - example_value
+                    fingerprint: example_value
+                    parentFolderId: '500123'
+                    tagManagerUrl: https://www.example.com
+                    formatValue:
+                      caseConversionType: none
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: updateVariable
-      summary: Google Tag Manager Update a variable
+      summary: Google Tag Manager Update a Variable
       description: Updates a GTM Variable.
       tags:
-        - Variables
+      - Variables
       parameters:
-        - name: variablePath
-          in: path
-          required: true
-          description: GTM Variable's API relative path.
-          schema:
-            type: string
-        - name: fingerprint
-          in: query
-          description: >-
-            When provided, this fingerprint must match the fingerprint of the
-            variable in storage.
-          schema:
-            type: string
+      - name: variablePath
+        in: path
+        required: true
+        description: GTM Variable's API relative path.
+        schema:
+          type: string
+        example: example_value
+      - name: fingerprint
+        in: query
+        description: >-
+          When provided, this fingerprint must match the fingerprint of the
+          variable in storage.
+        schema:
+          type: string
+        example: example_value
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Variable'
+            examples:
+              UpdatevariableRequestExample:
+                summary: Default updateVariable request
+                x-microcks-default: true
+                value:
+                  path: example_value
+                  accountId: '500123'
+                  containerId: '500123'
+                  workspaceId: '500123'
+                  variableId: '500123'
+                  name: Example Title
+                  type: example_value
+                  notes: example_value
+                  scheduleStartMs: example_value
+                  scheduleEndMs: example_value
+                  parameter:
+                  - type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list: {}
+                    map: {}
+                    isWeakReference: true
+                  enablingTriggerId:
+                  - example_value
+                  disablingTriggerId:
+                  - example_value
+                  fingerprint: example_value
+                  parentFolderId: '500123'
+                  tagManagerUrl: https://www.example.com
+                  formatValue:
+                    caseConversionType: none
       responses:
         '200':
           description: Successful response containing the updated variable.
@@ -821,38 +2808,77 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Variable'
+              examples:
+                Updatevariable200Example:
+                  summary: Default updateVariable 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    containerId: '500123'
+                    workspaceId: '500123'
+                    variableId: '500123'
+                    name: Example Title
+                    type: example_value
+                    notes: example_value
+                    scheduleStartMs: example_value
+                    scheduleEndMs: example_value
+                    parameter:
+                    - type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list: {}
+                      map: {}
+                      isWeakReference: true
+                    enablingTriggerId:
+                    - example_value
+                    disablingTriggerId:
+                    - example_value
+                    fingerprint: example_value
+                    parentFolderId: '500123'
+                    tagManagerUrl: https://www.example.com
+                    formatValue:
+                      caseConversionType: none
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteVariable
-      summary: Google Tag Manager Delete a variable
+      summary: Google Tag Manager Delete a Variable
       description: Deletes a GTM Variable.
       tags:
-        - Variables
+      - Variables
       parameters:
-        - name: variablePath
-          in: path
-          required: true
-          description: GTM Variable's API relative path.
-          schema:
-            type: string
+      - name: variablePath
+        in: path
+        required: true
+        description: GTM Variable's API relative path.
+        schema:
+          type: string
+        example: example_value
       responses:
         '204':
           description: Variable successfully deleted.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /tagmanager/v2/{variablePath}:revert:
     post:
       operationId: revertVariable
-      summary: Google Tag Manager Revert changes to a variable in a workspace
+      summary: Google Tag Manager Revert Changes to a Variable in a Workspace
       description: >-
         Reverts changes to a GTM Variable in a GTM Workspace, restoring it to
         its original state.
       tags:
-        - Variables
+      - Variables
       parameters:
-        - name: variablePath
-          in: path
-          required: true
-          description: GTM Variable's API relative path.
-          schema:
-            type: string
+      - name: variablePath
+        in: path
+        required: true
+        description: GTM Variable's API relative path.
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Successful response confirming the variable was reverted.
@@ -860,27 +2886,57 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RevertVariableResponse'
+              examples:
+                Revertvariable200Example:
+                  summary: Default revertVariable 200 response
+                  x-microcks-default: true
+                  value:
+                    variable:
+                      path: example_value
+                      accountId: '500123'
+                      containerId: '500123'
+                      workspaceId: '500123'
+                      variableId: '500123'
+                      name: Example Title
+                      type: example_value
+                      notes: example_value
+                      scheduleStartMs: example_value
+                      scheduleEndMs: example_value
+                      parameter:
+                      - {}
+                      enablingTriggerId:
+                      - {}
+                      disablingTriggerId:
+                      - {}
+                      fingerprint: example_value
+                      parentFolderId: '500123'
+                      tagManagerUrl: https://www.example.com
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /tagmanager/v2/{parent}/versions:
     get:
       operationId: listContainerVersionHeaders
-      summary: Google Tag Manager List all container version headers
+      summary: Google Tag Manager List All Container Version Headers
       description: >-
         Lists all Container Version Headers of a GTM Container, providing
         summary information about each version.
       tags:
-        - Versions
+      - Versions
       parameters:
-        - $ref: '#/components/parameters/parentParam'
-        - name: pageToken
-          in: query
-          description: Continuation token for fetching the next page of results.
-          schema:
-            type: string
-        - name: includeDeleted
-          in: query
-          description: Also retrieve deleted (archived) versions when true.
-          schema:
-            type: boolean
+      - $ref: '#/components/parameters/parentParam'
+      - name: pageToken
+        in: query
+        description: Continuation token for fetching the next page of results.
+        schema:
+          type: string
+        example: example_value
+      - name: includeDeleted
+        in: query
+        description: Also retrieve deleted (archived) versions when true.
+        schema:
+          type: boolean
+        example: true
       responses:
         '200':
           description: >-
@@ -889,20 +2945,40 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListContainerVersionsResponse'
+              examples:
+                Listcontainerversionheaders200Example:
+                  summary: Default listContainerVersionHeaders 200 response
+                  x-microcks-default: true
+                  value:
+                    containerVersionHeader:
+                    - path: example_value
+                      accountId: '500123'
+                      containerId: '500123'
+                      containerVersionId: '500123'
+                      name: Example Title
+                      numTags: example_value
+                      numTriggers: example_value
+                      numVariables: example_value
+                      deleted: true
+                    nextPageToken: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /tagmanager/v2/{versionPath}:
     get:
       operationId: getContainerVersion
-      summary: Google Tag Manager Get a container version
+      summary: Google Tag Manager Get a Container Version
       description: Gets a Container Version by its resource path.
       tags:
-        - Versions
+      - Versions
       parameters:
-        - name: versionPath
-          in: path
-          required: true
-          description: GTM ContainerVersion's API relative path.
-          schema:
-            type: string
+      - name: versionPath
+        in: path
+        required: true
+        description: GTM ContainerVersion's API relative path.
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Successful response containing the container version.
@@ -910,45 +2986,141 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ContainerVersion'
+              examples:
+                Getcontainerversion200Example:
+                  summary: Default getContainerVersion 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    containerId: '500123'
+                    containerVersionId: '500123'
+                    name: Example Title
+                    description: A sample description.
+                    container:
+                      path: example_value
+                      accountId: '500123'
+                      containerId: '500123'
+                      name: Example Title
+                      domainName:
+                      - {}
+                      publicId: '500123'
+                      tagIds:
+                      - {}
+                      notes: example_value
+                      usageContext:
+                      - {}
+                      fingerprint: example_value
+                      tagManagerUrl: https://www.example.com
+                      taggingServerUrls:
+                      - {}
+                    tag:
+                    - path: example_value
+                      accountId: '500123'
+                      containerId: '500123'
+                      workspaceId: '500123'
+                      tagId: '500123'
+                      name: Example Title
+                      type: example_value
+                      liveOnly: true
+                      notes: example_value
+                      scheduleStartMs: example_value
+                      scheduleEndMs: example_value
+                      parameter: {}
+                      fingerprint: example_value
+                      firingTriggerId: {}
+                      blockingTriggerId: {}
+                      setupTag: {}
+                      teardownTag: {}
+                      parentFolderId: '500123'
+                      tagFiringOption: tagFiringOptionUnspecified
+                      tagManagerUrl: https://www.example.com
+                      paused: true
+                      monitoringMetadataTagNameKey: example_value
+                    trigger:
+                    - path: example_value
+                      accountId: '500123'
+                      containerId: '500123'
+                      workspaceId: '500123'
+                      triggerId: '500123'
+                      name: Example Title
+                      type: eventTypeUnspecified
+                      customEventFilter: {}
+                      filter: {}
+                      autoEventFilter: {}
+                      fingerprint: example_value
+                      parentFolderId: '500123'
+                      tagManagerUrl: https://www.example.com
+                      notes: example_value
+                      parameter: {}
+                    variable:
+                    - path: example_value
+                      accountId: '500123'
+                      containerId: '500123'
+                      workspaceId: '500123'
+                      variableId: '500123'
+                      name: Example Title
+                      type: example_value
+                      notes: example_value
+                      scheduleStartMs: example_value
+                      scheduleEndMs: example_value
+                      parameter: {}
+                      enablingTriggerId: {}
+                      disablingTriggerId: {}
+                      fingerprint: example_value
+                      parentFolderId: '500123'
+                      tagManagerUrl: https://www.example.com
+                    fingerprint: example_value
+                    tagManagerUrl: https://www.example.com
+                    deleted: true
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteContainerVersion
-      summary: Google Tag Manager Delete a container version
+      summary: Google Tag Manager Delete a Container Version
       description: Deletes a Container Version.
       tags:
-        - Versions
+      - Versions
       parameters:
-        - name: versionPath
-          in: path
-          required: true
-          description: GTM ContainerVersion's API relative path.
-          schema:
-            type: string
+      - name: versionPath
+        in: path
+        required: true
+        description: GTM ContainerVersion's API relative path.
+        schema:
+          type: string
+        example: example_value
       responses:
         '204':
           description: Container version successfully deleted.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /tagmanager/v2/{versionPath}:publish:
     post:
       operationId: publishContainerVersion
-      summary: Google Tag Manager Publish a container version
+      summary: Google Tag Manager Publish a Container Version
       description: >-
         Publishes a Container Version, making it the live version served to
         users.
       tags:
-        - Versions
+      - Versions
       parameters:
-        - name: versionPath
-          in: path
-          required: true
-          description: GTM ContainerVersion's API relative path.
-          schema:
-            type: string
-        - name: fingerprint
-          in: query
-          description: >-
-            When provided, this fingerprint must match the fingerprint of the
-            container version in storage.
-          schema:
-            type: string
+      - name: versionPath
+        in: path
+        required: true
+        description: GTM ContainerVersion's API relative path.
+        schema:
+          type: string
+        example: example_value
+      - name: fingerprint
+        in: query
+        description: >-
+          When provided, this fingerprint must match the fingerprint of the
+          container version in storage.
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: >-
@@ -957,16 +3129,41 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PublishContainerVersionResponse'
+              examples:
+                Publishcontainerversion200Example:
+                  summary: Default publishContainerVersion 200 response
+                  x-microcks-default: true
+                  value:
+                    containerVersion:
+                      path: example_value
+                      accountId: '500123'
+                      containerId: '500123'
+                      containerVersionId: '500123'
+                      name: Example Title
+                      description: A sample description.
+                      tag:
+                      - {}
+                      trigger:
+                      - {}
+                      variable:
+                      - {}
+                      fingerprint: example_value
+                      tagManagerUrl: https://www.example.com
+                      deleted: true
+                    compilerError: true
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /tagmanager/v2/{parent}/versions:live:
     get:
       operationId: getLiveContainerVersion
-      summary: Google Tag Manager Get the live container version
+      summary: Google Tag Manager Get the Live Container Version
       description: >-
         Gets the live (published) container version for a GTM Container.
       tags:
-        - Versions
+      - Versions
       parameters:
-        - $ref: '#/components/parameters/parentParam'
+      - $ref: '#/components/parameters/parentParam'
       responses:
         '200':
           description: >-
@@ -975,22 +3172,113 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ContainerVersion'
+              examples:
+                Getlivecontainerversion200Example:
+                  summary: Default getLiveContainerVersion 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    containerId: '500123'
+                    containerVersionId: '500123'
+                    name: Example Title
+                    description: A sample description.
+                    container:
+                      path: example_value
+                      accountId: '500123'
+                      containerId: '500123'
+                      name: Example Title
+                      domainName:
+                      - {}
+                      publicId: '500123'
+                      tagIds:
+                      - {}
+                      notes: example_value
+                      usageContext:
+                      - {}
+                      fingerprint: example_value
+                      tagManagerUrl: https://www.example.com
+                      taggingServerUrls:
+                      - {}
+                    tag:
+                    - path: example_value
+                      accountId: '500123'
+                      containerId: '500123'
+                      workspaceId: '500123'
+                      tagId: '500123'
+                      name: Example Title
+                      type: example_value
+                      liveOnly: true
+                      notes: example_value
+                      scheduleStartMs: example_value
+                      scheduleEndMs: example_value
+                      parameter: {}
+                      fingerprint: example_value
+                      firingTriggerId: {}
+                      blockingTriggerId: {}
+                      setupTag: {}
+                      teardownTag: {}
+                      parentFolderId: '500123'
+                      tagFiringOption: tagFiringOptionUnspecified
+                      tagManagerUrl: https://www.example.com
+                      paused: true
+                      monitoringMetadataTagNameKey: example_value
+                    trigger:
+                    - path: example_value
+                      accountId: '500123'
+                      containerId: '500123'
+                      workspaceId: '500123'
+                      triggerId: '500123'
+                      name: Example Title
+                      type: eventTypeUnspecified
+                      customEventFilter: {}
+                      filter: {}
+                      autoEventFilter: {}
+                      fingerprint: example_value
+                      parentFolderId: '500123'
+                      tagManagerUrl: https://www.example.com
+                      notes: example_value
+                      parameter: {}
+                    variable:
+                    - path: example_value
+                      accountId: '500123'
+                      containerId: '500123'
+                      workspaceId: '500123'
+                      variableId: '500123'
+                      name: Example Title
+                      type: example_value
+                      notes: example_value
+                      scheduleStartMs: example_value
+                      scheduleEndMs: example_value
+                      parameter: {}
+                      enablingTriggerId: {}
+                      disablingTriggerId: {}
+                      fingerprint: example_value
+                      parentFolderId: '500123'
+                      tagManagerUrl: https://www.example.com
+                    fingerprint: example_value
+                    tagManagerUrl: https://www.example.com
+                    deleted: true
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /tagmanager/v2/{parent}/user_permissions:
     get:
       operationId: listUserPermissions
-      summary: Google Tag Manager List user permissions for an account
+      summary: Google Tag Manager List User Permissions for an Account
       description: >-
         List all users that have access to the account along with Account and
         Container user access granted to each of them.
       tags:
-        - User Permissions
+      - User Permissions
       parameters:
-        - $ref: '#/components/parameters/parentParam'
-        - name: pageToken
-          in: query
-          description: Continuation token for fetching the next page of results.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/parentParam'
+      - name: pageToken
+        in: query
+        description: Continuation token for fetching the next page of results.
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Successful response containing a list of user permissions.
@@ -998,20 +3286,47 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListUserPermissionsResponse'
+              examples:
+                Listuserpermissions200Example:
+                  summary: Default listUserPermissions 200 response
+                  x-microcks-default: true
+                  value:
+                    userPermission:
+                    - path: example_value
+                      accountId: '500123'
+                      emailAddress: user@example.com
+                      containerAccess: {}
+                    nextPageToken: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createUserPermission
-      summary: Google Tag Manager Create a user permission
+      summary: Google Tag Manager Create a User Permission
       description: Creates a user's Account and Container access within a GTM Account.
       tags:
-        - User Permissions
+      - User Permissions
       parameters:
-        - $ref: '#/components/parameters/parentParam'
+      - $ref: '#/components/parameters/parentParam'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/UserPermission'
+            examples:
+              CreateuserpermissionRequestExample:
+                summary: Default createUserPermission request
+                x-microcks-default: true
+                value:
+                  path: example_value
+                  accountId: '500123'
+                  emailAddress: user@example.com
+                  accountAccess:
+                    permission: accountPermissionUnspecified
+                  containerAccess:
+                  - containerId: '500123'
+                    permission: containerPermissionUnspecified
       responses:
         '200':
           description: Successful response containing the created user permission.
@@ -1019,20 +3334,37 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserPermission'
+              examples:
+                Createuserpermission200Example:
+                  summary: Default createUserPermission 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    emailAddress: user@example.com
+                    accountAccess:
+                      permission: accountPermissionUnspecified
+                    containerAccess:
+                    - containerId: '500123'
+                      permission: containerPermissionUnspecified
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /tagmanager/v2/{userPermissionPath}:
     get:
       operationId: getUserPermission
-      summary: Google Tag Manager Get a user permission
+      summary: Google Tag Manager Get a User Permission
       description: Gets a user's Account and Container access.
       tags:
-        - User Permissions
+      - User Permissions
       parameters:
-        - name: userPermissionPath
-          in: path
-          required: true
-          description: GTM UserPermission's API relative path.
-          schema:
-            type: string
+      - name: userPermissionPath
+        in: path
+        required: true
+        description: GTM UserPermission's API relative path.
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Successful response containing the user permission.
@@ -1040,25 +3372,55 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserPermission'
+              examples:
+                Getuserpermission200Example:
+                  summary: Default getUserPermission 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    emailAddress: user@example.com
+                    accountAccess:
+                      permission: accountPermissionUnspecified
+                    containerAccess:
+                    - containerId: '500123'
+                      permission: containerPermissionUnspecified
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: updateUserPermission
-      summary: Google Tag Manager Update a user permission
+      summary: Google Tag Manager Update a User Permission
       description: Updates a user's Account and Container access.
       tags:
-        - User Permissions
+      - User Permissions
       parameters:
-        - name: userPermissionPath
-          in: path
-          required: true
-          description: GTM UserPermission's API relative path.
-          schema:
-            type: string
+      - name: userPermissionPath
+        in: path
+        required: true
+        description: GTM UserPermission's API relative path.
+        schema:
+          type: string
+        example: example_value
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/UserPermission'
+            examples:
+              UpdateuserpermissionRequestExample:
+                summary: Default updateUserPermission request
+                x-microcks-default: true
+                value:
+                  path: example_value
+                  accountId: '500123'
+                  emailAddress: user@example.com
+                  accountAccess:
+                    permission: accountPermissionUnspecified
+                  containerAccess:
+                  - containerId: '500123'
+                    permission: containerPermissionUnspecified
       responses:
         '200':
           description: Successful response containing the updated user permission.
@@ -1066,22 +3428,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserPermission'
+              examples:
+                Updateuserpermission200Example:
+                  summary: Default updateUserPermission 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    emailAddress: user@example.com
+                    accountAccess:
+                      permission: accountPermissionUnspecified
+                    containerAccess:
+                    - containerId: '500123'
+                      permission: containerPermissionUnspecified
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteUserPermission
-      summary: Google Tag Manager Delete a user permission
+      summary: Google Tag Manager Delete a User Permission
       description: Removes a user from the account, revoking access.
       tags:
-        - User Permissions
+      - User Permissions
       parameters:
-        - name: userPermissionPath
-          in: path
-          required: true
-          description: GTM UserPermission's API relative path.
-          schema:
-            type: string
+      - name: userPermissionPath
+        in: path
+        required: true
+        description: GTM UserPermission's API relative path.
+        schema:
+          type: string
+        example: example_value
       responses:
         '204':
           description: User permission successfully deleted.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     oauth2:
@@ -1134,34 +3516,40 @@ components:
           type: string
           description: GTM Account's API relative path.
           readOnly: true
+          example: example_value
         accountId:
           type: string
           description: The Account ID uniquely identifies the GTM Account.
           readOnly: true
+          example: '500123'
         name:
           type: string
           description: Account display name.
+          example: Example Title
         shareData:
           type: boolean
           description: >-
             Whether the account shares data anonymously with Google and others.
             This flag enables benchmarking by sharing your data in an anonymous
             form.
+          example: true
         fingerprint:
           type: string
           description: >-
             The fingerprint of the GTM Account as computed at storage time. This
             value is recomputed whenever the account is modified.
           readOnly: true
+          example: example_value
         tagManagerUrl:
           type: string
           format: uri
           description: Auto-generated link to the tag manager UI.
           readOnly: true
+          example: https://www.example.com
         features:
           $ref: '#/components/schemas/AccountFeatures'
       required:
-        - name
+      - name
     AccountFeatures:
       type: object
       description: Read-only account feature set.
@@ -1170,10 +3558,12 @@ components:
           type: boolean
           description: Whether this account has user permissions management enabled.
           readOnly: true
+          example: true
         supportMultipleContainers:
           type: boolean
           description: Whether this account supports multiple containers.
           readOnly: true
+          example: true
     Container:
       type: object
       description: >-
@@ -1184,17 +3574,21 @@ components:
           type: string
           description: GTM Container's API relative path.
           readOnly: true
+          example: example_value
         accountId:
           type: string
           description: GTM Account ID.
           readOnly: true
+          example: '500123'
         containerId:
           type: string
           description: The Container ID uniquely identifies the GTM Container.
           readOnly: true
+          example: '500123'
         name:
           type: string
           description: Container display name.
+          example: Example Title
         domainName:
           type: array
           description: >-
@@ -1202,19 +3596,23 @@ components:
             auto-event tracking and link decoration.
           items:
             type: string
+          example: []
         publicId:
           type: string
           description: Container Public ID (e.g., GTM-XXXX).
           readOnly: true
+          example: '500123'
         tagIds:
           type: array
           description: All Tag IDs that refer to this Container.
           items:
             type: string
           readOnly: true
+          example: []
         notes:
           type: string
           description: Container Notes.
+          example: example_value
         usageContext:
           type: array
           description: >-
@@ -1223,36 +3621,40 @@ components:
           items:
             type: string
             enum:
-              - usageContextUnspecified
-              - web
-              - android
-              - ios
-              - androidSdk5
-              - iosSdk5
-              - amp
-              - server
+            - usageContextUnspecified
+            - web
+            - android
+            - ios
+            - androidSdk5
+            - iosSdk5
+            - amp
+            - server
+          example: []
         fingerprint:
           type: string
           description: >-
             The fingerprint of the GTM Container as computed at storage time.
             This value is recomputed whenever the container is modified.
           readOnly: true
+          example: example_value
         tagManagerUrl:
           type: string
           format: uri
           description: Auto-generated link to the tag manager UI.
           readOnly: true
+          example: https://www.example.com
         taggingServerUrls:
           type: array
           description: List of server-side container URLs for the Container.
           items:
             type: string
             format: uri
+          example: https://www.example.com
         features:
           $ref: '#/components/schemas/ContainerFeatures'
       required:
-        - name
-        - usageContext
+      - name
+      - usageContext
     ContainerFeatures:
       type: object
       description: Read-only container feature set.
@@ -1260,45 +3662,59 @@ components:
         supportUserPermissions:
           type: boolean
           readOnly: true
+          example: true
         supportEnvironments:
           type: boolean
           readOnly: true
+          example: true
         supportWorkspaces:
           type: boolean
           readOnly: true
+          example: true
         supportGtagConfigs:
           type: boolean
           readOnly: true
+          example: true
         supportBuiltInVariables:
           type: boolean
           readOnly: true
+          example: true
         supportClients:
           type: boolean
           readOnly: true
+          example: true
         supportFolders:
           type: boolean
           readOnly: true
+          example: true
         supportTags:
           type: boolean
           readOnly: true
+          example: true
         supportTemplates:
           type: boolean
           readOnly: true
+          example: true
         supportTriggers:
           type: boolean
           readOnly: true
+          example: true
         supportVariables:
           type: boolean
           readOnly: true
+          example: true
         supportVersions:
           type: boolean
           readOnly: true
+          example: true
         supportZones:
           type: boolean
           readOnly: true
+          example: true
         supportTransformations:
           type: boolean
           readOnly: true
+          example: true
     Workspace:
       type: object
       description: >-
@@ -1310,37 +3726,45 @@ components:
           type: string
           description: GTM Workspace's API relative path.
           readOnly: true
+          example: example_value
         accountId:
           type: string
           description: GTM Account ID.
           readOnly: true
+          example: '500123'
         containerId:
           type: string
           description: GTM Container ID.
           readOnly: true
+          example: '500123'
         workspaceId:
           type: string
           description: The Workspace ID uniquely identifies the GTM Workspace.
           readOnly: true
+          example: '500123'
         name:
           type: string
           description: Workspace display name.
+          example: Example Title
         description:
           type: string
           description: Workspace description.
+          example: A sample description.
         fingerprint:
           type: string
           description: >-
             The fingerprint of the GTM Workspace as computed at storage time.
             This value is recomputed whenever the workspace is modified.
           readOnly: true
+          example: example_value
         tagManagerUrl:
           type: string
           format: uri
           description: Auto-generated link to the tag manager UI.
           readOnly: true
+          example: https://www.example.com
       required:
-        - name
+      - name
     Parameter:
       type: object
       description: >-
@@ -1351,24 +3775,27 @@ components:
           type: string
           description: The parameter type.
           enum:
-            - typeUnspecified
-            - template
-            - integer
-            - boolean
-            - list
-            - map
-            - triggerReference
-            - tagReference
+          - typeUnspecified
+          - template
+          - integer
+          - boolean
+          - list
+          - map
+          - triggerReference
+          - tagReference
+          example: typeUnspecified
         key:
           type: string
           description: >-
             The named key that uniquely identifies a parameter. Required for
             top-level parameters, as well as map values. Ignored for list values.
+          example: example_value
         value:
           type: string
           description: >-
             A parameter's value (may contain variable references) as appropriate
             to the specified type.
+          example: example_value
         list:
           type: array
           description: >-
@@ -1376,6 +3803,7 @@ components:
             type is list.
           items:
             $ref: '#/components/schemas/Parameter'
+          example: []
         map:
           type: array
           description: >-
@@ -1383,13 +3811,15 @@ components:
             unique). Used when type is map.
           items:
             $ref: '#/components/schemas/Parameter'
+          example: []
         isWeakReference:
           type: boolean
           description: >-
             Whether or not the parameter is a weak reference. Used to determine
             which parameters should be included in exported containers.
+          example: true
       required:
-        - type
+      - type
     Condition:
       type: object
       description: >-
@@ -1400,18 +3830,19 @@ components:
           type: string
           description: The type of operator for this condition.
           enum:
-            - conditionTypeUnspecified
-            - equals
-            - contains
-            - startsWith
-            - endsWith
-            - matchRegex
-            - greater
-            - greaterOrEquals
-            - less
-            - lessOrEquals
-            - cssSelector
-            - urlMatches
+          - conditionTypeUnspecified
+          - equals
+          - contains
+          - startsWith
+          - endsWith
+          - matchRegex
+          - greater
+          - greaterOrEquals
+          - less
+          - lessOrEquals
+          - cssSelector
+          - urlMatches
+          example: conditionTypeUnspecified
         parameter:
           type: array
           description: >-
@@ -1420,6 +3851,7 @@ components:
             the right-hand operand.
           items:
             $ref: '#/components/schemas/Parameter'
+          example: []
     Tag:
       type: object
       description: >-
@@ -1430,25 +3862,31 @@ components:
           type: string
           description: GTM Tag's API relative path.
           readOnly: true
+          example: example_value
         accountId:
           type: string
           description: GTM Account ID.
           readOnly: true
+          example: '500123'
         containerId:
           type: string
           description: GTM Container ID.
           readOnly: true
+          example: '500123'
         workspaceId:
           type: string
           description: GTM Workspace ID.
           readOnly: true
+          example: '500123'
         tagId:
           type: string
           description: The Tag ID uniquely identifies the GTM Tag.
           readOnly: true
+          example: '500123'
         name:
           type: string
           description: Tag display name.
+          example: Example Title
         type:
           type: string
           description: >-
@@ -1457,40 +3895,47 @@ components:
             Event), awct (Google Ads Conversion Tracking), sp (Custom Script),
             html (Custom HTML), img (Custom Image), and flc (Floodlight
             Counter).
+          example: example_value
         liveOnly:
           type: boolean
           description: >-
             If set to true, this tag will only fire in the live environment
             (not in preview or debug mode).
+          example: true
         priority:
           $ref: '#/components/schemas/Parameter'
         notes:
           type: string
           description: >-
             User notes on how to apply this tag in the container.
+          example: example_value
         scheduleStartMs:
           type: string
           format: int64
           description: >-
             The start timestamp in milliseconds to schedule a tag. The tag will
             only fire after this time.
+          example: example_value
         scheduleEndMs:
           type: string
           format: int64
           description: >-
             The end timestamp in milliseconds to schedule a tag. The tag will
             stop firing after this time.
+          example: example_value
         parameter:
           type: array
           description: The tag's parameters, which configure its behavior.
           items:
             $ref: '#/components/schemas/Parameter'
+          example: []
         fingerprint:
           type: string
           description: >-
             The fingerprint of the GTM Tag as computed at storage time. This
             value is recomputed whenever the tag is modified.
           readOnly: true
+          example: example_value
         firingTriggerId:
           type: array
           description: >-
@@ -1499,6 +3944,7 @@ components:
             false.
           items:
             type: string
+          example: '500123'
         blockingTriggerId:
           type: array
           description: >-
@@ -1506,6 +3952,7 @@ components:
             true, the tag will not fire.
           items:
             type: string
+          example: '500123'
         setupTag:
           type: array
           description: >-
@@ -1513,6 +3960,7 @@ components:
             tag.
           items:
             $ref: '#/components/schemas/SetupTag'
+          example: []
         teardownTag:
           type: array
           description: >-
@@ -1520,27 +3968,32 @@ components:
             allowed per tag.
           items:
             $ref: '#/components/schemas/TeardownTag'
+          example: []
         parentFolderId:
           type: string
           description: Parent folder ID.
+          example: '500123'
         tagFiringOption:
           type: string
           description: Option to fire this tag.
           enum:
-            - tagFiringOptionUnspecified
-            - unlimited
-            - oncePerEvent
-            - oncePerLoad
+          - tagFiringOptionUnspecified
+          - unlimited
+          - oncePerEvent
+          - oncePerLoad
+          example: tagFiringOptionUnspecified
         tagManagerUrl:
           type: string
           format: uri
           description: Auto-generated link to the tag manager UI.
           readOnly: true
+          example: https://www.example.com
         paused:
           type: boolean
           description: >-
             Indicates whether the tag is paused, which prevents the tag from
             firing.
+          example: true
         monitoringMetadata:
           $ref: '#/components/schemas/Parameter'
         monitoringMetadataTagNameKey:
@@ -1548,11 +4001,12 @@ components:
           description: >-
             If non-empty, then the tag display name will be included in the
             monitoring metadata map using the key specified.
+          example: example_value
         consentSettings:
           $ref: '#/components/schemas/ConsentSettings'
       required:
-        - name
-        - type
+      - name
+      - type
     SetupTag:
       type: object
       description: >-
@@ -1562,11 +4016,13 @@ components:
         tagName:
           type: string
           description: The name of the setup tag.
+          example: example_value
         stopOnSetupFailure:
           type: boolean
           description: >-
             If true, fire the main tag only if the setup tag fires successfully.
             If false, fire the main tag regardless of setup tag firing status.
+          example: true
     TeardownTag:
       type: object
       description: >-
@@ -1576,12 +4032,14 @@ components:
         tagName:
           type: string
           description: The name of the teardown tag.
+          example: example_value
         stopTeardownOnFailure:
           type: boolean
           description: >-
             If true, fire the teardown tag if and only if the main tag fires
             successfully. If false, fire the teardown tag regardless of main tag
             firing status.
+          example: true
     ConsentSettings:
       type: object
       description: Tag consent settings.
@@ -1590,9 +4048,10 @@ components:
           type: string
           description: The tag's consent status.
           enum:
-            - notSet
-            - notNeeded
-            - needed
+          - notSet
+          - notNeeded
+          - needed
+          example: notSet
         consentType:
           $ref: '#/components/schemas/Parameter'
     Trigger:
@@ -1606,64 +4065,71 @@ components:
           type: string
           description: GTM Trigger's API relative path.
           readOnly: true
+          example: example_value
         accountId:
           type: string
           description: GTM Account ID.
           readOnly: true
+          example: '500123'
         containerId:
           type: string
           description: GTM Container ID.
           readOnly: true
+          example: '500123'
         workspaceId:
           type: string
           description: GTM Workspace ID.
           readOnly: true
+          example: '500123'
         triggerId:
           type: string
           description: The Trigger ID uniquely identifies the GTM Trigger.
           readOnly: true
+          example: '500123'
         name:
           type: string
           description: Trigger display name.
+          example: Example Title
         type:
           type: string
           description: Defines the data layer event that causes this trigger.
           enum:
-            - eventTypeUnspecified
-            - pageview
-            - domReady
-            - windowLoaded
-            - customEvent
-            - triggerGroup
-            - init
-            - consentInit
-            - serverPageview
-            - always
-            - firebaseAppException
-            - firebaseAppUpdate
-            - firebaseCampaign
-            - firebaseFirstOpen
-            - firebaseInAppPurchase
-            - firebaseNotificationDismiss
-            - firebaseNotificationForeground
-            - firebaseNotificationOpen
-            - firebaseNotificationReceive
-            - firebaseOsUpdate
-            - firebaseSessionStart
-            - firebaseUserEngagement
-            - formSubmission
-            - click
-            - linkClick
-            - jsError
-            - historyChange
-            - timer
-            - ampClick
-            - ampTimer
-            - ampScroll
-            - ampVisibility
-            - youTubeVideo
-            - scrollDepth
-            - elementVisibility
+          - eventTypeUnspecified
+          - pageview
+          - domReady
+          - windowLoaded
+          - customEvent
+          - triggerGroup
+          - init
+          - consentInit
+          - serverPageview
+          - always
+          - firebaseAppException
+          - firebaseAppUpdate
+          - firebaseCampaign
+          - firebaseFirstOpen
+          - firebaseInAppPurchase
+          - firebaseNotificationDismiss
+          - firebaseNotificationForeground
+          - firebaseNotificationOpen
+          - firebaseNotificationReceive
+          - firebaseOsUpdate
+          - firebaseSessionStart
+          - firebaseUserEngagement
+          - formSubmission
+          - click
+          - linkClick
+          - jsError
+          - historyChange
+          - timer
+          - ampClick
+          - ampTimer
+          - ampScroll
+          - ampVisibility
+          - youTubeVideo
+          - scrollDepth
+          - elementVisibility
+          example: eventTypeUnspecified
         customEventFilter:
           type: array
           description: >-
@@ -1671,18 +4137,21 @@ components:
             Conditions are true.
           items:
             $ref: '#/components/schemas/Condition'
+          example: []
         filter:
           type: array
           description: >-
             The trigger will only fire if and only if all Conditions are true.
           items:
             $ref: '#/components/schemas/Condition'
+          example: []
         autoEventFilter:
           type: array
           description: >-
             Used in the case of auto event tracking for filtering events.
           items:
             $ref: '#/components/schemas/Condition'
+          example: []
         waitForTags:
           $ref: '#/components/schemas/Parameter'
         checkValidation:
@@ -1703,9 +4172,11 @@ components:
             The fingerprint of the GTM Trigger as computed at storage time.
             This value is recomputed whenever the trigger is modified.
           readOnly: true
+          example: example_value
         parentFolderId:
           type: string
           description: Parent folder ID.
+          example: '500123'
         selector:
           $ref: '#/components/schemas/Parameter'
         intervalSeconds:
@@ -1731,18 +4202,21 @@ components:
           format: uri
           description: Auto-generated link to the tag manager UI.
           readOnly: true
+          example: https://www.example.com
         notes:
           type: string
           description: >-
             User notes on how to apply this trigger in the container.
+          example: example_value
         parameter:
           type: array
           description: Additional parameters for the trigger.
           items:
             $ref: '#/components/schemas/Parameter'
+          example: []
       required:
-        - name
-        - type
+      - name
+      - type
     Variable:
       type: object
       description: >-
@@ -1754,50 +4228,61 @@ components:
           type: string
           description: GTM Variable's API relative path.
           readOnly: true
+          example: example_value
         accountId:
           type: string
           description: GTM Account ID.
           readOnly: true
+          example: '500123'
         containerId:
           type: string
           description: GTM Container ID.
           readOnly: true
+          example: '500123'
         workspaceId:
           type: string
           description: GTM Workspace ID.
           readOnly: true
+          example: '500123'
         variableId:
           type: string
           description: The Variable ID uniquely identifies the GTM Variable.
           readOnly: true
+          example: '500123'
         name:
           type: string
           description: Variable display name.
+          example: Example Title
         type:
           type: string
           description: >-
             GTM Variable Type. Common types include v (Data Layer Variable),
             j (1st Party Cookie), k (Custom JavaScript), jsm (Custom
             JavaScript Variable), u (URL), c (Constant), and e (DOM Element).
+          example: example_value
         notes:
           type: string
           description: >-
             User notes on how to apply this variable in the container.
+          example: example_value
         scheduleStartMs:
           type: string
           format: int64
           description: >-
             The start timestamp in milliseconds to schedule a variable.
+          example: example_value
         scheduleEndMs:
           type: string
           format: int64
           description: >-
             The end timestamp in milliseconds to schedule a variable.
+          example: example_value
         parameter:
           type: array
           description: The variable's parameters, which configure its behavior.
           items:
             $ref: '#/components/schemas/Parameter'
+          example: []
         enablingTriggerId:
           type: array
           description: >-
@@ -1807,6 +4292,7 @@ components:
             false.
           items:
             type: string
+          example: '500123'
         disablingTriggerId:
           type: array
           description: >-
@@ -1814,25 +4300,29 @@ components:
             conditional variables.
           items:
             type: string
+          example: '500123'
         fingerprint:
           type: string
           description: >-
             The fingerprint of the GTM Variable as computed at storage time.
             This value is recomputed whenever the variable is modified.
           readOnly: true
+          example: example_value
         parentFolderId:
           type: string
           description: Parent folder ID.
+          example: '500123'
         tagManagerUrl:
           type: string
           format: uri
           description: Auto-generated link to the tag manager UI.
           readOnly: true
+          example: https://www.example.com
         formatValue:
           $ref: '#/components/schemas/FormatValue'
       required:
-        - name
-        - type
+      - name
+      - type
     FormatValue:
       type: object
       description: Option to convert a variable value to another value.
@@ -1843,9 +4333,10 @@ components:
             The option to convert a string-type variable value to either
             lowercase or uppercase.
           enum:
-            - none
-            - lowercase
-            - uppercase
+          - none
+          - lowercase
+          - uppercase
+          example: none
         convertNullToValue:
           $ref: '#/components/schemas/Parameter'
         convertUndefinedToValue:
@@ -1865,24 +4356,30 @@ components:
           type: string
           description: GTM ContainerVersion's API relative path.
           readOnly: true
+          example: example_value
         accountId:
           type: string
           description: GTM Account ID.
           readOnly: true
+          example: '500123'
         containerId:
           type: string
           description: GTM Container ID.
           readOnly: true
+          example: '500123'
         containerVersionId:
           type: string
           description: The Container Version ID uniquely identifies the GTM Container Version.
           readOnly: true
+          example: '500123'
         name:
           type: string
           description: Container version display name.
+          example: Example Title
         description:
           type: string
           description: Container version description.
+          example: A sample description.
         container:
           $ref: '#/components/schemas/Container'
         tag:
@@ -1890,31 +4387,37 @@ components:
           description: The tags in the container that this version was taken from.
           items:
             $ref: '#/components/schemas/Tag'
+          example: []
         trigger:
           type: array
           description: The triggers in the container that this version was taken from.
           items:
             $ref: '#/components/schemas/Trigger'
+          example: []
         variable:
           type: array
           description: The variables in the container that this version was taken from.
           items:
             $ref: '#/components/schemas/Variable'
+          example: []
         fingerprint:
           type: string
           description: >-
             The fingerprint of the GTM Container Version as computed at storage
             time.
           readOnly: true
+          example: example_value
         tagManagerUrl:
           type: string
           format: uri
           description: Auto-generated link to the tag manager UI.
           readOnly: true
+          example: https://www.example.com
         deleted:
           type: boolean
           description: A value of true indicates this version has been deleted.
           readOnly: true
+          example: true
     UserPermission:
       type: object
       description: >-
@@ -1925,14 +4428,17 @@ components:
           type: string
           description: GTM UserPermission's API relative path.
           readOnly: true
+          example: example_value
         accountId:
           type: string
           description: The Account ID uniquely identifies the GTM Account.
           readOnly: true
+          example: '500123'
         emailAddress:
           type: string
           format: email
           description: User's email address.
+          example: user@example.com
         accountAccess:
           $ref: '#/components/schemas/AccountAccess'
         containerAccess:
@@ -1940,6 +4446,7 @@ components:
           description: GTM Container access permissions.
           items:
             $ref: '#/components/schemas/ContainerAccess'
+          example: []
     AccountAccess:
       type: object
       description: Defines the Google Tag Manager Account access permissions.
@@ -1950,10 +4457,11 @@ components:
             Whether the user has no access, user access, or admin access to the
             account.
           enum:
-            - accountPermissionUnspecified
-            - noAccess
-            - user
-            - admin
+          - accountPermissionUnspecified
+          - noAccess
+          - user
+          - admin
+          example: accountPermissionUnspecified
     ContainerAccess:
       type: object
       description: Defines the Google Tag Manager Container access permissions.
@@ -1961,18 +4469,20 @@ components:
         containerId:
           type: string
           description: GTM Container ID.
+          example: '500123'
         permission:
           type: string
           description: >-
             List of Container permissions. Valid values include noAccess, read,
             edit, approve, and publish.
           enum:
-            - containerPermissionUnspecified
-            - noAccess
-            - read
-            - edit
-            - approve
-            - publish
+          - containerPermissionUnspecified
+          - noAccess
+          - read
+          - edit
+          - approve
+          - publish
+          example: containerPermissionUnspecified
     ListAccountsResponse:
       type: object
       description: List Accounts Response.
@@ -1982,9 +4492,11 @@ components:
           description: List of GTM Accounts that a user has access to.
           items:
             $ref: '#/components/schemas/Account'
+          example: []
         nextPageToken:
           type: string
           description: Continuation token for fetching the next page of results.
+          example: example_value
     ListContainersResponse:
       type: object
       description: List Containers Response.
@@ -1994,9 +4506,11 @@ components:
           description: All Containers of a GTM Account.
           items:
             $ref: '#/components/schemas/Container'
+          example: []
         nextPageToken:
           type: string
           description: Continuation token for fetching the next page of results.
+          example: example_value
     ListWorkspacesResponse:
       type: object
       description: List Workspaces Response.
@@ -2006,9 +4520,11 @@ components:
           description: All Workspaces of a GTM Container.
           items:
             $ref: '#/components/schemas/Workspace'
+          example: []
         nextPageToken:
           type: string
           description: Continuation token for fetching the next page of results.
+          example: example_value
     ListTagsResponse:
       type: object
       description: List Tags Response.
@@ -2018,9 +4534,11 @@ components:
           description: All GTM Tags of a GTM Container Workspace.
           items:
             $ref: '#/components/schemas/Tag'
+          example: []
         nextPageToken:
           type: string
           description: Continuation token for fetching the next page of results.
+          example: example_value
     ListTriggersResponse:
       type: object
       description: List Triggers Response.
@@ -2030,9 +4548,11 @@ components:
           description: All GTM Triggers of a GTM Container Workspace.
           items:
             $ref: '#/components/schemas/Trigger'
+          example: []
         nextPageToken:
           type: string
           description: Continuation token for fetching the next page of results.
+          example: example_value
     ListVariablesResponse:
       type: object
       description: List Variables Response.
@@ -2042,9 +4562,11 @@ components:
           description: All GTM Variables of a GTM Container Workspace.
           items:
             $ref: '#/components/schemas/Variable'
+          example: []
         nextPageToken:
           type: string
           description: Continuation token for fetching the next page of results.
+          example: example_value
     ListContainerVersionsResponse:
       type: object
       description: List Container Versions Response.
@@ -2054,9 +4576,11 @@ components:
           description: All container version headers of a GTM Container.
           items:
             $ref: '#/components/schemas/ContainerVersionHeader'
+          example: []
         nextPageToken:
           type: string
           description: Continuation token for fetching the next page of results.
+          example: example_value
     ContainerVersionHeader:
       type: object
       description: >-
@@ -2067,30 +4591,39 @@ components:
           type: string
           description: GTM Container Version's API relative path.
           readOnly: true
+          example: example_value
         accountId:
           type: string
           readOnly: true
+          example: '500123'
         containerId:
           type: string
           readOnly: true
+          example: '500123'
         containerVersionId:
           type: string
           readOnly: true
+          example: '500123'
         name:
           type: string
           description: Container version display name.
+          example: Example Title
         numTags:
           type: string
           description: Number of tags in the container version.
+          example: example_value
         numTriggers:
           type: string
           description: Number of triggers in the container version.
+          example: example_value
         numVariables:
           type: string
           description: Number of variables in the container version.
+          example: example_value
         deleted:
           type: boolean
           readOnly: true
+          example: true
     ListUserPermissionsResponse:
       type: object
       description: List user permissions response.
@@ -2100,9 +4633,11 @@ components:
           description: All GTM UserPermissions of a GTM Account.
           items:
             $ref: '#/components/schemas/UserPermission'
+          example: []
         nextPageToken:
           type: string
           description: Continuation token for fetching the next page of results.
+          example: example_value
     CreateContainerVersionRequestVersionOptions:
       type: object
       description: Options for new container versions.
@@ -2110,9 +4645,11 @@ components:
         name:
           type: string
           description: The name of the container version to be created.
+          example: Example Title
         notes:
           type: string
           description: The notes of the container version to be created.
+          example: example_value
     CreateContainerVersionResponse:
       type: object
       description: Create container version response.
@@ -2124,11 +4661,13 @@ components:
           description: >-
             Auto-generated workspace path for the new default workspace, if one
             was created.
+          example: example_value
         compilerError:
           type: boolean
           description: >-
             Compiler errors or not. True indicates that there were compiler
             errors.
+          example: true
         syncStatus:
           $ref: '#/components/schemas/SyncStatus'
     PublishContainerVersionResponse:
@@ -2142,6 +4681,7 @@ components:
           description: >-
             Compiler errors or not. True indicates that there were compiler
             errors.
+          example: true
     GetWorkspaceStatusResponse:
       type: object
       description: >-
@@ -2153,11 +4693,13 @@ components:
           description: Entities that have been changed in the workspace.
           items:
             $ref: '#/components/schemas/Entity'
+          example: []
         mergeConflict:
           type: array
           description: The merge conflict after sync.
           items:
             $ref: '#/components/schemas/MergeConflict'
+          example: []
     SyncWorkspaceResponse:
       type: object
       description: Sync workspace response.
@@ -2167,6 +4709,7 @@ components:
           description: The merge conflict after sync.
           items:
             $ref: '#/components/schemas/MergeConflict'
+          example: []
         syncStatus:
           $ref: '#/components/schemas/SyncStatus'
     SyncStatus:
@@ -2177,10 +4720,12 @@ components:
           type: boolean
           description: >-
             Synchornization operation detected a merge conflict.
+          example: true
         syncError:
           type: boolean
           description: >-
             An error occurred during the sync operation.
+          example: true
     Entity:
       type: object
       description: >-
@@ -2197,11 +4742,12 @@ components:
           type: string
           description: The status of the entity change.
           enum:
-            - changeStatusUnspecified
-            - none
-            - added
-            - deleted
-            - updated
+          - changeStatusUnspecified
+          - none
+          - added
+          - deleted
+          - updated
+          example: changeStatusUnspecified
     MergeConflict:
       type: object
       description: Represents a merge conflict between workspace and version.

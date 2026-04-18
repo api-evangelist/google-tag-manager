@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ListTriggersResponse",
+  "type": "object",
+  "description": "List Triggers Response.",
+  "properties": {
+    "trigger": {
+      "type": "array",
+      "description": "All GTM Triggers of a GTM Container Workspace."
+    },
+    "nextPageToken": {
+      "type": "string",
+      "description": "Continuation token for fetching the next page of results."
+    }
+  }
+}

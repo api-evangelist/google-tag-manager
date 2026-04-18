@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "RevertVariableResponse",
+  "type": "object",
+  "properties": {}
+}

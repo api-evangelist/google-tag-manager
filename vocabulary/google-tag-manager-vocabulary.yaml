@@ -1,0 +1,14 @@
+name: google-tag-manager API Vocabulary
+provider: google-tag-manager
+created: '2026-04-18'
+modified: '2026-04-18'
+operations: 44
+schemas: 38
+tags:
+- Accounts
+- Containers
+- Triggers
+- User Permissions
+- Variables
+- Versions
+- Workspaces

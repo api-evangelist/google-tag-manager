@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ListContainersResponse",
+  "type": "object",
+  "description": "List Containers Response.",
+  "properties": {
+    "container": {
+      "type": "array",
+      "description": "All Containers of a GTM Account."
+    },
+    "nextPageToken": {
+      "type": "string",
+      "description": "Continuation token for fetching the next page of results."
+    }
+  }
+}

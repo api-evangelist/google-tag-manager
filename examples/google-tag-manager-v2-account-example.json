@@ -1,0 +1,8 @@
+{
+  "path": "example_value",
+  "accountId": "500123",
+  "name": "Example Title",
+  "shareData": true,
+  "fingerprint": "example_value",
+  "tagManagerUrl": "https://www.example.com"
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Trigger",
+  "type": "object",
+  "properties": {
+    "path": {
+      "type": "string"
+    },
+    "accountId": {
+      "type": "string"
+    },
+    "containerId": {
+      "type": "string"
+    },
+    "workspaceId": {
+      "type": "string"
+    },
+    "triggerId": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "customEventFilter": {
+      "type": "array"
+    },
+    "filter": {
+      "type": "array"
+    },
+    "autoEventFilter": {
+      "type": "array"
+    },
+    "fingerprint": {
+      "type": "string"
+    },
+    "parentFolderId": {
+      "type": "string"
+    },
+    "tagManagerUrl": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "parameter": {
+      "type": "array"
+    }
+  }
+}

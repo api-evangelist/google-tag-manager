@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ContainerVersionHeader",
+  "type": "object",
+  "description": "Represents a summary of a container version, without the full tag, trigger, and variable details.",
+  "properties": {
+    "path": {
+      "type": "string",
+      "description": "GTM Container Version's API relative path."
+    },
+    "accountId": {
+      "type": "string"
+    },
+    "containerId": {
+      "type": "string"
+    },
+    "containerVersionId": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "description": "Container version display name."
+    },
+    "numTags": {
+      "type": "string",
+      "description": "Number of tags in the container version."
+    },
+    "numTriggers": {
+      "type": "string",
+      "description": "Number of triggers in the container version."
+    },
+    "numVariables": {
+      "type": "string",
+      "description": "Number of variables in the container version."
+    },
+    "deleted": {
+      "type": "boolean"
+    }
+  }
+}

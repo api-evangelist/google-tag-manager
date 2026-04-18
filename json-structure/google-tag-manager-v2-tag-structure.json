@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Tag",
+  "type": "object",
+  "properties": {
+    "path": {
+      "type": "string"
+    },
+    "accountId": {
+      "type": "string"
+    },
+    "containerId": {
+      "type": "string"
+    },
+    "workspaceId": {
+      "type": "string"
+    },
+    "tagId": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "liveOnly": {
+      "type": "boolean"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "scheduleStartMs": {
+      "type": "string"
+    },
+    "scheduleEndMs": {
+      "type": "string"
+    },
+    "parameter": {
+      "type": "array"
+    },
+    "fingerprint": {
+      "type": "string"
+    },
+    "firingTriggerId": {
+      "type": "array"
+    },
+    "blockingTriggerId": {
+      "type": "array"
+    },
+    "setupTag": {
+      "type": "array"
+    },
+    "teardownTag": {
+      "type": "array"
+    },
+    "parentFolderId": {
+      "type": "string"
+    },
+    "tagFiringOption": {
+      "type": "string"
+    },
+    "tagManagerUrl": {
+      "type": "string"
+    },
+    "paused": {
+      "type": "boolean"
+    },
+    "monitoringMetadataTagNameKey": {
+      "type": "string"
+    }
+  }
+}

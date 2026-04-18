@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AccountFeatures",
+  "type": "object",
+  "description": "Read-only account feature set.",
+  "properties": {
+    "supportUserPermissions": {
+      "type": "boolean",
+      "description": "Whether this account has user permissions management enabled."
+    },
+    "supportMultipleContainers": {
+      "type": "boolean",
+      "description": "Whether this account supports multiple containers."
+    }
+  }
+}

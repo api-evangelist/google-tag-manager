@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Parameter",
+  "type": "object",
+  "description": "Represents a Google Tag Manager Parameter. Parameters are key-value pairs that configure tags, triggers, and variables.",
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "The parameter type."
+    },
+    "key": {
+      "type": "string",
+      "description": "The named key that uniquely identifies a parameter. Required for top-level parameters, as well as map values. Ignored for list values."
+    },
+    "value": {
+      "type": "string",
+      "description": "A parameter's value (may contain variable references) as appropriate to the specified type."
+    },
+    "list": {
+      "type": "array",
+      "description": "This list parameter's parameters (keys will be ignored). Used when type is list."
+    },
+    "map": {
+      "type": "array",
+      "description": "This map parameter's parameters (must have keys; keys must be unique). Used when type is map."
+    },
+    "isWeakReference": {
+      "type": "boolean",
+      "description": "Whether or not the parameter is a weak reference. Used to determine which parameters should be included in exported containers."
+    }
+  }
+}

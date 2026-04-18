@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RevertTagResponse",
+  "type": "object",
+  "description": "The result of reverting a tag in a workspace.",
+  "properties": {}
+}

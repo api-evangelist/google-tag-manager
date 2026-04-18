@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "GetWorkspaceStatusResponse",
+  "type": "object",
+  "properties": {
+    "workspaceChange": {
+      "type": "array"
+    },
+    "mergeConflict": {
+      "type": "array"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Workspace",
+  "type": "object",
+  "properties": {
+    "path": {
+      "type": "string"
+    },
+    "accountId": {
+      "type": "string"
+    },
+    "containerId": {
+      "type": "string"
+    },
+    "workspaceId": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "fingerprint": {
+      "type": "string"
+    },
+    "tagManagerUrl": {
+      "type": "string"
+    }
+  }
+}
