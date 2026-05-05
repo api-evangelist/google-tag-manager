@@ -1,0 +1,13 @@
+{
+  "repo": "google-tag-manager",
+  "feeds": [
+    {
+      "source": "https://blog.google/products/marketingplatform/",
+      "feed_url": "https://blog.google/products/marketingplatform/rss/",
+      "saved": 10,
+      "title": "Google Marketing Platform"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:29:05Z"
+}
