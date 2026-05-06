@@ -1,362 +1,725 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
-  label: "Google Tag Manager Tag Deployment Management"
-  description: "Workflow for managing tag deployment lifecycle including accounts, containers, workspaces, tags, triggers, variables, and version publishing. Used by marketing technologists and web analytics engineers."
+  label: Google Tag Manager Tag Deployment Management
+  description: Workflow for managing tag deployment lifecycle including accounts, containers, workspaces, tags, triggers,
+    variables, and version publishing. Used by marketing technologists and web analytics engineers.
   tags:
-    - Google Tag Manager
-    - Tag Management
-    - Marketing
-    - Analytics
-  created: "2026-04-18"
-  modified: "2026-04-18"
-
+  - Google Tag Manager
+  - Tag Management
+  - Marketing
+  - Analytics
+  created: '2026-04-18'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      GOOGLE_OAUTH_TOKEN: GOOGLE_OAUTH_TOKEN
-
+- namespace: env
+  keys:
+    GOOGLE_OAUTH_TOKEN: GOOGLE_OAUTH_TOKEN
 capability:
   consumes:
-    - import: tag-manager
-      location: ./shared/tag-manager.yaml
-
+  - type: http
+    namespace: tag-manager
+    baseUri: https://tagmanager.googleapis.com
+    description: Google Tag Manager API v2 for container and tag configuration management.
+    authentication:
+      type: bearer
+      token: '{{GOOGLE_OAUTH_TOKEN}}'
+    resources:
+    - name: accounts
+      path: /tagmanager/v2/accounts
+      description: Account management operations.
+      operations:
+      - name: list-accounts
+        method: GET
+        description: Lists all GTM accounts.
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-account
+        method: GET
+        description: Gets a GTM account.
+        inputParameters:
+        - name: path
+          in: path
+          type: string
+          required: true
+          description: The account path.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update-account
+        method: PUT
+        description: Updates a GTM account.
+        inputParameters:
+        - name: path
+          in: path
+          type: string
+          required: true
+          description: The account path.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            name: '{{tools.name}}'
+            shareData: '{{tools.shareData}}'
+    - name: containers
+      path: /tagmanager/v2/{parent}/containers
+      description: Container management operations.
+      operations:
+      - name: list-containers
+        method: GET
+        description: Lists containers in an account.
+        inputParameters:
+        - name: parent
+          in: path
+          type: string
+          required: true
+          description: The account path.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-container
+        method: POST
+        description: Creates a container.
+        inputParameters:
+        - name: parent
+          in: path
+          type: string
+          required: true
+          description: The account path.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            name: '{{tools.name}}'
+            usageContext: '{{tools.usageContext}}'
+      - name: get-container
+        method: GET
+        description: Gets a container.
+        inputParameters:
+        - name: path
+          in: path
+          type: string
+          required: true
+          description: The container path.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete-container
+        method: DELETE
+        description: Deletes a container.
+        inputParameters:
+        - name: path
+          in: path
+          type: string
+          required: true
+          description: The container path.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: workspaces
+      path: /tagmanager/v2/{parent}/workspaces
+      description: Workspace management operations.
+      operations:
+      - name: list-workspaces
+        method: GET
+        description: Lists workspaces in a container.
+        inputParameters:
+        - name: parent
+          in: path
+          type: string
+          required: true
+          description: The container path.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-workspace
+        method: POST
+        description: Creates a workspace.
+        inputParameters:
+        - name: parent
+          in: path
+          type: string
+          required: true
+          description: The container path.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            name: '{{tools.name}}'
+            description: '{{tools.description}}'
+      - name: delete-workspace
+        method: DELETE
+        description: Deletes a workspace.
+        inputParameters:
+        - name: path
+          in: path
+          type: string
+          required: true
+          description: The workspace path.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: tags
+      path: /tagmanager/v2/{parent}/tags
+      description: Tag management operations.
+      operations:
+      - name: list-tags
+        method: GET
+        description: Lists tags in a workspace.
+        inputParameters:
+        - name: parent
+          in: path
+          type: string
+          required: true
+          description: The workspace path.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-tag
+        method: POST
+        description: Creates a tag.
+        inputParameters:
+        - name: parent
+          in: path
+          type: string
+          required: true
+          description: The workspace path.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            name: '{{tools.name}}'
+            type: '{{tools.type}}'
+      - name: get-tag
+        method: GET
+        description: Gets a tag.
+        inputParameters:
+        - name: path
+          in: path
+          type: string
+          required: true
+          description: The tag path.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete-tag
+        method: DELETE
+        description: Deletes a tag.
+        inputParameters:
+        - name: path
+          in: path
+          type: string
+          required: true
+          description: The tag path.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: triggers
+      path: /tagmanager/v2/{parent}/triggers
+      description: Trigger management operations.
+      operations:
+      - name: list-triggers
+        method: GET
+        description: Lists triggers in a workspace.
+        inputParameters:
+        - name: parent
+          in: path
+          type: string
+          required: true
+          description: The workspace path.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-trigger
+        method: POST
+        description: Creates a trigger.
+        inputParameters:
+        - name: parent
+          in: path
+          type: string
+          required: true
+          description: The workspace path.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            name: '{{tools.name}}'
+            type: '{{tools.type}}'
+      - name: delete-trigger
+        method: DELETE
+        description: Deletes a trigger.
+        inputParameters:
+        - name: path
+          in: path
+          type: string
+          required: true
+          description: The trigger path.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: variables
+      path: /tagmanager/v2/{parent}/variables
+      description: Variable management operations.
+      operations:
+      - name: list-variables
+        method: GET
+        description: Lists variables in a workspace.
+        inputParameters:
+        - name: parent
+          in: path
+          type: string
+          required: true
+          description: The workspace path.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-variable
+        method: POST
+        description: Creates a variable.
+        inputParameters:
+        - name: parent
+          in: path
+          type: string
+          required: true
+          description: The workspace path.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            name: '{{tools.name}}'
+            type: '{{tools.type}}'
+      - name: delete-variable
+        method: DELETE
+        description: Deletes a variable.
+        inputParameters:
+        - name: path
+          in: path
+          type: string
+          required: true
+          description: The variable path.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: versions
+      path: /tagmanager/v2/{parent}/version_headers
+      description: Version management operations.
+      operations:
+      - name: list-versions
+        method: GET
+        description: Lists container version headers.
+        inputParameters:
+        - name: parent
+          in: path
+          type: string
+          required: true
+          description: The container path.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: publish-version
+        method: POST
+        description: Publishes a container version.
+        inputParameters:
+        - name: path
+          in: path
+          type: string
+          required: true
+          description: The container version path.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
   exposes:
-    - type: rest
-      port: 8080
-      namespace: gtm-deploy-api
-      description: "Unified REST API for GTM tag deployment management."
-      resources:
-        - path: /v1/accounts
-          name: accounts
-          description: "Account management"
-          operations:
-            - method: GET
-              name: list-accounts
-              description: "List all GTM accounts"
-              call: "tag-manager.list-accounts"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/containers
-          name: containers
-          description: "Container management"
-          operations:
-            - method: GET
-              name: list-containers
-              description: "List containers in an account"
-              call: "tag-manager.list-containers"
-              with:
-                parent: "rest.parent"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: create-container
-              description: "Create a container"
-              call: "tag-manager.create-container"
-              with:
-                parent: "rest.parent"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/tags
-          name: tags
-          description: "Tag management"
-          operations:
-            - method: GET
-              name: list-tags
-              description: "List tags in a workspace"
-              call: "tag-manager.list-tags"
-              with:
-                parent: "rest.parent"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: create-tag
-              description: "Create a tag"
-              call: "tag-manager.create-tag"
-              with:
-                parent: "rest.parent"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/triggers
-          name: triggers
-          description: "Trigger management"
-          operations:
-            - method: GET
-              name: list-triggers
-              description: "List triggers in a workspace"
-              call: "tag-manager.list-triggers"
-              with:
-                parent: "rest.parent"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/variables
-          name: variables
-          description: "Variable management"
-          operations:
-            - method: GET
-              name: list-variables
-              description: "List variables in a workspace"
-              call: "tag-manager.list-variables"
-              with:
-                parent: "rest.parent"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9090
-      namespace: gtm-deploy-mcp
-      transport: http
-      description: "MCP server for AI-assisted GTM tag deployment management."
-      tools:
-        - name: list-accounts
-          description: "List all Google Tag Manager accounts"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "tag-manager.list-accounts"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-account
-          description: "Get account details"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "tag-manager.get-account"
-          with:
-            path: "tools.path"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: update-account
-          description: "Update account settings"
-          hints:
-            readOnly: false
-            idempotent: true
-          call: "tag-manager.update-account"
-          with:
-            path: "tools.path"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-containers
-          description: "List containers in an account"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "tag-manager.list-containers"
-          with:
-            parent: "tools.parent"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: create-container
-          description: "Create a new container"
-          hints:
-            readOnly: false
-            idempotent: false
-          call: "tag-manager.create-container"
-          with:
-            parent: "tools.parent"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-container
-          description: "Get container details"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "tag-manager.get-container"
-          with:
-            path: "tools.path"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: delete-container
-          description: "Delete a container"
-          hints:
-            readOnly: false
-            destructive: true
-            idempotent: true
-          call: "tag-manager.delete-container"
-          with:
-            path: "tools.path"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-workspaces
-          description: "List workspaces in a container"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "tag-manager.list-workspaces"
-          with:
-            parent: "tools.parent"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: create-workspace
-          description: "Create a new workspace"
-          hints:
-            readOnly: false
-            idempotent: false
-          call: "tag-manager.create-workspace"
-          with:
-            parent: "tools.parent"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: delete-workspace
-          description: "Delete a workspace"
-          hints:
-            readOnly: false
-            destructive: true
-            idempotent: true
-          call: "tag-manager.delete-workspace"
-          with:
-            path: "tools.path"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-tags
-          description: "List tags in a workspace"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "tag-manager.list-tags"
-          with:
-            parent: "tools.parent"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: create-tag
-          description: "Create a new tag"
-          hints:
-            readOnly: false
-            idempotent: false
-          call: "tag-manager.create-tag"
-          with:
-            parent: "tools.parent"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-tag
-          description: "Get tag details"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "tag-manager.get-tag"
-          with:
-            path: "tools.path"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: delete-tag
-          description: "Delete a tag"
-          hints:
-            readOnly: false
-            destructive: true
-            idempotent: true
-          call: "tag-manager.delete-tag"
-          with:
-            path: "tools.path"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-triggers
-          description: "List triggers in a workspace"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "tag-manager.list-triggers"
-          with:
-            parent: "tools.parent"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: create-trigger
-          description: "Create a new trigger"
-          hints:
-            readOnly: false
-            idempotent: false
-          call: "tag-manager.create-trigger"
-          with:
-            parent: "tools.parent"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: delete-trigger
-          description: "Delete a trigger"
-          hints:
-            readOnly: false
-            destructive: true
-            idempotent: true
-          call: "tag-manager.delete-trigger"
-          with:
-            path: "tools.path"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-variables
-          description: "List variables in a workspace"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "tag-manager.list-variables"
-          with:
-            parent: "tools.parent"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: create-variable
-          description: "Create a new variable"
-          hints:
-            readOnly: false
-            idempotent: false
-          call: "tag-manager.create-variable"
-          with:
-            parent: "tools.parent"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: delete-variable
-          description: "Delete a variable"
-          hints:
-            readOnly: false
-            destructive: true
-            idempotent: true
-          call: "tag-manager.delete-variable"
-          with:
-            path: "tools.path"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-versions
-          description: "List container version headers"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "tag-manager.list-versions"
-          with:
-            parent: "tools.parent"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: publish-version
-          description: "Publish a container version"
-          hints:
-            readOnly: false
-            idempotent: false
-          call: "tag-manager.publish-version"
-          with:
-            path: "tools.path"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8080
+    namespace: gtm-deploy-api
+    description: Unified REST API for GTM tag deployment management.
+    resources:
+    - path: /v1/accounts
+      name: accounts
+      description: Account management
+      operations:
+      - method: GET
+        name: list-accounts
+        description: List all GTM accounts
+        call: tag-manager.list-accounts
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/containers
+      name: containers
+      description: Container management
+      operations:
+      - method: GET
+        name: list-containers
+        description: List containers in an account
+        call: tag-manager.list-containers
+        with:
+          parent: rest.parent
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-container
+        description: Create a container
+        call: tag-manager.create-container
+        with:
+          parent: rest.parent
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tags
+      name: tags
+      description: Tag management
+      operations:
+      - method: GET
+        name: list-tags
+        description: List tags in a workspace
+        call: tag-manager.list-tags
+        with:
+          parent: rest.parent
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-tag
+        description: Create a tag
+        call: tag-manager.create-tag
+        with:
+          parent: rest.parent
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/triggers
+      name: triggers
+      description: Trigger management
+      operations:
+      - method: GET
+        name: list-triggers
+        description: List triggers in a workspace
+        call: tag-manager.list-triggers
+        with:
+          parent: rest.parent
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/variables
+      name: variables
+      description: Variable management
+      operations:
+      - method: GET
+        name: list-variables
+        description: List variables in a workspace
+        call: tag-manager.list-variables
+        with:
+          parent: rest.parent
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: gtm-deploy-mcp
+    transport: http
+    description: MCP server for AI-assisted GTM tag deployment management.
+    tools:
+    - name: list-accounts
+      description: List all Google Tag Manager accounts
+      hints:
+        readOnly: true
+        idempotent: true
+      call: tag-manager.list-accounts
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-account
+      description: Get account details
+      hints:
+        readOnly: true
+        idempotent: true
+      call: tag-manager.get-account
+      with:
+        path: tools.path
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-account
+      description: Update account settings
+      hints:
+        readOnly: false
+        idempotent: true
+      call: tag-manager.update-account
+      with:
+        path: tools.path
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-containers
+      description: List containers in an account
+      hints:
+        readOnly: true
+        idempotent: true
+      call: tag-manager.list-containers
+      with:
+        parent: tools.parent
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-container
+      description: Create a new container
+      hints:
+        readOnly: false
+        idempotent: false
+      call: tag-manager.create-container
+      with:
+        parent: tools.parent
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-container
+      description: Get container details
+      hints:
+        readOnly: true
+        idempotent: true
+      call: tag-manager.get-container
+      with:
+        path: tools.path
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-container
+      description: Delete a container
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: tag-manager.delete-container
+      with:
+        path: tools.path
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-workspaces
+      description: List workspaces in a container
+      hints:
+        readOnly: true
+        idempotent: true
+      call: tag-manager.list-workspaces
+      with:
+        parent: tools.parent
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-workspace
+      description: Create a new workspace
+      hints:
+        readOnly: false
+        idempotent: false
+      call: tag-manager.create-workspace
+      with:
+        parent: tools.parent
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-workspace
+      description: Delete a workspace
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: tag-manager.delete-workspace
+      with:
+        path: tools.path
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-tags
+      description: List tags in a workspace
+      hints:
+        readOnly: true
+        idempotent: true
+      call: tag-manager.list-tags
+      with:
+        parent: tools.parent
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-tag
+      description: Create a new tag
+      hints:
+        readOnly: false
+        idempotent: false
+      call: tag-manager.create-tag
+      with:
+        parent: tools.parent
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-tag
+      description: Get tag details
+      hints:
+        readOnly: true
+        idempotent: true
+      call: tag-manager.get-tag
+      with:
+        path: tools.path
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-tag
+      description: Delete a tag
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: tag-manager.delete-tag
+      with:
+        path: tools.path
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-triggers
+      description: List triggers in a workspace
+      hints:
+        readOnly: true
+        idempotent: true
+      call: tag-manager.list-triggers
+      with:
+        parent: tools.parent
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-trigger
+      description: Create a new trigger
+      hints:
+        readOnly: false
+        idempotent: false
+      call: tag-manager.create-trigger
+      with:
+        parent: tools.parent
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-trigger
+      description: Delete a trigger
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: tag-manager.delete-trigger
+      with:
+        path: tools.path
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-variables
+      description: List variables in a workspace
+      hints:
+        readOnly: true
+        idempotent: true
+      call: tag-manager.list-variables
+      with:
+        parent: tools.parent
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-variable
+      description: Create a new variable
+      hints:
+        readOnly: false
+        idempotent: false
+      call: tag-manager.create-variable
+      with:
+        parent: tools.parent
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-variable
+      description: Delete a variable
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: tag-manager.delete-variable
+      with:
+        path: tools.path
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-versions
+      description: List container version headers
+      hints:
+        readOnly: true
+        idempotent: true
+      call: tag-manager.list-versions
+      with:
+        parent: tools.parent
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: publish-version
+      description: Publish a container version
+      hints:
+        readOnly: false
+        idempotent: false
+      call: tag-manager.publish-version
+      with:
+        path: tools.path
+      outputParameters:
+      - type: object
+        mapping: $.
