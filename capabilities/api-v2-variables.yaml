@@ -1,0 +1,281 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Google Tag Manager API — Variables
+  description: 'Google Tag Manager API — Variables. 6 operations. Lead operation: Google Tag Manager List Variables in a Workspace.
+    Self-contained Naftiko capability covering one Google Tag Manager business surface.'
+  tags:
+  - Google Tag Manager
+  - Variables
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GOOGLE_TAG_MANAGER_API_KEY: GOOGLE_TAG_MANAGER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: api-v2-variables
+    baseUri: https://tagmanager.googleapis.com
+    description: Google Tag Manager API — Variables business capability. Self-contained, no shared references.
+    resources:
+    - name: tagmanager-v2-parent-variables
+      path: /tagmanager/v2/{parent}/variables
+      operations:
+      - name: listvariables
+        method: GET
+        description: Google Tag Manager List Variables in a Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: pageToken
+          in: query
+          type: string
+          description: Continuation token for fetching the next page of results.
+      - name: createvariable
+        method: POST
+        description: Google Tag Manager Create a Variable
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: tagmanager-v2-variablePath
+      path: /tagmanager/v2/{variablePath}
+      operations:
+      - name: getvariable
+        method: GET
+        description: Google Tag Manager Get a Variable
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: variablePath
+          in: path
+          type: string
+          description: GTM Variable's API relative path, e.g. accounts/{accountId}/containers/{containerId}/workspaces/{workspaceId}/variables/{variableId}.
+          required: true
+      - name: updatevariable
+        method: PUT
+        description: Google Tag Manager Update a Variable
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: variablePath
+          in: path
+          type: string
+          description: GTM Variable's API relative path.
+          required: true
+        - name: fingerprint
+          in: query
+          type: string
+          description: When provided, this fingerprint must match the fingerprint of the variable in storage.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletevariable
+        method: DELETE
+        description: Google Tag Manager Delete a Variable
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: variablePath
+          in: path
+          type: string
+          description: GTM Variable's API relative path.
+          required: true
+    - name: tagmanager-v2-variablePath}:revert
+      path: /tagmanager/v2/{variablePath}:revert
+      operations:
+      - name: revertvariable
+        method: POST
+        description: Google Tag Manager Revert Changes to a Variable in a Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: variablePath
+          in: path
+          type: string
+          description: GTM Variable's API relative path.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.GOOGLE_TAG_MANAGER_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: api-v2-variables-rest
+    port: 8080
+    description: REST adapter for Google Tag Manager API — Variables. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/tagmanager/v2/{parent}/variables
+      name: tagmanager-v2-parent-variables
+      description: REST surface for tagmanager-v2-parent-variables.
+      operations:
+      - method: GET
+        name: listvariables
+        description: Google Tag Manager List Variables in a Workspace
+        call: api-v2-variables.listvariables
+        with:
+          pageToken: rest.pageToken
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createvariable
+        description: Google Tag Manager Create a Variable
+        call: api-v2-variables.createvariable
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tagmanager/v2/{variablepath}
+      name: tagmanager-v2-variablepath
+      description: REST surface for tagmanager-v2-variablePath.
+      operations:
+      - method: GET
+        name: getvariable
+        description: Google Tag Manager Get a Variable
+        call: api-v2-variables.getvariable
+        with:
+          variablePath: rest.variablePath
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatevariable
+        description: Google Tag Manager Update a Variable
+        call: api-v2-variables.updatevariable
+        with:
+          variablePath: rest.variablePath
+          fingerprint: rest.fingerprint
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletevariable
+        description: Google Tag Manager Delete a Variable
+        call: api-v2-variables.deletevariable
+        with:
+          variablePath: rest.variablePath
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tagmanager/v2/variablepath-revert
+      name: tagmanager-v2-variablepath-revert
+      description: REST surface for tagmanager-v2-variablePath}:revert.
+      operations:
+      - method: POST
+        name: revertvariable
+        description: Google Tag Manager Revert Changes to a Variable in a Workspace
+        call: api-v2-variables.revertvariable
+        with:
+          variablePath: rest.variablePath
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: api-v2-variables-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Google Tag Manager API — Variables. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: google-tag-manager-list-variables
+      description: Google Tag Manager List Variables in a Workspace
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: api-v2-variables.listvariables
+      with:
+        pageToken: tools.pageToken
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-tag-manager-create-variable
+      description: Google Tag Manager Create a Variable
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: api-v2-variables.createvariable
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-tag-manager-get-variable
+      description: Google Tag Manager Get a Variable
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: api-v2-variables.getvariable
+      with:
+        variablePath: tools.variablePath
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-tag-manager-update-variable
+      description: Google Tag Manager Update a Variable
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: api-v2-variables.updatevariable
+      with:
+        variablePath: tools.variablePath
+        fingerprint: tools.fingerprint
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-tag-manager-delete-variable
+      description: Google Tag Manager Delete a Variable
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: api-v2-variables.deletevariable
+      with:
+        variablePath: tools.variablePath
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-tag-manager-revert-changes
+      description: Google Tag Manager Revert Changes to a Variable in a Workspace
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: api-v2-variables.revertvariable
+      with:
+        variablePath: tools.variablePath
+      outputParameters:
+      - type: object
+        mapping: $.

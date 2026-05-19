@@ -1,0 +1,281 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Google Tag Manager API — Triggers
+  description: 'Google Tag Manager API — Triggers. 6 operations. Lead operation: Google Tag Manager List Triggers in a Workspace.
+    Self-contained Naftiko capability covering one Google Tag Manager business surface.'
+  tags:
+  - Google Tag Manager
+  - Triggers
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GOOGLE_TAG_MANAGER_API_KEY: GOOGLE_TAG_MANAGER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: api-v2-triggers
+    baseUri: https://tagmanager.googleapis.com
+    description: Google Tag Manager API — Triggers business capability. Self-contained, no shared references.
+    resources:
+    - name: tagmanager-v2-parent-triggers
+      path: /tagmanager/v2/{parent}/triggers
+      operations:
+      - name: listtriggers
+        method: GET
+        description: Google Tag Manager List Triggers in a Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: pageToken
+          in: query
+          type: string
+          description: Continuation token for fetching the next page of results.
+      - name: createtrigger
+        method: POST
+        description: Google Tag Manager Create a Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: tagmanager-v2-triggerPath
+      path: /tagmanager/v2/{triggerPath}
+      operations:
+      - name: gettrigger
+        method: GET
+        description: Google Tag Manager Get a Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: triggerPath
+          in: path
+          type: string
+          description: GTM Trigger's API relative path, e.g. accounts/{accountId}/containers/{containerId}/workspaces/{workspaceId}/triggers/{triggerId}.
+          required: true
+      - name: updatetrigger
+        method: PUT
+        description: Google Tag Manager Update a Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: triggerPath
+          in: path
+          type: string
+          description: GTM Trigger's API relative path.
+          required: true
+        - name: fingerprint
+          in: query
+          type: string
+          description: When provided, this fingerprint must match the fingerprint of the trigger in storage.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletetrigger
+        method: DELETE
+        description: Google Tag Manager Delete a Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: triggerPath
+          in: path
+          type: string
+          description: GTM Trigger's API relative path.
+          required: true
+    - name: tagmanager-v2-triggerPath}:revert
+      path: /tagmanager/v2/{triggerPath}:revert
+      operations:
+      - name: reverttrigger
+        method: POST
+        description: Google Tag Manager Revert Changes to a Trigger in a Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: triggerPath
+          in: path
+          type: string
+          description: GTM Trigger's API relative path.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.GOOGLE_TAG_MANAGER_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: api-v2-triggers-rest
+    port: 8080
+    description: REST adapter for Google Tag Manager API — Triggers. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/tagmanager/v2/{parent}/triggers
+      name: tagmanager-v2-parent-triggers
+      description: REST surface for tagmanager-v2-parent-triggers.
+      operations:
+      - method: GET
+        name: listtriggers
+        description: Google Tag Manager List Triggers in a Workspace
+        call: api-v2-triggers.listtriggers
+        with:
+          pageToken: rest.pageToken
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createtrigger
+        description: Google Tag Manager Create a Trigger
+        call: api-v2-triggers.createtrigger
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tagmanager/v2/{triggerpath}
+      name: tagmanager-v2-triggerpath
+      description: REST surface for tagmanager-v2-triggerPath.
+      operations:
+      - method: GET
+        name: gettrigger
+        description: Google Tag Manager Get a Trigger
+        call: api-v2-triggers.gettrigger
+        with:
+          triggerPath: rest.triggerPath
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatetrigger
+        description: Google Tag Manager Update a Trigger
+        call: api-v2-triggers.updatetrigger
+        with:
+          triggerPath: rest.triggerPath
+          fingerprint: rest.fingerprint
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletetrigger
+        description: Google Tag Manager Delete a Trigger
+        call: api-v2-triggers.deletetrigger
+        with:
+          triggerPath: rest.triggerPath
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tagmanager/v2/triggerpath-revert
+      name: tagmanager-v2-triggerpath-revert
+      description: REST surface for tagmanager-v2-triggerPath}:revert.
+      operations:
+      - method: POST
+        name: reverttrigger
+        description: Google Tag Manager Revert Changes to a Trigger in a Workspace
+        call: api-v2-triggers.reverttrigger
+        with:
+          triggerPath: rest.triggerPath
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: api-v2-triggers-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Google Tag Manager API — Triggers. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: google-tag-manager-list-triggers
+      description: Google Tag Manager List Triggers in a Workspace
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: api-v2-triggers.listtriggers
+      with:
+        pageToken: tools.pageToken
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-tag-manager-create-trigger
+      description: Google Tag Manager Create a Trigger
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: api-v2-triggers.createtrigger
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-tag-manager-get-trigger
+      description: Google Tag Manager Get a Trigger
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: api-v2-triggers.gettrigger
+      with:
+        triggerPath: tools.triggerPath
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-tag-manager-update-trigger
+      description: Google Tag Manager Update a Trigger
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: api-v2-triggers.updatetrigger
+      with:
+        triggerPath: tools.triggerPath
+        fingerprint: tools.fingerprint
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-tag-manager-delete-trigger
+      description: Google Tag Manager Delete a Trigger
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: api-v2-triggers.deletetrigger
+      with:
+        triggerPath: tools.triggerPath
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-tag-manager-revert-changes
+      description: Google Tag Manager Revert Changes to a Trigger in a Workspace
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: api-v2-triggers.reverttrigger
+      with:
+        triggerPath: tools.triggerPath
+      outputParameters:
+      - type: object
+        mapping: $.

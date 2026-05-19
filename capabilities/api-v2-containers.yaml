@@ -1,0 +1,239 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Google Tag Manager API — Containers
+  description: 'Google Tag Manager API — Containers. 5 operations. Lead operation: Google Tag Manager Get a Container. Self-contained
+    Naftiko capability covering one Google Tag Manager business surface.'
+  tags:
+  - Google Tag Manager
+  - Containers
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GOOGLE_TAG_MANAGER_API_KEY: GOOGLE_TAG_MANAGER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: api-v2-containers
+    baseUri: https://tagmanager.googleapis.com
+    description: Google Tag Manager API — Containers business capability. Self-contained, no shared references.
+    resources:
+    - name: tagmanager-v2-containerPath
+      path: /tagmanager/v2/{containerPath}
+      operations:
+      - name: getcontainer
+        method: GET
+        description: Google Tag Manager Get a Container
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: containerPath
+          in: path
+          type: string
+          description: GTM Container's API relative path, e.g. accounts/{accountId}/containers/{containerId}.
+          required: true
+      - name: updatecontainer
+        method: PUT
+        description: Google Tag Manager Update a Container
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: containerPath
+          in: path
+          type: string
+          description: GTM Container's API relative path.
+          required: true
+        - name: fingerprint
+          in: query
+          type: string
+          description: When provided, this fingerprint must match the fingerprint of the container in storage.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletecontainer
+        method: DELETE
+        description: Google Tag Manager Delete a Container
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: containerPath
+          in: path
+          type: string
+          description: GTM Container's API relative path.
+          required: true
+    - name: tagmanager-v2-parent-containers
+      path: /tagmanager/v2/{parent}/containers
+      operations:
+      - name: listcontainers
+        method: GET
+        description: Google Tag Manager List Containers in an Account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: pageToken
+          in: query
+          type: string
+          description: Continuation token for fetching the next page of results.
+      - name: createcontainer
+        method: POST
+        description: Google Tag Manager Create a Container
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.GOOGLE_TAG_MANAGER_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: api-v2-containers-rest
+    port: 8080
+    description: REST adapter for Google Tag Manager API — Containers. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/tagmanager/v2/{containerpath}
+      name: tagmanager-v2-containerpath
+      description: REST surface for tagmanager-v2-containerPath.
+      operations:
+      - method: GET
+        name: getcontainer
+        description: Google Tag Manager Get a Container
+        call: api-v2-containers.getcontainer
+        with:
+          containerPath: rest.containerPath
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatecontainer
+        description: Google Tag Manager Update a Container
+        call: api-v2-containers.updatecontainer
+        with:
+          containerPath: rest.containerPath
+          fingerprint: rest.fingerprint
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletecontainer
+        description: Google Tag Manager Delete a Container
+        call: api-v2-containers.deletecontainer
+        with:
+          containerPath: rest.containerPath
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tagmanager/v2/{parent}/containers
+      name: tagmanager-v2-parent-containers
+      description: REST surface for tagmanager-v2-parent-containers.
+      operations:
+      - method: GET
+        name: listcontainers
+        description: Google Tag Manager List Containers in an Account
+        call: api-v2-containers.listcontainers
+        with:
+          pageToken: rest.pageToken
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createcontainer
+        description: Google Tag Manager Create a Container
+        call: api-v2-containers.createcontainer
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: api-v2-containers-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Google Tag Manager API — Containers. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: google-tag-manager-get-container
+      description: Google Tag Manager Get a Container
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: api-v2-containers.getcontainer
+      with:
+        containerPath: tools.containerPath
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-tag-manager-update-container
+      description: Google Tag Manager Update a Container
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: api-v2-containers.updatecontainer
+      with:
+        containerPath: tools.containerPath
+        fingerprint: tools.fingerprint
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-tag-manager-delete-container
+      description: Google Tag Manager Delete a Container
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: api-v2-containers.deletecontainer
+      with:
+        containerPath: tools.containerPath
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-tag-manager-list-containers
+      description: Google Tag Manager List Containers in an Account
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: api-v2-containers.listcontainers
+      with:
+        pageToken: tools.pageToken
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-tag-manager-create-container
+      description: Google Tag Manager Create a Container
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: api-v2-containers.createcontainer
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

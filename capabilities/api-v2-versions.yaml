@@ -1,0 +1,242 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Google Tag Manager API — Versions
+  description: 'Google Tag Manager API — Versions. 5 operations. Lead operation: Google Tag Manager List All Container Version
+    Headers. Self-contained Naftiko capability covering one Google Tag Manager business surface.'
+  tags:
+  - Google Tag Manager
+  - Versions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GOOGLE_TAG_MANAGER_API_KEY: GOOGLE_TAG_MANAGER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: api-v2-versions
+    baseUri: https://tagmanager.googleapis.com
+    description: Google Tag Manager API — Versions business capability. Self-contained, no shared references.
+    resources:
+    - name: tagmanager-v2-parent-versions
+      path: /tagmanager/v2/{parent}/versions
+      operations:
+      - name: listcontainerversionheaders
+        method: GET
+        description: Google Tag Manager List All Container Version Headers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: pageToken
+          in: query
+          type: string
+          description: Continuation token for fetching the next page of results.
+        - name: includeDeleted
+          in: query
+          type: boolean
+          description: Also retrieve deleted (archived) versions when true.
+    - name: tagmanager-v2-parent-versions:live
+      path: /tagmanager/v2/{parent}/versions:live
+      operations:
+      - name: getlivecontainerversion
+        method: GET
+        description: Google Tag Manager Get the Live Container Version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: tagmanager-v2-versionPath
+      path: /tagmanager/v2/{versionPath}
+      operations:
+      - name: getcontainerversion
+        method: GET
+        description: Google Tag Manager Get a Container Version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: versionPath
+          in: path
+          type: string
+          description: GTM ContainerVersion's API relative path.
+          required: true
+      - name: deletecontainerversion
+        method: DELETE
+        description: Google Tag Manager Delete a Container Version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: versionPath
+          in: path
+          type: string
+          description: GTM ContainerVersion's API relative path.
+          required: true
+    - name: tagmanager-v2-versionPath}:publish
+      path: /tagmanager/v2/{versionPath}:publish
+      operations:
+      - name: publishcontainerversion
+        method: POST
+        description: Google Tag Manager Publish a Container Version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: versionPath
+          in: path
+          type: string
+          description: GTM ContainerVersion's API relative path.
+          required: true
+        - name: fingerprint
+          in: query
+          type: string
+          description: When provided, this fingerprint must match the fingerprint of the container version in storage.
+    authentication:
+      type: bearer
+      token: '{{env.GOOGLE_TAG_MANAGER_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: api-v2-versions-rest
+    port: 8080
+    description: REST adapter for Google Tag Manager API — Versions. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/tagmanager/v2/{parent}/versions
+      name: tagmanager-v2-parent-versions
+      description: REST surface for tagmanager-v2-parent-versions.
+      operations:
+      - method: GET
+        name: listcontainerversionheaders
+        description: Google Tag Manager List All Container Version Headers
+        call: api-v2-versions.listcontainerversionheaders
+        with:
+          pageToken: rest.pageToken
+          includeDeleted: rest.includeDeleted
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tagmanager/v2/{parent}/versions-live
+      name: tagmanager-v2-parent-versions-live
+      description: REST surface for tagmanager-v2-parent-versions:live.
+      operations:
+      - method: GET
+        name: getlivecontainerversion
+        description: Google Tag Manager Get the Live Container Version
+        call: api-v2-versions.getlivecontainerversion
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tagmanager/v2/{versionpath}
+      name: tagmanager-v2-versionpath
+      description: REST surface for tagmanager-v2-versionPath.
+      operations:
+      - method: GET
+        name: getcontainerversion
+        description: Google Tag Manager Get a Container Version
+        call: api-v2-versions.getcontainerversion
+        with:
+          versionPath: rest.versionPath
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletecontainerversion
+        description: Google Tag Manager Delete a Container Version
+        call: api-v2-versions.deletecontainerversion
+        with:
+          versionPath: rest.versionPath
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tagmanager/v2/versionpath-publish
+      name: tagmanager-v2-versionpath-publish
+      description: REST surface for tagmanager-v2-versionPath}:publish.
+      operations:
+      - method: POST
+        name: publishcontainerversion
+        description: Google Tag Manager Publish a Container Version
+        call: api-v2-versions.publishcontainerversion
+        with:
+          versionPath: rest.versionPath
+          fingerprint: rest.fingerprint
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: api-v2-versions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Google Tag Manager API — Versions. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: google-tag-manager-list-all
+      description: Google Tag Manager List All Container Version Headers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: api-v2-versions.listcontainerversionheaders
+      with:
+        pageToken: tools.pageToken
+        includeDeleted: tools.includeDeleted
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-tag-manager-get-live
+      description: Google Tag Manager Get the Live Container Version
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: api-v2-versions.getlivecontainerversion
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-tag-manager-get-container
+      description: Google Tag Manager Get a Container Version
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: api-v2-versions.getcontainerversion
+      with:
+        versionPath: tools.versionPath
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-tag-manager-delete-container
+      description: Google Tag Manager Delete a Container Version
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: api-v2-versions.deletecontainerversion
+      with:
+        versionPath: tools.versionPath
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-tag-manager-publish-container
+      description: Google Tag Manager Publish a Container Version
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: api-v2-versions.publishcontainerversion
+      with:
+        versionPath: tools.versionPath
+        fingerprint: tools.fingerprint
+      outputParameters:
+      - type: object
+        mapping: $.

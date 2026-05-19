@@ -1,0 +1,372 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Google Tag Manager API — Workspaces
+  description: 'Google Tag Manager API — Workspaces. 8 operations. Lead operation: Google Tag Manager List Workspaces in a
+    Container. Self-contained Naftiko capability covering one Google Tag Manager business surface.'
+  tags:
+  - Google Tag Manager
+  - Workspaces
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GOOGLE_TAG_MANAGER_API_KEY: GOOGLE_TAG_MANAGER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: api-v2-workspaces
+    baseUri: https://tagmanager.googleapis.com
+    description: Google Tag Manager API — Workspaces business capability. Self-contained, no shared references.
+    resources:
+    - name: tagmanager-v2-parent-workspaces
+      path: /tagmanager/v2/{parent}/workspaces
+      operations:
+      - name: listworkspaces
+        method: GET
+        description: Google Tag Manager List Workspaces in a Container
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: pageToken
+          in: query
+          type: string
+          description: Continuation token for fetching the next page of results.
+      - name: createworkspace
+        method: POST
+        description: Google Tag Manager Create a Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: tagmanager-v2-workspacePath
+      path: /tagmanager/v2/{workspacePath}
+      operations:
+      - name: getworkspace
+        method: GET
+        description: Google Tag Manager Get a Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: workspacePath
+          in: path
+          type: string
+          description: GTM Workspace's API relative path, e.g. accounts/{accountId}/containers/{containerId}/workspaces/{workspaceId}.
+          required: true
+      - name: updateworkspace
+        method: PUT
+        description: Google Tag Manager Update a Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: workspacePath
+          in: path
+          type: string
+          description: GTM Workspace's API relative path.
+          required: true
+        - name: fingerprint
+          in: query
+          type: string
+          description: When provided, this fingerprint must match the fingerprint of the workspace in storage.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteworkspace
+        method: DELETE
+        description: Google Tag Manager Delete a Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: workspacePath
+          in: path
+          type: string
+          description: GTM Workspace's API relative path.
+          required: true
+    - name: tagmanager-v2-workspacePath-status
+      path: /tagmanager/v2/{workspacePath}/status
+      operations:
+      - name: getworkspacestatus
+        method: GET
+        description: Google Tag Manager Get the Status of a Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: workspacePath
+          in: path
+          type: string
+          description: GTM Workspace's API relative path.
+          required: true
+    - name: tagmanager-v2-workspacePath}:create_version
+      path: /tagmanager/v2/{workspacePath}:create_version
+      operations:
+      - name: createworkspaceversion
+        method: POST
+        description: Google Tag Manager Create a Container Version From a Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: workspacePath
+          in: path
+          type: string
+          description: GTM Workspace's API relative path.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: tagmanager-v2-workspacePath}:sync
+      path: /tagmanager/v2/{workspacePath}:sync
+      operations:
+      - name: syncworkspace
+        method: POST
+        description: Google Tag Manager Sync a Workspace to the Latest Container Version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: workspacePath
+          in: path
+          type: string
+          description: GTM Workspace's API relative path.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.GOOGLE_TAG_MANAGER_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: api-v2-workspaces-rest
+    port: 8080
+    description: REST adapter for Google Tag Manager API — Workspaces. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/tagmanager/v2/{parent}/workspaces
+      name: tagmanager-v2-parent-workspaces
+      description: REST surface for tagmanager-v2-parent-workspaces.
+      operations:
+      - method: GET
+        name: listworkspaces
+        description: Google Tag Manager List Workspaces in a Container
+        call: api-v2-workspaces.listworkspaces
+        with:
+          pageToken: rest.pageToken
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createworkspace
+        description: Google Tag Manager Create a Workspace
+        call: api-v2-workspaces.createworkspace
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tagmanager/v2/{workspacepath}
+      name: tagmanager-v2-workspacepath
+      description: REST surface for tagmanager-v2-workspacePath.
+      operations:
+      - method: GET
+        name: getworkspace
+        description: Google Tag Manager Get a Workspace
+        call: api-v2-workspaces.getworkspace
+        with:
+          workspacePath: rest.workspacePath
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateworkspace
+        description: Google Tag Manager Update a Workspace
+        call: api-v2-workspaces.updateworkspace
+        with:
+          workspacePath: rest.workspacePath
+          fingerprint: rest.fingerprint
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteworkspace
+        description: Google Tag Manager Delete a Workspace
+        call: api-v2-workspaces.deleteworkspace
+        with:
+          workspacePath: rest.workspacePath
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tagmanager/v2/{workspacepath}/status
+      name: tagmanager-v2-workspacepath-status
+      description: REST surface for tagmanager-v2-workspacePath-status.
+      operations:
+      - method: GET
+        name: getworkspacestatus
+        description: Google Tag Manager Get the Status of a Workspace
+        call: api-v2-workspaces.getworkspacestatus
+        with:
+          workspacePath: rest.workspacePath
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tagmanager/v2/workspacepath-create-version
+      name: tagmanager-v2-workspacepath-create-version
+      description: REST surface for tagmanager-v2-workspacePath}:create_version.
+      operations:
+      - method: POST
+        name: createworkspaceversion
+        description: Google Tag Manager Create a Container Version From a Workspace
+        call: api-v2-workspaces.createworkspaceversion
+        with:
+          workspacePath: rest.workspacePath
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tagmanager/v2/workspacepath-sync
+      name: tagmanager-v2-workspacepath-sync
+      description: REST surface for tagmanager-v2-workspacePath}:sync.
+      operations:
+      - method: POST
+        name: syncworkspace
+        description: Google Tag Manager Sync a Workspace to the Latest Container Version
+        call: api-v2-workspaces.syncworkspace
+        with:
+          workspacePath: rest.workspacePath
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: api-v2-workspaces-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Google Tag Manager API — Workspaces. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: google-tag-manager-list-workspaces
+      description: Google Tag Manager List Workspaces in a Container
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: api-v2-workspaces.listworkspaces
+      with:
+        pageToken: tools.pageToken
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-tag-manager-create-workspace
+      description: Google Tag Manager Create a Workspace
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: api-v2-workspaces.createworkspace
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-tag-manager-get-workspace
+      description: Google Tag Manager Get a Workspace
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: api-v2-workspaces.getworkspace
+      with:
+        workspacePath: tools.workspacePath
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-tag-manager-update-workspace
+      description: Google Tag Manager Update a Workspace
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: api-v2-workspaces.updateworkspace
+      with:
+        workspacePath: tools.workspacePath
+        fingerprint: tools.fingerprint
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-tag-manager-delete-workspace
+      description: Google Tag Manager Delete a Workspace
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: api-v2-workspaces.deleteworkspace
+      with:
+        workspacePath: tools.workspacePath
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-tag-manager-get-status
+      description: Google Tag Manager Get the Status of a Workspace
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: api-v2-workspaces.getworkspacestatus
+      with:
+        workspacePath: tools.workspacePath
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-tag-manager-create-container
+      description: Google Tag Manager Create a Container Version From a Workspace
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: api-v2-workspaces.createworkspaceversion
+      with:
+        workspacePath: tools.workspacePath
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-tag-manager-sync-workspace
+      description: Google Tag Manager Sync a Workspace to the Latest Container Version
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: api-v2-workspaces.syncworkspace
+      with:
+        workspacePath: tools.workspacePath
+      outputParameters:
+      - type: object
+        mapping: $.
