@@ -2,12 +2,20 @@
   "repo": "google-tag-manager",
   "feeds": [
     {
-      "source": "https://blog.google/products/marketingplatform/",
+      "source": "https://blog.google/products/marketingplatform/rss/",
       "feed_url": "https://blog.google/products/marketingplatform/rss/",
-      "title": "Google Marketing Platform",
-      "saved": 17
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://developers.google.com/tag-platform/tag-manager",
+      "feed_url": "https://developers.google.com/tag-platform/tag-manager",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "post_count": 27,
-  "fetched": "2026-05-17T20:20:35Z"
+  "post_count": 28,
+  "fetched": "2026-06-01T23:35:02Z"
 }
