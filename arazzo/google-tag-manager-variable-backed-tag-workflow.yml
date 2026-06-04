@@ -1,0 +1,132 @@
+arazzo: 1.0.1
+info:
+  title: Google Tag Manager Build a Variable-Backed Tag
+  summary: Create a workspace, create a variable, then create a tag that consumes it.
+  description: >-
+    Creates a reusable variable and a tag that references it. The workflow opens
+    a workspace, creates a variable in that workspace, and then creates a tag
+    that pulls the variable into a tag parameter using the {{Variable Name}}
+    reference convention. Each step spells out its request inline, including the
+    inline bearer authorization, so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: googleTagManagerApi
+  url: ../openapi/google-tag-manager-api-v2-openapi.yml
+  type: openapi
+workflows:
+- workflowId: build-variable-backed-tag
+  summary: Create a workspace, a variable, and a tag that consumes the variable.
+  description: >-
+    Creates a workspace under the supplied container, creates a variable in it,
+    and creates a tag whose parameter value references the new variable by name.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - containerPath
+    - workspaceName
+    - variableName
+    - variableType
+    - tagName
+    - tagType
+    - parameterKey
+    properties:
+      accessToken:
+        type: string
+        description: OAuth 2.0 bearer access token for the Tag Manager API.
+      containerPath:
+        type: string
+        description: >-
+          The container API relative path, e.g.
+          accounts/{accountId}/containers/{containerId}.
+      workspaceName:
+        type: string
+        description: Display name for the new workspace.
+      variableName:
+        type: string
+        description: Display name for the new variable.
+      variableType:
+        type: string
+        description: GTM variable type identifier (e.g. c, jsm, v).
+      tagName:
+        type: string
+        description: Display name for the new tag.
+      tagType:
+        type: string
+        description: GTM tag type identifier (e.g. html, gaawe).
+      parameterKey:
+        type: string
+        description: The tag parameter key that will hold the variable reference.
+  steps:
+  - stepId: createWorkspace
+    description: >-
+      Open a new workspace inside the supplied container.
+    operationId: createWorkspace
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: parent
+      in: path
+      value: $inputs.containerPath
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.workspaceName
+        description: Workspace for building a variable-backed tag.
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      workspacePath: $response.body#/path
+  - stepId: createVariable
+    description: >-
+      Create a variable in the new workspace.
+    operationId: createVariable
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: parent
+      in: path
+      value: $steps.createWorkspace.outputs.workspacePath
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.variableName
+        type: $inputs.variableType
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      variablePath: $response.body#/path
+      variableName: $response.body#/name
+      variableId: $response.body#/variableId
+  - stepId: createTag
+    description: >-
+      Create a tag whose parameter references the new variable by name.
+    operationId: createTag
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: parent
+      in: path
+      value: $steps.createWorkspace.outputs.workspacePath
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.tagName
+        type: $inputs.tagType
+        parameter:
+        - type: template
+          key: $inputs.parameterKey
+          value: "{{$steps.createVariable.outputs.variableName}}"
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      tagPath: $response.body#/path
+      tagId: $response.body#/tagId
+  outputs:
+    workspacePath: $steps.createWorkspace.outputs.workspacePath
+    variablePath: $steps.createVariable.outputs.variablePath
+    tagPath: $steps.createTag.outputs.tagPath

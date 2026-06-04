@@ -1,0 +1,112 @@
+arazzo: 1.0.1
+info:
+  title: Google Tag Manager Grant a User Permission
+  summary: List account user permissions, then add a new user when not present.
+  description: >-
+    An access-provisioning flow for a Google Tag Manager account. The workflow
+    lists the existing user permissions on the account and branches: when the
+    account already has at least one user permission it ends so an out-of-band
+    review can decide on changes, and when the account has no user permissions it
+    creates the supplied user's account and container access. Each step spells
+    out its request inline, including the inline bearer authorization, so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: googleTagManagerApi
+  url: ../openapi/google-tag-manager-api-v2-openapi.yml
+  type: openapi
+workflows:
+- workflowId: grant-user-permission
+  summary: List account permissions, then create a user permission when none exist.
+  description: >-
+    Lists the user permissions on the supplied account and creates a new user
+    permission only when the account currently has none.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - accountPath
+    - emailAddress
+    - accountPermission
+    - containerId
+    - containerPermission
+    properties:
+      accessToken:
+        type: string
+        description: OAuth 2.0 bearer access token for the Tag Manager API.
+      accountPath:
+        type: string
+        description: >-
+          The account API relative path, e.g. accounts/{accountId}.
+      emailAddress:
+        type: string
+        description: Email address of the user being granted access.
+      accountPermission:
+        type: string
+        description: >-
+          Account-level permission (e.g. admin, user, noAccess).
+      containerId:
+        type: string
+        description: The container id the user should be granted access to.
+      containerPermission:
+        type: string
+        description: >-
+          Container-level permission (e.g. publish, edit, read, noAccess).
+  steps:
+  - stepId: listPermissions
+    description: >-
+      List all user permissions currently granted on the account.
+    operationId: listUserPermissions
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: parent
+      in: path
+      value: $inputs.accountPath
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      existingPermissions: $response.body#/userPermission
+    onSuccess:
+    - name: noPermissions
+      type: goto
+      stepId: createPermission
+      criteria:
+      - context: $response.body
+        condition: $.userPermission.length == 0
+        type: jsonpath
+    - name: permissionsExist
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.userPermission.length > 0
+        type: jsonpath
+  - stepId: createPermission
+    description: >-
+      Create the user's account and container access on the account.
+    operationId: createUserPermission
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: parent
+      in: path
+      value: $inputs.accountPath
+    requestBody:
+      contentType: application/json
+      payload:
+        emailAddress: $inputs.emailAddress
+        accountAccess:
+          permission: $inputs.accountPermission
+        containerAccess:
+        - containerId: $inputs.containerId
+          permission: $inputs.containerPermission
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      permissionPath: $response.body#/path
+      emailAddress: $response.body#/emailAddress
+  outputs:
+    permissionPath: $steps.createPermission.outputs.permissionPath

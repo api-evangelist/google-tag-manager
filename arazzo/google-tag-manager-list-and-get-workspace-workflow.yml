@@ -1,0 +1,86 @@
+arazzo: 1.0.1
+info:
+  title: Google Tag Manager List and Get a Workspace
+  summary: List the workspaces in a container, then fetch the first one in detail.
+  description: >-
+    A read-side discovery flow. The workflow lists the workspaces in a container
+    and branches on the result: when at least one workspace exists it fetches the
+    first workspace by its resource path, and when the container has no
+    workspaces it ends. Each step spells out its request inline, including the
+    inline bearer authorization, so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: googleTagManagerApi
+  url: ../openapi/google-tag-manager-api-v2-openapi.yml
+  type: openapi
+workflows:
+- workflowId: list-and-get-workspace
+  summary: List container workspaces and get the first one when present.
+  description: >-
+    Lists the workspaces in the supplied container and, when at least one is
+    returned, fetches the first workspace in full detail.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - containerPath
+    properties:
+      accessToken:
+        type: string
+        description: OAuth 2.0 bearer access token for the Tag Manager API.
+      containerPath:
+        type: string
+        description: >-
+          The container API relative path, e.g.
+          accounts/{accountId}/containers/{containerId}.
+  steps:
+  - stepId: listWorkspaces
+    description: >-
+      List all workspaces that belong to the supplied container.
+    operationId: listWorkspaces
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: parent
+      in: path
+      value: $inputs.containerPath
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstWorkspacePath: $response.body#/workspace/0/path
+    onSuccess:
+    - name: hasWorkspace
+      type: goto
+      stepId: getWorkspace
+      criteria:
+      - context: $response.body
+        condition: $.workspace.length > 0
+        type: jsonpath
+    - name: noWorkspace
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.workspace.length == 0
+        type: jsonpath
+  - stepId: getWorkspace
+    description: >-
+      Fetch the first workspace returned by the list in full detail.
+    operationId: getWorkspace
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: workspacePath
+      in: path
+      value: $steps.listWorkspaces.outputs.firstWorkspacePath
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      workspacePath: $response.body#/path
+      workspaceName: $response.body#/name
+      fingerprint: $response.body#/fingerprint
+  outputs:
+    firstWorkspacePath: $steps.listWorkspaces.outputs.firstWorkspacePath
+    workspaceName: $steps.getWorkspace.outputs.workspaceName

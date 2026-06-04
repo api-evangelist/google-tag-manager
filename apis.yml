@@ -96,6 +96,45 @@ apis:
     url: https://support.google.com/tagmanager
     email: ''
 common:
+- type: ArazzoWorkflows
+  url: arazzo/
+  workflows:
+  - url: arazzo/google-tag-manager-audit-container-versions-workflow.yml
+    name: Google Tag Manager Audit Container Versions
+    summary: List a container's version headers, then fetch the newest one in full.
+  - url: arazzo/google-tag-manager-bootstrap-live-container-workflow.yml
+    name: Google Tag Manager Bootstrap a Live Container
+    summary: Create a container and workspace, cut a baseline version, and publish it.
+  - url: arazzo/google-tag-manager-build-and-publish-tag-workflow.yml
+    name: Google Tag Manager Build and Publish a Tag End to End
+    summary: Workspace, trigger, tag, version, and publish in a single release flow.
+  - url: arazzo/google-tag-manager-grant-user-permission-workflow.yml
+    name: Google Tag Manager Grant a User Permission
+    summary: List account user permissions, then add a new user when not present.
+  - url: arazzo/google-tag-manager-inspect-live-version-workflow.yml
+    name: Google Tag Manager Inspect the Live Container Version
+    summary: Resolve a container's live version, then fetch its full definition.
+  - url: arazzo/google-tag-manager-list-and-get-workspace-workflow.yml
+    name: Google Tag Manager List and Get a Workspace
+    summary: List the workspaces in a container, then fetch the first one in detail.
+  - url: arazzo/google-tag-manager-provision-tagged-container-workflow.yml
+    name: Google Tag Manager Provision a Tagged Container
+    summary: Create a container, open a workspace in it, and add a first tag.
+  - url: arazzo/google-tag-manager-safe-update-tag-workflow.yml
+    name: Google Tag Manager Safely Update a Tag
+    summary: Read a tag for its fingerprint, then update it with optimistic concurrency.
+  - url: arazzo/google-tag-manager-sync-and-version-workspace-workflow.yml
+    name: Google Tag Manager Sync and Version a Workspace
+    summary: Check status, sync a workspace to the latest version, then cut a version.
+  - url: arazzo/google-tag-manager-trigger-fired-tag-workflow.yml
+    name: Google Tag Manager Wire a Trigger-Fired Tag
+    summary: Create a workspace, create a trigger, then create a tag that fires on it.
+  - url: arazzo/google-tag-manager-variable-backed-tag-workflow.yml
+    name: Google Tag Manager Build a Variable-Backed Tag
+    summary: Create a workspace, create a variable, then create a tag that consumes it.
+  - url: arazzo/google-tag-manager-version-and-publish-workspace-workflow.yml
+    name: Google Tag Manager Version and Publish a Workspace
+    summary: Freeze a workspace into a container version and publish it live.
 - type: Portal
   url: https://developers.google.com/tag-platform
 - type: GettingStarted

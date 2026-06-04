@@ -1,0 +1,88 @@
+arazzo: 1.0.1
+info:
+  title: Google Tag Manager Safely Update a Tag
+  summary: Read a tag for its fingerprint, then update it with optimistic concurrency.
+  description: >-
+    A conflict-safe edit flow for a single tag. The workflow gets the tag to
+    read its current fingerprint and then updates the tag, passing that
+    fingerprint as the concurrency guard so the write is rejected if the tag was
+    changed underneath. Each step spells out its request inline, including the
+    inline bearer authorization, so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: googleTagManagerApi
+  url: ../openapi/google-tag-manager-api-v2-openapi.yml
+  type: openapi
+workflows:
+- workflowId: safe-update-tag
+  summary: Read a tag's fingerprint, then update the tag guarded by that fingerprint.
+  description: >-
+    Gets the tag to capture its fingerprint and name, then updates the tag using
+    the captured fingerprint as the optimistic-concurrency guard.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - tagPath
+    - tagName
+    - tagType
+    properties:
+      accessToken:
+        type: string
+        description: OAuth 2.0 bearer access token for the Tag Manager API.
+      tagPath:
+        type: string
+        description: >-
+          The tag API relative path, e.g.
+          accounts/{accountId}/containers/{containerId}/workspaces/{workspaceId}/tags/{tagId}.
+      tagName:
+        type: string
+        description: The new display name to set on the tag.
+      tagType:
+        type: string
+        description: GTM tag type identifier (e.g. html, gaawe).
+  steps:
+  - stepId: getTag
+    description: >-
+      Get the tag to read its current fingerprint before updating.
+    operationId: getTag
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: tagPath
+      in: path
+      value: $inputs.tagPath
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      fingerprint: $response.body#/fingerprint
+  - stepId: updateTag
+    description: >-
+      Update the tag, passing the captured fingerprint so the write fails if the
+      tag changed in storage.
+    operationId: updateTag
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: tagPath
+      in: path
+      value: $inputs.tagPath
+    - name: fingerprint
+      in: query
+      value: $steps.getTag.outputs.fingerprint
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.tagName
+        type: $inputs.tagType
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      tagPath: $response.body#/path
+      newFingerprint: $response.body#/fingerprint
+  outputs:
+    tagPath: $steps.updateTag.outputs.tagPath
+    newFingerprint: $steps.updateTag.outputs.newFingerprint

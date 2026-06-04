@@ -1,0 +1,111 @@
+arazzo: 1.0.1
+info:
+  title: Google Tag Manager Sync and Version a Workspace
+  summary: Check status, sync a workspace to the latest version, then cut a version.
+  description: >-
+    A safe-release preamble for Google Tag Manager. The workflow reads the
+    workspace status, syncs the workspace up to the latest published container
+    version, and then branches on the sync result: a clean sync proceeds to cut
+    a new container version, while a sync error ends the workflow so conflicts
+    can be resolved by hand. Each step spells out its request inline, including
+    the inline bearer authorization, so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: googleTagManagerApi
+  url: ../openapi/google-tag-manager-api-v2-openapi.yml
+  type: openapi
+workflows:
+- workflowId: sync-and-version-workspace
+  summary: Status, sync, then version a workspace when the sync is clean.
+  description: >-
+    Reads workspace status, syncs the workspace to the latest container version,
+    and creates a new container version only when the sync reports no error.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - workspacePath
+    - versionName
+    properties:
+      accessToken:
+        type: string
+        description: OAuth 2.0 bearer access token for the Tag Manager API.
+      workspacePath:
+        type: string
+        description: >-
+          The workspace API relative path, e.g.
+          accounts/{accountId}/containers/{containerId}/workspaces/{workspaceId}.
+      versionName:
+        type: string
+        description: Display name for the new container version.
+  steps:
+  - stepId: getStatus
+    description: >-
+      Read the workspace status to surface modified and conflicting entities
+      before syncing.
+    operationId: getWorkspaceStatus
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: workspacePath
+      in: path
+      value: $inputs.workspacePath
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      workspaceChange: $response.body#/workspaceChange
+  - stepId: syncWorkspace
+    description: >-
+      Sync the workspace to the latest container version, merging unmodified
+      entities and flagging conflicts.
+    operationId: syncWorkspace
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: workspacePath
+      in: path
+      value: $inputs.workspacePath
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      syncError: $response.body#/syncStatus/syncError
+    onSuccess:
+    - name: syncClean
+      type: goto
+      stepId: createVersion
+      criteria:
+      - context: $response.body
+        condition: $.syncStatus.syncError == false
+        type: jsonpath
+    - name: syncFailed
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.syncStatus.syncError == true
+        type: jsonpath
+  - stepId: createVersion
+    description: >-
+      Cut a new container version from the synced workspace.
+    operationId: createWorkspaceVersion
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: workspacePath
+      in: path
+      value: $inputs.workspacePath
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.versionName
+        notes: Created after a clean workspace sync.
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      versionPath: $response.body#/containerVersion/path
+  outputs:
+    syncError: $steps.syncWorkspace.outputs.syncError
+    versionPath: $steps.createVersion.outputs.versionPath

@@ -1,0 +1,75 @@
+arazzo: 1.0.1
+info:
+  title: Google Tag Manager Inspect the Live Container Version
+  summary: Resolve a container's live version, then fetch its full definition.
+  description: >-
+    An auditing flow that answers "what is live right now?" for a container. The
+    workflow gets the live container version header for the container and then
+    fetches the full container version by its resource path so the complete set
+    of tags, triggers, and variables can be inspected. Each step spells out its
+    request inline, including the inline bearer authorization, so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: googleTagManagerApi
+  url: ../openapi/google-tag-manager-api-v2-openapi.yml
+  type: openapi
+workflows:
+- workflowId: inspect-live-version
+  summary: Get the live container version and then its full definition.
+  description: >-
+    Resolves the live container version for the supplied container and fetches
+    the full version document for inspection.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - containerPath
+    properties:
+      accessToken:
+        type: string
+        description: OAuth 2.0 bearer access token for the Tag Manager API.
+      containerPath:
+        type: string
+        description: >-
+          The container API relative path, e.g.
+          accounts/{accountId}/containers/{containerId}.
+  steps:
+  - stepId: getLiveVersion
+    description: >-
+      Get the live (published) container version for the container.
+    operationId: getLiveContainerVersion
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: parent
+      in: path
+      value: $inputs.containerPath
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      versionPath: $response.body#/path
+      containerVersionId: $response.body#/containerVersionId
+  - stepId: getVersionDetail
+    description: >-
+      Fetch the full container version document for the live version.
+    operationId: getContainerVersion
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: versionPath
+      in: path
+      value: $steps.getLiveVersion.outputs.versionPath
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      tags: $response.body#/tag
+      triggers: $response.body#/trigger
+      variables: $response.body#/variable
+  outputs:
+    versionPath: $steps.getLiveVersion.outputs.versionPath
+    tags: $steps.getVersionDetail.outputs.tags
+    triggers: $steps.getVersionDetail.outputs.triggers
+    variables: $steps.getVersionDetail.outputs.variables

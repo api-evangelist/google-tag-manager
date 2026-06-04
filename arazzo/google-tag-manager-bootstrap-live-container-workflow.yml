@@ -1,0 +1,128 @@
+arazzo: 1.0.1
+info:
+  title: Google Tag Manager Bootstrap a Live Container
+  summary: Create a container and workspace, cut a baseline version, and publish it.
+  description: >-
+    A from-scratch container bootstrap that ends with a published baseline. The
+    workflow creates a container under an account, opens a workspace, freezes
+    that workspace into a baseline container version, and publishes the version
+    so the container is immediately live. Each step spells out its request
+    inline, including the inline bearer authorization, so the flow can be read
+    and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: googleTagManagerApi
+  url: ../openapi/google-tag-manager-api-v2-openapi.yml
+  type: openapi
+workflows:
+- workflowId: bootstrap-live-container
+  summary: Create a container and workspace, then version and publish a baseline.
+  description: >-
+    Creates a container, opens a workspace, cuts a baseline container version
+    from the workspace, and publishes it so the new container is live.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - accountPath
+    - containerName
+    - workspaceName
+    - versionName
+    properties:
+      accessToken:
+        type: string
+        description: OAuth 2.0 bearer access token for the Tag Manager API.
+      accountPath:
+        type: string
+        description: >-
+          The account API relative path, e.g. accounts/{accountId}.
+      containerName:
+        type: string
+        description: Display name for the new container.
+      workspaceName:
+        type: string
+        description: Display name for the new workspace.
+      versionName:
+        type: string
+        description: Display name for the baseline container version.
+  steps:
+  - stepId: createContainer
+    description: >-
+      Create a new container within the supplied account.
+    operationId: createContainer
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: parent
+      in: path
+      value: $inputs.accountPath
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.containerName
+        usageContext:
+        - web
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      containerPath: $response.body#/path
+  - stepId: createWorkspace
+    description: >-
+      Open a workspace inside the new container.
+    operationId: createWorkspace
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: parent
+      in: path
+      value: $steps.createContainer.outputs.containerPath
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.workspaceName
+        description: Baseline workspace created during container bootstrap.
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      workspacePath: $response.body#/path
+  - stepId: createVersion
+    description: >-
+      Cut a baseline container version from the new workspace.
+    operationId: createWorkspaceVersion
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: workspacePath
+      in: path
+      value: $steps.createWorkspace.outputs.workspacePath
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.versionName
+        notes: Baseline version created during container bootstrap.
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      versionPath: $response.body#/containerVersion/path
+  - stepId: publishVersion
+    description: >-
+      Publish the baseline version so the new container is live.
+    operationId: publishContainerVersion
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: versionPath
+      in: path
+      value: $steps.createVersion.outputs.versionPath
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      publishedVersionPath: $response.body#/containerVersion/path
+  outputs:
+    containerPath: $steps.createContainer.outputs.containerPath
+    workspacePath: $steps.createWorkspace.outputs.workspacePath
+    publishedVersionPath: $steps.publishVersion.outputs.publishedVersionPath

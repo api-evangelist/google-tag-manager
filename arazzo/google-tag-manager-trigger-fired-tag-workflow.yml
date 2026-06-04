@@ -1,0 +1,126 @@
+arazzo: 1.0.1
+info:
+  title: Google Tag Manager Wire a Trigger-Fired Tag
+  summary: Create a workspace, create a trigger, then create a tag that fires on it.
+  description: >-
+    Builds a working tag-and-trigger pair inside a container. The workflow opens
+    a fresh workspace, creates a trigger in that workspace, and then creates a
+    tag whose firingTriggerId references the trigger that was just created so the
+    tag fires when the trigger condition is met. Each step spells out its request
+    inline, including the inline bearer authorization, so the flow can be read
+    and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: googleTagManagerApi
+  url: ../openapi/google-tag-manager-api-v2-openapi.yml
+  type: openapi
+workflows:
+- workflowId: wire-trigger-fired-tag
+  summary: Create a workspace, a trigger, and a tag that fires on that trigger.
+  description: >-
+    Creates a workspace under the supplied container, creates a trigger in that
+    workspace, and creates a tag whose firingTriggerId is set to the new
+    trigger's id.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - containerPath
+    - workspaceName
+    - triggerName
+    - triggerType
+    - tagName
+    - tagType
+    properties:
+      accessToken:
+        type: string
+        description: OAuth 2.0 bearer access token for the Tag Manager API.
+      containerPath:
+        type: string
+        description: >-
+          The container API relative path, e.g.
+          accounts/{accountId}/containers/{containerId}.
+      workspaceName:
+        type: string
+        description: Display name for the new workspace.
+      triggerName:
+        type: string
+        description: Display name for the new trigger.
+      triggerType:
+        type: string
+        description: GTM trigger event type (e.g. pageview, click, customEvent).
+      tagName:
+        type: string
+        description: Display name for the new tag.
+      tagType:
+        type: string
+        description: GTM tag type identifier (e.g. html, gaawe).
+  steps:
+  - stepId: createWorkspace
+    description: >-
+      Open a new workspace inside the supplied container.
+    operationId: createWorkspace
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: parent
+      in: path
+      value: $inputs.containerPath
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.workspaceName
+        description: Workspace for wiring a trigger-fired tag.
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      workspacePath: $response.body#/path
+  - stepId: createTrigger
+    description: >-
+      Create a trigger in the new workspace.
+    operationId: createTrigger
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: parent
+      in: path
+      value: $steps.createWorkspace.outputs.workspacePath
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.triggerName
+        type: $inputs.triggerType
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      triggerPath: $response.body#/path
+      triggerId: $response.body#/triggerId
+  - stepId: createTag
+    description: >-
+      Create a tag whose firingTriggerId references the new trigger.
+    operationId: createTag
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: parent
+      in: path
+      value: $steps.createWorkspace.outputs.workspacePath
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.tagName
+        type: $inputs.tagType
+        firingTriggerId:
+        - $steps.createTrigger.outputs.triggerId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      tagPath: $response.body#/path
+      tagId: $response.body#/tagId
+  outputs:
+    workspacePath: $steps.createWorkspace.outputs.workspacePath
+    triggerId: $steps.createTrigger.outputs.triggerId
+    tagPath: $steps.createTag.outputs.tagPath

@@ -1,0 +1,101 @@
+arazzo: 1.0.1
+info:
+  title: Google Tag Manager Version and Publish a Workspace
+  summary: Freeze a workspace into a container version and publish it live.
+  description: >-
+    The core release flow for Google Tag Manager. The workflow creates a
+    container version from the entities in a workspace and then branches on the
+    result: when the version compiles cleanly it publishes that version live,
+    and when a compiler error is reported it stops without publishing. Each step
+    spells out its request inline, including the inline bearer authorization, so
+    the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: googleTagManagerApi
+  url: ../openapi/google-tag-manager-api-v2-openapi.yml
+  type: openapi
+workflows:
+- workflowId: version-and-publish-workspace
+  summary: Create a container version from a workspace and publish it if it compiles.
+  description: >-
+    Creates a container version from the supplied workspace, then branches: a
+    clean compile publishes the new version, while a compiler error ends the
+    workflow before publishing.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - workspacePath
+    - versionName
+    properties:
+      accessToken:
+        type: string
+        description: OAuth 2.0 bearer access token for the Tag Manager API.
+      workspacePath:
+        type: string
+        description: >-
+          The workspace API relative path, e.g.
+          accounts/{accountId}/containers/{containerId}/workspaces/{workspaceId}.
+      versionName:
+        type: string
+        description: Display name for the new container version.
+      versionNotes:
+        type: string
+        description: Optional notes describing the new container version.
+  steps:
+  - stepId: createVersion
+    description: >-
+      Create a container version from the entities in the workspace.
+    operationId: createWorkspaceVersion
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: workspacePath
+      in: path
+      value: $inputs.workspacePath
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.versionName
+        notes: $inputs.versionNotes
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      versionPath: $response.body#/containerVersion/path
+      compilerError: $response.body#/compilerError
+    onSuccess:
+    - name: versionCompiled
+      type: goto
+      stepId: publishVersion
+      criteria:
+      - context: $response.body
+        condition: $.compilerError == false
+        type: jsonpath
+    - name: versionHadError
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.compilerError == true
+        type: jsonpath
+  - stepId: publishVersion
+    description: >-
+      Publish the newly created container version so it becomes the live
+      version served to users.
+    operationId: publishContainerVersion
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: versionPath
+      in: path
+      value: $steps.createVersion.outputs.versionPath
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      publishedVersionPath: $response.body#/containerVersion/path
+      publishCompilerError: $response.body#/compilerError
+  outputs:
+    versionPath: $steps.createVersion.outputs.versionPath
+    publishedVersionPath: $steps.publishVersion.outputs.publishedVersionPath

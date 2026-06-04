@@ -1,0 +1,121 @@
+arazzo: 1.0.1
+info:
+  title: Google Tag Manager Provision a Tagged Container
+  summary: Create a container, open a workspace in it, and add a first tag.
+  description: >-
+    The foundational Google Tag Manager bootstrap flow. Starting from an
+    existing account, the workflow creates a new container, opens a default
+    workspace inside that container, and creates an initial tag in the
+    workspace. Each step spells out its request inline, including the inline
+    bearer authorization, so the flow can be read and executed without opening
+    the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: googleTagManagerApi
+  url: ../openapi/google-tag-manager-api-v2-openapi.yml
+  type: openapi
+workflows:
+- workflowId: provision-tagged-container
+  summary: Create a container, a workspace, and a first tag in one pass.
+  description: >-
+    Creates a container under the supplied account, creates a workspace under
+    the new container, and creates a tag in that workspace. The relative paths
+    returned by each create are chained into the next request.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - accountPath
+    - containerName
+    - workspaceName
+    - tagName
+    - tagType
+    properties:
+      accessToken:
+        type: string
+        description: OAuth 2.0 bearer access token for the Tag Manager API.
+      accountPath:
+        type: string
+        description: >-
+          The account API relative path, e.g. accounts/{accountId}.
+      containerName:
+        type: string
+        description: Display name for the new container.
+      workspaceName:
+        type: string
+        description: Display name for the new workspace.
+      tagName:
+        type: string
+        description: Display name for the new tag.
+      tagType:
+        type: string
+        description: GTM tag type identifier (e.g. html, ua, gaawe).
+  steps:
+  - stepId: createContainer
+    description: >-
+      Create a new container within the supplied account.
+    operationId: createContainer
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: parent
+      in: path
+      value: $inputs.accountPath
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.containerName
+        usageContext:
+        - web
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      containerPath: $response.body#/path
+      containerId: $response.body#/containerId
+  - stepId: createWorkspace
+    description: >-
+      Open a new workspace inside the container that was just created.
+    operationId: createWorkspace
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: parent
+      in: path
+      value: $steps.createContainer.outputs.containerPath
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.workspaceName
+        description: Workspace provisioned by the Arazzo bootstrap flow.
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      workspacePath: $response.body#/path
+      workspaceId: $response.body#/workspaceId
+  - stepId: createTag
+    description: >-
+      Create an initial tag inside the new workspace.
+    operationId: createTag
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: parent
+      in: path
+      value: $steps.createWorkspace.outputs.workspacePath
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.tagName
+        type: $inputs.tagType
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      tagPath: $response.body#/path
+      tagId: $response.body#/tagId
+  outputs:
+    containerPath: $steps.createContainer.outputs.containerPath
+    workspacePath: $steps.createWorkspace.outputs.workspacePath
+    tagPath: $steps.createTag.outputs.tagPath
