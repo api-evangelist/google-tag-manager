@@ -82,6 +82,8 @@ apis:
         url: https://support.google.com/tagmanager
         email: ''
 common:
+  - type: OAuthScopes
+    url: scopes/google-tag-manager-scopes.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/google-tag-manager/overview
   - type: Arazzo

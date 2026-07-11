@@ -1,0 +1,55 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/google-tag-manager-api-v2-openapi.yml
+schemes:
+- name: oauth2
+  source: openapi/google-tag-manager-api-v2-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://accounts.google.com/o/oauth2/v2/auth
+    tokenUrl: https://oauth2.googleapis.com/token
+  description: OAuth 2.0 authentication for Google Tag Manager API.
+scopes:
+- scope: tagmanager.delete.containers
+  description: Delete your Google Tag Manager containers.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/google-tag-manager-api-v2-openapi.yml
+- scope: tagmanager.edit.containers
+  description: Manage your Google Tag Manager container and its subcomponents, excluding versioning
+    and publishing.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/google-tag-manager-api-v2-openapi.yml
+- scope: tagmanager.edit.containerversions
+  description: Manage your Google Tag Manager container versions.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/google-tag-manager-api-v2-openapi.yml
+- scope: tagmanager.manage.accounts
+  description: View and manage your Google Tag Manager accounts.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/google-tag-manager-api-v2-openapi.yml
+- scope: tagmanager.manage.users
+  description: Manage user permissions of your Google Tag Manager account and container.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/google-tag-manager-api-v2-openapi.yml
+- scope: tagmanager.publish
+  description: Publish your Google Tag Manager container versions.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/google-tag-manager-api-v2-openapi.yml
+- scope: tagmanager.readonly
+  description: View your Google Tag Manager container and its subcomponents.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/google-tag-manager-api-v2-openapi.yml
