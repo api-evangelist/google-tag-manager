@@ -82,6 +82,12 @@ apis:
         url: https://support.google.com/tagmanager
         email: ''
 common:
+  - type: VulnerabilityDisclosure
+    url: security/google-tag-manager-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/google-tag-manager-domain-security.yml
+  - type: Authentication
+    url: authentication/google-tag-manager-authentication.yml
   - type: OAuthScopes
     url: scopes/google-tag-manager-scopes.yml
   - type: PostmanWorkspace
