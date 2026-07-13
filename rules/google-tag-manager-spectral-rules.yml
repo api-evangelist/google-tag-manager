@@ -1,36 +1,134 @@
+# google-tag-manager — Spectral ruleset (strengthened)
+# Plain Spectral. Existing hand-authored rules preserved; measured rules added
+# from this provider's own OpenAPI conventions by strengthen_ruleset.py,
+# then self-validated against the spec.
+#
+# Provenance:
+#   - servers-https-only: 100% of servers already https (error)
+#   - servers-expected-domain: 1/1 servers on googleapis.com
+#   - path-params-casing: camel @ 63% (n=43)
+#   - query-params-casing: camel @ 59% (n=17)
+#   - operationid-casing: camel @ 100% (n=44)
+#   - schema-names-casing: pascal @ 100% (n=38)
+#   - schema-properties-casing: camel @ 65% (n=206)
+#   - security: global (root) — NOT emitting operation-security-required
+#   - pagination params observed: ['pageToken']
+#   - merge: kept 7 existing, added 8 measured, upgraded 0
+#   - added: servers-https-only, servers-expected-domain, path-params-casing, query-params-casing, operationid-casing, schema-names-casing, schema-properties-casing, security-schemes-defined
+extends:
+  - spectral:oas
 rules:
   info-title-required:
     description: Info title must be present
     severity: error
     given: $.info
-    then: {field: title, function: truthy}
+    then:
+      field: title
+      function: truthy
   info-description-required:
     description: Info description must be present
     severity: error
     given: $.info
-    then: {field: description, function: truthy}
+    then:
+      field: description
+      function: truthy
   operation-operationid-required:
     description: Every operation must have an operationId
     severity: error
     given: $.paths[*][get,post,put,patch,delete]
-    then: {field: operationId, function: truthy}
+    then:
+      field: operationId
+      function: truthy
   operation-summary-required:
     description: Every operation must have a summary
     severity: error
     given: $.paths[*][get,post,put,patch,delete]
-    then: {field: summary, function: truthy}
+    then:
+      field: summary
+      function: truthy
   operation-tags-required:
     description: Every operation must have tags
     severity: error
     given: $.paths[*][get,post,put,patch,delete]
-    then: {field: tags, function: truthy}
+    then:
+      field: tags
+      function: truthy
   response-description-required:
     description: Every response must have a description
     severity: error
     given: $.paths[*][get,post,put,patch,delete].responses[*]
-    then: {field: description, function: truthy}
+    then:
+      field: description
+      function: truthy
   no-empty-descriptions:
     description: Descriptions must not be empty
     severity: error
     given: $..description
-    then: {function: truthy}
+    then:
+      function: truthy
+  servers-https-only:
+    description: Server URLs must use HTTPS.
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: ^https://
+  servers-expected-domain:
+    description: Server URLs should be on the googleapis.com domain.
+    severity: warn
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: googleapis\.com
+  path-params-casing:
+    description: Path parameters should be camelCase (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*].parameters[?(@.in=='path')].name
+    then:
+      function: casing
+      functionOptions:
+        type: camel
+  query-params-casing:
+    description: Query parameters should be camelCase (the dominant convention in this API).
+    severity: info
+    given: $.paths[*][get,post,put,patch,delete].parameters[?(@.in=='query')]
+    then:
+      field: name
+      function: casing
+      functionOptions:
+        type: camel
+  operationid-casing:
+    description: Operation IDs should be camelCase (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].operationId
+    then:
+      function: casing
+      functionOptions:
+        type: camel
+  schema-names-casing:
+    description: Component schema names should be PascalCase (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: pascal
+  schema-properties-casing:
+    description: Schema properties should be camelCase (the dominant convention in this API).
+    severity: info
+    given: $.components.schemas[*].properties
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: camel
+  security-schemes-defined:
+    description: Security schemes should be defined in components.
+    severity: warn
+    given: $.components
+    then:
+      field: securitySchemes
+      function: truthy

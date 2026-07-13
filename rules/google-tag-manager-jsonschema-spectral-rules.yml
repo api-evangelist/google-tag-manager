@@ -1,0 +1,57 @@
+# google-tag-manager — JSON Schema Spectral ruleset (strengthened)
+# Plain Spectral. Rules measured from this provider's own JSON Schema
+# conventions by strengthen_jsonschema.py, then self-validated against them.
+#
+# Provenance:
+#   - schema-declares-$schema: 39/39 roots
+#   - schema-draft-consistency: 2020-12 @ 100%
+#   - schema-has-title: 39/39 roots
+#   - property-name-casing: camel @ 64% (n=267)
+#   - def-name-casing: pascal @ 100% (n=8)
+rules:
+  schema-declares-$schema:
+    description: Every JSON Schema document should declare its $schema (draft).
+    severity: warn
+    given: $
+    then:
+      field: $schema
+      function: truthy
+  schema-draft-consistency:
+    description: $schema should reference the 2020-12 draft (this API's convention).
+    severity: warn
+    given: $.$schema
+    then:
+      function: pattern
+      functionOptions:
+        match: 2020\-12
+  schema-has-title:
+    description: JSON Schema documents should declare a title.
+    severity: info
+    given: $
+    then:
+      field: title
+      function: truthy
+  property-name-casing:
+    description: Schema properties should be camelCase (the dominant convention in this API).
+    severity: info
+    given: $..properties
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: camel
+  defs-name-casing:
+    description: Schema $defs names should be PascalCase (the dominant convention in this API).
+    severity: warn
+    given: $..$defs
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: pascal
+  no-empty-descriptions:
+    description: Descriptions must not be empty strings.
+    severity: warn
+    given: $..description
+    then:
+      function: truthy
