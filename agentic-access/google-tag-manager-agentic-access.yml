@@ -1,0 +1,964 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/google-tag-manager-api-v2-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 44
+  by_action_class:
+    connected: 18
+    acting: 26
+  by_consequence:
+    read: 18
+    write: 26
+  human_in_the_loop_required: 0
+operations:
+- path: /tagmanager/v2/accounts
+  method: get
+  operationId: listAccounts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{path}
+  method: get
+  operationId: getAccount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{path}
+  method: put
+  operationId: updateAccount
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{parent}/containers
+  method: get
+  operationId: listContainers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{parent}/containers
+  method: post
+  operationId: createContainer
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{containerPath}
+  method: get
+  operationId: getContainer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{containerPath}
+  method: put
+  operationId: updateContainer
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{containerPath}
+  method: delete
+  operationId: deleteContainer
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{parent}/workspaces
+  method: get
+  operationId: listWorkspaces
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{parent}/workspaces
+  method: post
+  operationId: createWorkspace
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{workspacePath}
+  method: get
+  operationId: getWorkspace
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{workspacePath}
+  method: put
+  operationId: updateWorkspace
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{workspacePath}
+  method: delete
+  operationId: deleteWorkspace
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{workspacePath}:create_version
+  method: post
+  operationId: createWorkspaceVersion
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{workspacePath}/status
+  method: get
+  operationId: getWorkspaceStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{workspacePath}:sync
+  method: post
+  operationId: syncWorkspace
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{parent}/tags
+  method: get
+  operationId: listTags
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{parent}/tags
+  method: post
+  operationId: createTag
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{tagPath}
+  method: get
+  operationId: getTag
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{tagPath}
+  method: put
+  operationId: updateTag
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{tagPath}
+  method: delete
+  operationId: deleteTag
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{tagPath}:revert
+  method: post
+  operationId: revertTag
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{parent}/triggers
+  method: get
+  operationId: listTriggers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{parent}/triggers
+  method: post
+  operationId: createTrigger
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{triggerPath}
+  method: get
+  operationId: getTrigger
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{triggerPath}
+  method: put
+  operationId: updateTrigger
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{triggerPath}
+  method: delete
+  operationId: deleteTrigger
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{triggerPath}:revert
+  method: post
+  operationId: revertTrigger
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{parent}/variables
+  method: get
+  operationId: listVariables
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{parent}/variables
+  method: post
+  operationId: createVariable
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{variablePath}
+  method: get
+  operationId: getVariable
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{variablePath}
+  method: put
+  operationId: updateVariable
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{variablePath}
+  method: delete
+  operationId: deleteVariable
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{variablePath}:revert
+  method: post
+  operationId: revertVariable
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{parent}/versions
+  method: get
+  operationId: listContainerVersionHeaders
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{versionPath}
+  method: get
+  operationId: getContainerVersion
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{versionPath}
+  method: delete
+  operationId: deleteContainerVersion
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{versionPath}:publish
+  method: post
+  operationId: publishContainerVersion
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{parent}/versions:live
+  method: get
+  operationId: getLiveContainerVersion
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{parent}/user_permissions
+  method: get
+  operationId: listUserPermissions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{parent}/user_permissions
+  method: post
+  operationId: createUserPermission
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{userPermissionPath}
+  method: get
+  operationId: getUserPermission
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{userPermissionPath}
+  method: put
+  operationId: updateUserPermission
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly
+- path: /tagmanager/v2/{userPermissionPath}
+  method: delete
+  operationId: deleteUserPermission
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - tagmanager.delete.containers
+    - tagmanager.edit.containers
+    - tagmanager.edit.containerversions
+    - tagmanager.manage.accounts
+    - tagmanager.manage.users
+    - tagmanager.publish
+    - tagmanager.readonly

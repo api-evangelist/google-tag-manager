@@ -82,6 +82,8 @@ apis:
         url: https://support.google.com/tagmanager
         email: ''
 common:
+  - type: AgenticAccess
+    url: agentic-access/google-tag-manager-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/google-tag-manager-vulnerability-disclosure.yml
   - type: DomainSecurity
