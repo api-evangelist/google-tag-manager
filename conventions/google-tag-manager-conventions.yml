@@ -1,0 +1,58 @@
+generated: '2026-06-20'
+method: derived
+source: >-
+  openapi/google-tag-manager-api-v2-openapi.yml +
+  https://developers.google.com/tag-platform/tag-manager/api/v2/devguide
+authentication:
+  style: oauth2
+  flows: [authorizationCode]
+  token_type: Bearer
+  detail: authentication/google-tag-manager-authentication.yml
+  scopes: scopes/google-tag-manager-scopes.yml
+resource_paths:
+  style: hierarchical-path
+  note: >-
+    Resources are addressed by a hierarchical resource path, e.g.
+    accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}/tags/{tag_id}.
+    Path, parent, containerPath, workspacePath, tagPath, etc. parameters carry
+    these composite paths.
+pagination:
+  style: cursor
+  request_params: [pageToken]
+  response_fields: [nextPageToken]
+  note: List operations return nextPageToken; pass it as pageToken to fetch the next page.
+concurrency:
+  style: optimistic
+  mechanism: fingerprint
+  request_param: fingerprint
+  conflict_status: 409
+  note: >-
+    Each resource carries a fingerprint that changes on every modification.
+    Update/delete accept a fingerprint query parameter; the operation succeeds
+    only if it matches storage, otherwise HTTP 409 (ABORTED) is returned. This
+    is Tag Manager's concurrency-safety mechanism rather than an Idempotency-Key.
+idempotency:
+  header: null
+  note: No Idempotency-Key header; safe retries rely on fingerprint-based optimistic concurrency.
+versioning:
+  style: uri-path
+  current: v2
+  detail: lifecycle/google-tag-manager-lifecycle.yml
+error_envelope:
+  format: google-json-error
+  container: error
+  fields: [code, message, status, errors]
+  detail: errors/google-tag-manager-problem-types.yml
+rate_limiting:
+  signaling: HTTP 429 / RESOURCE_EXHAUSTED
+  docs: https://developers.google.com/tag-platform/tag-manager/api/v2/limits-quotas
+  detail: rate-limits/google-tag-manager-rate-limits.yml
+request_tracing:
+  request_id_header: null
+  note: No documented client-facing request-id header.
+data_formats:
+  media_type: application/json
+  workspace_model: >-
+    Changes are staged in a workspace, then committed as an immutable container
+    version, which is then published to become the live version. Tags, triggers,
+    and variables are edited within a workspace and reverted via revert* ops.

@@ -1,0 +1,99 @@
+generated: '2026-06-20'
+method: derived
+source: >-
+  openapi/google-tag-manager-api-v2-openapi.yml (resource paths + schemas) +
+  https://developers.google.com/tag-platform/tag-manager/api/reference/rest
+notes: >-
+  Entity-relationship graph derived from the Tag Manager v2 resource hierarchy
+  (path segments) and schema id-reference fields. Resources are addressed by a
+  composite resource path; each id field below is the segment used to build it.
+entities:
+- name: Account
+  id_field: accountId
+  path_segment: accounts/{accountId}
+- name: Container
+  id_field: containerId
+  path_segment: containers/{containerId}
+- name: Workspace
+  id_field: workspaceId
+  path_segment: workspaces/{workspaceId}
+- name: ContainerVersion
+  id_field: containerVersionId
+  path_segment: versions/{containerVersionId}
+- name: Tag
+  id_field: tagId
+  path_segment: tags/{tagId}
+- name: Trigger
+  id_field: triggerId
+  path_segment: triggers/{triggerId}
+- name: Variable
+  id_field: variableId
+  path_segment: variables/{variableId}
+- name: UserPermission
+  id_field: path
+  path_segment: user_permissions/{userPermissionId}
+relationships:
+- from: Account
+  to: Container
+  type: has_many
+  via: accountId
+- from: Account
+  to: UserPermission
+  type: has_many
+  via: accountId
+- from: Container
+  to: Account
+  type: belongs_to
+  via: accountId
+- from: Container
+  to: Workspace
+  type: has_many
+  via: containerId
+- from: Container
+  to: ContainerVersion
+  type: has_many
+  via: containerId
+- from: Container
+  to: ContainerVersion
+  type: has_one
+  via: liveVersion
+  note: getLiveContainerVersion returns the currently published version.
+- from: Workspace
+  to: Container
+  type: belongs_to
+  via: containerId
+- from: Workspace
+  to: Tag
+  type: has_many
+  via: workspaceId
+- from: Workspace
+  to: Trigger
+  type: has_many
+  via: workspaceId
+- from: Workspace
+  to: Variable
+  type: has_many
+  via: workspaceId
+- from: ContainerVersion
+  to: Tag
+  type: has_many
+  via: snapshot
+  note: A version is an immutable snapshot of the tags/triggers/variables at publish time.
+- from: ContainerVersion
+  to: Trigger
+  type: has_many
+  via: snapshot
+- from: ContainerVersion
+  to: Variable
+  type: has_many
+  via: snapshot
+- from: Tag
+  to: Trigger
+  type: has_many
+  via: firingTriggerId
+  note: Tags reference triggers by id in firingTriggerId and blockingTriggerId.
+- from: Trigger
+  to: Variable
+  type: references
+  via: filter/condition
+  note: Trigger conditions reference variables (built-in or user-defined).

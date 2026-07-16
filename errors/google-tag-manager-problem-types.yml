@@ -1,0 +1,78 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/google-tag-manager-api-v2-openapi.yml
+format: google-json-error
+envelope:
+  container: error
+  fields:
+    code: HTTP status code (integer)
+    message: human-readable error message
+    status: canonical Google API status enum (e.g. NOT_FOUND, PERMISSION_DENIED)
+    errors: array of {message, domain, reason} detail objects
+  content_type: application/json
+  note: >-
+    Google Tag Manager API v2 returns the standard Google JSON error format,
+    not RFC 9457 application/problem+json. The status codes below are those the
+    OpenAPI declares on operations; 429/500/503 are standard Google API errors
+    documented across the platform and included for completeness.
+problems:
+- status: 400
+  reason: badRequest
+  status_enum: INVALID_ARGUMENT
+  title: Invalid request
+  description: Request body or parameters failed validation (e.g. malformed entity, bad fingerprint format).
+  source_operations:
+  - "openapi/google-tag-manager-api-v2-openapi.yml#updateAccount"
+  - "openapi/google-tag-manager-api-v2-openapi.yml#createContainer"
+  remediation: Correct the request payload/parameters and retry.
+- status: 401
+  reason: authError
+  status_enum: UNAUTHENTICATED
+  title: Authentication required
+  description: Missing or invalid OAuth 2.0 credentials.
+  source_operations:
+  - "openapi/google-tag-manager-api-v2-openapi.yml#listAccounts"
+  remediation: Provide a valid OAuth 2.0 bearer token with the required tagmanager scope.
+- status: 403
+  reason: insufficientPermissions
+  status_enum: PERMISSION_DENIED
+  title: Insufficient permissions
+  description: The authenticated user lacks the required permission/scope for the resource.
+  source_operations:
+  - "openapi/google-tag-manager-api-v2-openapi.yml#listAccounts"
+  remediation: Grant the user the needed account/container permission and request the matching OAuth scope.
+- status: 404
+  reason: notFound
+  status_enum: NOT_FOUND
+  title: Resource not found
+  description: The requested account, container, workspace, tag, trigger, variable, or version does not exist.
+  source_operations:
+  - "openapi/google-tag-manager-api-v2-openapi.yml#getAccount"
+  - "openapi/google-tag-manager-api-v2-openapi.yml#getContainer"
+  remediation: Verify the resource path and that the resource exists.
+- status: 409
+  reason: conflict
+  status_enum: ABORTED
+  title: Fingerprint mismatch (conflict)
+  description: The supplied fingerprint does not match the stored resource fingerprint, indicating a concurrent modification.
+  source_operations:
+  - "openapi/google-tag-manager-api-v2-openapi.yml#updateAccount"
+  remediation: Re-fetch the resource to obtain the current fingerprint, reapply changes, and retry.
+- status: 429
+  reason: rateLimitExceeded
+  status_enum: RESOURCE_EXHAUSTED
+  title: Quota / rate limit exceeded
+  description: The project or user exceeded the API request quota (see limits-quotas docs).
+  remediation: Back off and retry with exponential backoff; request higher quota if needed.
+- status: 500
+  reason: backendError
+  status_enum: INTERNAL
+  title: Internal server error
+  description: An unexpected error occurred on the Tag Manager backend.
+  remediation: Retry with exponential backoff; if persistent, contact Google support.
+- status: 503
+  reason: backendError
+  status_enum: UNAVAILABLE
+  title: Service unavailable
+  description: The service is temporarily unavailable.
+  remediation: Retry with exponential backoff.

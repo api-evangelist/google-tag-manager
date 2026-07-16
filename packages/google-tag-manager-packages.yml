@@ -1,0 +1,60 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  Google APIs client libraries (https://developers.google.com/tag-platform/tag-manager/api/v2/libraries)
+  and the public package registries. Google ships auto-generated per-service
+  clients for the Tag Manager API v2 inside its language-wide API client
+  libraries; the service module name is "tagmanager" version "v2".
+packages:
+- language: python
+  registry: pypi
+  name: google-api-python-client
+  url: https://pypi.org/project/google-api-python-client/
+  install: pip install google-api-python-client
+  usage: build('tagmanager', 'v2', credentials=creds)
+  official: true
+- language: javascript
+  registry: npm
+  name: googleapis
+  url: https://www.npmjs.com/package/googleapis
+  install: npm install googleapis
+  usage: google.tagmanager('v2')
+  official: true
+- language: go
+  registry: pkg.go.dev
+  name: google.golang.org/api/tagmanager/v2
+  url: https://pkg.go.dev/google.golang.org/api/tagmanager/v2
+  install: go get google.golang.org/api/tagmanager/v2
+  official: true
+- language: java
+  registry: maven
+  name: com.google.apis:google-api-services-tagmanager
+  url: https://central.sonatype.com/artifact/com.google.apis/google-api-services-tagmanager
+  install: "implementation 'com.google.apis:google-api-services-tagmanager:v2-rev...'"
+  official: true
+- language: dotnet
+  registry: nuget
+  name: Google.Apis.TagManager.v2
+  url: https://www.nuget.org/packages/Google.Apis.TagManager.v2
+  install: dotnet add package Google.Apis.TagManager.v2
+  official: true
+- language: ruby
+  registry: rubygems
+  name: google-apis-tagmanager_v2
+  url: https://rubygems.org/gems/google-apis-tagmanager_v2
+  install: gem install google-apis-tagmanager_v2
+  official: true
+- language: php
+  registry: packagist
+  name: google/apiclient
+  url: https://packagist.org/packages/google/apiclient
+  install: composer require google/apiclient
+  usage: new Google\Service\TagManager($client)
+  official: true
+- language: dart
+  registry: pub.dev
+  name: googleapis
+  url: https://pub.dev/packages/googleapis
+  install: dart pub add googleapis
+  usage: TagManagerApi(client)
+  official: true

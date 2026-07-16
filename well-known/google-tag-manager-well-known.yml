@@ -1,0 +1,44 @@
+generated: '2026-06-20'
+method: searched
+source: live probe of API host + Google identity provider hosts referenced in OpenAPI securitySchemes
+notes: >-
+  The Tag Manager API host (tagmanager.googleapis.com) and docs host
+  (developers.google.com) expose no /.well-known/ discovery documents (all 404).
+  The OAuth 2.0 / OIDC discovery documents below belong to the Google identity
+  provider (accounts.google.com), which is the authorizationUrl/issuer the Tag
+  Manager API's oauth2 security scheme delegates to.
+hosts:
+- host: https://tagmanager.googleapis.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+- host: https://developers.google.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+- host: https://accounts.google.com
+  role: identity-provider
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: google-tag-manager-openid-configuration.json
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: google-tag-manager-oauth-authorization-server.json
+security_txt:
+  note: >-
+    No security.txt on the API or docs host. Google publishes an org-wide
+    security.txt at https://www.google.com/.well-known/security.txt (VRP /
+    g.co/vrp) — captured in security/google-tag-manager-vulnerability-disclosure.yml.

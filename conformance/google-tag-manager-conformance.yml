@@ -1,0 +1,42 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/google-tag-manager-api-v2-openapi.yml
+notes: >-
+  Standards conformance derived from the OpenAPI 3.1 spec and Google API
+  conventions. Google's public REST APIs use the Google JSON error format
+  (an error object with code/message/status/errors[]), not RFC 9457
+  application/problem+json.
+standards:
+- id: oauth2
+  conforms: true
+  evidence: securitySchemes.oauth2 type oauth2, authorizationCode flow (accounts.google.com / oauth2.googleapis.com)
+- id: oidc
+  conforms: true
+  evidence: authorization delegates to accounts.google.com which publishes /.well-known/openid-configuration (200)
+- id: rfc8414-oauth-authorization-server-metadata
+  conforms: true
+  evidence: accounts.google.com/.well-known/oauth-authorization-server returns 200
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: uses Google JSON error envelope, not application/problem+json
+- id: json-api
+  conforms: false
+- id: pagination
+  conforms: true
+  evidence: cursor pagination via pageToken request param and nextPageToken response field
+- id: idempotency
+  conforms: partial
+  evidence: no Idempotency-Key header; optimistic concurrency via fingerprint query param (409 on mismatch)
+- id: openapi-3.1
+  conforms: true
+  evidence: openapi/google-tag-manager-api-v2-openapi.yml is OpenAPI 3.1.0
+- id: fhir-r4
+  conforms: false
+- id: fapi
+  conforms: false
+- id: scim
+  conforms: false
+- id: odata
+  conforms: false
+- id: psd2
+  conforms: false

@@ -1,6 +1,7 @@
-generated: '2026-07-11'
-method: derived
+generated: '2026-06-20'
+method: searched
 source: openapi/google-tag-manager-api-v2-openapi.yml
+docs: https://developers.google.com/tag-platform/tag-manager/api/v2/authorization
 schemes:
 - name: oauth2
   source: openapi/google-tag-manager-api-v2-openapi.yml

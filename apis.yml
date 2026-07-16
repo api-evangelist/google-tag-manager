@@ -6,7 +6,7 @@ description: >-
 image: https://www.gstatic.com/analytics-suite/header/suite/v2/ic_tag_manager.svg
 url: https://tagmanager.google.com/
 created: '2024-01-01'
-modified: '2026-05-19'
+modified: '2026-06-20'
 specificationVersion: '0.19'
 type: Index
 tags:
@@ -84,6 +84,30 @@ apis:
 common:
   - type: AgenticAccess
     url: agentic-access/google-tag-manager-agentic-access.yml
+  - type: Packages
+    url: packages/google-tag-manager-packages.yml
+  - type: WellKnown
+    url: well-known/google-tag-manager-well-known.yml
+  - type: MCPServer
+    url: mcp/google-tag-manager-mcp.yml
+  - type: LLMsTxt
+    url: llms/google-tag-manager-llms.txt
+  - type: Overlay
+    url: overlays/google-tag-manager-api-v2-overlay.yaml
+  - type: Conformance
+    url: conformance/google-tag-manager-conformance.yml
+  - type: ErrorCatalog
+    url: errors/google-tag-manager-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/google-tag-manager-lifecycle.yml
+  - type: Conventions
+    url: conventions/google-tag-manager-conventions.yml
+  - type: DataModel
+    url: data-model/google-tag-manager-data-model.yml
+  - type: Components
+    url: components/google-tag-manager-components.yml
+  - type: ChangeLog
+    url: changelog/google-tag-manager-changelog.yml
   - type: VulnerabilityDisclosure
     url: security/google-tag-manager-vulnerability-disclosure.yml
   - type: DomainSecurity

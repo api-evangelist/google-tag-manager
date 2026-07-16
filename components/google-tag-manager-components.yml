@@ -1,0 +1,49 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://developers.google.com/tag-platform/tag-manager/web +
+  https://developers.google.com/tag-platform/tag-manager/datalayer
+notes: >-
+  Distinct from the server-side SDKs in packages/. These are the client-side,
+  embeddable Tag Manager runtime surfaces installed on a web page or app. The
+  REST API (v2) configures containers; these components are how a container is
+  loaded and fed data in the browser.
+families:
+- name: Web container snippet
+  kind: client-side loader
+  loader: https://www.googletagmanager.com/gtm.js?id=GTM-XXXXXXX
+  install: >-
+    Two-part install: an async <script> in <head> that loads gtm.js, plus a
+    <noscript> <iframe> fallback (googletagmanager.com/ns.html) immediately
+    after the opening <body> tag.
+  docs: https://developers.google.com/tag-platform/tag-manager/web
+- name: dataLayer
+  kind: JavaScript data interface
+  loader: window.dataLayer
+  install: "window.dataLayer = window.dataLayer || []; dataLayer.push({ ... });"
+  note: >-
+    The structured queue used to pass page/event/variable data from the page
+    into Tag Manager for use in triggers and variables.
+  docs: https://developers.google.com/tag-platform/tag-manager/datalayer
+- name: Google tag (gtag.js)
+  kind: client-side loader
+  loader: https://www.googletagmanager.com/gtag/js?id=TAG_ID
+  note: >-
+    The Google tag shares the googletagmanager.com delivery surface and can be
+    managed through a GTM container; commonly used for Google Analytics 4 and
+    Google Ads.
+  docs: https://developers.google.com/tag-platform/gtagjs
+- name: Consent Mode
+  kind: client-side API
+  loader: gtag('consent', 'default'|'update', {...})
+  note: >-
+    Client-side consent-state API that gates how tags in the container behave
+    for privacy compliance (GDPR/CCPA).
+  docs: https://developers.google.com/tag-platform/security/guides/consent
+- name: Server-side container
+  kind: hosted/prebuilt runtime
+  note: >-
+    A server-side tagging container runs on customer-provisioned infrastructure
+    (e.g. Google Cloud Run / App Engine) and receives client requests, running
+    server tags/clients/variables. Configured via the Server-side Tagging API.
+  docs: https://developers.google.com/tag-platform/tag-manager/server-side

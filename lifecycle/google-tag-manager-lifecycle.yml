@@ -1,0 +1,31 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://developers.google.com/tag-platform/tag-manager/api/v2 +
+  Google API deprecation policy + Google Cloud status dashboard
+versioning:
+  scheme: uri-path
+  current: v2
+  path_prefix: /tagmanager/v2
+  docs: https://developers.google.com/tag-platform/tag-manager/api/v2
+  note: >-
+    v1 of the Tag Manager API was deprecated and shut down; v2 is the current
+    and only supported version. Version is pinned in the URL path and in the
+    client-library service constructor (tagmanager, v2).
+deprecation:
+  policy_url: https://cloud.google.com/terms/deprecation
+  sunset_header: false
+  deprecation_header: false
+  note: >-
+    Google follows a published deprecation policy for its APIs (generally
+    advance notice before a version is decommissioned). The Tag Manager REST
+    API does not emit RFC 8594 Sunset/Deprecation response headers; deprecation
+    is communicated via docs, release notes, and email.
+sla:
+  url: null
+  uptime_target: null
+  note: No standalone published SLA for the Tag Manager API.
+status_page: https://status.cloud.google.com/
+changelog: https://support.google.com/tagmanager/answer/4620708
+release_notes: https://developers.google.com/tag-platform/tag-manager/server-side/release-notes
+deprecated_operations: []

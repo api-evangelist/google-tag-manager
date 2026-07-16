@@ -1,0 +1,46 @@
+generated: '2026-06-20'
+method: searched
+source: https://developers.google.com/tag-platform/tag-manager/server-side/release-notes
+also:
+  web_help_changelog: https://support.google.com/tagmanager/answer/4620708
+scheme: semver
+subject: Server-side Tagging container (server image)
+note: >-
+  Google publishes dated release notes for the server-side tagging container
+  image (versioned semver). The REST API v2 itself has no separate dated
+  changelog; product/UI changes are announced via the Tag Manager help center
+  (see web_help_changelog). Recent window captured below.
+current_version: 4.3.0
+entries:
+- version: 4.3.0
+  date: '2026-04-28'
+  breaking: false
+  highlights: [Updated base image version for security updates.]
+- version: 4.2.0
+  date: '2026-02-02'
+  breaking: false
+  highlights: [Updated base image version for security updates.]
+- version: 4.0.0
+  date: '2025-11-10'
+  breaking: true
+  highlights: [Upgraded to Node.js v24 (base image gcr.io/distroless/nodejs24-debian13).]
+- version: 3.2.0
+  date: '2025-09-02'
+  breaking: false
+  highlights: [Updated NPM packages including @google-cloud/bigquery 8.1.1 and re2 1.22.1.]
+- version: 3.1.0
+  date: '2025-06-05'
+  breaking: false
+  highlights: [Updated base image for security updates (Node.js 22.16.0).]
+- version: 3.0.0
+  date: '2025-05-15'
+  breaking: true
+  highlights: [Upgraded to Node.js v22 (base image gcr.io/distroless/nodejs22-debian12).]
+- version: 2.4.0
+  date: '2024-09-26'
+  breaking: false
+  highlights: [Updated base image version for security updates.]
+- version: 2.3.0
+  date: '2024-02-20'
+  breaking: false
+  highlights: [Updated base image for security updates (Node.js 18.19.1).]
