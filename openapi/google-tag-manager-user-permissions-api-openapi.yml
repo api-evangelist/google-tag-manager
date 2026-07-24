@@ -1,0 +1,330 @@
+openapi: 3.1.0
+info:
+  title: Google Tag Manager Accounts User Permissions API
+  description: The Google Tag Manager API v2 allows clients to access and modify Google Tag Manager account, container, workspace, tag, trigger, and variable configurations. It provides programmatic management of tag deployment, trigger conditions, and variable definitions across web, mobile, and server-side containers.
+  version: 2.0.0
+  termsOfService: https://policies.google.com/terms
+  contact:
+    name: Google Support
+    url: https://support.google.com/tagmanager
+  license:
+    name: Google APIs Terms of Service
+    url: https://developers.google.com/terms
+servers:
+- url: https://tagmanager.googleapis.com
+  description: Google Tag Manager API Production Server
+security:
+- oauth2:
+  - tagmanager.readonly
+  - tagmanager.edit.containers
+  - tagmanager.manage.accounts
+  - tagmanager.manage.users
+  - tagmanager.publish
+  - tagmanager.edit.containerversions
+  - tagmanager.delete.containers
+tags:
+- name: User Permissions
+  description: Operations for managing user permissions on Google Tag Manager accounts.
+paths:
+  /tagmanager/v2/{parent}/user_permissions:
+    get:
+      operationId: listUserPermissions
+      summary: Google Tag Manager List User Permissions for an Account
+      description: List all users that have access to the account along with Account and Container user access granted to each of them.
+      tags:
+      - User Permissions
+      parameters:
+      - $ref: '#/components/parameters/parentParam'
+      - name: pageToken
+        in: query
+        description: Continuation token for fetching the next page of results.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Successful response containing a list of user permissions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListUserPermissionsResponse'
+              examples:
+                Listuserpermissions200Example:
+                  summary: Default listUserPermissions 200 response
+                  x-microcks-default: true
+                  value:
+                    userPermission:
+                    - path: example_value
+                      accountId: '500123'
+                      emailAddress: user@example.com
+                      containerAccess: {}
+                    nextPageToken: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createUserPermission
+      summary: Google Tag Manager Create a User Permission
+      description: Creates a user's Account and Container access within a GTM Account.
+      tags:
+      - User Permissions
+      parameters:
+      - $ref: '#/components/parameters/parentParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserPermission'
+            examples:
+              CreateuserpermissionRequestExample:
+                summary: Default createUserPermission request
+                x-microcks-default: true
+                value:
+                  path: example_value
+                  accountId: '500123'
+                  emailAddress: user@example.com
+                  accountAccess:
+                    permission: accountPermissionUnspecified
+                  containerAccess:
+                  - containerId: '500123'
+                    permission: containerPermissionUnspecified
+      responses:
+        '200':
+          description: Successful response containing the created user permission.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPermission'
+              examples:
+                Createuserpermission200Example:
+                  summary: Default createUserPermission 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    emailAddress: user@example.com
+                    accountAccess:
+                      permission: accountPermissionUnspecified
+                    containerAccess:
+                    - containerId: '500123'
+                      permission: containerPermissionUnspecified
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /tagmanager/v2/{userPermissionPath}:
+    get:
+      operationId: getUserPermission
+      summary: Google Tag Manager Get a User Permission
+      description: Gets a user's Account and Container access.
+      tags:
+      - User Permissions
+      parameters:
+      - name: userPermissionPath
+        in: path
+        required: true
+        description: GTM UserPermission's API relative path.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Successful response containing the user permission.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPermission'
+              examples:
+                Getuserpermission200Example:
+                  summary: Default getUserPermission 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    emailAddress: user@example.com
+                    accountAccess:
+                      permission: accountPermissionUnspecified
+                    containerAccess:
+                    - containerId: '500123'
+                      permission: containerPermissionUnspecified
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateUserPermission
+      summary: Google Tag Manager Update a User Permission
+      description: Updates a user's Account and Container access.
+      tags:
+      - User Permissions
+      parameters:
+      - name: userPermissionPath
+        in: path
+        required: true
+        description: GTM UserPermission's API relative path.
+        schema:
+          type: string
+        example: example_value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserPermission'
+            examples:
+              UpdateuserpermissionRequestExample:
+                summary: Default updateUserPermission request
+                x-microcks-default: true
+                value:
+                  path: example_value
+                  accountId: '500123'
+                  emailAddress: user@example.com
+                  accountAccess:
+                    permission: accountPermissionUnspecified
+                  containerAccess:
+                  - containerId: '500123'
+                    permission: containerPermissionUnspecified
+      responses:
+        '200':
+          description: Successful response containing the updated user permission.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPermission'
+              examples:
+                Updateuserpermission200Example:
+                  summary: Default updateUserPermission 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    emailAddress: user@example.com
+                    accountAccess:
+                      permission: accountPermissionUnspecified
+                    containerAccess:
+                    - containerId: '500123'
+                      permission: containerPermissionUnspecified
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteUserPermission
+      summary: Google Tag Manager Delete a User Permission
+      description: Removes a user from the account, revoking access.
+      tags:
+      - User Permissions
+      parameters:
+      - name: userPermissionPath
+        in: path
+        required: true
+        description: GTM UserPermission's API relative path.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '204':
+          description: User permission successfully deleted.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    parentParam:
+      name: parent
+      in: path
+      required: true
+      description: GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers.
+      schema:
+        type: string
+  schemas:
+    ListUserPermissionsResponse:
+      type: object
+      description: List user permissions response.
+      properties:
+        userPermission:
+          type: array
+          description: All GTM UserPermissions of a GTM Account.
+          items:
+            $ref: '#/components/schemas/UserPermission'
+          example: []
+        nextPageToken:
+          type: string
+          description: Continuation token for fetching the next page of results.
+          example: example_value
+    UserPermission:
+      type: object
+      description: Represents a user's permission settings for a Google Tag Manager Account and its Containers.
+      properties:
+        path:
+          type: string
+          description: GTM UserPermission's API relative path.
+          readOnly: true
+          example: example_value
+        accountId:
+          type: string
+          description: The Account ID uniquely identifies the GTM Account.
+          readOnly: true
+          example: '500123'
+        emailAddress:
+          type: string
+          format: email
+          description: User's email address.
+          example: user@example.com
+        accountAccess:
+          $ref: '#/components/schemas/AccountAccess'
+        containerAccess:
+          type: array
+          description: GTM Container access permissions.
+          items:
+            $ref: '#/components/schemas/ContainerAccess'
+          example: []
+    AccountAccess:
+      type: object
+      description: Defines the Google Tag Manager Account access permissions.
+      properties:
+        permission:
+          type: string
+          description: Whether the user has no access, user access, or admin access to the account.
+          enum:
+          - accountPermissionUnspecified
+          - noAccess
+          - user
+          - admin
+          example: accountPermissionUnspecified
+    ContainerAccess:
+      type: object
+      description: Defines the Google Tag Manager Container access permissions.
+      properties:
+        containerId:
+          type: string
+          description: GTM Container ID.
+          example: '500123'
+        permission:
+          type: string
+          description: List of Container permissions. Valid values include noAccess, read, edit, approve, and publish.
+          enum:
+          - containerPermissionUnspecified
+          - noAccess
+          - read
+          - edit
+          - approve
+          - publish
+          example: containerPermissionUnspecified
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for Google Tag Manager API.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/v2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            tagmanager.readonly: View your Google Tag Manager container and its subcomponents.
+            tagmanager.edit.containers: Manage your Google Tag Manager container and its subcomponents, excluding versioning and publishing.
+            tagmanager.manage.accounts: View and manage your Google Tag Manager accounts.
+            tagmanager.manage.users: Manage user permissions of your Google Tag Manager account and container.
+            tagmanager.publish: Publish your Google Tag Manager container versions.
+            tagmanager.edit.containerversions: Manage your Google Tag Manager container versions.
+            tagmanager.delete.containers: Delete your Google Tag Manager containers.
+externalDocs:
+  description: Google Tag Manager API Documentation
+  url: https://developers.google.com/tag-platform/tag-manager/api/v2

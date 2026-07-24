@@ -1,0 +1,795 @@
+openapi: 3.1.0
+info:
+  title: Google Tag Manager Accounts Tagmanager API
+  description: The Google Tag Manager API v2 allows clients to access and modify Google Tag Manager account, container, workspace, tag, trigger, and variable configurations. It provides programmatic management of tag deployment, trigger conditions, and variable definitions across web, mobile, and server-side containers.
+  version: 2.0.0
+  termsOfService: https://policies.google.com/terms
+  contact:
+    name: Google Support
+    url: https://support.google.com/tagmanager
+  license:
+    name: Google APIs Terms of Service
+    url: https://developers.google.com/terms
+servers:
+- url: https://tagmanager.googleapis.com
+  description: Google Tag Manager API Production Server
+security:
+- oauth2:
+  - tagmanager.readonly
+  - tagmanager.edit.containers
+  - tagmanager.manage.accounts
+  - tagmanager.manage.users
+  - tagmanager.publish
+  - tagmanager.edit.containerversions
+  - tagmanager.delete.containers
+tags:
+- name: Tagmanager
+paths:
+  /tagmanager/v2/{parent}/tags:
+    get:
+      operationId: listTags
+      summary: Google Tag Manager List Tags in a Workspace
+      description: Lists all GTM Tags of a GTM Container Workspace.
+      tags:
+      - Tagmanager
+      parameters:
+      - $ref: '#/components/parameters/parentParam'
+      - name: pageToken
+        in: query
+        description: Continuation token for fetching the next page of results.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Successful response containing a list of tags.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsResponse'
+              examples:
+                Listtags200Example:
+                  summary: Default listTags 200 response
+                  x-microcks-default: true
+                  value:
+                    tag:
+                    - path: example_value
+                      accountId: '500123'
+                      containerId: '500123'
+                      workspaceId: '500123'
+                      tagId: '500123'
+                      name: Example Title
+                      type: example_value
+                      liveOnly: true
+                      notes: example_value
+                      scheduleStartMs: example_value
+                      scheduleEndMs: example_value
+                      parameter: {}
+                      fingerprint: example_value
+                      firingTriggerId: {}
+                      blockingTriggerId: {}
+                      setupTag: {}
+                      teardownTag: {}
+                      parentFolderId: '500123'
+                      tagFiringOption: tagFiringOptionUnspecified
+                      tagManagerUrl: https://www.example.com
+                      paused: true
+                      monitoringMetadataTagNameKey: example_value
+                    nextPageToken: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createTag
+      summary: Google Tag Manager Create a Tag
+      description: Creates a GTM Tag in a GTM Workspace.
+      tags:
+      - Tagmanager
+      parameters:
+      - $ref: '#/components/parameters/parentParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tag'
+            examples:
+              CreatetagRequestExample:
+                summary: Default createTag request
+                x-microcks-default: true
+                value:
+                  path: example_value
+                  accountId: '500123'
+                  containerId: '500123'
+                  workspaceId: '500123'
+                  tagId: '500123'
+                  name: Example Title
+                  type: example_value
+                  liveOnly: true
+                  priority:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  notes: example_value
+                  scheduleStartMs: example_value
+                  scheduleEndMs: example_value
+                  parameter:
+                  - type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list: {}
+                    map: {}
+                    isWeakReference: true
+                  fingerprint: example_value
+                  firingTriggerId:
+                  - example_value
+                  blockingTriggerId:
+                  - example_value
+                  setupTag:
+                  - tagName: example_value
+                    stopOnSetupFailure: true
+                  teardownTag:
+                  - tagName: example_value
+                    stopTeardownOnFailure: true
+                  parentFolderId: '500123'
+                  tagFiringOption: tagFiringOptionUnspecified
+                  tagManagerUrl: https://www.example.com
+                  paused: true
+                  monitoringMetadata:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  monitoringMetadataTagNameKey: example_value
+                  consentSettings:
+                    consentStatus: notSet
+      responses:
+        '200':
+          description: Successful response containing the created tag.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+              examples:
+                Createtag200Example:
+                  summary: Default createTag 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    containerId: '500123'
+                    workspaceId: '500123'
+                    tagId: '500123'
+                    name: Example Title
+                    type: example_value
+                    liveOnly: true
+                    priority:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    notes: example_value
+                    scheduleStartMs: example_value
+                    scheduleEndMs: example_value
+                    parameter:
+                    - type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list: {}
+                      map: {}
+                      isWeakReference: true
+                    fingerprint: example_value
+                    firingTriggerId:
+                    - example_value
+                    blockingTriggerId:
+                    - example_value
+                    setupTag:
+                    - tagName: example_value
+                      stopOnSetupFailure: true
+                    teardownTag:
+                    - tagName: example_value
+                      stopTeardownOnFailure: true
+                    parentFolderId: '500123'
+                    tagFiringOption: tagFiringOptionUnspecified
+                    tagManagerUrl: https://www.example.com
+                    paused: true
+                    monitoringMetadata:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    monitoringMetadataTagNameKey: example_value
+                    consentSettings:
+                      consentStatus: notSet
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /tagmanager/v2/{tagPath}:
+    get:
+      operationId: getTag
+      summary: Google Tag Manager Get a Tag
+      description: Gets a GTM Tag by its resource path.
+      tags:
+      - Tagmanager
+      parameters:
+      - name: tagPath
+        in: path
+        required: true
+        description: GTM Tag's API relative path, e.g. accounts/{accountId}/containers/{containerId}/workspaces/{workspaceId}/tags/{tagId}.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Successful response containing the tag.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+              examples:
+                Gettag200Example:
+                  summary: Default getTag 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    containerId: '500123'
+                    workspaceId: '500123'
+                    tagId: '500123'
+                    name: Example Title
+                    type: example_value
+                    liveOnly: true
+                    priority:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    notes: example_value
+                    scheduleStartMs: example_value
+                    scheduleEndMs: example_value
+                    parameter:
+                    - type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list: {}
+                      map: {}
+                      isWeakReference: true
+                    fingerprint: example_value
+                    firingTriggerId:
+                    - example_value
+                    blockingTriggerId:
+                    - example_value
+                    setupTag:
+                    - tagName: example_value
+                      stopOnSetupFailure: true
+                    teardownTag:
+                    - tagName: example_value
+                      stopTeardownOnFailure: true
+                    parentFolderId: '500123'
+                    tagFiringOption: tagFiringOptionUnspecified
+                    tagManagerUrl: https://www.example.com
+                    paused: true
+                    monitoringMetadata:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    monitoringMetadataTagNameKey: example_value
+                    consentSettings:
+                      consentStatus: notSet
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateTag
+      summary: Google Tag Manager Update a Tag
+      description: Updates a GTM Tag.
+      tags:
+      - Tagmanager
+      parameters:
+      - name: tagPath
+        in: path
+        required: true
+        description: GTM Tag's API relative path.
+        schema:
+          type: string
+        example: example_value
+      - name: fingerprint
+        in: query
+        description: When provided, this fingerprint must match the fingerprint of the tag in storage.
+        schema:
+          type: string
+        example: example_value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tag'
+            examples:
+              UpdatetagRequestExample:
+                summary: Default updateTag request
+                x-microcks-default: true
+                value:
+                  path: example_value
+                  accountId: '500123'
+                  containerId: '500123'
+                  workspaceId: '500123'
+                  tagId: '500123'
+                  name: Example Title
+                  type: example_value
+                  liveOnly: true
+                  priority:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  notes: example_value
+                  scheduleStartMs: example_value
+                  scheduleEndMs: example_value
+                  parameter:
+                  - type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list: {}
+                    map: {}
+                    isWeakReference: true
+                  fingerprint: example_value
+                  firingTriggerId:
+                  - example_value
+                  blockingTriggerId:
+                  - example_value
+                  setupTag:
+                  - tagName: example_value
+                    stopOnSetupFailure: true
+                  teardownTag:
+                  - tagName: example_value
+                    stopTeardownOnFailure: true
+                  parentFolderId: '500123'
+                  tagFiringOption: tagFiringOptionUnspecified
+                  tagManagerUrl: https://www.example.com
+                  paused: true
+                  monitoringMetadata:
+                    type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list:
+                    - {}
+                    map:
+                    - {}
+                    isWeakReference: true
+                  monitoringMetadataTagNameKey: example_value
+                  consentSettings:
+                    consentStatus: notSet
+      responses:
+        '200':
+          description: Successful response containing the updated tag.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+              examples:
+                Updatetag200Example:
+                  summary: Default updateTag 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    containerId: '500123'
+                    workspaceId: '500123'
+                    tagId: '500123'
+                    name: Example Title
+                    type: example_value
+                    liveOnly: true
+                    priority:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    notes: example_value
+                    scheduleStartMs: example_value
+                    scheduleEndMs: example_value
+                    parameter:
+                    - type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list: {}
+                      map: {}
+                      isWeakReference: true
+                    fingerprint: example_value
+                    firingTriggerId:
+                    - example_value
+                    blockingTriggerId:
+                    - example_value
+                    setupTag:
+                    - tagName: example_value
+                      stopOnSetupFailure: true
+                    teardownTag:
+                    - tagName: example_value
+                      stopTeardownOnFailure: true
+                    parentFolderId: '500123'
+                    tagFiringOption: tagFiringOptionUnspecified
+                    tagManagerUrl: https://www.example.com
+                    paused: true
+                    monitoringMetadata:
+                      type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list:
+                      - {}
+                      map:
+                      - {}
+                      isWeakReference: true
+                    monitoringMetadataTagNameKey: example_value
+                    consentSettings:
+                      consentStatus: notSet
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteTag
+      summary: Google Tag Manager Delete a Tag
+      description: Deletes a GTM Tag.
+      tags:
+      - Tagmanager
+      parameters:
+      - name: tagPath
+        in: path
+        required: true
+        description: GTM Tag's API relative path.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '204':
+          description: Tag successfully deleted.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /tagmanager/v2/{tagPath}:revert:
+    post:
+      operationId: revertTag
+      summary: Google Tag Manager Revert Changes to a Tag in a Workspace
+      description: Reverts changes to a GTM Tag in a GTM Workspace, restoring it to its original state.
+      tags:
+      - Tagmanager
+      parameters:
+      - name: tagPath
+        in: path
+        required: true
+        description: GTM Tag's API relative path.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Successful response confirming the tag was reverted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RevertTagResponse'
+              examples:
+                Reverttag200Example:
+                  summary: Default revertTag 200 response
+                  x-microcks-default: true
+                  value:
+                    tag:
+                      path: example_value
+                      accountId: '500123'
+                      containerId: '500123'
+                      workspaceId: '500123'
+                      tagId: '500123'
+                      name: Example Title
+                      type: example_value
+                      liveOnly: true
+                      notes: example_value
+                      scheduleStartMs: example_value
+                      scheduleEndMs: example_value
+                      parameter:
+                      - {}
+                      fingerprint: example_value
+                      firingTriggerId:
+                      - {}
+                      blockingTriggerId:
+                      - {}
+                      setupTag:
+                      - {}
+                      teardownTag:
+                      - {}
+                      parentFolderId: '500123'
+                      tagFiringOption: tagFiringOptionUnspecified
+                      tagManagerUrl: https://www.example.com
+                      paused: true
+                      monitoringMetadataTagNameKey: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ConsentSettings:
+      type: object
+      description: Tag consent settings.
+      properties:
+        consentStatus:
+          type: string
+          description: The tag's consent status.
+          enum:
+          - notSet
+          - notNeeded
+          - needed
+          example: notSet
+        consentType:
+          $ref: '#/components/schemas/Parameter'
+    RevertTagResponse:
+      type: object
+      description: The result of reverting a tag in a workspace.
+      properties:
+        tag:
+          $ref: '#/components/schemas/Tag'
+    SetupTag:
+      type: object
+      description: Represents a setup tag relationship. A setup tag fires before the main tag.
+      properties:
+        tagName:
+          type: string
+          description: The name of the setup tag.
+          example: example_value
+        stopOnSetupFailure:
+          type: boolean
+          description: If true, fire the main tag only if the setup tag fires successfully. If false, fire the main tag regardless of setup tag firing status.
+          example: true
+    Tag:
+      type: object
+      description: Represents a Google Tag Manager Tag. A tag is a snippet of code that executes on a page when certain conditions (triggers) are met.
+      properties:
+        path:
+          type: string
+          description: GTM Tag's API relative path.
+          readOnly: true
+          example: example_value
+        accountId:
+          type: string
+          description: GTM Account ID.
+          readOnly: true
+          example: '500123'
+        containerId:
+          type: string
+          description: GTM Container ID.
+          readOnly: true
+          example: '500123'
+        workspaceId:
+          type: string
+          description: GTM Workspace ID.
+          readOnly: true
+          example: '500123'
+        tagId:
+          type: string
+          description: The Tag ID uniquely identifies the GTM Tag.
+          readOnly: true
+          example: '500123'
+        name:
+          type: string
+          description: Tag display name.
+          example: Example Title
+        type:
+          type: string
+          description: GTM Tag Type. Common types include ua (Universal Analytics), gaawc (Google Analytics GA4 Configuration), gaawe (Google Analytics GA4 Event), awct (Google Ads Conversion Tracking), sp (Custom Script), html (Custom HTML), img (Custom Image), and flc (Floodlight Counter).
+          example: example_value
+        liveOnly:
+          type: boolean
+          description: If set to true, this tag will only fire in the live environment (not in preview or debug mode).
+          example: true
+        priority:
+          $ref: '#/components/schemas/Parameter'
+        notes:
+          type: string
+          description: User notes on how to apply this tag in the container.
+          example: example_value
+        scheduleStartMs:
+          type: string
+          format: int64
+          description: The start timestamp in milliseconds to schedule a tag. The tag will only fire after this time.
+          example: example_value
+        scheduleEndMs:
+          type: string
+          format: int64
+          description: The end timestamp in milliseconds to schedule a tag. The tag will stop firing after this time.
+          example: example_value
+        parameter:
+          type: array
+          description: The tag's parameters, which configure its behavior.
+          items:
+            $ref: '#/components/schemas/Parameter'
+          example: []
+        fingerprint:
+          type: string
+          description: The fingerprint of the GTM Tag as computed at storage time. This value is recomputed whenever the tag is modified.
+          readOnly: true
+          example: example_value
+        firingTriggerId:
+          type: array
+          description: Firing trigger IDs. A tag will fire when any of the listed triggers are true and all of its blockingTriggerIds (if any specified) are false.
+          items:
+            type: string
+          example: '500123'
+        blockingTriggerId:
+          type: array
+          description: Blocking trigger IDs. If any of the listed triggers evaluates to true, the tag will not fire.
+          items:
+            type: string
+          example: '500123'
+        setupTag:
+          type: array
+          description: The list of setup tags. Currently, only one setup tag is allowed per tag.
+          items:
+            $ref: '#/components/schemas/SetupTag'
+          example: []
+        teardownTag:
+          type: array
+          description: The list of teardown tags. Currently, only one teardown tag is allowed per tag.
+          items:
+            $ref: '#/components/schemas/TeardownTag'
+          example: []
+        parentFolderId:
+          type: string
+          description: Parent folder ID.
+          example: '500123'
+        tagFiringOption:
+          type: string
+          description: Option to fire this tag.
+          enum:
+          - tagFiringOptionUnspecified
+          - unlimited
+          - oncePerEvent
+          - oncePerLoad
+          example: tagFiringOptionUnspecified
+        tagManagerUrl:
+          type: string
+          format: uri
+          description: Auto-generated link to the tag manager UI.
+          readOnly: true
+          example: https://www.example.com
+        paused:
+          type: boolean
+          description: Indicates whether the tag is paused, which prevents the tag from firing.
+          example: true
+        monitoringMetadata:
+          $ref: '#/components/schemas/Parameter'
+        monitoringMetadataTagNameKey:
+          type: string
+          description: If non-empty, then the tag display name will be included in the monitoring metadata map using the key specified.
+          example: example_value
+        consentSettings:
+          $ref: '#/components/schemas/ConsentSettings'
+      required:
+      - name
+      - type
+    TeardownTag:
+      type: object
+      description: Represents a teardown tag relationship. A teardown tag fires after the main tag.
+      properties:
+        tagName:
+          type: string
+          description: The name of the teardown tag.
+          example: example_value
+        stopTeardownOnFailure:
+          type: boolean
+          description: If true, fire the teardown tag if and only if the main tag fires successfully. If false, fire the teardown tag regardless of main tag firing status.
+          example: true
+    ListTagsResponse:
+      type: object
+      description: List Tags Response.
+      properties:
+        tag:
+          type: array
+          description: All GTM Tags of a GTM Container Workspace.
+          items:
+            $ref: '#/components/schemas/Tag'
+          example: []
+        nextPageToken:
+          type: string
+          description: Continuation token for fetching the next page of results.
+          example: example_value
+    Parameter:
+      type: object
+      description: Represents a Google Tag Manager Parameter. Parameters are key-value pairs that configure tags, triggers, and variables.
+      properties:
+        type:
+          type: string
+          description: The parameter type.
+          enum:
+          - typeUnspecified
+          - template
+          - integer
+          - boolean
+          - list
+          - map
+          - triggerReference
+          - tagReference
+          example: typeUnspecified
+        key:
+          type: string
+          description: The named key that uniquely identifies a parameter. Required for top-level parameters, as well as map values. Ignored for list values.
+          example: example_value
+        value:
+          type: string
+          description: A parameter's value (may contain variable references) as appropriate to the specified type.
+          example: example_value
+        list:
+          type: array
+          description: This list parameter's parameters (keys will be ignored). Used when type is list.
+          items:
+            $ref: '#/components/schemas/Parameter'
+          example: []
+        map:
+          type: array
+          description: This map parameter's parameters (must have keys; keys must be unique). Used when type is map.
+          items:
+            $ref: '#/components/schemas/Parameter'
+          example: []
+        isWeakReference:
+          type: boolean
+          description: Whether or not the parameter is a weak reference. Used to determine which parameters should be included in exported containers.
+          example: true
+      required:
+      - type
+  parameters:
+    parentParam:
+      name: parent
+      in: path
+      required: true
+      description: GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers.
+      schema:
+        type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for Google Tag Manager API.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/v2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            tagmanager.readonly: View your Google Tag Manager container and its subcomponents.
+            tagmanager.edit.containers: Manage your Google Tag Manager container and its subcomponents, excluding versioning and publishing.
+            tagmanager.manage.accounts: View and manage your Google Tag Manager accounts.
+            tagmanager.manage.users: Manage user permissions of your Google Tag Manager account and container.
+            tagmanager.publish: Publish your Google Tag Manager container versions.
+            tagmanager.edit.containerversions: Manage your Google Tag Manager container versions.
+            tagmanager.delete.containers: Delete your Google Tag Manager containers.
+externalDocs:
+  description: Google Tag Manager API Documentation
+  url: https://developers.google.com/tag-platform/tag-manager/api/v2

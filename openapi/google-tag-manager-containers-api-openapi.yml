@@ -1,0 +1,549 @@
+openapi: 3.1.0
+info:
+  title: Google Tag Manager Accounts Containers API
+  description: The Google Tag Manager API v2 allows clients to access and modify Google Tag Manager account, container, workspace, tag, trigger, and variable configurations. It provides programmatic management of tag deployment, trigger conditions, and variable definitions across web, mobile, and server-side containers.
+  version: 2.0.0
+  termsOfService: https://policies.google.com/terms
+  contact:
+    name: Google Support
+    url: https://support.google.com/tagmanager
+  license:
+    name: Google APIs Terms of Service
+    url: https://developers.google.com/terms
+servers:
+- url: https://tagmanager.googleapis.com
+  description: Google Tag Manager API Production Server
+security:
+- oauth2:
+  - tagmanager.readonly
+  - tagmanager.edit.containers
+  - tagmanager.manage.accounts
+  - tagmanager.manage.users
+  - tagmanager.publish
+  - tagmanager.edit.containerversions
+  - tagmanager.delete.containers
+tags:
+- name: Containers
+  description: Operations for managing containers within a Google Tag Manager account.
+paths:
+  /tagmanager/v2/{parent}/containers:
+    get:
+      operationId: listContainers
+      summary: Google Tag Manager List Containers in an Account
+      description: Lists all Containers that belongs to a GTM Account.
+      tags:
+      - Containers
+      parameters:
+      - $ref: '#/components/parameters/parentParam'
+      - name: pageToken
+        in: query
+        description: Continuation token for fetching the next page of results.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Successful response containing a list of containers.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListContainersResponse'
+              examples:
+                Listcontainers200Example:
+                  summary: Default listContainers 200 response
+                  x-microcks-default: true
+                  value:
+                    container:
+                    - path: example_value
+                      accountId: '500123'
+                      containerId: '500123'
+                      name: Example Title
+                      domainName: {}
+                      publicId: '500123'
+                      tagIds: {}
+                      notes: example_value
+                      usageContext: {}
+                      fingerprint: example_value
+                      tagManagerUrl: https://www.example.com
+                      taggingServerUrls: {}
+                    nextPageToken: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createContainer
+      summary: Google Tag Manager Create a Container
+      description: Creates a Container within a GTM Account.
+      tags:
+      - Containers
+      parameters:
+      - $ref: '#/components/parameters/parentParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Container'
+            examples:
+              CreatecontainerRequestExample:
+                summary: Default createContainer request
+                x-microcks-default: true
+                value:
+                  path: example_value
+                  accountId: '500123'
+                  containerId: '500123'
+                  name: Example Title
+                  domainName:
+                  - example_value
+                  publicId: '500123'
+                  tagIds:
+                  - example_value
+                  notes: example_value
+                  usageContext:
+                  - usageContextUnspecified
+                  fingerprint: example_value
+                  tagManagerUrl: https://www.example.com
+                  taggingServerUrls:
+                  - https://www.example.com
+                  features:
+                    supportUserPermissions: true
+                    supportEnvironments: true
+                    supportWorkspaces: true
+                    supportGtagConfigs: true
+                    supportBuiltInVariables: true
+                    supportClients: true
+                    supportFolders: true
+                    supportTags: true
+                    supportTemplates: true
+                    supportTriggers: true
+                    supportVariables: true
+                    supportVersions: true
+                    supportZones: true
+                    supportTransformations: true
+      responses:
+        '200':
+          description: Successful response containing the created container.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Container'
+              examples:
+                Createcontainer200Example:
+                  summary: Default createContainer 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    containerId: '500123'
+                    name: Example Title
+                    domainName:
+                    - example_value
+                    publicId: '500123'
+                    tagIds:
+                    - example_value
+                    notes: example_value
+                    usageContext:
+                    - usageContextUnspecified
+                    fingerprint: example_value
+                    tagManagerUrl: https://www.example.com
+                    taggingServerUrls:
+                    - https://www.example.com
+                    features:
+                      supportUserPermissions: true
+                      supportEnvironments: true
+                      supportWorkspaces: true
+                      supportGtagConfigs: true
+                      supportBuiltInVariables: true
+                      supportClients: true
+                      supportFolders: true
+                      supportTags: true
+                      supportTemplates: true
+                      supportTriggers: true
+                      supportVariables: true
+                      supportVersions: true
+                      supportZones: true
+                      supportTransformations: true
+        '400':
+          description: Invalid request.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /tagmanager/v2/{containerPath}:
+    get:
+      operationId: getContainer
+      summary: Google Tag Manager Get a Container
+      description: Gets a Container by its resource path.
+      tags:
+      - Containers
+      parameters:
+      - name: containerPath
+        in: path
+        required: true
+        description: GTM Container's API relative path, e.g. accounts/{accountId}/containers/{containerId}.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Successful response containing the container.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Container'
+              examples:
+                Getcontainer200Example:
+                  summary: Default getContainer 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    containerId: '500123'
+                    name: Example Title
+                    domainName:
+                    - example_value
+                    publicId: '500123'
+                    tagIds:
+                    - example_value
+                    notes: example_value
+                    usageContext:
+                    - usageContextUnspecified
+                    fingerprint: example_value
+                    tagManagerUrl: https://www.example.com
+                    taggingServerUrls:
+                    - https://www.example.com
+                    features:
+                      supportUserPermissions: true
+                      supportEnvironments: true
+                      supportWorkspaces: true
+                      supportGtagConfigs: true
+                      supportBuiltInVariables: true
+                      supportClients: true
+                      supportFolders: true
+                      supportTags: true
+                      supportTemplates: true
+                      supportTriggers: true
+                      supportVariables: true
+                      supportVersions: true
+                      supportZones: true
+                      supportTransformations: true
+        '404':
+          description: Container not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateContainer
+      summary: Google Tag Manager Update a Container
+      description: Updates a Container.
+      tags:
+      - Containers
+      parameters:
+      - name: containerPath
+        in: path
+        required: true
+        description: GTM Container's API relative path.
+        schema:
+          type: string
+        example: example_value
+      - name: fingerprint
+        in: query
+        description: When provided, this fingerprint must match the fingerprint of the container in storage.
+        schema:
+          type: string
+        example: example_value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Container'
+            examples:
+              UpdatecontainerRequestExample:
+                summary: Default updateContainer request
+                x-microcks-default: true
+                value:
+                  path: example_value
+                  accountId: '500123'
+                  containerId: '500123'
+                  name: Example Title
+                  domainName:
+                  - example_value
+                  publicId: '500123'
+                  tagIds:
+                  - example_value
+                  notes: example_value
+                  usageContext:
+                  - usageContextUnspecified
+                  fingerprint: example_value
+                  tagManagerUrl: https://www.example.com
+                  taggingServerUrls:
+                  - https://www.example.com
+                  features:
+                    supportUserPermissions: true
+                    supportEnvironments: true
+                    supportWorkspaces: true
+                    supportGtagConfigs: true
+                    supportBuiltInVariables: true
+                    supportClients: true
+                    supportFolders: true
+                    supportTags: true
+                    supportTemplates: true
+                    supportTriggers: true
+                    supportVariables: true
+                    supportVersions: true
+                    supportZones: true
+                    supportTransformations: true
+      responses:
+        '200':
+          description: Successful response containing the updated container.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Container'
+              examples:
+                Updatecontainer200Example:
+                  summary: Default updateContainer 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    containerId: '500123'
+                    name: Example Title
+                    domainName:
+                    - example_value
+                    publicId: '500123'
+                    tagIds:
+                    - example_value
+                    notes: example_value
+                    usageContext:
+                    - usageContextUnspecified
+                    fingerprint: example_value
+                    tagManagerUrl: https://www.example.com
+                    taggingServerUrls:
+                    - https://www.example.com
+                    features:
+                      supportUserPermissions: true
+                      supportEnvironments: true
+                      supportWorkspaces: true
+                      supportGtagConfigs: true
+                      supportBuiltInVariables: true
+                      supportClients: true
+                      supportFolders: true
+                      supportTags: true
+                      supportTemplates: true
+                      supportTriggers: true
+                      supportVariables: true
+                      supportVersions: true
+                      supportZones: true
+                      supportTransformations: true
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteContainer
+      summary: Google Tag Manager Delete a Container
+      description: Deletes a Container.
+      tags:
+      - Containers
+      parameters:
+      - name: containerPath
+        in: path
+        required: true
+        description: GTM Container's API relative path.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '204':
+          description: Container successfully deleted.
+        '404':
+          description: Container not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ListContainersResponse:
+      type: object
+      description: List Containers Response.
+      properties:
+        container:
+          type: array
+          description: All Containers of a GTM Account.
+          items:
+            $ref: '#/components/schemas/Container'
+          example: []
+        nextPageToken:
+          type: string
+          description: Continuation token for fetching the next page of results.
+          example: example_value
+    ContainerFeatures:
+      type: object
+      description: Read-only container feature set.
+      properties:
+        supportUserPermissions:
+          type: boolean
+          readOnly: true
+          example: true
+        supportEnvironments:
+          type: boolean
+          readOnly: true
+          example: true
+        supportWorkspaces:
+          type: boolean
+          readOnly: true
+          example: true
+        supportGtagConfigs:
+          type: boolean
+          readOnly: true
+          example: true
+        supportBuiltInVariables:
+          type: boolean
+          readOnly: true
+          example: true
+        supportClients:
+          type: boolean
+          readOnly: true
+          example: true
+        supportFolders:
+          type: boolean
+          readOnly: true
+          example: true
+        supportTags:
+          type: boolean
+          readOnly: true
+          example: true
+        supportTemplates:
+          type: boolean
+          readOnly: true
+          example: true
+        supportTriggers:
+          type: boolean
+          readOnly: true
+          example: true
+        supportVariables:
+          type: boolean
+          readOnly: true
+          example: true
+        supportVersions:
+          type: boolean
+          readOnly: true
+          example: true
+        supportZones:
+          type: boolean
+          readOnly: true
+          example: true
+        supportTransformations:
+          type: boolean
+          readOnly: true
+          example: true
+    Container:
+      type: object
+      description: Represents a Google Tag Manager Container, which is a collection of tags, triggers, and variables used on a website or mobile app.
+      properties:
+        path:
+          type: string
+          description: GTM Container's API relative path.
+          readOnly: true
+          example: example_value
+        accountId:
+          type: string
+          description: GTM Account ID.
+          readOnly: true
+          example: '500123'
+        containerId:
+          type: string
+          description: The Container ID uniquely identifies the GTM Container.
+          readOnly: true
+          example: '500123'
+        name:
+          type: string
+          description: Container display name.
+          example: Example Title
+        domainName:
+          type: array
+          description: List of domain names associated with the Container. This is used for auto-event tracking and link decoration.
+          items:
+            type: string
+          example: []
+        publicId:
+          type: string
+          description: Container Public ID (e.g., GTM-XXXX).
+          readOnly: true
+          example: '500123'
+        tagIds:
+          type: array
+          description: All Tag IDs that refer to this Container.
+          items:
+            type: string
+          readOnly: true
+          example: []
+        notes:
+          type: string
+          description: Container Notes.
+          example: example_value
+        usageContext:
+          type: array
+          description: List of Usage Contexts for the Container. Valid values include web, android, ios, and server.
+          items:
+            type: string
+            enum:
+            - usageContextUnspecified
+            - web
+            - android
+            - ios
+            - androidSdk5
+            - iosSdk5
+            - amp
+            - server
+          example: []
+        fingerprint:
+          type: string
+          description: The fingerprint of the GTM Container as computed at storage time. This value is recomputed whenever the container is modified.
+          readOnly: true
+          example: example_value
+        tagManagerUrl:
+          type: string
+          format: uri
+          description: Auto-generated link to the tag manager UI.
+          readOnly: true
+          example: https://www.example.com
+        taggingServerUrls:
+          type: array
+          description: List of server-side container URLs for the Container.
+          items:
+            type: string
+            format: uri
+          example: https://www.example.com
+        features:
+          $ref: '#/components/schemas/ContainerFeatures'
+      required:
+      - name
+      - usageContext
+  parameters:
+    parentParam:
+      name: parent
+      in: path
+      required: true
+      description: GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers.
+      schema:
+        type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for Google Tag Manager API.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/v2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            tagmanager.readonly: View your Google Tag Manager container and its subcomponents.
+            tagmanager.edit.containers: Manage your Google Tag Manager container and its subcomponents, excluding versioning and publishing.
+            tagmanager.manage.accounts: View and manage your Google Tag Manager accounts.
+            tagmanager.manage.users: Manage user permissions of your Google Tag Manager account and container.
+            tagmanager.publish: Publish your Google Tag Manager container versions.
+            tagmanager.edit.containerversions: Manage your Google Tag Manager container versions.
+            tagmanager.delete.containers: Delete your Google Tag Manager containers.
+externalDocs:
+  description: Google Tag Manager API Documentation
+  url: https://developers.google.com/tag-platform/tag-manager/api/v2

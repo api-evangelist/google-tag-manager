@@ -1,0 +1,587 @@
+openapi: 3.1.0
+info:
+  title: Google Tag Manager Accounts Variables API
+  description: The Google Tag Manager API v2 allows clients to access and modify Google Tag Manager account, container, workspace, tag, trigger, and variable configurations. It provides programmatic management of tag deployment, trigger conditions, and variable definitions across web, mobile, and server-side containers.
+  version: 2.0.0
+  termsOfService: https://policies.google.com/terms
+  contact:
+    name: Google Support
+    url: https://support.google.com/tagmanager
+  license:
+    name: Google APIs Terms of Service
+    url: https://developers.google.com/terms
+servers:
+- url: https://tagmanager.googleapis.com
+  description: Google Tag Manager API Production Server
+security:
+- oauth2:
+  - tagmanager.readonly
+  - tagmanager.edit.containers
+  - tagmanager.manage.accounts
+  - tagmanager.manage.users
+  - tagmanager.publish
+  - tagmanager.edit.containerversions
+  - tagmanager.delete.containers
+tags:
+- name: Variables
+  description: Operations for managing variables within a workspace that provide dynamic values to tags and triggers.
+paths:
+  /tagmanager/v2/{parent}/variables:
+    get:
+      operationId: listVariables
+      summary: Google Tag Manager List Variables in a Workspace
+      description: Lists all GTM Variables of a GTM Container Workspace.
+      tags:
+      - Variables
+      parameters:
+      - $ref: '#/components/parameters/parentParam'
+      - name: pageToken
+        in: query
+        description: Continuation token for fetching the next page of results.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Successful response containing a list of variables.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListVariablesResponse'
+              examples:
+                Listvariables200Example:
+                  summary: Default listVariables 200 response
+                  x-microcks-default: true
+                  value:
+                    variable:
+                    - path: example_value
+                      accountId: '500123'
+                      containerId: '500123'
+                      workspaceId: '500123'
+                      variableId: '500123'
+                      name: Example Title
+                      type: example_value
+                      notes: example_value
+                      scheduleStartMs: example_value
+                      scheduleEndMs: example_value
+                      parameter: {}
+                      enablingTriggerId: {}
+                      disablingTriggerId: {}
+                      fingerprint: example_value
+                      parentFolderId: '500123'
+                      tagManagerUrl: https://www.example.com
+                    nextPageToken: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createVariable
+      summary: Google Tag Manager Create a Variable
+      description: Creates a GTM Variable in a GTM Workspace.
+      tags:
+      - Variables
+      parameters:
+      - $ref: '#/components/parameters/parentParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Variable'
+            examples:
+              CreatevariableRequestExample:
+                summary: Default createVariable request
+                x-microcks-default: true
+                value:
+                  path: example_value
+                  accountId: '500123'
+                  containerId: '500123'
+                  workspaceId: '500123'
+                  variableId: '500123'
+                  name: Example Title
+                  type: example_value
+                  notes: example_value
+                  scheduleStartMs: example_value
+                  scheduleEndMs: example_value
+                  parameter:
+                  - type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list: {}
+                    map: {}
+                    isWeakReference: true
+                  enablingTriggerId:
+                  - example_value
+                  disablingTriggerId:
+                  - example_value
+                  fingerprint: example_value
+                  parentFolderId: '500123'
+                  tagManagerUrl: https://www.example.com
+                  formatValue:
+                    caseConversionType: none
+      responses:
+        '200':
+          description: Successful response containing the created variable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Variable'
+              examples:
+                Createvariable200Example:
+                  summary: Default createVariable 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    containerId: '500123'
+                    workspaceId: '500123'
+                    variableId: '500123'
+                    name: Example Title
+                    type: example_value
+                    notes: example_value
+                    scheduleStartMs: example_value
+                    scheduleEndMs: example_value
+                    parameter:
+                    - type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list: {}
+                      map: {}
+                      isWeakReference: true
+                    enablingTriggerId:
+                    - example_value
+                    disablingTriggerId:
+                    - example_value
+                    fingerprint: example_value
+                    parentFolderId: '500123'
+                    tagManagerUrl: https://www.example.com
+                    formatValue:
+                      caseConversionType: none
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /tagmanager/v2/{variablePath}:
+    get:
+      operationId: getVariable
+      summary: Google Tag Manager Get a Variable
+      description: Gets a GTM Variable by its resource path.
+      tags:
+      - Variables
+      parameters:
+      - name: variablePath
+        in: path
+        required: true
+        description: GTM Variable's API relative path, e.g. accounts/{accountId}/containers/{containerId}/workspaces/{workspaceId}/variables/{variableId}.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Successful response containing the variable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Variable'
+              examples:
+                Getvariable200Example:
+                  summary: Default getVariable 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    containerId: '500123'
+                    workspaceId: '500123'
+                    variableId: '500123'
+                    name: Example Title
+                    type: example_value
+                    notes: example_value
+                    scheduleStartMs: example_value
+                    scheduleEndMs: example_value
+                    parameter:
+                    - type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list: {}
+                      map: {}
+                      isWeakReference: true
+                    enablingTriggerId:
+                    - example_value
+                    disablingTriggerId:
+                    - example_value
+                    fingerprint: example_value
+                    parentFolderId: '500123'
+                    tagManagerUrl: https://www.example.com
+                    formatValue:
+                      caseConversionType: none
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateVariable
+      summary: Google Tag Manager Update a Variable
+      description: Updates a GTM Variable.
+      tags:
+      - Variables
+      parameters:
+      - name: variablePath
+        in: path
+        required: true
+        description: GTM Variable's API relative path.
+        schema:
+          type: string
+        example: example_value
+      - name: fingerprint
+        in: query
+        description: When provided, this fingerprint must match the fingerprint of the variable in storage.
+        schema:
+          type: string
+        example: example_value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Variable'
+            examples:
+              UpdatevariableRequestExample:
+                summary: Default updateVariable request
+                x-microcks-default: true
+                value:
+                  path: example_value
+                  accountId: '500123'
+                  containerId: '500123'
+                  workspaceId: '500123'
+                  variableId: '500123'
+                  name: Example Title
+                  type: example_value
+                  notes: example_value
+                  scheduleStartMs: example_value
+                  scheduleEndMs: example_value
+                  parameter:
+                  - type: typeUnspecified
+                    key: example_value
+                    value: example_value
+                    list: {}
+                    map: {}
+                    isWeakReference: true
+                  enablingTriggerId:
+                  - example_value
+                  disablingTriggerId:
+                  - example_value
+                  fingerprint: example_value
+                  parentFolderId: '500123'
+                  tagManagerUrl: https://www.example.com
+                  formatValue:
+                    caseConversionType: none
+      responses:
+        '200':
+          description: Successful response containing the updated variable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Variable'
+              examples:
+                Updatevariable200Example:
+                  summary: Default updateVariable 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    containerId: '500123'
+                    workspaceId: '500123'
+                    variableId: '500123'
+                    name: Example Title
+                    type: example_value
+                    notes: example_value
+                    scheduleStartMs: example_value
+                    scheduleEndMs: example_value
+                    parameter:
+                    - type: typeUnspecified
+                      key: example_value
+                      value: example_value
+                      list: {}
+                      map: {}
+                      isWeakReference: true
+                    enablingTriggerId:
+                    - example_value
+                    disablingTriggerId:
+                    - example_value
+                    fingerprint: example_value
+                    parentFolderId: '500123'
+                    tagManagerUrl: https://www.example.com
+                    formatValue:
+                      caseConversionType: none
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteVariable
+      summary: Google Tag Manager Delete a Variable
+      description: Deletes a GTM Variable.
+      tags:
+      - Variables
+      parameters:
+      - name: variablePath
+        in: path
+        required: true
+        description: GTM Variable's API relative path.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '204':
+          description: Variable successfully deleted.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /tagmanager/v2/{variablePath}:revert:
+    post:
+      operationId: revertVariable
+      summary: Google Tag Manager Revert Changes to a Variable in a Workspace
+      description: Reverts changes to a GTM Variable in a GTM Workspace, restoring it to its original state.
+      tags:
+      - Variables
+      parameters:
+      - name: variablePath
+        in: path
+        required: true
+        description: GTM Variable's API relative path.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Successful response confirming the variable was reverted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RevertVariableResponse'
+              examples:
+                Revertvariable200Example:
+                  summary: Default revertVariable 200 response
+                  x-microcks-default: true
+                  value:
+                    variable:
+                      path: example_value
+                      accountId: '500123'
+                      containerId: '500123'
+                      workspaceId: '500123'
+                      variableId: '500123'
+                      name: Example Title
+                      type: example_value
+                      notes: example_value
+                      scheduleStartMs: example_value
+                      scheduleEndMs: example_value
+                      parameter:
+                      - {}
+                      enablingTriggerId:
+                      - {}
+                      disablingTriggerId:
+                      - {}
+                      fingerprint: example_value
+                      parentFolderId: '500123'
+                      tagManagerUrl: https://www.example.com
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    RevertVariableResponse:
+      type: object
+      description: The result of reverting a variable in a workspace.
+      properties:
+        variable:
+          $ref: '#/components/schemas/Variable'
+    FormatValue:
+      type: object
+      description: Option to convert a variable value to another value.
+      properties:
+        caseConversionType:
+          type: string
+          description: The option to convert a string-type variable value to either lowercase or uppercase.
+          enum:
+          - none
+          - lowercase
+          - uppercase
+          example: none
+        convertNullToValue:
+          $ref: '#/components/schemas/Parameter'
+        convertUndefinedToValue:
+          $ref: '#/components/schemas/Parameter'
+        convertTrueToValue:
+          $ref: '#/components/schemas/Parameter'
+        convertFalseToValue:
+          $ref: '#/components/schemas/Parameter'
+    ListVariablesResponse:
+      type: object
+      description: List Variables Response.
+      properties:
+        variable:
+          type: array
+          description: All GTM Variables of a GTM Container Workspace.
+          items:
+            $ref: '#/components/schemas/Variable'
+          example: []
+        nextPageToken:
+          type: string
+          description: Continuation token for fetching the next page of results.
+          example: example_value
+    Parameter:
+      type: object
+      description: Represents a Google Tag Manager Parameter. Parameters are key-value pairs that configure tags, triggers, and variables.
+      properties:
+        type:
+          type: string
+          description: The parameter type.
+          enum:
+          - typeUnspecified
+          - template
+          - integer
+          - boolean
+          - list
+          - map
+          - triggerReference
+          - tagReference
+          example: typeUnspecified
+        key:
+          type: string
+          description: The named key that uniquely identifies a parameter. Required for top-level parameters, as well as map values. Ignored for list values.
+          example: example_value
+        value:
+          type: string
+          description: A parameter's value (may contain variable references) as appropriate to the specified type.
+          example: example_value
+        list:
+          type: array
+          description: This list parameter's parameters (keys will be ignored). Used when type is list.
+          items:
+            $ref: '#/components/schemas/Parameter'
+          example: []
+        map:
+          type: array
+          description: This map parameter's parameters (must have keys; keys must be unique). Used when type is map.
+          items:
+            $ref: '#/components/schemas/Parameter'
+          example: []
+        isWeakReference:
+          type: boolean
+          description: Whether or not the parameter is a weak reference. Used to determine which parameters should be included in exported containers.
+          example: true
+      required:
+      - type
+    Variable:
+      type: object
+      description: Represents a Google Tag Manager Variable. A variable provides dynamic values that can be used in tags and triggers, such as page URL, click text, or custom JavaScript values.
+      properties:
+        path:
+          type: string
+          description: GTM Variable's API relative path.
+          readOnly: true
+          example: example_value
+        accountId:
+          type: string
+          description: GTM Account ID.
+          readOnly: true
+          example: '500123'
+        containerId:
+          type: string
+          description: GTM Container ID.
+          readOnly: true
+          example: '500123'
+        workspaceId:
+          type: string
+          description: GTM Workspace ID.
+          readOnly: true
+          example: '500123'
+        variableId:
+          type: string
+          description: The Variable ID uniquely identifies the GTM Variable.
+          readOnly: true
+          example: '500123'
+        name:
+          type: string
+          description: Variable display name.
+          example: Example Title
+        type:
+          type: string
+          description: GTM Variable Type. Common types include v (Data Layer Variable), j (1st Party Cookie), k (Custom JavaScript), jsm (Custom JavaScript Variable), u (URL), c (Constant), and e (DOM Element).
+          example: example_value
+        notes:
+          type: string
+          description: User notes on how to apply this variable in the container.
+          example: example_value
+        scheduleStartMs:
+          type: string
+          format: int64
+          description: The start timestamp in milliseconds to schedule a variable.
+          example: example_value
+        scheduleEndMs:
+          type: string
+          format: int64
+          description: The end timestamp in milliseconds to schedule a variable.
+          example: example_value
+        parameter:
+          type: array
+          description: The variable's parameters, which configure its behavior.
+          items:
+            $ref: '#/components/schemas/Parameter'
+          example: []
+        enablingTriggerId:
+          type: array
+          description: For mobile containers only. A list of trigger IDs for enabling conditional variables. The variable is enabled if one of the enabling triggers is true while all of the disabling triggers are false.
+          items:
+            type: string
+          example: '500123'
+        disablingTriggerId:
+          type: array
+          description: For mobile containers only. A list of trigger IDs for disabling conditional variables.
+          items:
+            type: string
+          example: '500123'
+        fingerprint:
+          type: string
+          description: The fingerprint of the GTM Variable as computed at storage time. This value is recomputed whenever the variable is modified.
+          readOnly: true
+          example: example_value
+        parentFolderId:
+          type: string
+          description: Parent folder ID.
+          example: '500123'
+        tagManagerUrl:
+          type: string
+          format: uri
+          description: Auto-generated link to the tag manager UI.
+          readOnly: true
+          example: https://www.example.com
+        formatValue:
+          $ref: '#/components/schemas/FormatValue'
+      required:
+      - name
+      - type
+  parameters:
+    parentParam:
+      name: parent
+      in: path
+      required: true
+      description: GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers.
+      schema:
+        type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for Google Tag Manager API.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/v2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            tagmanager.readonly: View your Google Tag Manager container and its subcomponents.
+            tagmanager.edit.containers: Manage your Google Tag Manager container and its subcomponents, excluding versioning and publishing.
+            tagmanager.manage.accounts: View and manage your Google Tag Manager accounts.
+            tagmanager.manage.users: Manage user permissions of your Google Tag Manager account and container.
+            tagmanager.publish: Publish your Google Tag Manager container versions.
+            tagmanager.edit.containerversions: Manage your Google Tag Manager container versions.
+            tagmanager.delete.containers: Delete your Google Tag Manager containers.
+externalDocs:
+  description: Google Tag Manager API Documentation
+  url: https://developers.google.com/tag-platform/tag-manager/api/v2

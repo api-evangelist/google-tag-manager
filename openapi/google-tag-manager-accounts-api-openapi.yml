@@ -1,0 +1,266 @@
+openapi: 3.1.0
+info:
+  title: Google Tag Manager Accounts API
+  description: The Google Tag Manager API v2 allows clients to access and modify Google Tag Manager account, container, workspace, tag, trigger, and variable configurations. It provides programmatic management of tag deployment, trigger conditions, and variable definitions across web, mobile, and server-side containers.
+  version: 2.0.0
+  termsOfService: https://policies.google.com/terms
+  contact:
+    name: Google Support
+    url: https://support.google.com/tagmanager
+  license:
+    name: Google APIs Terms of Service
+    url: https://developers.google.com/terms
+servers:
+- url: https://tagmanager.googleapis.com
+  description: Google Tag Manager API Production Server
+security:
+- oauth2:
+  - tagmanager.readonly
+  - tagmanager.edit.containers
+  - tagmanager.manage.accounts
+  - tagmanager.manage.users
+  - tagmanager.publish
+  - tagmanager.edit.containerversions
+  - tagmanager.delete.containers
+tags:
+- name: Accounts
+  description: Operations for managing Google Tag Manager accounts.
+paths:
+  /tagmanager/v2/accounts:
+    get:
+      operationId: listAccounts
+      summary: List All Google Tag Manager Accounts
+      description: Lists all GTM Accounts that a user has access to. Returns a list of Account resources.
+      tags:
+      - Accounts
+      parameters:
+      - name: pageToken
+        in: query
+        description: Continuation token for fetching the next page of results.
+        schema:
+          type: string
+        example: example_value
+      - name: includeGoogleTags
+        in: query
+        description: Also retrieve accounts associated with Google Tag when true.
+        schema:
+          type: boolean
+        example: true
+      responses:
+        '200':
+          description: Successful response containing a list of accounts.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAccountsResponse'
+              examples:
+                Listaccounts200Example:
+                  summary: Default listAccounts 200 response
+                  x-microcks-default: true
+                  value:
+                    account:
+                    - path: example_value
+                      accountId: '500123'
+                      name: Example Title
+                      shareData: true
+                      fingerprint: example_value
+                      tagManagerUrl: https://www.example.com
+                    nextPageToken: example_value
+        '401':
+          description: Authentication required.
+        '403':
+          description: Insufficient permissions.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /tagmanager/v2/{path}:
+    get:
+      operationId: getAccount
+      summary: Get a Google Tag Manager Account
+      description: Gets a GTM Account by its resource path.
+      tags:
+      - Accounts
+      parameters:
+      - $ref: '#/components/parameters/pathParam'
+      responses:
+        '200':
+          description: Successful response containing the account.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+              examples:
+                Getaccount200Example:
+                  summary: Default getAccount 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    name: Example Title
+                    shareData: true
+                    fingerprint: example_value
+                    tagManagerUrl: https://www.example.com
+                    features:
+                      supportUserPermissions: true
+                      supportMultipleContainers: true
+        '404':
+          description: Account not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateAccount
+      summary: Update a Google Tag Manager Account
+      description: Updates a GTM Account.
+      tags:
+      - Accounts
+      parameters:
+      - $ref: '#/components/parameters/pathParam'
+      - name: fingerprint
+        in: query
+        description: When provided, this fingerprint must match the fingerprint of the account in storage.
+        schema:
+          type: string
+        example: example_value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Account'
+            examples:
+              UpdateaccountRequestExample:
+                summary: Default updateAccount request
+                x-microcks-default: true
+                value:
+                  path: example_value
+                  accountId: '500123'
+                  name: Example Title
+                  shareData: true
+                  fingerprint: example_value
+                  tagManagerUrl: https://www.example.com
+                  features:
+                    supportUserPermissions: true
+                    supportMultipleContainers: true
+      responses:
+        '200':
+          description: Successful response containing the updated account.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+              examples:
+                Updateaccount200Example:
+                  summary: Default updateAccount 200 response
+                  x-microcks-default: true
+                  value:
+                    path: example_value
+                    accountId: '500123'
+                    name: Example Title
+                    shareData: true
+                    fingerprint: example_value
+                    tagManagerUrl: https://www.example.com
+                    features:
+                      supportUserPermissions: true
+                      supportMultipleContainers: true
+        '400':
+          description: Invalid request.
+        '409':
+          description: Fingerprint mismatch indicating a conflict.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Account:
+      type: object
+      description: Represents a Google Tag Manager Account.
+      properties:
+        path:
+          type: string
+          description: GTM Account's API relative path.
+          readOnly: true
+          example: example_value
+        accountId:
+          type: string
+          description: The Account ID uniquely identifies the GTM Account.
+          readOnly: true
+          example: '500123'
+        name:
+          type: string
+          description: Account display name.
+          example: Example Title
+        shareData:
+          type: boolean
+          description: Whether the account shares data anonymously with Google and others. This flag enables benchmarking by sharing your data in an anonymous form.
+          example: true
+        fingerprint:
+          type: string
+          description: The fingerprint of the GTM Account as computed at storage time. This value is recomputed whenever the account is modified.
+          readOnly: true
+          example: example_value
+        tagManagerUrl:
+          type: string
+          format: uri
+          description: Auto-generated link to the tag manager UI.
+          readOnly: true
+          example: https://www.example.com
+        features:
+          $ref: '#/components/schemas/AccountFeatures'
+      required:
+      - name
+    ListAccountsResponse:
+      type: object
+      description: List Accounts Response.
+      properties:
+        account:
+          type: array
+          description: List of GTM Accounts that a user has access to.
+          items:
+            $ref: '#/components/schemas/Account'
+          example: []
+        nextPageToken:
+          type: string
+          description: Continuation token for fetching the next page of results.
+          example: example_value
+    AccountFeatures:
+      type: object
+      description: Read-only account feature set.
+      properties:
+        supportUserPermissions:
+          type: boolean
+          description: Whether this account has user permissions management enabled.
+          readOnly: true
+          example: true
+        supportMultipleContainers:
+          type: boolean
+          description: Whether this account supports multiple containers.
+          readOnly: true
+          example: true
+  parameters:
+    pathParam:
+      name: path
+      in: path
+      required: true
+      description: GTM resource's API relative path, e.g. accounts/{accountId}.
+      schema:
+        type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for Google Tag Manager API.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/v2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            tagmanager.readonly: View your Google Tag Manager container and its subcomponents.
+            tagmanager.edit.containers: Manage your Google Tag Manager container and its subcomponents, excluding versioning and publishing.
+            tagmanager.manage.accounts: View and manage your Google Tag Manager accounts.
+            tagmanager.manage.users: Manage user permissions of your Google Tag Manager account and container.
+            tagmanager.publish: Publish your Google Tag Manager container versions.
+            tagmanager.edit.containerversions: Manage your Google Tag Manager container versions.
+            tagmanager.delete.containers: Delete your Google Tag Manager containers.
+externalDocs:
+  description: Google Tag Manager API Documentation
+  url: https://developers.google.com/tag-platform/tag-manager/api/v2
