@@ -3,6 +3,19 @@ name: Google Tag Manager
 description: >-
   Google Tag Manager is a tag management system that allows you to quickly and easily update measurement codes and
   related code fragments collectively known as tags on your website or mobile app.
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://www.gstatic.com/analytics-suite/header/suite/v2/ic_tag_manager.svg
 url: https://tagmanager.google.com/
 created: '2024-01-01'
@@ -16,71 +29,258 @@ tags:
   - Tag Management
   - Tracking
 apis:
-  - name: Google Tag Manager API
-    description: The Tag Manager API allows clients to access and modify container and tag configuration.
-    image: https://www.gstatic.com/analytics-suite/header/suite/v2/ic_tag_manager.svg
-    humanURL: https://developers.google.com/tag-platform/tag-manager/api/v2
-    baseURL: https://tagmanager.googleapis.com
-    tags:
-      - Analytics
-      - Containers
-      - Permissions
-      - Tag Management
-      - Triggers
-      - Variables
-      - Versions
-      - Workspaces
-    properties:
-      - type: OpenAPI
-        url: openapi/google-tag-manager-api-v2-openapi.yml
-      - type: JSONSchema
-        url: json-schema/google-tag-manager-container-schema.json
-      - type: JSONLD
-        url: json-ld/google-tag-manager-context.jsonld
-      - type: Documentation
-        url: https://developers.google.com/tag-platform/tag-manager/api/v2
-      - type: APIReference
-        url: https://developers.google.com/tag-platform/tag-manager/api/reference/rest
-      - type: Authentication
-        url: https://developers.google.com/tag-platform/tag-manager/api/v2/authorization
-      - type: GettingStarted
-        url: https://developers.google.com/tag-platform/tag-manager/api/v2/devguide
-      - type: SDKs
-        url: https://developers.google.com/tag-platform/tag-manager/api/v2/libraries
-      - type: RateLimits
-        url: https://developers.google.com/tag-platform/tag-manager/api/v2/limits-quotas
-      - type: ChangeLog
-        url: https://support.google.com/tagmanager/answer/4620708
-    contact:
-      - FN: Google Support
-        url: https://support.google.com/tagmanager
-        email: ''
-  - name: Google Tag Manager Server-side Tagging API
-    description: >-
-      The Server-side Tagging API provides APIs for building custom tags, clients, and variables that run in a
-      server-side container, enabling server-to-server data collection and processing.
-    image: https://www.gstatic.com/analytics-suite/header/suite/v2/ic_tag_manager.svg
-    humanURL: https://developers.google.com/tag-platform/tag-manager/server-side
-    baseURL: https://tagmanager.googleapis.com
-    tags:
-      - Analytics
-      - Data Collection
-      - Privacy
-      - Server-Side Tagging
-      - Tag Management
-    properties:
-      - type: Documentation
-        url: https://developers.google.com/tag-platform/tag-manager/server-side
-      - type: APIReference
-        url: https://developers.google.com/tag-platform/tag-manager/server-side/api
-      - type: GettingStarted
-        url: https://developers.google.com/tag-platform/tag-manager/server-side/intro
-      - type: ReleaseNotes
-        url: https://developers.google.com/tag-platform/tag-manager/server-side/release-notes
-    contact:
-      - FN: Google Support
-        url: https://support.google.com/tagmanager
-        email: ''
+- name: Google Tag Manager Server-side Tagging API
+  description: >-
+    The Server-side Tagging API provides APIs for building custom tags, clients, and variables that run
+    in a server-side container, enabling server-to-server data collection and processing.
+  image: https://www.gstatic.com/analytics-suite/header/suite/v2/ic_tag_manager.svg
+  humanURL: https://developers.google.com/tag-platform/tag-manager/server-side
+  baseURL: https://tagmanager.googleapis.com
+  tags:
+  - Analytics
+  - Data Collection
+  - Privacy
+  - Server-Side Tagging
+  - Tag Management
+  properties:
+  - type: Documentation
+    url: https://developers.google.com/tag-platform/tag-manager/server-side
+  - type: APIReference
+    url: https://developers.google.com/tag-platform/tag-manager/server-side/api
+  - type: GettingStarted
+    url: https://developers.google.com/tag-platform/tag-manager/server-side/intro
+  - type: ReleaseNotes
+    url: https://developers.google.com/tag-platform/tag-manager/server-side/release-notes
+  contact:
+  - FN: Google Support
+    url: https://support.google.com/tagmanager
+    email: ''
+- aid: google-tag-manager:google-tag-manager-accounts-api
+  name: Google Tag Manager Accounts API
+  description: Operations for managing Google Tag Manager accounts.
+  humanURL: https://developers.google.com/tag-platform/tag-manager/api/v2
+  baseURL: https://tagmanager.googleapis.com
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/google-tag-manager-accounts-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/google-tag-manager-container-schema.json
+  - type: JSONLD
+    url: json-ld/google-tag-manager-context.jsonld
+  - type: Documentation
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2
+  - type: APIReference
+    url: https://developers.google.com/tag-platform/tag-manager/api/reference/rest
+  - type: Authentication
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/authorization
+  - type: GettingStarted
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/devguide
+  - type: SDKs
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/libraries
+  - type: RateLimits
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/limits-quotas
+  - type: ChangeLog
+    url: https://support.google.com/tagmanager/answer/4620708
+- aid: google-tag-manager:google-tag-manager-containers-api
+  name: Google Tag Manager Containers API
+  description: Operations for managing containers within a Google Tag Manager account.
+  humanURL: https://developers.google.com/tag-platform/tag-manager/api/v2
+  baseURL: https://tagmanager.googleapis.com
+  tags:
+  - Containers
+  properties:
+  - type: OpenAPI
+    url: openapi/google-tag-manager-containers-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/google-tag-manager-container-schema.json
+  - type: JSONLD
+    url: json-ld/google-tag-manager-context.jsonld
+  - type: Documentation
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2
+  - type: APIReference
+    url: https://developers.google.com/tag-platform/tag-manager/api/reference/rest
+  - type: Authentication
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/authorization
+  - type: GettingStarted
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/devguide
+  - type: SDKs
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/libraries
+  - type: RateLimits
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/limits-quotas
+  - type: ChangeLog
+    url: https://support.google.com/tagmanager/answer/4620708
+- aid: google-tag-manager:google-tag-manager-tagmanager-api
+  name: Google Tag Manager Tagmanager API
+  description: The Tagmanager API from Google Tag Manager — 3 operation(s) for tagmanager.
+  humanURL: https://developers.google.com/tag-platform/tag-manager/api/v2
+  baseURL: https://tagmanager.googleapis.com
+  tags:
+  - Tagmanager
+  properties:
+  - type: OpenAPI
+    url: openapi/google-tag-manager-tagmanager-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/google-tag-manager-container-schema.json
+  - type: JSONLD
+    url: json-ld/google-tag-manager-context.jsonld
+  - type: Documentation
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2
+  - type: APIReference
+    url: https://developers.google.com/tag-platform/tag-manager/api/reference/rest
+  - type: Authentication
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/authorization
+  - type: GettingStarted
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/devguide
+  - type: SDKs
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/libraries
+  - type: RateLimits
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/limits-quotas
+  - type: ChangeLog
+    url: https://support.google.com/tagmanager/answer/4620708
+- aid: google-tag-manager:google-tag-manager-triggers-api
+  name: Google Tag Manager Triggers API
+  description: Operations for managing triggers within a workspace that control when tags fire.
+  humanURL: https://developers.google.com/tag-platform/tag-manager/api/v2
+  baseURL: https://tagmanager.googleapis.com
+  tags:
+  - Triggers
+  properties:
+  - type: OpenAPI
+    url: openapi/google-tag-manager-triggers-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/google-tag-manager-container-schema.json
+  - type: JSONLD
+    url: json-ld/google-tag-manager-context.jsonld
+  - type: Documentation
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2
+  - type: APIReference
+    url: https://developers.google.com/tag-platform/tag-manager/api/reference/rest
+  - type: Authentication
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/authorization
+  - type: GettingStarted
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/devguide
+  - type: SDKs
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/libraries
+  - type: RateLimits
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/limits-quotas
+  - type: ChangeLog
+    url: https://support.google.com/tagmanager/answer/4620708
+- aid: google-tag-manager:google-tag-manager-user-permissions-api
+  name: Google Tag Manager User Permissions API
+  description: Operations for managing user permissions on Google Tag Manager accounts.
+  humanURL: https://developers.google.com/tag-platform/tag-manager/api/v2
+  baseURL: https://tagmanager.googleapis.com
+  tags:
+  - User Permissions
+  properties:
+  - type: OpenAPI
+    url: openapi/google-tag-manager-user-permissions-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/google-tag-manager-container-schema.json
+  - type: JSONLD
+    url: json-ld/google-tag-manager-context.jsonld
+  - type: Documentation
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2
+  - type: APIReference
+    url: https://developers.google.com/tag-platform/tag-manager/api/reference/rest
+  - type: Authentication
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/authorization
+  - type: GettingStarted
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/devguide
+  - type: SDKs
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/libraries
+  - type: RateLimits
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/limits-quotas
+  - type: ChangeLog
+    url: https://support.google.com/tagmanager/answer/4620708
+- aid: google-tag-manager:google-tag-manager-variables-api
+  name: Google Tag Manager Variables API
+  description: >-
+    Operations for managing variables within a workspace that provide dynamic values to tags and triggers.
+  humanURL: https://developers.google.com/tag-platform/tag-manager/api/v2
+  baseURL: https://tagmanager.googleapis.com
+  tags:
+  - Variables
+  properties:
+  - type: OpenAPI
+    url: openapi/google-tag-manager-variables-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/google-tag-manager-container-schema.json
+  - type: JSONLD
+    url: json-ld/google-tag-manager-context.jsonld
+  - type: Documentation
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2
+  - type: APIReference
+    url: https://developers.google.com/tag-platform/tag-manager/api/reference/rest
+  - type: Authentication
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/authorization
+  - type: GettingStarted
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/devguide
+  - type: SDKs
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/libraries
+  - type: RateLimits
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/limits-quotas
+  - type: ChangeLog
+    url: https://support.google.com/tagmanager/answer/4620708
+- aid: google-tag-manager:google-tag-manager-versions-api
+  name: Google Tag Manager Versions API
+  description: Operations for managing container versions, including publishing and rollback.
+  humanURL: https://developers.google.com/tag-platform/tag-manager/api/v2
+  baseURL: https://tagmanager.googleapis.com
+  tags:
+  - Versions
+  properties:
+  - type: OpenAPI
+    url: openapi/google-tag-manager-versions-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/google-tag-manager-container-schema.json
+  - type: JSONLD
+    url: json-ld/google-tag-manager-context.jsonld
+  - type: Documentation
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2
+  - type: APIReference
+    url: https://developers.google.com/tag-platform/tag-manager/api/reference/rest
+  - type: Authentication
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/authorization
+  - type: GettingStarted
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/devguide
+  - type: SDKs
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/libraries
+  - type: RateLimits
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/limits-quotas
+  - type: ChangeLog
+    url: https://support.google.com/tagmanager/answer/4620708
+- aid: google-tag-manager:google-tag-manager-workspaces-api
+  name: Google Tag Manager Workspaces API
+  description: >-
+    Operations for managing workspaces within a container, including version creation and conflict resolution.
+  humanURL: https://developers.google.com/tag-platform/tag-manager/api/v2
+  baseURL: https://tagmanager.googleapis.com
+  tags:
+  - Workspaces
+  properties:
+  - type: OpenAPI
+    url: openapi/google-tag-manager-workspaces-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/google-tag-manager-container-schema.json
+  - type: JSONLD
+    url: json-ld/google-tag-manager-context.jsonld
+  - type: Documentation
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2
+  - type: APIReference
+    url: https://developers.google.com/tag-platform/tag-manager/api/reference/rest
+  - type: Authentication
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/authorization
+  - type: GettingStarted
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/devguide
+  - type: SDKs
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/libraries
+  - type: RateLimits
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/limits-quotas
+  - type: ChangeLog
+    url: https://support.google.com/tagmanager/answer/4620708
 common:
   - type: AgenticAccess
     url: agentic-access/google-tag-manager-agentic-access.yml
