@@ -1,0 +1,28 @@
+{
+  "provider": "google-tag-manager",
+  "sources": [
+    "google-tag-manager-accounts-api-openapi.yml",
+    "google-tag-manager-containers-api-openapi.yml",
+    "google-tag-manager-tagmanager-api-openapi.yml",
+    "google-tag-manager-triggers-api-openapi.yml",
+    "google-tag-manager-user-permissions-api-openapi.yml",
+    "google-tag-manager-variables-api-openapi.yml",
+    "google-tag-manager-versions-api-openapi.yml",
+    "google-tag-manager-workspaces-api-openapi.yml"
+  ],
+  "outputs": [
+    "google-tag-manager-accounts-api-openapi.yml",
+    "google-tag-manager-containers-api-openapi.yml",
+    "google-tag-manager-tagmanager-api-openapi.yml",
+    "google-tag-manager-triggers-api-openapi.yml",
+    "google-tag-manager-user-permissions-api-openapi.yml",
+    "google-tag-manager-variables-api-openapi.yml",
+    "google-tag-manager-versions-api-openapi.yml",
+    "google-tag-manager-workspaces-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
