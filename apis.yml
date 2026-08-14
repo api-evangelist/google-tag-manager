@@ -1,8 +1,14 @@
 aid: google-tag-manager
 name: Google Tag Manager
 description: >-
-  Google Tag Manager is a tag management system that allows you to quickly and easily update measurement codes and
-  related code fragments collectively known as tags on your website or mobile app.
+  Google Tag Manager is a tag management system that lets teams deploy and update measurement codes and related
+  code fragments — collectively known as tags — on a website, mobile app, or server-side container without
+  editing site code on every change. The Tag Manager API v2 exposes that configuration programmatically:
+  accounts, containers, workspaces, tags, triggers, variables, container versions, and user permissions, across
+  web, iOS, Android, AMP, and server-side usage contexts. Changes are staged in a workspace, frozen into an
+  immutable container version, and then published to live traffic, with fingerprint-based optimistic concurrency
+  guarding every write. Access is OAuth 2.0 only, with seven granular scopes separating read, edit, publish, and
+  user-management rights.
 accessModel:
   pricing: freemium
   onboarding: self-serve
@@ -19,7 +25,7 @@ accessModel:
 image: https://www.gstatic.com/analytics-suite/header/suite/v2/ic_tag_manager.svg
 url: https://tagmanager.google.com/
 created: '2024-01-01'
-modified: '2026-06-20'
+modified: '2026-08-13'
 specificationVersion: '0.19'
 type: Index
 tags:
@@ -290,10 +296,57 @@ common:
     url: well-known/google-tag-manager-well-known.yml
   - type: MCPServer
     url: mcp/google-tag-manager-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/google-tag-manager-tool-crosswalk.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+    name: Google Tag Manager Agent Skills (6 packaged flows)
+  - type: Sandbox
+    url: sandbox/google-tag-manager-sandbox.yml
+  - type: SecurityTxt
+    url: well-known/google-tag-manager-security.txt
+  - type: TrustCenter
+    url: security/google-tag-manager-trust-center.yml
+  - type: Compliance
+    url: https://support.google.com/marketingplatform/answer/9013962
+  - type: Security
+    url: https://g.co/vrp
+  - type: Plans
+    url: plans/google-tag-manager-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/google-tag-manager-rate-limits.yml
+  - type: Pricing
+    url: https://marketingplatform.google.com/about/tag-manager/
+  - type: APIReference
+    url: https://developers.google.com/tag-platform/tag-manager/api/reference/rest
+  - type: GitHubOrganization
+    url: https://github.com/googleapis
   - type: LLMsTxt
     url: llms/google-tag-manager-llms.txt
   - type: Overlay
-    url: overlays/google-tag-manager-api-v2-overlay.yaml
+    url: overlays/google-tag-manager-accounts-api-overlay.yaml
+    name: Google Tag Manager Accounts API enhancements
+  - type: Overlay
+    url: overlays/google-tag-manager-containers-api-overlay.yaml
+    name: Google Tag Manager Containers API enhancements
+  - type: Overlay
+    url: overlays/google-tag-manager-tagmanager-api-overlay.yaml
+    name: Google Tag Manager Tagmanager API enhancements
+  - type: Overlay
+    url: overlays/google-tag-manager-triggers-api-overlay.yaml
+    name: Google Tag Manager Triggers API enhancements
+  - type: Overlay
+    url: overlays/google-tag-manager-user-permissions-api-overlay.yaml
+    name: Google Tag Manager User Permissions API enhancements
+  - type: Overlay
+    url: overlays/google-tag-manager-variables-api-overlay.yaml
+    name: Google Tag Manager Variables API enhancements
+  - type: Overlay
+    url: overlays/google-tag-manager-versions-api-overlay.yaml
+    name: Google Tag Manager Versions API enhancements
+  - type: Overlay
+    url: overlays/google-tag-manager-workspaces-api-overlay.yaml
+    name: Google Tag Manager Workspaces API enhancements
   - type: Conformance
     url: conformance/google-tag-manager-conformance.yml
   - type: ErrorCatalog
@@ -368,8 +421,6 @@ common:
     url: https://developers.google.com/tag-platform/tag-manager/api/v2/libraries
   - type: Support
     url: https://support.google.com/tagmanager
-  - type: StatusPage
-    url: https://status.cloud.google.com/
   - type: TermsOfService
     url: https://policies.google.com/terms
   - type: PrivacyPolicy
@@ -437,3 +488,8 @@ common:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 20
+  pass: local-v1
