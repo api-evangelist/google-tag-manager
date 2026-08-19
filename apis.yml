@@ -26,7 +26,7 @@ image: https://www.gstatic.com/analytics-suite/header/suite/v2/ic_tag_manager.sv
 url: https://tagmanager.google.com/
 created: '2024-01-01'
 modified: '2026-08-13'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 type: Index
 tags:
   - Analytics
