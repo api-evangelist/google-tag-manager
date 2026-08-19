@@ -1,0 +1,80 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://developers.google.com/tag-platform/tag-manager/api/v2/devguide +
+  https://developers.google.com/tag-platform/tag-manager/api/reference/rest/v2/accounts/list
+notes: >-
+  Google publishes no separate sandbox host, no test-mode credentials and no magic
+  test identifiers for the Tag Manager API. There is no test-vs-live key separation:
+  the same OAuth client and the same host (tagmanager.googleapis.com) serve
+  production. What Google DOES publish is (a) an authenticated in-browser request
+  console on every REST reference page, and (b) a product-level preview/debug mode
+  that runs an unpublished container draft against a real site without affecting the
+  live container. Both are recorded below. Nothing here is invented - the absence of
+  test credentials is itself the finding, and it is the sharpest risk in this API:
+  the developer guide warns that "when performing destructive operations using the
+  API there will be no warnings, no confirmations, and no undo."
+test_live_separation:
+  supported: false
+  key_prefixes: []
+  modes: []
+  note: >-
+    No test mode, no sandbox host, no test key prefix. Google's own mitigation, from
+    the developer guide, is organizational rather than technical: "we recommend that
+    you implement and verify your code with a test account" - i.e. create a separate
+    real GTM account/container for development.
+magic_test_values: []
+magic_test_values_note: >-
+  None published. Unlike payments or comms APIs there are no reserved identifiers
+  that trigger deterministic behaviour.
+consoles:
+  - name: Google APIs Explorer ("Try it!")
+    kind: hosted request console
+    embedded: true
+    url: https://developers.google.com/tag-platform/tag-manager/api/reference/rest/v2/accounts/list
+    description: >-
+      Every method page in the Tag Manager v2 REST reference embeds a "Try it!"
+      APIs Explorer panel that builds and executes a live, OAuth-authorized request
+      against tagmanager.googleapis.com from the browser, showing the real request
+      URL, headers and JSON response.
+    auth: OAuth 2.0 (the signed-in Google account, consented to the method's scopes)
+    live_data: true
+    warning: >-
+      The Explorer calls PRODUCTION. Executing a create/update/delete method from a
+      reference page mutates real containers. Use a throwaway account.
+  - name: Tag Manager Preview and Debug mode
+    kind: product-level draft runtime
+    url: https://support.google.com/tagmanager/answer/6107056
+    description: >-
+      Runs the current unpublished workspace draft against a real site in a debug
+      session, showing which tags fired, which triggers evaluated and the dataLayer
+      state, without publishing a container version. This is the closest thing GTM
+      has to a staging environment for tag configuration.
+    live_data: false
+    note: >-
+      Preview exercises the container draft, not the REST API. An API client can set
+      a workspace up for preview (createWorkspace / createTag / createTrigger) but
+      cannot start or read a preview session through the v2 API.
+  - name: Environments
+    kind: named deployment targets
+    url: https://support.google.com/tagmanager/answer/6311518
+    description: >-
+      Tag Manager supports named environments (e.g. Latest, Live, and custom ones
+      such as Staging) so a container version can be published to a non-production
+      environment first and loaded on a staging site via an environment-specific
+      snippet.
+    note: >-
+      Environments are a real staging mechanism, but the v2 API surface captured in
+      openapi/ (44 operations across accounts, containers, workspaces, tags,
+      triggers, variables, versions, user permissions) does not include environment
+      operations, so an API-driven staging promotion is not expressible from the
+      specs in this repo.
+safe_practice:
+  - Develop against a dedicated test Google Tag Manager account, per Google's developer guide.
+  - >-
+    Use a workspace (createWorkspace) as the unit of isolation - workspace edits do
+    not affect the live container until createWorkspaceVersion + publishContainerVersion.
+  - >-
+    Carry the resource fingerprint on every update; a stale fingerprint fails with a
+    conflict rather than silently overwriting a concurrent edit
+    (see conventions/google-tag-manager-conventions.yml).

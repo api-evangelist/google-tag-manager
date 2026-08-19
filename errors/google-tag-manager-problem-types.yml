@@ -1,9 +1,28 @@
-generated: '2026-06-20'
-method: derived
-source: openapi/google-tag-manager-api-v2-openapi.yml
+generated: '2026-08-13'
+method: searched
+source: https://developers.google.com/tag-platform/tag-manager/api/v2/errors
+also:
+  quotas: https://developers.google.com/tag-platform/tag-manager/api/v2/limits-quotas
+  derived_from: openapi/ (8 refined Tag Manager API v2 specs, 44 operations)
 format: google-json-error
+upgrade_note: >-
+  Upgraded 2026-08-13 from derived to searched against Google's published error
+  reference. Two corrections to the derived pass: (1) quota exhaustion on this API
+  returns HTTP 403 with domain "usageLimits", NOT the 429 the derived pass assumed
+  from generic REST convention; (2) source_operation paths now point at the refined
+  per-tag specs in openapi/ rather than the retired combined api-v2 file.
 envelope:
   container: error
+  shape: |
+    {
+      "error": {
+        "errors": [
+          { "domain": "[error domain]", "reason": "[error code]", "message": "[human-readable description]" }
+        ],
+        "code": [http status code],
+        "message": "[error message]"
+      }
+    }
   fields:
     code: HTTP status code (integer)
     message: human-readable error message
@@ -11,10 +30,24 @@ envelope:
     errors: array of {message, domain, reason} detail objects
   content_type: application/json
   note: >-
-    Google Tag Manager API v2 returns the standard Google JSON error format,
-    not RFC 9457 application/problem+json. The status codes below are those the
-    OpenAPI declares on operations; 429/500/503 are standard Google API errors
-    documented across the platform and included for completeness.
+    Google Tag Manager API v2 returns the standard Google JSON error format, not RFC
+    9457 application/problem+json. The machine-readable discriminator an agent should
+    branch on is errors[].reason (with errors[].domain for the class), not the prose
+    message - Google states explicitly that the description text "could change at any
+    time so applications should not depend on the actual description text."
+  agent_guidance: >-
+    Branch on error.errors[0].reason. Treat userRateLimitExceeded and quotaExceeded
+    as retryable; treat everything else as terminal until the request is changed.
+retry_policy:
+  strategy: exponential-backoff
+  formula: (2 ^ n) + random_number_milliseconds
+  n_starts_at: 0
+  max_attempts: 5
+  max_elapsed_seconds: 32
+  retryable_reasons:
+    - userRateLimitExceeded
+    - quotaExceeded
+  source: https://developers.google.com/tag-platform/tag-manager/api/v2/errors
 problems:
 - status: 400
   reason: badRequest
@@ -22,16 +55,32 @@ problems:
   title: Invalid request
   description: Request body or parameters failed validation (e.g. malformed entity, bad fingerprint format).
   source_operations:
-  - "openapi/google-tag-manager-api-v2-openapi.yml#updateAccount"
-  - "openapi/google-tag-manager-api-v2-openapi.yml#createContainer"
+  - openapi/google-tag-manager-accounts-api-openapi.yml#updateAccount
+  - openapi/google-tag-manager-containers-api-openapi.yml#createContainer
+  retryable: false
   remediation: Correct the request payload/parameters and retry.
+- status: 403
+  reason: accessNotConfigured
+  domain: usageLimits
+  status_enum: PERMISSION_DENIED
+  title: Access Not Configured
+  description: >-
+    The Tag Manager API has not been enabled for the calling Google Cloud project.
+  verbatim_message: >-
+    Access Not Configured. Please use Google Developers Console to activate the API
+    for your project.
+  retryable: false
+  remediation: Enable the Tag Manager API for the project in the Google API Console, then retry.
+  source: https://developers.google.com/tag-platform/tag-manager/api/v2/errors
+  note: Google's error reference shows this reason on both 400 and 403 responses.
 - status: 401
   reason: authError
   status_enum: UNAUTHENTICATED
   title: Authentication required
   description: Missing or invalid OAuth 2.0 credentials.
   source_operations:
-  - "openapi/google-tag-manager-api-v2-openapi.yml#listAccounts"
+  - openapi/google-tag-manager-accounts-api-openapi.yml#listAccounts
+  retryable: false
   remediation: Provide a valid OAuth 2.0 bearer token with the required tagmanager scope.
 - status: 403
   reason: insufficientPermissions
@@ -39,40 +88,72 @@ problems:
   title: Insufficient permissions
   description: The authenticated user lacks the required permission/scope for the resource.
   source_operations:
-  - "openapi/google-tag-manager-api-v2-openapi.yml#listAccounts"
+  - openapi/google-tag-manager-accounts-api-openapi.yml#listAccounts
+  retryable: false
   remediation: Grant the user the needed account/container permission and request the matching OAuth scope.
+- status: 403
+  reason: userRateLimitExceeded
+  domain: usageLimits
+  status_enum: RESOURCE_EXHAUSTED
+  title: Per-user rate limit exceeded
+  description: >-
+    The calling user exceeded the sustained request rate (0.25 QPS per project over a
+    100-second sliding window).
+  retryable: true
+  remediation: Retry with exponential backoff per retry_policy.
+  source: https://developers.google.com/tag-platform/tag-manager/api/v2/errors
+- status: 403
+  reason: quotaExceeded
+  domain: usageLimits
+  status_enum: RESOURCE_EXHAUSTED
+  title: Quota exceeded
+  description: >-
+    The Google Cloud project exceeded its Tag Manager API quota (10,000 requests per
+    project per day; resets at midnight PST).
+  retryable: true
+  remediation: >-
+    Retry with exponential backoff; if the daily quota is genuinely exhausted, wait
+    for the reset or request a higher quota via the API Console.
+  source: https://developers.google.com/tag-platform/tag-manager/api/v2/limits-quotas
 - status: 404
   reason: notFound
   status_enum: NOT_FOUND
   title: Resource not found
   description: The requested account, container, workspace, tag, trigger, variable, or version does not exist.
   source_operations:
-  - "openapi/google-tag-manager-api-v2-openapi.yml#getAccount"
-  - "openapi/google-tag-manager-api-v2-openapi.yml#getContainer"
+  - openapi/google-tag-manager-accounts-api-openapi.yml#getAccount
+  - openapi/google-tag-manager-containers-api-openapi.yml#getContainer
+  retryable: false
   remediation: Verify the resource path and that the resource exists.
 - status: 409
   reason: conflict
   status_enum: ABORTED
   title: Fingerprint mismatch (conflict)
-  description: The supplied fingerprint does not match the stored resource fingerprint, indicating a concurrent modification.
+  description: >-
+    The supplied fingerprint does not match the stored resource fingerprint,
+    indicating a concurrent modification.
   source_operations:
-  - "openapi/google-tag-manager-api-v2-openapi.yml#updateAccount"
+  - openapi/google-tag-manager-accounts-api-openapi.yml#updateAccount
+  - openapi/google-tag-manager-tagmanager-api-openapi.yml#updateTag
+  retryable: false
   remediation: Re-fetch the resource to obtain the current fingerprint, reapply changes, and retry.
-- status: 429
-  reason: rateLimitExceeded
-  status_enum: RESOURCE_EXHAUSTED
-  title: Quota / rate limit exceeded
-  description: The project or user exceeded the API request quota (see limits-quotas docs).
-  remediation: Back off and retry with exponential backoff; request higher quota if needed.
 - status: 500
   reason: backendError
   status_enum: INTERNAL
   title: Internal server error
   description: An unexpected error occurred on the Tag Manager backend.
+  retryable: true
   remediation: Retry with exponential backoff; if persistent, contact Google support.
 - status: 503
   reason: backendError
   status_enum: UNAVAILABLE
   title: Service unavailable
   description: The service is temporarily unavailable.
+  retryable: true
   remediation: Retry with exponential backoff.
+absent:
+  - code: 429
+    note: >-
+      This API does NOT use 429 for throttling. The derived pass assumed it; Google's
+      quota docs specify 403 + usageLimits. Recorded so the wrong assumption is not
+      re-derived on a later round.

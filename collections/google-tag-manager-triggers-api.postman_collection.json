@@ -1,0 +1,695 @@
+{
+  "item": [
+    {
+      "id": "38827a05-507e-4928-9816-b36a8404ad9f",
+      "name": "Triggers",
+      "description": {
+        "content": "Operations for managing triggers within a workspace that control when tags fire.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a7695943-b99e-4b42-8286-b0902d8053d3",
+          "name": "Google Tag Manager List Triggers in a Workspace",
+          "request": {
+            "name": "Google Tag Manager List Triggers in a Workspace",
+            "description": {
+              "content": "Lists all GTM Triggers of a GTM Container Workspace.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tagmanager",
+                "v2",
+                ":parent",
+                "triggers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageToken",
+                  "value": "<string>",
+                  "description": "Continuation token for fetching the next page of results."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "parent",
+                  "description": "(Required) GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f557baee-d26a-4a21-896e-9716e19e4c90",
+              "name": "Successful response containing a list of triggers.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    ":parent",
+                    "triggers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageToken",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "parent",
+                      "description": "(Required) GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"trigger\": [\n    {\n      \"path\": \"example_value\",\n      \"accountId\": \"500123\",\n      \"containerId\": \"500123\",\n      \"workspaceId\": \"500123\",\n      \"triggerId\": \"500123\",\n      \"name\": \"Example Title\",\n      \"type\": \"eventTypeUnspecified\",\n      \"customEventFilter\": {},\n      \"filter\": {},\n      \"autoEventFilter\": {},\n      \"fingerprint\": \"example_value\",\n      \"parentFolderId\": \"500123\",\n      \"tagManagerUrl\": \"https://www.example.com\",\n      \"notes\": \"example_value\",\n      \"parameter\": {}\n    }\n  ],\n  \"nextPageToken\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d13e84e3-02d0-4521-b5bb-15b84295607f",
+          "name": "Google Tag Manager Create a Trigger",
+          "request": {
+            "name": "Google Tag Manager Create a Trigger",
+            "description": {
+              "content": "Creates a GTM Trigger in a GTM Workspace.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tagmanager",
+                "v2",
+                ":parent",
+                "triggers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "parent",
+                  "description": "(Required) GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"customEventFilter\": [\n    {\n      \"type\": \"<string>\",\n      \"parameter\": [\n        {\n          \"type\": \"<string>\",\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"list\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"map\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"isWeakReference\": \"<boolean>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"list\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"map\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"isWeakReference\": \"<boolean>\"\n        }\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"parameter\": [\n        {\n          \"type\": \"<string>\",\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"list\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"map\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"isWeakReference\": \"<boolean>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"list\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"map\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"isWeakReference\": \"<boolean>\"\n        }\n      ]\n    }\n  ],\n  \"filter\": [\n    {\n      \"type\": \"<string>\",\n      \"parameter\": [\n        {\n          \"type\": \"<string>\",\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"list\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"map\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"isWeakReference\": \"<boolean>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"list\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"map\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"isWeakReference\": \"<boolean>\"\n        }\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"parameter\": [\n        {\n          \"type\": \"<string>\",\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"list\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"map\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"isWeakReference\": \"<boolean>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"list\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"map\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"isWeakReference\": \"<boolean>\"\n        }\n      ]\n    }\n  ],\n  \"autoEventFilter\": [\n    {\n      \"type\": \"<string>\",\n      \"parameter\": [\n        {\n          \"type\": \"<string>\",\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"list\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"map\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"isWeakReference\": \"<boolean>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"list\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"map\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"isWeakReference\": \"<boolean>\"\n        }\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"parameter\": [\n        {\n          \"type\": \"<string>\",\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"list\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"map\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"isWeakReference\": \"<boolean>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"list\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"map\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"isWeakReference\": \"<boolean>\"\n        }\n      ]\n    }\n  ],\n  \"waitForTags\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"checkValidation\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"waitForTagsTimeout\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"uniqueTriggerId\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"eventName\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"interval\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"limit\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"parentFolderId\": \"<string>\",\n  \"selector\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"intervalSeconds\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"maxTimerLengthSeconds\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"verticalScrollPercentageList\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"horizontalScrollPercentageList\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"visibilitySelector\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"visiblePercentageMin\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"visiblePercentageMax\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"continuousTimeMinMilliseconds\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"totalTimeMinMilliseconds\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"notes\": \"<string>\",\n  \"parameter\": [\n    {\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"list\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"map\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"isWeakReference\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"list\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"map\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"isWeakReference\": \"<boolean>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e520c801-a4f0-48d1-a18b-820ff5729517",
+              "name": "Successful response containing the created trigger.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    ":parent",
+                    "triggers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "parent",
+                      "description": "(Required) GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\",\n  \"accountId\": \"500123\",\n  \"containerId\": \"500123\",\n  \"workspaceId\": \"500123\",\n  \"triggerId\": \"500123\",\n  \"name\": \"Example Title\",\n  \"type\": \"eventTypeUnspecified\",\n  \"customEventFilter\": [\n    {\n      \"type\": \"conditionTypeUnspecified\",\n      \"parameter\": {}\n    }\n  ],\n  \"filter\": [\n    {\n      \"type\": \"conditionTypeUnspecified\",\n      \"parameter\": {}\n    }\n  ],\n  \"autoEventFilter\": [\n    {\n      \"type\": \"conditionTypeUnspecified\",\n      \"parameter\": {}\n    }\n  ],\n  \"waitForTags\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"checkValidation\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"waitForTagsTimeout\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"uniqueTriggerId\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"eventName\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"interval\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"limit\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"fingerprint\": \"example_value\",\n  \"parentFolderId\": \"500123\",\n  \"selector\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"intervalSeconds\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"maxTimerLengthSeconds\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"verticalScrollPercentageList\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"horizontalScrollPercentageList\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"visibilitySelector\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"visiblePercentageMin\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"visiblePercentageMax\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"continuousTimeMinMilliseconds\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"totalTimeMinMilliseconds\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"tagManagerUrl\": \"https://www.example.com\",\n  \"notes\": \"example_value\",\n  \"parameter\": [\n    {\n      \"type\": \"typeUnspecified\",\n      \"key\": \"example_value\",\n      \"value\": \"example_value\",\n      \"list\": {},\n      \"map\": {},\n      \"isWeakReference\": true\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"path\": \"example_value\",\n  \"accountId\": \"500123\",\n  \"containerId\": \"500123\",\n  \"workspaceId\": \"500123\",\n  \"triggerId\": \"500123\",\n  \"name\": \"Example Title\",\n  \"type\": \"eventTypeUnspecified\",\n  \"customEventFilter\": [\n    {\n      \"type\": \"conditionTypeUnspecified\",\n      \"parameter\": {}\n    }\n  ],\n  \"filter\": [\n    {\n      \"type\": \"conditionTypeUnspecified\",\n      \"parameter\": {}\n    }\n  ],\n  \"autoEventFilter\": [\n    {\n      \"type\": \"conditionTypeUnspecified\",\n      \"parameter\": {}\n    }\n  ],\n  \"waitForTags\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"checkValidation\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"waitForTagsTimeout\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"uniqueTriggerId\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"eventName\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"interval\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"limit\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"fingerprint\": \"example_value\",\n  \"parentFolderId\": \"500123\",\n  \"selector\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"intervalSeconds\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"maxTimerLengthSeconds\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"verticalScrollPercentageList\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"horizontalScrollPercentageList\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"visibilitySelector\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"visiblePercentageMin\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"visiblePercentageMax\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"continuousTimeMinMilliseconds\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"totalTimeMinMilliseconds\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"tagManagerUrl\": \"https://www.example.com\",\n  \"notes\": \"example_value\",\n  \"parameter\": [\n    {\n      \"type\": \"typeUnspecified\",\n      \"key\": \"example_value\",\n      \"value\": \"example_value\",\n      \"list\": {},\n      \"map\": {},\n      \"isWeakReference\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "00b64db2-4c0d-4ebb-8b8b-3f8d7b60aa47",
+          "name": "Google Tag Manager Get a Trigger",
+          "request": {
+            "name": "Google Tag Manager Get a Trigger",
+            "description": {
+              "content": "Gets a GTM Trigger by its resource path.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tagmanager",
+                "v2",
+                ":triggerPath"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "triggerPath",
+                  "description": "(Required) GTM Trigger's API relative path, e.g. accounts/{accountId}/containers/{containerId}/workspaces/{workspaceId}/triggers/{triggerId}."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "52edae9f-f514-4dd9-9b81-c24896d1efd1",
+              "name": "Successful response containing the trigger.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    ":triggerPath"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "triggerPath",
+                      "description": "(Required) GTM Trigger's API relative path, e.g. accounts/{accountId}/containers/{containerId}/workspaces/{workspaceId}/triggers/{triggerId}."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"path\": \"example_value\",\n  \"accountId\": \"500123\",\n  \"containerId\": \"500123\",\n  \"workspaceId\": \"500123\",\n  \"triggerId\": \"500123\",\n  \"name\": \"Example Title\",\n  \"type\": \"eventTypeUnspecified\",\n  \"customEventFilter\": [\n    {\n      \"type\": \"conditionTypeUnspecified\",\n      \"parameter\": {}\n    }\n  ],\n  \"filter\": [\n    {\n      \"type\": \"conditionTypeUnspecified\",\n      \"parameter\": {}\n    }\n  ],\n  \"autoEventFilter\": [\n    {\n      \"type\": \"conditionTypeUnspecified\",\n      \"parameter\": {}\n    }\n  ],\n  \"waitForTags\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"checkValidation\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"waitForTagsTimeout\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"uniqueTriggerId\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"eventName\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"interval\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"limit\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"fingerprint\": \"example_value\",\n  \"parentFolderId\": \"500123\",\n  \"selector\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"intervalSeconds\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"maxTimerLengthSeconds\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"verticalScrollPercentageList\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"horizontalScrollPercentageList\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"visibilitySelector\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"visiblePercentageMin\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"visiblePercentageMax\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"continuousTimeMinMilliseconds\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"totalTimeMinMilliseconds\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"tagManagerUrl\": \"https://www.example.com\",\n  \"notes\": \"example_value\",\n  \"parameter\": [\n    {\n      \"type\": \"typeUnspecified\",\n      \"key\": \"example_value\",\n      \"value\": \"example_value\",\n      \"list\": {},\n      \"map\": {},\n      \"isWeakReference\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5d5b2d7e-96c3-4414-9108-b9e1e0cdcd22",
+          "name": "Google Tag Manager Update a Trigger",
+          "request": {
+            "name": "Google Tag Manager Update a Trigger",
+            "description": {
+              "content": "Updates a GTM Trigger.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tagmanager",
+                "v2",
+                ":triggerPath"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fingerprint",
+                  "value": "<string>",
+                  "description": "When provided, this fingerprint must match the fingerprint of the trigger in storage."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "triggerPath",
+                  "description": "(Required) GTM Trigger's API relative path."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"customEventFilter\": [\n    {\n      \"type\": \"<string>\",\n      \"parameter\": [\n        {\n          \"type\": \"<string>\",\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"list\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"map\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"isWeakReference\": \"<boolean>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"list\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"map\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"isWeakReference\": \"<boolean>\"\n        }\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"parameter\": [\n        {\n          \"type\": \"<string>\",\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"list\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"map\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"isWeakReference\": \"<boolean>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"list\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"map\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"isWeakReference\": \"<boolean>\"\n        }\n      ]\n    }\n  ],\n  \"filter\": [\n    {\n      \"type\": \"<string>\",\n      \"parameter\": [\n        {\n          \"type\": \"<string>\",\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"list\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"map\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"isWeakReference\": \"<boolean>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"list\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"map\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"isWeakReference\": \"<boolean>\"\n        }\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"parameter\": [\n        {\n          \"type\": \"<string>\",\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"list\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"map\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"isWeakReference\": \"<boolean>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"list\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"map\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"isWeakReference\": \"<boolean>\"\n        }\n      ]\n    }\n  ],\n  \"autoEventFilter\": [\n    {\n      \"type\": \"<string>\",\n      \"parameter\": [\n        {\n          \"type\": \"<string>\",\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"list\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"map\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"isWeakReference\": \"<boolean>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"list\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"map\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"isWeakReference\": \"<boolean>\"\n        }\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"parameter\": [\n        {\n          \"type\": \"<string>\",\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"list\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"map\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"isWeakReference\": \"<boolean>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"key\": \"<string>\",\n          \"value\": \"<string>\",\n          \"list\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"map\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n            }\n          ],\n          \"isWeakReference\": \"<boolean>\"\n        }\n      ]\n    }\n  ],\n  \"waitForTags\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"checkValidation\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"waitForTagsTimeout\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"uniqueTriggerId\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"eventName\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"interval\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"limit\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"parentFolderId\": \"<string>\",\n  \"selector\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"intervalSeconds\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"maxTimerLengthSeconds\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"verticalScrollPercentageList\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"horizontalScrollPercentageList\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"visibilitySelector\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"visiblePercentageMin\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"visiblePercentageMax\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"continuousTimeMinMilliseconds\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"totalTimeMinMilliseconds\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"notes\": \"<string>\",\n  \"parameter\": [\n    {\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"list\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"map\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"isWeakReference\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"list\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"map\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"isWeakReference\": \"<boolean>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ae4fd850-49ed-45bd-832c-a0efb1857161",
+              "name": "Successful response containing the updated trigger.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    ":triggerPath"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fingerprint",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "triggerPath",
+                      "description": "(Required) GTM Trigger's API relative path."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\",\n  \"accountId\": \"500123\",\n  \"containerId\": \"500123\",\n  \"workspaceId\": \"500123\",\n  \"triggerId\": \"500123\",\n  \"name\": \"Example Title\",\n  \"type\": \"eventTypeUnspecified\",\n  \"customEventFilter\": [\n    {\n      \"type\": \"conditionTypeUnspecified\",\n      \"parameter\": {}\n    }\n  ],\n  \"filter\": [\n    {\n      \"type\": \"conditionTypeUnspecified\",\n      \"parameter\": {}\n    }\n  ],\n  \"autoEventFilter\": [\n    {\n      \"type\": \"conditionTypeUnspecified\",\n      \"parameter\": {}\n    }\n  ],\n  \"waitForTags\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"checkValidation\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"waitForTagsTimeout\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"uniqueTriggerId\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"eventName\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"interval\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"limit\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"fingerprint\": \"example_value\",\n  \"parentFolderId\": \"500123\",\n  \"selector\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"intervalSeconds\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"maxTimerLengthSeconds\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"verticalScrollPercentageList\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"horizontalScrollPercentageList\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"visibilitySelector\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"visiblePercentageMin\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"visiblePercentageMax\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"continuousTimeMinMilliseconds\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"totalTimeMinMilliseconds\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"tagManagerUrl\": \"https://www.example.com\",\n  \"notes\": \"example_value\",\n  \"parameter\": [\n    {\n      \"type\": \"typeUnspecified\",\n      \"key\": \"example_value\",\n      \"value\": \"example_value\",\n      \"list\": {},\n      \"map\": {},\n      \"isWeakReference\": true\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"path\": \"example_value\",\n  \"accountId\": \"500123\",\n  \"containerId\": \"500123\",\n  \"workspaceId\": \"500123\",\n  \"triggerId\": \"500123\",\n  \"name\": \"Example Title\",\n  \"type\": \"eventTypeUnspecified\",\n  \"customEventFilter\": [\n    {\n      \"type\": \"conditionTypeUnspecified\",\n      \"parameter\": {}\n    }\n  ],\n  \"filter\": [\n    {\n      \"type\": \"conditionTypeUnspecified\",\n      \"parameter\": {}\n    }\n  ],\n  \"autoEventFilter\": [\n    {\n      \"type\": \"conditionTypeUnspecified\",\n      \"parameter\": {}\n    }\n  ],\n  \"waitForTags\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"checkValidation\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"waitForTagsTimeout\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"uniqueTriggerId\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"eventName\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"interval\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"limit\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"fingerprint\": \"example_value\",\n  \"parentFolderId\": \"500123\",\n  \"selector\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"intervalSeconds\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"maxTimerLengthSeconds\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"verticalScrollPercentageList\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"horizontalScrollPercentageList\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"visibilitySelector\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"visiblePercentageMin\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"visiblePercentageMax\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"continuousTimeMinMilliseconds\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"totalTimeMinMilliseconds\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"tagManagerUrl\": \"https://www.example.com\",\n  \"notes\": \"example_value\",\n  \"parameter\": [\n    {\n      \"type\": \"typeUnspecified\",\n      \"key\": \"example_value\",\n      \"value\": \"example_value\",\n      \"list\": {},\n      \"map\": {},\n      \"isWeakReference\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "16266a54-9211-44f9-9a12-e81ac08dc225",
+          "name": "Google Tag Manager Delete a Trigger",
+          "request": {
+            "name": "Google Tag Manager Delete a Trigger",
+            "description": {
+              "content": "Deletes a GTM Trigger.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tagmanager",
+                "v2",
+                ":triggerPath"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "triggerPath",
+                  "description": "(Required) GTM Trigger's API relative path."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ad0aa53c-130c-4ba6-9973-cd536a8931d7",
+              "name": "Trigger successfully deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    ":triggerPath"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "triggerPath",
+                      "description": "(Required) GTM Trigger's API relative path."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d5a0e358-2978-4628-974f-c167059ca255",
+          "name": "Google Tag Manager Revert Changes to a Trigger in a Workspace",
+          "request": {
+            "name": "Google Tag Manager Revert Changes to a Trigger in a Workspace",
+            "description": {
+              "content": "Reverts changes to a GTM Trigger in a GTM Workspace, restoring it to its original state.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tagmanager",
+                "v2",
+                "{{triggerPath}}:revert"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8d57657f-c4a5-42bc-b305-1607356c0592",
+              "name": "Successful response confirming the trigger was reverted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    "{{triggerPath}}:revert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"trigger\": {\n    \"path\": \"example_value\",\n    \"accountId\": \"500123\",\n    \"containerId\": \"500123\",\n    \"workspaceId\": \"500123\",\n    \"triggerId\": \"500123\",\n    \"name\": \"Example Title\",\n    \"type\": \"eventTypeUnspecified\",\n    \"customEventFilter\": [\n      {}\n    ],\n    \"filter\": [\n      {}\n    ],\n    \"autoEventFilter\": [\n      {}\n    ],\n    \"fingerprint\": \"example_value\",\n    \"parentFolderId\": \"500123\",\n    \"tagManagerUrl\": \"https://www.example.com\",\n    \"notes\": \"example_value\",\n    \"parameter\": [\n      {}\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://tagmanager.googleapis.com",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) GTM Trigger's API relative path.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "triggerPath"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "tagmanager.readonly tagmanager.edit.containers tagmanager.manage.accounts tagmanager.manage.users tagmanager.publish tagmanager.edit.containerversions tagmanager.delete.containers"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://oauth2.googleapis.com/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://accounts.google.com/o/oauth2/v2/auth"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f744d29a-ecdb-4e16-a17e-1b8c0108fedf",
+    "name": "Google Tag Manager Accounts Triggers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Google Tag Manager API v2 allows clients to access and modify Google Tag Manager account, container, workspace, tag, trigger, and variable configurations. It provides programmatic management of tag deployment, trigger conditions, and variable definitions across web, mobile, and server-side containers.\n\nContact Support:\n Name: Google Support",
+      "type": "text/plain"
+    }
+  }
+}

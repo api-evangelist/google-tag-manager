@@ -1,0 +1,695 @@
+{
+  "item": [
+    {
+      "id": "7003e848-a0d3-4546-b2cf-73066ec66b2e",
+      "name": "Variables",
+      "description": {
+        "content": "Operations for managing variables within a workspace that provide dynamic values to tags and triggers.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "58998238-2743-4618-9847-36b521dc5b1f",
+          "name": "Google Tag Manager List Variables in a Workspace",
+          "request": {
+            "name": "Google Tag Manager List Variables in a Workspace",
+            "description": {
+              "content": "Lists all GTM Variables of a GTM Container Workspace.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tagmanager",
+                "v2",
+                ":parent",
+                "variables"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageToken",
+                  "value": "<string>",
+                  "description": "Continuation token for fetching the next page of results."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "parent",
+                  "description": "(Required) GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d5ee7d96-07d0-45a2-a9f4-df879ad22d7e",
+              "name": "Successful response containing a list of variables.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    ":parent",
+                    "variables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageToken",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "parent",
+                      "description": "(Required) GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"variable\": [\n    {\n      \"path\": \"example_value\",\n      \"accountId\": \"500123\",\n      \"containerId\": \"500123\",\n      \"workspaceId\": \"500123\",\n      \"variableId\": \"500123\",\n      \"name\": \"Example Title\",\n      \"type\": \"example_value\",\n      \"notes\": \"example_value\",\n      \"scheduleStartMs\": \"example_value\",\n      \"scheduleEndMs\": \"example_value\",\n      \"parameter\": {},\n      \"enablingTriggerId\": {},\n      \"disablingTriggerId\": {},\n      \"fingerprint\": \"example_value\",\n      \"parentFolderId\": \"500123\",\n      \"tagManagerUrl\": \"https://www.example.com\"\n    }\n  ],\n  \"nextPageToken\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c97674de-3445-436d-8b4d-f5aa2a26b829",
+          "name": "Google Tag Manager Create a Variable",
+          "request": {
+            "name": "Google Tag Manager Create a Variable",
+            "description": {
+              "content": "Creates a GTM Variable in a GTM Workspace.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tagmanager",
+                "v2",
+                ":parent",
+                "variables"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "parent",
+                  "description": "(Required) GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"scheduleStartMs\": \"<int64>\",\n  \"scheduleEndMs\": \"<int64>\",\n  \"parameter\": [\n    {\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"list\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"map\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"isWeakReference\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"list\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"map\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"isWeakReference\": \"<boolean>\"\n    }\n  ],\n  \"enablingTriggerId\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"disablingTriggerId\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"parentFolderId\": \"<string>\",\n  \"formatValue\": {\n    \"caseConversionType\": \"<string>\",\n    \"convertNullToValue\": {\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"list\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"map\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"isWeakReference\": \"<boolean>\"\n    },\n    \"convertUndefinedToValue\": {\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"list\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"map\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"isWeakReference\": \"<boolean>\"\n    },\n    \"convertTrueToValue\": {\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"list\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"map\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"isWeakReference\": \"<boolean>\"\n    },\n    \"convertFalseToValue\": {\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"list\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"map\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"isWeakReference\": \"<boolean>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ed45a646-d937-4b38-a43f-122f7accc178",
+              "name": "Successful response containing the created variable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    ":parent",
+                    "variables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "parent",
+                      "description": "(Required) GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\",\n  \"accountId\": \"500123\",\n  \"containerId\": \"500123\",\n  \"workspaceId\": \"500123\",\n  \"variableId\": \"500123\",\n  \"name\": \"Example Title\",\n  \"type\": \"example_value\",\n  \"notes\": \"example_value\",\n  \"scheduleStartMs\": \"example_value\",\n  \"scheduleEndMs\": \"example_value\",\n  \"parameter\": [\n    {\n      \"type\": \"typeUnspecified\",\n      \"key\": \"example_value\",\n      \"value\": \"example_value\",\n      \"list\": {},\n      \"map\": {},\n      \"isWeakReference\": true\n    }\n  ],\n  \"enablingTriggerId\": [\n    \"example_value\"\n  ],\n  \"disablingTriggerId\": [\n    \"example_value\"\n  ],\n  \"fingerprint\": \"example_value\",\n  \"parentFolderId\": \"500123\",\n  \"tagManagerUrl\": \"https://www.example.com\",\n  \"formatValue\": {\n    \"caseConversionType\": \"none\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"path\": \"example_value\",\n  \"accountId\": \"500123\",\n  \"containerId\": \"500123\",\n  \"workspaceId\": \"500123\",\n  \"variableId\": \"500123\",\n  \"name\": \"Example Title\",\n  \"type\": \"example_value\",\n  \"notes\": \"example_value\",\n  \"scheduleStartMs\": \"example_value\",\n  \"scheduleEndMs\": \"example_value\",\n  \"parameter\": [\n    {\n      \"type\": \"typeUnspecified\",\n      \"key\": \"example_value\",\n      \"value\": \"example_value\",\n      \"list\": {},\n      \"map\": {},\n      \"isWeakReference\": true\n    }\n  ],\n  \"enablingTriggerId\": [\n    \"example_value\"\n  ],\n  \"disablingTriggerId\": [\n    \"example_value\"\n  ],\n  \"fingerprint\": \"example_value\",\n  \"parentFolderId\": \"500123\",\n  \"tagManagerUrl\": \"https://www.example.com\",\n  \"formatValue\": {\n    \"caseConversionType\": \"none\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d21944be-9378-4c32-9de9-047b4f2d5684",
+          "name": "Google Tag Manager Get a Variable",
+          "request": {
+            "name": "Google Tag Manager Get a Variable",
+            "description": {
+              "content": "Gets a GTM Variable by its resource path.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tagmanager",
+                "v2",
+                ":variablePath"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "variablePath",
+                  "description": "(Required) GTM Variable's API relative path, e.g. accounts/{accountId}/containers/{containerId}/workspaces/{workspaceId}/variables/{variableId}."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8706267a-0861-4839-9ccd-3edc4f007a12",
+              "name": "Successful response containing the variable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    ":variablePath"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "variablePath",
+                      "description": "(Required) GTM Variable's API relative path, e.g. accounts/{accountId}/containers/{containerId}/workspaces/{workspaceId}/variables/{variableId}."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"path\": \"example_value\",\n  \"accountId\": \"500123\",\n  \"containerId\": \"500123\",\n  \"workspaceId\": \"500123\",\n  \"variableId\": \"500123\",\n  \"name\": \"Example Title\",\n  \"type\": \"example_value\",\n  \"notes\": \"example_value\",\n  \"scheduleStartMs\": \"example_value\",\n  \"scheduleEndMs\": \"example_value\",\n  \"parameter\": [\n    {\n      \"type\": \"typeUnspecified\",\n      \"key\": \"example_value\",\n      \"value\": \"example_value\",\n      \"list\": {},\n      \"map\": {},\n      \"isWeakReference\": true\n    }\n  ],\n  \"enablingTriggerId\": [\n    \"example_value\"\n  ],\n  \"disablingTriggerId\": [\n    \"example_value\"\n  ],\n  \"fingerprint\": \"example_value\",\n  \"parentFolderId\": \"500123\",\n  \"tagManagerUrl\": \"https://www.example.com\",\n  \"formatValue\": {\n    \"caseConversionType\": \"none\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1c940730-4b19-4c4c-ae2d-83bee1d62757",
+          "name": "Google Tag Manager Update a Variable",
+          "request": {
+            "name": "Google Tag Manager Update a Variable",
+            "description": {
+              "content": "Updates a GTM Variable.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tagmanager",
+                "v2",
+                ":variablePath"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fingerprint",
+                  "value": "<string>",
+                  "description": "When provided, this fingerprint must match the fingerprint of the variable in storage."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "variablePath",
+                  "description": "(Required) GTM Variable's API relative path."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"scheduleStartMs\": \"<int64>\",\n  \"scheduleEndMs\": \"<int64>\",\n  \"parameter\": [\n    {\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"list\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"map\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"isWeakReference\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"list\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"map\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"isWeakReference\": \"<boolean>\"\n    }\n  ],\n  \"enablingTriggerId\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"disablingTriggerId\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"parentFolderId\": \"<string>\",\n  \"formatValue\": {\n    \"caseConversionType\": \"<string>\",\n    \"convertNullToValue\": {\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"list\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"map\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"isWeakReference\": \"<boolean>\"\n    },\n    \"convertUndefinedToValue\": {\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"list\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"map\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"isWeakReference\": \"<boolean>\"\n    },\n    \"convertTrueToValue\": {\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"list\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"map\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"isWeakReference\": \"<boolean>\"\n    },\n    \"convertFalseToValue\": {\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"list\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"map\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"isWeakReference\": \"<boolean>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "61fbbf74-0a1d-40b5-80c9-03fa8d5d83d3",
+              "name": "Successful response containing the updated variable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    ":variablePath"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fingerprint",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "variablePath",
+                      "description": "(Required) GTM Variable's API relative path."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\",\n  \"accountId\": \"500123\",\n  \"containerId\": \"500123\",\n  \"workspaceId\": \"500123\",\n  \"variableId\": \"500123\",\n  \"name\": \"Example Title\",\n  \"type\": \"example_value\",\n  \"notes\": \"example_value\",\n  \"scheduleStartMs\": \"example_value\",\n  \"scheduleEndMs\": \"example_value\",\n  \"parameter\": [\n    {\n      \"type\": \"typeUnspecified\",\n      \"key\": \"example_value\",\n      \"value\": \"example_value\",\n      \"list\": {},\n      \"map\": {},\n      \"isWeakReference\": true\n    }\n  ],\n  \"enablingTriggerId\": [\n    \"example_value\"\n  ],\n  \"disablingTriggerId\": [\n    \"example_value\"\n  ],\n  \"fingerprint\": \"example_value\",\n  \"parentFolderId\": \"500123\",\n  \"tagManagerUrl\": \"https://www.example.com\",\n  \"formatValue\": {\n    \"caseConversionType\": \"none\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"path\": \"example_value\",\n  \"accountId\": \"500123\",\n  \"containerId\": \"500123\",\n  \"workspaceId\": \"500123\",\n  \"variableId\": \"500123\",\n  \"name\": \"Example Title\",\n  \"type\": \"example_value\",\n  \"notes\": \"example_value\",\n  \"scheduleStartMs\": \"example_value\",\n  \"scheduleEndMs\": \"example_value\",\n  \"parameter\": [\n    {\n      \"type\": \"typeUnspecified\",\n      \"key\": \"example_value\",\n      \"value\": \"example_value\",\n      \"list\": {},\n      \"map\": {},\n      \"isWeakReference\": true\n    }\n  ],\n  \"enablingTriggerId\": [\n    \"example_value\"\n  ],\n  \"disablingTriggerId\": [\n    \"example_value\"\n  ],\n  \"fingerprint\": \"example_value\",\n  \"parentFolderId\": \"500123\",\n  \"tagManagerUrl\": \"https://www.example.com\",\n  \"formatValue\": {\n    \"caseConversionType\": \"none\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b85ed905-32c5-43a3-bf65-c41c57c93e07",
+          "name": "Google Tag Manager Delete a Variable",
+          "request": {
+            "name": "Google Tag Manager Delete a Variable",
+            "description": {
+              "content": "Deletes a GTM Variable.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tagmanager",
+                "v2",
+                ":variablePath"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "variablePath",
+                  "description": "(Required) GTM Variable's API relative path."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "de47a80a-bd84-4652-8b0d-e8f8607b9d36",
+              "name": "Variable successfully deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    ":variablePath"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "variablePath",
+                      "description": "(Required) GTM Variable's API relative path."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a38ccdde-e407-4856-9fec-8a10faf7287d",
+          "name": "Google Tag Manager Revert Changes to a Variable in a Workspace",
+          "request": {
+            "name": "Google Tag Manager Revert Changes to a Variable in a Workspace",
+            "description": {
+              "content": "Reverts changes to a GTM Variable in a GTM Workspace, restoring it to its original state.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tagmanager",
+                "v2",
+                "{{variablePath}}:revert"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "70a39758-8259-49a9-b531-74f6a6b13150",
+              "name": "Successful response confirming the variable was reverted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    "{{variablePath}}:revert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"variable\": {\n    \"path\": \"example_value\",\n    \"accountId\": \"500123\",\n    \"containerId\": \"500123\",\n    \"workspaceId\": \"500123\",\n    \"variableId\": \"500123\",\n    \"name\": \"Example Title\",\n    \"type\": \"example_value\",\n    \"notes\": \"example_value\",\n    \"scheduleStartMs\": \"example_value\",\n    \"scheduleEndMs\": \"example_value\",\n    \"parameter\": [\n      {}\n    ],\n    \"enablingTriggerId\": [\n      {}\n    ],\n    \"disablingTriggerId\": [\n      {}\n    ],\n    \"fingerprint\": \"example_value\",\n    \"parentFolderId\": \"500123\",\n    \"tagManagerUrl\": \"https://www.example.com\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://tagmanager.googleapis.com",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) GTM Variable's API relative path.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "variablePath"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "tagmanager.readonly tagmanager.edit.containers tagmanager.manage.accounts tagmanager.manage.users tagmanager.publish tagmanager.edit.containerversions tagmanager.delete.containers"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://oauth2.googleapis.com/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://accounts.google.com/o/oauth2/v2/auth"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c47bb71a-07a9-4962-a77f-81b7f6c0cf32",
+    "name": "Google Tag Manager Accounts Variables API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Google Tag Manager API v2 allows clients to access and modify Google Tag Manager account, container, workspace, tag, trigger, and variable configurations. It provides programmatic management of tag deployment, trigger conditions, and variable definitions across web, mobile, and server-side containers.\n\nContact Support:\n Name: Google Support",
+      "type": "text/plain"
+    }
+  }
+}

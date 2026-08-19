@@ -1,0 +1,139 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Google Tag Manager Accounts User Permissions API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/v2/auth",
+      "accessTokenUrl": "https://oauth2.googleapis.com/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "User Permissions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Google Tag Manager List User Permissions for an Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tagmanager.googleapis.com/tagmanager/v2/:parent/user_permissions",
+            "params": [
+              {
+                "name": "parent",
+                "value": "",
+                "type": "path",
+                "description": "GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers."
+              },
+              {
+                "name": "pageToken",
+                "value": "example_value",
+                "type": "query",
+                "description": "Continuation token for fetching the next page of results."
+              }
+            ]
+          },
+          "docs": "List all users that have access to the account along with Account and Container user access granted to each of them."
+        },
+        {
+          "info": {
+            "name": "Google Tag Manager Create a User Permission",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://tagmanager.googleapis.com/tagmanager/v2/:parent/user_permissions",
+            "params": [
+              {
+                "name": "parent",
+                "value": "",
+                "type": "path",
+                "description": "GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a user's Account and Container access within a GTM Account."
+        },
+        {
+          "info": {
+            "name": "Google Tag Manager Get a User Permission",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tagmanager.googleapis.com/tagmanager/v2/:userPermissionPath",
+            "params": [
+              {
+                "name": "userPermissionPath",
+                "value": "example_value",
+                "type": "path",
+                "description": "GTM UserPermission's API relative path."
+              }
+            ]
+          },
+          "docs": "Gets a user's Account and Container access."
+        },
+        {
+          "info": {
+            "name": "Google Tag Manager Update a User Permission",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://tagmanager.googleapis.com/tagmanager/v2/:userPermissionPath",
+            "params": [
+              {
+                "name": "userPermissionPath",
+                "value": "example_value",
+                "type": "path",
+                "description": "GTM UserPermission's API relative path."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a user's Account and Container access."
+        },
+        {
+          "info": {
+            "name": "Google Tag Manager Delete a User Permission",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://tagmanager.googleapis.com/tagmanager/v2/:userPermissionPath",
+            "params": [
+              {
+                "name": "userPermissionPath",
+                "value": "example_value",
+                "type": "path",
+                "description": "GTM UserPermission's API relative path."
+              }
+            ]
+          },
+          "docs": "Removes a user from the account, revoking access."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

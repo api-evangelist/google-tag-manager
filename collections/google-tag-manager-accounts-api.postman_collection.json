@@ -1,0 +1,659 @@
+{
+  "item": [
+    {
+      "id": "8afa4cf8-bc91-46de-88de-668b8a2c5097",
+      "name": "Accounts",
+      "description": {
+        "content": "Operations for managing Google Tag Manager accounts.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b5a6bc11-edac-4a15-8e47-2cfe585a0000",
+          "name": "List All Google Tag Manager Accounts",
+          "request": {
+            "name": "List All Google Tag Manager Accounts",
+            "description": {
+              "content": "Lists all GTM Accounts that a user has access to. Returns a list of Account resources.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tagmanager",
+                "v2",
+                "accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageToken",
+                  "value": "<string>",
+                  "description": "Continuation token for fetching the next page of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "includeGoogleTags",
+                  "value": "<boolean>",
+                  "description": "Also retrieve accounts associated with Google Tag when true."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e9a77d61-1768-44ae-a2cf-4f8ee62dc39f",
+              "name": "Successful response containing a list of accounts.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageToken",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "includeGoogleTags",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"account\": [\n    {\n      \"path\": \"example_value\",\n      \"accountId\": \"500123\",\n      \"name\": \"Example Title\",\n      \"shareData\": true,\n      \"fingerprint\": \"example_value\",\n      \"tagManagerUrl\": \"https://www.example.com\"\n    }\n  ],\n  \"nextPageToken\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b612a95e-8e3e-409e-96cf-79c134abc3e2",
+              "name": "Authentication required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageToken",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "includeGoogleTags",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "00a7407e-6522-4bba-a084-0a1d2019aaa7",
+              "name": "Insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageToken",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "includeGoogleTags",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1fbd30d9-11d7-4215-8c9a-548daa228418",
+          "name": "Get a Google Tag Manager Account",
+          "request": {
+            "name": "Get a Google Tag Manager Account",
+            "description": {
+              "content": "Gets a GTM Account by its resource path.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tagmanager",
+                "v2",
+                ":path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path",
+                  "description": "(Required) GTM resource's API relative path, e.g. accounts/{accountId}."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f65d75da-fe99-4429-a5f2-8d5065d35632",
+              "name": "Successful response containing the account.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) GTM resource's API relative path, e.g. accounts/{accountId}."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"path\": \"example_value\",\n  \"accountId\": \"500123\",\n  \"name\": \"Example Title\",\n  \"shareData\": true,\n  \"fingerprint\": \"example_value\",\n  \"tagManagerUrl\": \"https://www.example.com\",\n  \"features\": {\n    \"supportUserPermissions\": true,\n    \"supportMultipleContainers\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b89fcbfd-69de-4e59-962a-60683513faf2",
+              "name": "Account not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) GTM resource's API relative path, e.g. accounts/{accountId}."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "60b7fe33-7e4d-4f56-84a2-3aa944df0f5e",
+          "name": "Update a Google Tag Manager Account",
+          "request": {
+            "name": "Update a Google Tag Manager Account",
+            "description": {
+              "content": "Updates a GTM Account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tagmanager",
+                "v2",
+                ":path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fingerprint",
+                  "value": "<string>",
+                  "description": "When provided, this fingerprint must match the fingerprint of the account in storage."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path",
+                  "description": "(Required) GTM resource's API relative path, e.g. accounts/{accountId}."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"shareData\": \"<boolean>\",\n  \"features\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "71b8814d-898f-4368-bf71-91c01ac753f5",
+              "name": "Successful response containing the updated account.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fingerprint",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) GTM resource's API relative path, e.g. accounts/{accountId}."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\",\n  \"accountId\": \"500123\",\n  \"name\": \"Example Title\",\n  \"shareData\": true,\n  \"fingerprint\": \"example_value\",\n  \"tagManagerUrl\": \"https://www.example.com\",\n  \"features\": {\n    \"supportUserPermissions\": true,\n    \"supportMultipleContainers\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"path\": \"example_value\",\n  \"accountId\": \"500123\",\n  \"name\": \"Example Title\",\n  \"shareData\": true,\n  \"fingerprint\": \"example_value\",\n  \"tagManagerUrl\": \"https://www.example.com\",\n  \"features\": {\n    \"supportUserPermissions\": true,\n    \"supportMultipleContainers\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "319f0908-7aa8-4c9a-880a-68322bf8e79f",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fingerprint",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) GTM resource's API relative path, e.g. accounts/{accountId}."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\",\n  \"accountId\": \"500123\",\n  \"name\": \"Example Title\",\n  \"shareData\": true,\n  \"fingerprint\": \"example_value\",\n  \"tagManagerUrl\": \"https://www.example.com\",\n  \"features\": {\n    \"supportUserPermissions\": true,\n    \"supportMultipleContainers\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "49662a18-d966-4abc-8cce-52634baf70b4",
+              "name": "Fingerprint mismatch indicating a conflict.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fingerprint",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) GTM resource's API relative path, e.g. accounts/{accountId}."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\",\n  \"accountId\": \"500123\",\n  \"name\": \"Example Title\",\n  \"shareData\": true,\n  \"fingerprint\": \"example_value\",\n  \"tagManagerUrl\": \"https://www.example.com\",\n  \"features\": {\n    \"supportUserPermissions\": true,\n    \"supportMultipleContainers\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://tagmanager.googleapis.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "tagmanager.readonly tagmanager.edit.containers tagmanager.manage.accounts tagmanager.manage.users tagmanager.publish tagmanager.edit.containerversions tagmanager.delete.containers"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://oauth2.googleapis.com/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://accounts.google.com/o/oauth2/v2/auth"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1b1c7a6a-f169-4902-820d-24212d27ff27",
+    "name": "Google Tag Manager Accounts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Google Tag Manager API v2 allows clients to access and modify Google Tag Manager account, container, workspace, tag, trigger, and variable configurations. It provides programmatic management of tag deployment, trigger conditions, and variable definitions across web, mobile, and server-side containers.\n\nContact Support:\n Name: Google Support",
+      "type": "text/plain"
+    }
+  }
+}

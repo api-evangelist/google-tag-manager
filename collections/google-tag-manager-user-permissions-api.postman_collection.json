@@ -1,0 +1,591 @@
+{
+  "item": [
+    {
+      "id": "166e7293-03f9-40e1-8499-8027b3cf3f7b",
+      "name": "User Permissions",
+      "description": {
+        "content": "Operations for managing user permissions on Google Tag Manager accounts.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7b28bce8-baee-44ae-b1ab-e7b67bcf0be3",
+          "name": "Google Tag Manager List User Permissions for an Account",
+          "request": {
+            "name": "Google Tag Manager List User Permissions for an Account",
+            "description": {
+              "content": "List all users that have access to the account along with Account and Container user access granted to each of them.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tagmanager",
+                "v2",
+                ":parent",
+                "user_permissions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageToken",
+                  "value": "<string>",
+                  "description": "Continuation token for fetching the next page of results."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "parent",
+                  "description": "(Required) GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bbcf83e8-0d0b-402e-8ef8-69f78cde1a85",
+              "name": "Successful response containing a list of user permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    ":parent",
+                    "user_permissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageToken",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "parent",
+                      "description": "(Required) GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"userPermission\": [\n    {\n      \"path\": \"example_value\",\n      \"accountId\": \"500123\",\n      \"emailAddress\": \"user@example.com\",\n      \"containerAccess\": {}\n    }\n  ],\n  \"nextPageToken\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fdac015e-9c90-4ae9-8e5c-7d646f78f194",
+          "name": "Google Tag Manager Create a User Permission",
+          "request": {
+            "name": "Google Tag Manager Create a User Permission",
+            "description": {
+              "content": "Creates a user's Account and Container access within a GTM Account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tagmanager",
+                "v2",
+                ":parent",
+                "user_permissions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "parent",
+                  "description": "(Required) GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"emailAddress\": \"<email>\",\n  \"accountAccess\": {\n    \"permission\": \"<string>\"\n  },\n  \"containerAccess\": [\n    {\n      \"containerId\": \"<string>\",\n      \"permission\": \"<string>\"\n    },\n    {\n      \"containerId\": \"<string>\",\n      \"permission\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1ee2e4ea-61d6-4663-8a2b-f51d50df0289",
+              "name": "Successful response containing the created user permission.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    ":parent",
+                    "user_permissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "parent",
+                      "description": "(Required) GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\",\n  \"accountId\": \"500123\",\n  \"emailAddress\": \"user@example.com\",\n  \"accountAccess\": {\n    \"permission\": \"accountPermissionUnspecified\"\n  },\n  \"containerAccess\": [\n    {\n      \"containerId\": \"500123\",\n      \"permission\": \"containerPermissionUnspecified\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"path\": \"example_value\",\n  \"accountId\": \"500123\",\n  \"emailAddress\": \"user@example.com\",\n  \"accountAccess\": {\n    \"permission\": \"accountPermissionUnspecified\"\n  },\n  \"containerAccess\": [\n    {\n      \"containerId\": \"500123\",\n      \"permission\": \"containerPermissionUnspecified\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a8ca3907-be40-49ef-9207-9a999945f8d7",
+          "name": "Google Tag Manager Get a User Permission",
+          "request": {
+            "name": "Google Tag Manager Get a User Permission",
+            "description": {
+              "content": "Gets a user's Account and Container access.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tagmanager",
+                "v2",
+                ":userPermissionPath"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userPermissionPath",
+                  "description": "(Required) GTM UserPermission's API relative path."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "26a0884a-d851-4bd6-8fbc-28bc011c152c",
+              "name": "Successful response containing the user permission.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    ":userPermissionPath"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userPermissionPath",
+                      "description": "(Required) GTM UserPermission's API relative path."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"path\": \"example_value\",\n  \"accountId\": \"500123\",\n  \"emailAddress\": \"user@example.com\",\n  \"accountAccess\": {\n    \"permission\": \"accountPermissionUnspecified\"\n  },\n  \"containerAccess\": [\n    {\n      \"containerId\": \"500123\",\n      \"permission\": \"containerPermissionUnspecified\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eb0bd576-e936-4beb-b278-306d1fe72e48",
+          "name": "Google Tag Manager Update a User Permission",
+          "request": {
+            "name": "Google Tag Manager Update a User Permission",
+            "description": {
+              "content": "Updates a user's Account and Container access.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tagmanager",
+                "v2",
+                ":userPermissionPath"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userPermissionPath",
+                  "description": "(Required) GTM UserPermission's API relative path."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"emailAddress\": \"<email>\",\n  \"accountAccess\": {\n    \"permission\": \"<string>\"\n  },\n  \"containerAccess\": [\n    {\n      \"containerId\": \"<string>\",\n      \"permission\": \"<string>\"\n    },\n    {\n      \"containerId\": \"<string>\",\n      \"permission\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4f59f7eb-0bcd-4b2e-9ebe-91d0342a2b69",
+              "name": "Successful response containing the updated user permission.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    ":userPermissionPath"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userPermissionPath",
+                      "description": "(Required) GTM UserPermission's API relative path."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\",\n  \"accountId\": \"500123\",\n  \"emailAddress\": \"user@example.com\",\n  \"accountAccess\": {\n    \"permission\": \"accountPermissionUnspecified\"\n  },\n  \"containerAccess\": [\n    {\n      \"containerId\": \"500123\",\n      \"permission\": \"containerPermissionUnspecified\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"path\": \"example_value\",\n  \"accountId\": \"500123\",\n  \"emailAddress\": \"user@example.com\",\n  \"accountAccess\": {\n    \"permission\": \"accountPermissionUnspecified\"\n  },\n  \"containerAccess\": [\n    {\n      \"containerId\": \"500123\",\n      \"permission\": \"containerPermissionUnspecified\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c02408db-4e47-44aa-adab-b08e97931fb9",
+          "name": "Google Tag Manager Delete a User Permission",
+          "request": {
+            "name": "Google Tag Manager Delete a User Permission",
+            "description": {
+              "content": "Removes a user from the account, revoking access.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tagmanager",
+                "v2",
+                ":userPermissionPath"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userPermissionPath",
+                  "description": "(Required) GTM UserPermission's API relative path."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d84836d2-33cf-435b-8fd9-16f57bfcbfd0",
+              "name": "User permission successfully deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    ":userPermissionPath"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userPermissionPath",
+                      "description": "(Required) GTM UserPermission's API relative path."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://tagmanager.googleapis.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "tagmanager.readonly tagmanager.edit.containers tagmanager.manage.accounts tagmanager.manage.users tagmanager.publish tagmanager.edit.containerversions tagmanager.delete.containers"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://oauth2.googleapis.com/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://accounts.google.com/o/oauth2/v2/auth"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d51e3bec-28f8-4fce-b965-bf61839b2523",
+    "name": "Google Tag Manager Accounts User Permissions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Google Tag Manager API v2 allows clients to access and modify Google Tag Manager account, container, workspace, tag, trigger, and variable configurations. It provides programmatic management of tag deployment, trigger conditions, and variable definitions across web, mobile, and server-side containers.\n\nContact Support:\n Name: Google Support",
+      "type": "text/plain"
+    }
+  }
+}

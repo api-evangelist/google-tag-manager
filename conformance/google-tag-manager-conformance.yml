@@ -1,18 +1,19 @@
-generated: '2026-06-20'
-method: derived
-source: openapi/google-tag-manager-api-v2-openapi.yml
-notes: >-
-  Standards conformance derived from the OpenAPI 3.1 spec and Google API
-  conventions. Google's public REST APIs use the Google JSON error format
-  (an error object with code/message/status/errors[]), not RFC 9457
-  application/problem+json.
+generated: '2026-08-13'
+method: searched
+source: openapi/ (8 refined Tag Manager API v2 specs) + https://support.google.com/marketingplatform/answer/9013962
+  + https://developers.google.com/tag-platform/tag-manager/api/v2/errors
+notes: Standards conformance derived from the OpenAPI 3.1 specs and Google API conventions, upgraded 2026-08-13
+  with searched compliance evidence. Google's public REST APIs use the Google JSON error format (an error
+  object with code/message/status/errors[]), not RFC 9457 application/problem+json. Compliance certifications
+  live in security/google-tag-manager-trust-center.yml.
 standards:
 - id: oauth2
   conforms: true
   evidence: securitySchemes.oauth2 type oauth2, authorizationCode flow (accounts.google.com / oauth2.googleapis.com)
 - id: oidc
   conforms: true
-  evidence: authorization delegates to accounts.google.com which publishes /.well-known/openid-configuration (200)
+  evidence: authorization delegates to accounts.google.com which publishes /.well-known/openid-configuration
+    (200)
 - id: rfc8414-oauth-authorization-server-metadata
   conforms: true
   evidence: accounts.google.com/.well-known/oauth-authorization-server returns 200
@@ -26,10 +27,12 @@ standards:
   evidence: cursor pagination via pageToken request param and nextPageToken response field
 - id: idempotency
   conforms: partial
-  evidence: no Idempotency-Key header; optimistic concurrency via fingerprint query param (409 on mismatch)
+  evidence: no Idempotency-Key header and no safe-retry contract; optimistic concurrency only, via a fingerprint
+    QUERY parameter on update/publish (conflict on mismatch). Retried creates duplicate - see skills/
+    and conventions/.
 - id: openapi-3.1
   conforms: true
-  evidence: openapi/google-tag-manager-api-v2-openapi.yml is OpenAPI 3.1.0
+  evidence: all 8 files in openapi/ are OpenAPI 3.1.0
 - id: fhir-r4
   conforms: false
 - id: fapi
@@ -40,3 +43,22 @@ standards:
   conforms: false
 - id: psd2
   conforms: false
+- id: iso-27001
+  conforms: true
+  evidence: Google publishes ISO 27001 certification explicitly naming Google Tag Manager
+  source: https://support.google.com/marketingplatform/answer/9013962
+- id: soc2
+  conforms: false
+  evidence: Google's SOC 2/SOC 3 reports cover Google Cloud Platform and Workspace; Tag Manager is not
+    in scope
+- id: google-api-discovery
+  conforms: true
+  evidence: machine-readable Google Discovery Document served at https://tagmanager.googleapis.com/$discovery/rest?version=v2
+    (HTTP 200, revision 20260812)
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: no Sunset or Deprecation response headers; deprecation communicated via docs and email
+- id: rate-limit-headers
+  conforms: false
+  evidence: no RateLimit-*/X-RateLimit-*/Retry-After headers; quota exhaustion signalled only by 403 +
+    reason usageLimits

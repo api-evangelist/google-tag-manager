@@ -1,0 +1,49 @@
+generated: '2026-08-13'
+method: searched
+probe: true
+probe_result: >-
+  probe-security-programs.py found no trust.google.com / security.google.com trust
+  center for this product (trust=none). The certification below was found by
+  searching Google's own Marketing Platform help center, which is where Google
+  publishes the compliance posture for Tag Manager rather than on a Cloud-style
+  trust portal.
+url: https://support.google.com/marketingplatform/answer/9013962
+certifications:
+  - name: ISO/IEC 27001
+    status: certified
+    scope: >-
+      The systems, applications, people, technology, processes and data centers
+      serving Google Tag Manager.
+    source: https://support.google.com/marketingplatform/answer/9013962
+    verbatim: >-
+      "Google has earned ISO 27001 certification for the systems, applications,
+      people, technology, processes, and data centers serving Google Tag Manager."
+    covered_products:
+      - Google Marketing Platform
+      - Google Analytics
+      - Google Tag Manager
+      - Google Optimize
+      - Google Attribution
+      - Google Data Studio
+      - Google Audience Center
+not_claimed:
+  - name: SOC 2 / SOC 3
+    note: >-
+      Google publishes SOC 2 and SOC 3 reports for Google Cloud Platform and Google
+      Workspace. Tag Manager is a Google Marketing Platform product and is NOT named
+      in those reports, and Google does not publish a SOC report scoped to Tag
+      Manager. Recorded as an explicit absence so it is not inferred from Google's
+      Cloud posture.
+  - name: PCI DSS / HIPAA / FedRAMP
+    note: Not claimed by Google for Tag Manager.
+related:
+  data_privacy_and_security: https://support.google.com/tagmanager/answer/9323295
+  business_compliance: https://business.safety.google/compliance/
+  vulnerability_disclosure: security/google-tag-manager-vulnerability-disclosure.yml
+evidence:
+  - source: https://support.google.com/marketingplatform/answer/9013962
+    status: 200
+    keywords: [iso 27001, certification, google tag manager]
+  - source: https://support.google.com/tagmanager/answer/9323295
+    status: 200
+    keywords: [data privacy, security]

@@ -1,0 +1,695 @@
+{
+  "item": [
+    {
+      "id": "932256dd-5741-46ff-9856-7df7d8128b5c",
+      "name": "Tagmanager",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "aa3e85b5-6368-4a4c-8117-fc0276a9646b",
+          "name": "Google Tag Manager List Tags in a Workspace",
+          "request": {
+            "name": "Google Tag Manager List Tags in a Workspace",
+            "description": {
+              "content": "Lists all GTM Tags of a GTM Container Workspace.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tagmanager",
+                "v2",
+                ":parent",
+                "tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageToken",
+                  "value": "<string>",
+                  "description": "Continuation token for fetching the next page of results."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "parent",
+                  "description": "(Required) GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9960bf9c-aebe-46d3-a63d-c4ad23fac0ac",
+              "name": "Successful response containing a list of tags.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    ":parent",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageToken",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "parent",
+                      "description": "(Required) GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tag\": [\n    {\n      \"path\": \"example_value\",\n      \"accountId\": \"500123\",\n      \"containerId\": \"500123\",\n      \"workspaceId\": \"500123\",\n      \"tagId\": \"500123\",\n      \"name\": \"Example Title\",\n      \"type\": \"example_value\",\n      \"liveOnly\": true,\n      \"notes\": \"example_value\",\n      \"scheduleStartMs\": \"example_value\",\n      \"scheduleEndMs\": \"example_value\",\n      \"parameter\": {},\n      \"fingerprint\": \"example_value\",\n      \"firingTriggerId\": {},\n      \"blockingTriggerId\": {},\n      \"setupTag\": {},\n      \"teardownTag\": {},\n      \"parentFolderId\": \"500123\",\n      \"tagFiringOption\": \"tagFiringOptionUnspecified\",\n      \"tagManagerUrl\": \"https://www.example.com\",\n      \"paused\": true,\n      \"monitoringMetadataTagNameKey\": \"example_value\"\n    }\n  ],\n  \"nextPageToken\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e2395477-bab6-4d2b-93b7-1a161b0ec3f1",
+          "name": "Google Tag Manager Create a Tag",
+          "request": {
+            "name": "Google Tag Manager Create a Tag",
+            "description": {
+              "content": "Creates a GTM Tag in a GTM Workspace.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tagmanager",
+                "v2",
+                ":parent",
+                "tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "parent",
+                  "description": "(Required) GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"liveOnly\": \"<boolean>\",\n  \"priority\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"notes\": \"<string>\",\n  \"scheduleStartMs\": \"<int64>\",\n  \"scheduleEndMs\": \"<int64>\",\n  \"parameter\": [\n    {\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"list\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"map\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"isWeakReference\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"list\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"map\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"isWeakReference\": \"<boolean>\"\n    }\n  ],\n  \"firingTriggerId\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"blockingTriggerId\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"setupTag\": [\n    {\n      \"tagName\": \"<string>\",\n      \"stopOnSetupFailure\": \"<boolean>\"\n    },\n    {\n      \"tagName\": \"<string>\",\n      \"stopOnSetupFailure\": \"<boolean>\"\n    }\n  ],\n  \"teardownTag\": [\n    {\n      \"tagName\": \"<string>\",\n      \"stopTeardownOnFailure\": \"<boolean>\"\n    },\n    {\n      \"tagName\": \"<string>\",\n      \"stopTeardownOnFailure\": \"<boolean>\"\n    }\n  ],\n  \"parentFolderId\": \"<string>\",\n  \"tagFiringOption\": \"<string>\",\n  \"paused\": \"<boolean>\",\n  \"monitoringMetadata\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"monitoringMetadataTagNameKey\": \"<string>\",\n  \"consentSettings\": {\n    \"consentStatus\": \"<string>\",\n    \"consentType\": {\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"list\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"map\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"isWeakReference\": \"<boolean>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "78040738-aa6f-4cf8-9b22-8783cd10d10f",
+              "name": "Successful response containing the created tag.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    ":parent",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "parent",
+                      "description": "(Required) GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\",\n  \"accountId\": \"500123\",\n  \"containerId\": \"500123\",\n  \"workspaceId\": \"500123\",\n  \"tagId\": \"500123\",\n  \"name\": \"Example Title\",\n  \"type\": \"example_value\",\n  \"liveOnly\": true,\n  \"priority\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"notes\": \"example_value\",\n  \"scheduleStartMs\": \"example_value\",\n  \"scheduleEndMs\": \"example_value\",\n  \"parameter\": [\n    {\n      \"type\": \"typeUnspecified\",\n      \"key\": \"example_value\",\n      \"value\": \"example_value\",\n      \"list\": {},\n      \"map\": {},\n      \"isWeakReference\": true\n    }\n  ],\n  \"fingerprint\": \"example_value\",\n  \"firingTriggerId\": [\n    \"example_value\"\n  ],\n  \"blockingTriggerId\": [\n    \"example_value\"\n  ],\n  \"setupTag\": [\n    {\n      \"tagName\": \"example_value\",\n      \"stopOnSetupFailure\": true\n    }\n  ],\n  \"teardownTag\": [\n    {\n      \"tagName\": \"example_value\",\n      \"stopTeardownOnFailure\": true\n    }\n  ],\n  \"parentFolderId\": \"500123\",\n  \"tagFiringOption\": \"tagFiringOptionUnspecified\",\n  \"tagManagerUrl\": \"https://www.example.com\",\n  \"paused\": true,\n  \"monitoringMetadata\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"monitoringMetadataTagNameKey\": \"example_value\",\n  \"consentSettings\": {\n    \"consentStatus\": \"notSet\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"path\": \"example_value\",\n  \"accountId\": \"500123\",\n  \"containerId\": \"500123\",\n  \"workspaceId\": \"500123\",\n  \"tagId\": \"500123\",\n  \"name\": \"Example Title\",\n  \"type\": \"example_value\",\n  \"liveOnly\": true,\n  \"priority\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"notes\": \"example_value\",\n  \"scheduleStartMs\": \"example_value\",\n  \"scheduleEndMs\": \"example_value\",\n  \"parameter\": [\n    {\n      \"type\": \"typeUnspecified\",\n      \"key\": \"example_value\",\n      \"value\": \"example_value\",\n      \"list\": {},\n      \"map\": {},\n      \"isWeakReference\": true\n    }\n  ],\n  \"fingerprint\": \"example_value\",\n  \"firingTriggerId\": [\n    \"example_value\"\n  ],\n  \"blockingTriggerId\": [\n    \"example_value\"\n  ],\n  \"setupTag\": [\n    {\n      \"tagName\": \"example_value\",\n      \"stopOnSetupFailure\": true\n    }\n  ],\n  \"teardownTag\": [\n    {\n      \"tagName\": \"example_value\",\n      \"stopTeardownOnFailure\": true\n    }\n  ],\n  \"parentFolderId\": \"500123\",\n  \"tagFiringOption\": \"tagFiringOptionUnspecified\",\n  \"tagManagerUrl\": \"https://www.example.com\",\n  \"paused\": true,\n  \"monitoringMetadata\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"monitoringMetadataTagNameKey\": \"example_value\",\n  \"consentSettings\": {\n    \"consentStatus\": \"notSet\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "04da49de-b6bf-4498-a252-3166a9a87a01",
+          "name": "Google Tag Manager Get a Tag",
+          "request": {
+            "name": "Google Tag Manager Get a Tag",
+            "description": {
+              "content": "Gets a GTM Tag by its resource path.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tagmanager",
+                "v2",
+                ":tagPath"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tagPath",
+                  "description": "(Required) GTM Tag's API relative path, e.g. accounts/{accountId}/containers/{containerId}/workspaces/{workspaceId}/tags/{tagId}."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ebb32d49-4390-48a8-8f04-dffc731a71bd",
+              "name": "Successful response containing the tag.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    ":tagPath"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tagPath",
+                      "description": "(Required) GTM Tag's API relative path, e.g. accounts/{accountId}/containers/{containerId}/workspaces/{workspaceId}/tags/{tagId}."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"path\": \"example_value\",\n  \"accountId\": \"500123\",\n  \"containerId\": \"500123\",\n  \"workspaceId\": \"500123\",\n  \"tagId\": \"500123\",\n  \"name\": \"Example Title\",\n  \"type\": \"example_value\",\n  \"liveOnly\": true,\n  \"priority\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"notes\": \"example_value\",\n  \"scheduleStartMs\": \"example_value\",\n  \"scheduleEndMs\": \"example_value\",\n  \"parameter\": [\n    {\n      \"type\": \"typeUnspecified\",\n      \"key\": \"example_value\",\n      \"value\": \"example_value\",\n      \"list\": {},\n      \"map\": {},\n      \"isWeakReference\": true\n    }\n  ],\n  \"fingerprint\": \"example_value\",\n  \"firingTriggerId\": [\n    \"example_value\"\n  ],\n  \"blockingTriggerId\": [\n    \"example_value\"\n  ],\n  \"setupTag\": [\n    {\n      \"tagName\": \"example_value\",\n      \"stopOnSetupFailure\": true\n    }\n  ],\n  \"teardownTag\": [\n    {\n      \"tagName\": \"example_value\",\n      \"stopTeardownOnFailure\": true\n    }\n  ],\n  \"parentFolderId\": \"500123\",\n  \"tagFiringOption\": \"tagFiringOptionUnspecified\",\n  \"tagManagerUrl\": \"https://www.example.com\",\n  \"paused\": true,\n  \"monitoringMetadata\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"monitoringMetadataTagNameKey\": \"example_value\",\n  \"consentSettings\": {\n    \"consentStatus\": \"notSet\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b3036444-e508-47e1-9c7a-cae57cbc8fbd",
+          "name": "Google Tag Manager Update a Tag",
+          "request": {
+            "name": "Google Tag Manager Update a Tag",
+            "description": {
+              "content": "Updates a GTM Tag.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tagmanager",
+                "v2",
+                ":tagPath"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fingerprint",
+                  "value": "<string>",
+                  "description": "When provided, this fingerprint must match the fingerprint of the tag in storage."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tagPath",
+                  "description": "(Required) GTM Tag's API relative path."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"liveOnly\": \"<boolean>\",\n  \"priority\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"notes\": \"<string>\",\n  \"scheduleStartMs\": \"<int64>\",\n  \"scheduleEndMs\": \"<int64>\",\n  \"parameter\": [\n    {\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"list\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"map\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"isWeakReference\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"list\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"map\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"isWeakReference\": \"<boolean>\"\n    }\n  ],\n  \"firingTriggerId\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"blockingTriggerId\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"setupTag\": [\n    {\n      \"tagName\": \"<string>\",\n      \"stopOnSetupFailure\": \"<boolean>\"\n    },\n    {\n      \"tagName\": \"<string>\",\n      \"stopOnSetupFailure\": \"<boolean>\"\n    }\n  ],\n  \"teardownTag\": [\n    {\n      \"tagName\": \"<string>\",\n      \"stopTeardownOnFailure\": \"<boolean>\"\n    },\n    {\n      \"tagName\": \"<string>\",\n      \"stopTeardownOnFailure\": \"<boolean>\"\n    }\n  ],\n  \"parentFolderId\": \"<string>\",\n  \"tagFiringOption\": \"<string>\",\n  \"paused\": \"<boolean>\",\n  \"monitoringMetadata\": {\n    \"type\": \"<string>\",\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"list\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"map\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n      }\n    ],\n    \"isWeakReference\": \"<boolean>\"\n  },\n  \"monitoringMetadataTagNameKey\": \"<string>\",\n  \"consentSettings\": {\n    \"consentStatus\": \"<string>\",\n    \"consentType\": {\n      \"type\": \"<string>\",\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"list\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"map\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Parameter detected>\"\n        }\n      ],\n      \"isWeakReference\": \"<boolean>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8f8c5c3e-482b-4ec5-bcf0-f0e0bc6233e1",
+              "name": "Successful response containing the updated tag.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    ":tagPath"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fingerprint",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tagPath",
+                      "description": "(Required) GTM Tag's API relative path."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\",\n  \"accountId\": \"500123\",\n  \"containerId\": \"500123\",\n  \"workspaceId\": \"500123\",\n  \"tagId\": \"500123\",\n  \"name\": \"Example Title\",\n  \"type\": \"example_value\",\n  \"liveOnly\": true,\n  \"priority\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"notes\": \"example_value\",\n  \"scheduleStartMs\": \"example_value\",\n  \"scheduleEndMs\": \"example_value\",\n  \"parameter\": [\n    {\n      \"type\": \"typeUnspecified\",\n      \"key\": \"example_value\",\n      \"value\": \"example_value\",\n      \"list\": {},\n      \"map\": {},\n      \"isWeakReference\": true\n    }\n  ],\n  \"fingerprint\": \"example_value\",\n  \"firingTriggerId\": [\n    \"example_value\"\n  ],\n  \"blockingTriggerId\": [\n    \"example_value\"\n  ],\n  \"setupTag\": [\n    {\n      \"tagName\": \"example_value\",\n      \"stopOnSetupFailure\": true\n    }\n  ],\n  \"teardownTag\": [\n    {\n      \"tagName\": \"example_value\",\n      \"stopTeardownOnFailure\": true\n    }\n  ],\n  \"parentFolderId\": \"500123\",\n  \"tagFiringOption\": \"tagFiringOptionUnspecified\",\n  \"tagManagerUrl\": \"https://www.example.com\",\n  \"paused\": true,\n  \"monitoringMetadata\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"monitoringMetadataTagNameKey\": \"example_value\",\n  \"consentSettings\": {\n    \"consentStatus\": \"notSet\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"path\": \"example_value\",\n  \"accountId\": \"500123\",\n  \"containerId\": \"500123\",\n  \"workspaceId\": \"500123\",\n  \"tagId\": \"500123\",\n  \"name\": \"Example Title\",\n  \"type\": \"example_value\",\n  \"liveOnly\": true,\n  \"priority\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"notes\": \"example_value\",\n  \"scheduleStartMs\": \"example_value\",\n  \"scheduleEndMs\": \"example_value\",\n  \"parameter\": [\n    {\n      \"type\": \"typeUnspecified\",\n      \"key\": \"example_value\",\n      \"value\": \"example_value\",\n      \"list\": {},\n      \"map\": {},\n      \"isWeakReference\": true\n    }\n  ],\n  \"fingerprint\": \"example_value\",\n  \"firingTriggerId\": [\n    \"example_value\"\n  ],\n  \"blockingTriggerId\": [\n    \"example_value\"\n  ],\n  \"setupTag\": [\n    {\n      \"tagName\": \"example_value\",\n      \"stopOnSetupFailure\": true\n    }\n  ],\n  \"teardownTag\": [\n    {\n      \"tagName\": \"example_value\",\n      \"stopTeardownOnFailure\": true\n    }\n  ],\n  \"parentFolderId\": \"500123\",\n  \"tagFiringOption\": \"tagFiringOptionUnspecified\",\n  \"tagManagerUrl\": \"https://www.example.com\",\n  \"paused\": true,\n  \"monitoringMetadata\": {\n    \"type\": \"typeUnspecified\",\n    \"key\": \"example_value\",\n    \"value\": \"example_value\",\n    \"list\": [\n      {}\n    ],\n    \"map\": [\n      {}\n    ],\n    \"isWeakReference\": true\n  },\n  \"monitoringMetadataTagNameKey\": \"example_value\",\n  \"consentSettings\": {\n    \"consentStatus\": \"notSet\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "188f9083-e8a0-4377-a9ed-69380d41560a",
+          "name": "Google Tag Manager Delete a Tag",
+          "request": {
+            "name": "Google Tag Manager Delete a Tag",
+            "description": {
+              "content": "Deletes a GTM Tag.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tagmanager",
+                "v2",
+                ":tagPath"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tagPath",
+                  "description": "(Required) GTM Tag's API relative path."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "601cb658-d3f7-412d-ac83-657eb22c3b8c",
+              "name": "Tag successfully deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    ":tagPath"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tagPath",
+                      "description": "(Required) GTM Tag's API relative path."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a50362f1-45fb-4cba-a8b5-8412ebee1666",
+          "name": "Google Tag Manager Revert Changes to a Tag in a Workspace",
+          "request": {
+            "name": "Google Tag Manager Revert Changes to a Tag in a Workspace",
+            "description": {
+              "content": "Reverts changes to a GTM Tag in a GTM Workspace, restoring it to its original state.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tagmanager",
+                "v2",
+                "{{tagPath}}:revert"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "df09b698-b24d-4a1b-a1c6-856ce7e10c80",
+              "name": "Successful response confirming the tag was reverted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    "{{tagPath}}:revert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tag\": {\n    \"path\": \"example_value\",\n    \"accountId\": \"500123\",\n    \"containerId\": \"500123\",\n    \"workspaceId\": \"500123\",\n    \"tagId\": \"500123\",\n    \"name\": \"Example Title\",\n    \"type\": \"example_value\",\n    \"liveOnly\": true,\n    \"notes\": \"example_value\",\n    \"scheduleStartMs\": \"example_value\",\n    \"scheduleEndMs\": \"example_value\",\n    \"parameter\": [\n      {}\n    ],\n    \"fingerprint\": \"example_value\",\n    \"firingTriggerId\": [\n      {}\n    ],\n    \"blockingTriggerId\": [\n      {}\n    ],\n    \"setupTag\": [\n      {}\n    ],\n    \"teardownTag\": [\n      {}\n    ],\n    \"parentFolderId\": \"500123\",\n    \"tagFiringOption\": \"tagFiringOptionUnspecified\",\n    \"tagManagerUrl\": \"https://www.example.com\",\n    \"paused\": true,\n    \"monitoringMetadataTagNameKey\": \"example_value\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://tagmanager.googleapis.com",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) GTM Tag's API relative path.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "tagPath"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "tagmanager.readonly tagmanager.edit.containers tagmanager.manage.accounts tagmanager.manage.users tagmanager.publish tagmanager.edit.containerversions tagmanager.delete.containers"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://oauth2.googleapis.com/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://accounts.google.com/o/oauth2/v2/auth"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f6207f9c-1241-4818-bb23-d86b56dabdd9",
+    "name": "Google Tag Manager Accounts Tagmanager API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Google Tag Manager API v2 allows clients to access and modify Google Tag Manager account, container, workspace, tag, trigger, and variable configurations. It provides programmatic management of tag deployment, trigger conditions, and variable definitions across web, mobile, and server-side containers.\n\nContact Support:\n Name: Google Support",
+      "type": "text/plain"
+    }
+  }
+}

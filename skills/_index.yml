@@ -1,0 +1,37 @@
+generated: '2026-08-13'
+method: generated
+source: >-
+  openapi/ (8 refined Google Tag Manager API v2 specs, 44 operations) +
+  https://developers.google.com/tag-platform/tag-manager/api/v2/devguide +
+  the repo's conventions/, errors/, scopes/ and sandbox/ artifacts.
+notes: >-
+  Packaged agent operating instructions for the marquee Tag Manager API v2 flows,
+  mirroring the arazzo/ native workflow set. Every operationId referenced below was
+  verified verbatim against the specs in openapi/ - none is invented. No
+  provider-published Agent Skills or AGENTS.md exists on Google's tag-platform docs,
+  so these are generated rather than harvested.
+skills:
+  - file: google-tag-manager-provision-container.md
+    name: Provision a Google Tag Manager container and workspace
+    api: openapi/google-tag-manager-containers-api-openapi.yml
+    operations: [listAccounts, createContainer, listContainers, createWorkspace, listWorkspaces]
+  - file: google-tag-manager-build-and-publish-tag.md
+    name: Build a trigger-fired, variable-backed tag and publish it live
+    api: openapi/google-tag-manager-tagmanager-api-openapi.yml
+    operations: [createVariable, createTrigger, createTag, getWorkspaceStatus, createWorkspaceVersion, publishContainerVersion, getLiveContainerVersion]
+  - file: google-tag-manager-safe-update-and-revert.md
+    name: Safely update or revert a tag, trigger or variable
+    api: openapi/google-tag-manager-tagmanager-api-openapi.yml
+    operations: [getTag, updateTag, revertTag, getTrigger, updateTrigger, revertTrigger, getVariable, updateVariable, revertVariable]
+  - file: google-tag-manager-audit-live-container.md
+    name: Audit what is live in a container and roll back a bad publish
+    api: openapi/google-tag-manager-versions-api-openapi.yml
+    operations: [listAccounts, listContainers, getLiveContainerVersion, listContainerVersionHeaders, getContainerVersion, publishContainerVersion]
+  - file: google-tag-manager-sync-and-resolve-workspace.md
+    name: Sync a stale workspace and resolve merge conflicts before versioning
+    api: openapi/google-tag-manager-workspaces-api-openapi.yml
+    operations: [listWorkspaces, getWorkspace, syncWorkspace, getWorkspaceStatus, updateTag, createWorkspaceVersion]
+  - file: google-tag-manager-manage-user-permissions.md
+    name: Grant, adjust and revoke Tag Manager user permissions
+    api: openapi/google-tag-manager-user-permissions-api-openapi.yml
+    operations: [listUserPermissions, createUserPermission, getUserPermission, updateUserPermission, deleteUserPermission]

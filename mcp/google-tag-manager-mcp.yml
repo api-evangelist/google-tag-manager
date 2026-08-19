@@ -1,59 +1,112 @@
-generated: '2026-06-20'
+generated: '2026-08-13'
 method: derived
 status: candidate
-source: openapi/google-tag-manager-api-v2-openapi.yml
-notes: >-
-  No official Google-hosted MCP server for the Tag Manager API was found (no
-  entry in the Model Context Protocol registry, npm @modelcontextprotocol, or
-  Google's docs as of this round). The tool list below is a candidate surface
-  derived one-to-one from the OpenAPI v2 operations, suitable for a generated
+source: openapi/ (8 refined Tag Manager API v2 specs, 44 operations)
+notes: No official Google-hosted or Google-published MCP server for the Tag Manager API exists as of 2026-08-13.
+  A search of the MCP registry directories, npm @modelcontextprotocol, GitHub and Google's own tag-platform
+  docs returned only community/third-party implementations (paolobtl/gtm-mcp, VasthavM/google-tag-manager-mcp,
+  sprawz/gtm-mcp-server, neep305/mcp-for-gtm, adtechnacity/gtm-mcp, and a hosted one from Stape) - none
+  of them first-party, so none is recorded as this provider's agent surface. The tool list below is a
+  CANDIDATE surface derived one-to-one from the 44 OpenAPI v2 operations in openapi/, suitable for a generated
   MCP wrapper over the REST API.
 server:
   name: google-tag-manager
   transport: http
   url: null
+deployment:
+  mode: none
+  auth: oauth
+  verified: searched
+  tools: 44
+  checked: '2026-08-13'
+  note: 'mode: none - nobody ships a first-party server. Third-party servers exist (local-stdio, plus
+    a hosted one from Stape) but are not published by Google and are not an agent surface Google operates.'
 tools:
-- {name: list_accounts, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#listAccounts"}
-- {name: get_account, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#getAccount"}
-- {name: update_account, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#updateAccount"}
-- {name: list_containers, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#listContainers"}
-- {name: create_container, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#createContainer"}
-- {name: get_container, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#getContainer"}
-- {name: update_container, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#updateContainer"}
-- {name: delete_container, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#deleteContainer"}
-- {name: list_workspaces, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#listWorkspaces"}
-- {name: create_workspace, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#createWorkspace"}
-- {name: get_workspace, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#getWorkspace"}
-- {name: update_workspace, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#updateWorkspace"}
-- {name: delete_workspace, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#deleteWorkspace"}
-- {name: create_workspace_version, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#createWorkspaceVersion"}
-- {name: get_workspace_status, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#getWorkspaceStatus"}
-- {name: sync_workspace, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#syncWorkspace"}
-- {name: list_tags, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#listTags"}
-- {name: create_tag, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#createTag"}
-- {name: get_tag, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#getTag"}
-- {name: update_tag, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#updateTag"}
-- {name: delete_tag, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#deleteTag"}
-- {name: revert_tag, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#revertTag"}
-- {name: list_triggers, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#listTriggers"}
-- {name: create_trigger, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#createTrigger"}
-- {name: get_trigger, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#getTrigger"}
-- {name: update_trigger, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#updateTrigger"}
-- {name: delete_trigger, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#deleteTrigger"}
-- {name: revert_trigger, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#revertTrigger"}
-- {name: list_variables, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#listVariables"}
-- {name: create_variable, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#createVariable"}
-- {name: get_variable, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#getVariable"}
-- {name: update_variable, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#updateVariable"}
-- {name: delete_variable, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#deleteVariable"}
-- {name: revert_variable, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#revertVariable"}
-- {name: list_container_version_headers, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#listContainerVersionHeaders"}
-- {name: get_container_version, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#getContainerVersion"}
-- {name: delete_container_version, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#deleteContainerVersion"}
-- {name: publish_container_version, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#publishContainerVersion"}
-- {name: get_live_container_version, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#getLiveContainerVersion"}
-- {name: list_user_permissions, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#listUserPermissions"}
-- {name: create_user_permission, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#createUserPermission"}
-- {name: get_user_permission, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#getUserPermission"}
-- {name: update_user_permission, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#updateUserPermission"}
-- {name: delete_user_permission, source_operation: "openapi/google-tag-manager-api-v2-openapi.yml#deleteUserPermission"}
+- name: list_accounts
+  source_operation: openapi/google-tag-manager-accounts-api-openapi.yml#listAccounts
+- name: get_account
+  source_operation: openapi/google-tag-manager-accounts-api-openapi.yml#getAccount
+- name: update_account
+  source_operation: openapi/google-tag-manager-accounts-api-openapi.yml#updateAccount
+- name: list_containers
+  source_operation: openapi/google-tag-manager-containers-api-openapi.yml#listContainers
+- name: create_container
+  source_operation: openapi/google-tag-manager-containers-api-openapi.yml#createContainer
+- name: get_container
+  source_operation: openapi/google-tag-manager-containers-api-openapi.yml#getContainer
+- name: update_container
+  source_operation: openapi/google-tag-manager-containers-api-openapi.yml#updateContainer
+- name: delete_container
+  source_operation: openapi/google-tag-manager-containers-api-openapi.yml#deleteContainer
+- name: list_workspaces
+  source_operation: openapi/google-tag-manager-workspaces-api-openapi.yml#listWorkspaces
+- name: create_workspace
+  source_operation: openapi/google-tag-manager-workspaces-api-openapi.yml#createWorkspace
+- name: get_workspace
+  source_operation: openapi/google-tag-manager-workspaces-api-openapi.yml#getWorkspace
+- name: update_workspace
+  source_operation: openapi/google-tag-manager-workspaces-api-openapi.yml#updateWorkspace
+- name: delete_workspace
+  source_operation: openapi/google-tag-manager-workspaces-api-openapi.yml#deleteWorkspace
+- name: create_workspace_version
+  source_operation: openapi/google-tag-manager-workspaces-api-openapi.yml#createWorkspaceVersion
+- name: get_workspace_status
+  source_operation: openapi/google-tag-manager-workspaces-api-openapi.yml#getWorkspaceStatus
+- name: sync_workspace
+  source_operation: openapi/google-tag-manager-workspaces-api-openapi.yml#syncWorkspace
+- name: list_tags
+  source_operation: openapi/google-tag-manager-tagmanager-api-openapi.yml#listTags
+- name: create_tag
+  source_operation: openapi/google-tag-manager-tagmanager-api-openapi.yml#createTag
+- name: get_tag
+  source_operation: openapi/google-tag-manager-tagmanager-api-openapi.yml#getTag
+- name: update_tag
+  source_operation: openapi/google-tag-manager-tagmanager-api-openapi.yml#updateTag
+- name: delete_tag
+  source_operation: openapi/google-tag-manager-tagmanager-api-openapi.yml#deleteTag
+- name: revert_tag
+  source_operation: openapi/google-tag-manager-tagmanager-api-openapi.yml#revertTag
+- name: list_triggers
+  source_operation: openapi/google-tag-manager-triggers-api-openapi.yml#listTriggers
+- name: create_trigger
+  source_operation: openapi/google-tag-manager-triggers-api-openapi.yml#createTrigger
+- name: get_trigger
+  source_operation: openapi/google-tag-manager-triggers-api-openapi.yml#getTrigger
+- name: update_trigger
+  source_operation: openapi/google-tag-manager-triggers-api-openapi.yml#updateTrigger
+- name: delete_trigger
+  source_operation: openapi/google-tag-manager-triggers-api-openapi.yml#deleteTrigger
+- name: revert_trigger
+  source_operation: openapi/google-tag-manager-triggers-api-openapi.yml#revertTrigger
+- name: list_variables
+  source_operation: openapi/google-tag-manager-variables-api-openapi.yml#listVariables
+- name: create_variable
+  source_operation: openapi/google-tag-manager-variables-api-openapi.yml#createVariable
+- name: get_variable
+  source_operation: openapi/google-tag-manager-variables-api-openapi.yml#getVariable
+- name: update_variable
+  source_operation: openapi/google-tag-manager-variables-api-openapi.yml#updateVariable
+- name: delete_variable
+  source_operation: openapi/google-tag-manager-variables-api-openapi.yml#deleteVariable
+- name: revert_variable
+  source_operation: openapi/google-tag-manager-variables-api-openapi.yml#revertVariable
+- name: list_container_version_headers
+  source_operation: openapi/google-tag-manager-versions-api-openapi.yml#listContainerVersionHeaders
+- name: get_container_version
+  source_operation: openapi/google-tag-manager-versions-api-openapi.yml#getContainerVersion
+- name: delete_container_version
+  source_operation: openapi/google-tag-manager-versions-api-openapi.yml#deleteContainerVersion
+- name: publish_container_version
+  source_operation: openapi/google-tag-manager-versions-api-openapi.yml#publishContainerVersion
+- name: get_live_container_version
+  source_operation: openapi/google-tag-manager-versions-api-openapi.yml#getLiveContainerVersion
+- name: list_user_permissions
+  source_operation: openapi/google-tag-manager-user-permissions-api-openapi.yml#listUserPermissions
+- name: create_user_permission
+  source_operation: openapi/google-tag-manager-user-permissions-api-openapi.yml#createUserPermission
+- name: get_user_permission
+  source_operation: openapi/google-tag-manager-user-permissions-api-openapi.yml#getUserPermission
+- name: update_user_permission
+  source_operation: openapi/google-tag-manager-user-permissions-api-openapi.yml#updateUserPermission
+- name: delete_user_permission
+  source_operation: openapi/google-tag-manager-user-permissions-api-openapi.yml#deleteUserPermission

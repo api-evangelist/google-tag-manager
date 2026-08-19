@@ -1,0 +1,145 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Google Tag Manager Accounts Containers API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/v2/auth",
+      "accessTokenUrl": "https://oauth2.googleapis.com/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Containers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Google Tag Manager List Containers in an Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tagmanager.googleapis.com/tagmanager/v2/:parent/containers",
+            "params": [
+              {
+                "name": "parent",
+                "value": "",
+                "type": "path",
+                "description": "GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers."
+              },
+              {
+                "name": "pageToken",
+                "value": "example_value",
+                "type": "query",
+                "description": "Continuation token for fetching the next page of results."
+              }
+            ]
+          },
+          "docs": "Lists all Containers that belongs to a GTM Account."
+        },
+        {
+          "info": {
+            "name": "Google Tag Manager Create a Container",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://tagmanager.googleapis.com/tagmanager/v2/:parent/containers",
+            "params": [
+              {
+                "name": "parent",
+                "value": "",
+                "type": "path",
+                "description": "GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a Container within a GTM Account."
+        },
+        {
+          "info": {
+            "name": "Google Tag Manager Get a Container",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tagmanager.googleapis.com/tagmanager/v2/:containerPath",
+            "params": [
+              {
+                "name": "containerPath",
+                "value": "example_value",
+                "type": "path",
+                "description": "GTM Container's API relative path, e.g. accounts/{accountId}/containers/{containerId}."
+              }
+            ]
+          },
+          "docs": "Gets a Container by its resource path."
+        },
+        {
+          "info": {
+            "name": "Google Tag Manager Update a Container",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://tagmanager.googleapis.com/tagmanager/v2/:containerPath",
+            "params": [
+              {
+                "name": "containerPath",
+                "value": "example_value",
+                "type": "path",
+                "description": "GTM Container's API relative path."
+              },
+              {
+                "name": "fingerprint",
+                "value": "example_value",
+                "type": "query",
+                "description": "When provided, this fingerprint must match the fingerprint of the container in storage."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a Container."
+        },
+        {
+          "info": {
+            "name": "Google Tag Manager Delete a Container",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://tagmanager.googleapis.com/tagmanager/v2/:containerPath",
+            "params": [
+              {
+                "name": "containerPath",
+                "value": "example_value",
+                "type": "path",
+                "description": "GTM Container's API relative path."
+              }
+            ]
+          },
+          "docs": "Deletes a Container."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

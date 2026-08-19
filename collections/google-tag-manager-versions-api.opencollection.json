@@ -1,0 +1,143 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Google Tag Manager Accounts Versions API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/v2/auth",
+      "accessTokenUrl": "https://oauth2.googleapis.com/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Versions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Google Tag Manager List All Container Version Headers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tagmanager.googleapis.com/tagmanager/v2/:parent/versions",
+            "params": [
+              {
+                "name": "parent",
+                "value": "",
+                "type": "path",
+                "description": "GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers."
+              },
+              {
+                "name": "pageToken",
+                "value": "example_value",
+                "type": "query",
+                "description": "Continuation token for fetching the next page of results."
+              },
+              {
+                "name": "includeDeleted",
+                "value": "true",
+                "type": "query",
+                "description": "Also retrieve deleted (archived) versions when true."
+              }
+            ]
+          },
+          "docs": "Lists all Container Version Headers of a GTM Container, providing summary information about each version."
+        },
+        {
+          "info": {
+            "name": "Google Tag Manager Get a Container Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tagmanager.googleapis.com/tagmanager/v2/:versionPath",
+            "params": [
+              {
+                "name": "versionPath",
+                "value": "example_value",
+                "type": "path",
+                "description": "GTM ContainerVersion's API relative path."
+              }
+            ]
+          },
+          "docs": "Gets a Container Version by its resource path."
+        },
+        {
+          "info": {
+            "name": "Google Tag Manager Delete a Container Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://tagmanager.googleapis.com/tagmanager/v2/:versionPath",
+            "params": [
+              {
+                "name": "versionPath",
+                "value": "example_value",
+                "type": "path",
+                "description": "GTM ContainerVersion's API relative path."
+              }
+            ]
+          },
+          "docs": "Deletes a Container Version."
+        },
+        {
+          "info": {
+            "name": "Google Tag Manager Publish a Container Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://tagmanager.googleapis.com/tagmanager/v2/:versionPath:publish",
+            "params": [
+              {
+                "name": "versionPath",
+                "value": "example_value",
+                "type": "path",
+                "description": "GTM ContainerVersion's API relative path."
+              },
+              {
+                "name": "fingerprint",
+                "value": "example_value",
+                "type": "query",
+                "description": "When provided, this fingerprint must match the fingerprint of the container version in storage."
+              }
+            ]
+          },
+          "docs": "Publishes a Container Version, making it the live version served to users."
+        },
+        {
+          "info": {
+            "name": "Google Tag Manager Get the Live Container Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tagmanager.googleapis.com/tagmanager/v2/:parent/versions:live",
+            "params": [
+              {
+                "name": "parent",
+                "value": "",
+                "type": "path",
+                "description": "GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers."
+              }
+            ]
+          },
+          "docs": "Gets the live (published) container version for a GTM Container."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

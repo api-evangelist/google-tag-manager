@@ -1,31 +1,67 @@
-generated: '2026-06-20'
+generated: '2026-08-13'
 method: searched
 source: >-
   https://developers.google.com/tag-platform/tag-manager/api/v2 +
-  Google API deprecation policy + Google Cloud status dashboard
+  https://developers.google.com/terms +
+  https://status.cloud.google.com/ +
+  live probe of the Google Discovery Document
+correction_note: >-
+  Two pointers recorded in the 2026-06-20 round were misattributions and are
+  corrected here, both verified on 2026-08-13. (1) status_page was
+  status.cloud.google.com — that dashboard covers Google Cloud services only and does
+  not list Google Tag Manager, Google Marketing Platform or the Tag Manager API.
+  (2) deprecation.policy_url was cloud.google.com/terms/deprecation — the Google
+  Cloud Platform deprecation policy, which does not govern a Marketing Platform
+  product. Neither surface exists for this API; recording them as present credited
+  Google with operational transparency it does not publish for Tag Manager.
 versioning:
   scheme: uri-path
   current: v2
   path_prefix: /tagmanager/v2
   docs: https://developers.google.com/tag-platform/tag-manager/api/v2
+  discovery_document: 'https://tagmanager.googleapis.com/$discovery/rest?version=v2'
+  discovery_revision: '20260812'
+  discovery_probed: '2026-08-13'
+  discovery_status: 200
   note: >-
-    v1 of the Tag Manager API was deprecated and shut down; v2 is the current
-    and only supported version. Version is pinned in the URL path and in the
-    client-library service constructor (tagmanager, v2).
+    v1 of the Tag Manager API was deprecated and shut down; v2 is the current and
+    only supported version. Version is pinned in the URL path and in the
+    client-library service constructor (tagmanager, v2). Google regenerates a
+    machine-readable Discovery Document per revision — revision 20260812 was live
+    when probed, which makes the contract itself demonstrably current even though
+    there is no dated changelog for the REST API.
 deprecation:
-  policy_url: https://cloud.google.com/terms/deprecation
+  policy_url: null
+  policy_published: false
   sunset_header: false
   deprecation_header: false
   note: >-
-    Google follows a published deprecation policy for its APIs (generally
-    advance notice before a version is decommissioned). The Tag Manager REST
-    API does not emit RFC 8594 Sunset/Deprecation response headers; deprecation
-    is communicated via docs, release notes, and email.
+    Google publishes NO deprecation policy scoped to the Tag Manager API. The Google
+    APIs Terms of Service (developers.google.com/terms) contains no deprecation
+    clause and no notice period — section 8a instead reserves the right to
+    "discontinue the APIs or any portion or feature or your access thereto for any
+    reason and at any time." The API emits no RFC 8594 Sunset or Deprecation response
+    headers, so there is no runtime signal either. Deprecation, when it happens, is
+    communicated through docs, release notes and email.
 sla:
   url: null
   uptime_target: null
-  note: No standalone published SLA for the Tag Manager API.
-status_page: https://status.cloud.google.com/
+  note: >-
+    No published SLA for the Tag Manager API on the free tier. Tag Manager 360, sold
+    within Google Marketing Platform, carries enterprise support terms that are not
+    publicly documented.
+status_page: null
+status_page_published: false
+status_page_note: >-
+  Google publishes no status page or incident dashboard for Google Tag Manager.
+  status.cloud.google.com covers Google Cloud services and does not list Tag Manager,
+  Marketing Platform or the Tag Manager API (verified 2026-08-13). ads.google.com/status
+  is the Google Ads publisher dashboard and likewise does not cover Tag Manager.
+  Third-party monitors (StatusGator, UptimeRobot) exist but are not provider-published
+  and are not recorded as this provider's status surface.
 changelog: https://support.google.com/tagmanager/answer/4620708
+changelog_artifact: changelog/google-tag-manager-changelog.yml
 release_notes: https://developers.google.com/tag-platform/tag-manager/server-side/release-notes
 deprecated_operations: []
+deprecated_operations_note: >-
+  No operation in any of the 8 specs in openapi/ carries deprecated: true.

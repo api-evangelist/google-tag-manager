@@ -1,44 +1,89 @@
-generated: '2026-06-20'
-method: searched
-source: live probe of API host + Google identity provider hosts referenced in OpenAPI securitySchemes
-notes: >-
-  The Tag Manager API host (tagmanager.googleapis.com) and docs host
-  (developers.google.com) expose no /.well-known/ discovery documents (all 404).
-  The OAuth 2.0 / OIDC discovery documents below belong to the Google identity
-  provider (accounts.google.com), which is the authorizationUrl/issuer the Tag
-  Manager API's oauth2 security scheme delegates to.
+generated: '2026-08-13'
+method: probed
+source: >-
+  Live probe on 2026-08-13 of every Google Tag Manager host in apis.yml and in the
+  OpenAPI servers[] blocks, plus the Google identity hosts the API's oauth2 security
+  scheme delegates to, plus the company root domain.
+summary: >-
+  The Tag Manager API host, the docs host, the container-delivery host and the
+  product console ALL return 404 on every /.well-known/ path (with an HTML error
+  shell, not a document). Tag Manager itself publishes no per-service discovery
+  surface. What Google does serve, at the company level, is a real RFC 9116
+  security.txt on google.com, and the OAuth 2.0 / OIDC discovery documents on
+  accounts.google.com — which is the authorization server this API's oauth2 scheme
+  points at (authorizationUrl accounts.google.com, tokenUrl oauth2.googleapis.com),
+  so it is the discovery surface an integrator of THIS API actually resolves against.
+  All three hits are on hosts Google owns and operates.
 hosts:
 - host: https://tagmanager.googleapis.com
+  role: API host (baseURL for all 8 API entries)
   documents:
-  - path: /.well-known/security.txt
-    status: 404
-  - path: /.well-known/openid-configuration
-    status: 404
-  - path: /.well-known/oauth-authorization-server
-    status: 404
-  - path: /.well-known/api-catalog
-    status: 404
-  - path: /.well-known/ai-plugin.json
-    status: 404
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
 - host: https://developers.google.com
+  role: documentation host
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+- host: https://www.googletagmanager.com
+  role: container / gtm.js delivery host
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+- host: https://tagmanager.google.com
+  role: product console / sign-in host
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+- host: https://www.google.com
+  role: company root domain (Google, the provider)
   documents:
   - path: /.well-known/security.txt
-    status: 404
-  - path: /.well-known/openid-configuration
-    status: 404
-  - path: /.well-known/ai-plugin.json
-    status: 404
+    status: 200
+    file: google-tag-manager-security.txt
+    spec: RFC 9116
+    contents:
+      contact: [https://g.co/vulnz, 'mailto:security@google.com']
+      policy: https://g.co/vrp
+      acknowledgments: https://bughunters.google.com/
+      encryption: https://services.google.com/corporate/publickey.txt
+      expires: '2030-04-01T00:00:00z'
+  - {path: /.well-known/openid-configuration, status: 404}
 - host: https://accounts.google.com
-  role: identity-provider
+  role: >-
+    OAuth 2.0 authorization server for this API (the authorizationUrl in the Tag
+    Manager OpenAPI oauth2 securityScheme)
   documents:
   - path: /.well-known/openid-configuration
     status: 200
+    spec: OpenID Connect Discovery 1.0
     file: google-tag-manager-openid-configuration.json
+    issuer: https://accounts.google.com
   - path: /.well-known/oauth-authorization-server
     status: 200
+    spec: RFC 8414
     file: google-tag-manager-oauth-authorization-server.json
-security_txt:
-  note: >-
-    No security.txt on the API or docs host. Google publishes an org-wide
-    security.txt at https://www.google.com/.well-known/security.txt (VRP /
-    g.co/vrp) — captured in security/google-tag-manager-vulnerability-disclosure.yml.
+negative_findings:
+  - >-
+    No /.well-known/api-catalog (RFC 9727) on any Google Tag Manager host — there is
+    no machine-readable index of Google's API estate at the well-known path.
+  - >-
+    No /.well-known/ai-plugin.json and no agent card on any host. Confirmed on all
+    five product/API/docs hosts; a2a/ is deliberately absent rather than stubbed.
+  - >-
+    404 responses return an HTML error page, not a JSON body — recorded so a future
+    round does not mistake a 200-with-HTML shell for a document.

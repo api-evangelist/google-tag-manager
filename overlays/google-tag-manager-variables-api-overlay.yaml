@@ -1,0 +1,57 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Google Tag Manager Accounts Variables API
+  version: 1.0.0
+extends: openapi/google-tag-manager-variables-api-openapi.yml
+x-generated: '2026-08-13'
+x-method: generated
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-08-13'
+    x-apievangelist-provider: google-tag-manager
+    x-apievangelist-artifacts:
+      authentication: authentication/google-tag-manager-authentication.yml
+      scopes: scopes/google-tag-manager-scopes.yml
+      errors: errors/google-tag-manager-problem-types.yml
+      lifecycle: lifecycle/google-tag-manager-lifecycle.yml
+      conventions: conventions/google-tag-manager-conventions.yml
+      data_model: data-model/google-tag-manager-data-model.yml
+      conformance: conformance/google-tag-manager-conformance.yml
+      packages: packages/google-tag-manager-packages.yml
+      rate_limits: rate-limits/google-tag-manager-rate-limits.yml
+      plans: plans/google-tag-manager-plans-pricing.yml
+      sandbox: sandbox/google-tag-manager-sandbox.yml
+      skills: skills/_index.yml
+      agentic_access: agentic-access/google-tag-manager-agentic-access.yml
+    x-apievangelist-source-contract:
+      discovery_document: https://tagmanager.googleapis.com/$discovery/rest?version=v2
+      revision: '20260812'
+      probed: '2026-08-13'
+      http_status: 200
+- target: $.info
+  update:
+    x-apievangelist-pagination:
+      style: cursor
+      request_param: pageToken
+      response_field: nextPageToken
+    x-apievangelist-concurrency:
+      style: optimistic
+      mechanism: fingerprint
+      note: Mutating operations accept a fingerprint query parameter; the request succeeds only when it
+        matches the stored resource fingerprint, otherwise a conflict is returned. There is no Idempotency-Key
+        header - a retried create duplicates.
+    x-apievangelist-rate-limit:
+      quota_per_project_per_day: 10000
+      qps_per_project: 0.25
+      window: 100 second sliding window (25 requests)
+      exhaustion_status: 403
+      exhaustion_reasons:
+      - userRateLimitExceeded
+      - quotaExceeded
+      response_headers: null
+      note: No RateLimit-* or Retry-After headers are emitted; 403 + reason is the only runtime signal.
+- target: $.servers
+  update:
+    x-apievangelist-note: Single production host, no sandbox host. Server-side tagging containers run
+      on customer-provisioned infrastructure and are configured, not called, via this API.

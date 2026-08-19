@@ -1,0 +1,206 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Google Tag Manager Accounts Workspaces API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/v2/auth",
+      "accessTokenUrl": "https://oauth2.googleapis.com/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Workspaces",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Google Tag Manager List Workspaces in a Container",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tagmanager.googleapis.com/tagmanager/v2/:parent/workspaces",
+            "params": [
+              {
+                "name": "parent",
+                "value": "",
+                "type": "path",
+                "description": "GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers."
+              },
+              {
+                "name": "pageToken",
+                "value": "example_value",
+                "type": "query",
+                "description": "Continuation token for fetching the next page of results."
+              }
+            ]
+          },
+          "docs": "Lists all Workspaces that belong to a GTM Container."
+        },
+        {
+          "info": {
+            "name": "Google Tag Manager Create a Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://tagmanager.googleapis.com/tagmanager/v2/:parent/workspaces",
+            "params": [
+              {
+                "name": "parent",
+                "value": "",
+                "type": "path",
+                "description": "GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a Workspace within a GTM Container."
+        },
+        {
+          "info": {
+            "name": "Google Tag Manager Get a Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tagmanager.googleapis.com/tagmanager/v2/:workspacePath",
+            "params": [
+              {
+                "name": "workspacePath",
+                "value": "example_value",
+                "type": "path",
+                "description": "GTM Workspace's API relative path, e.g. accounts/{accountId}/containers/{containerId}/workspaces/{workspaceId}."
+              }
+            ]
+          },
+          "docs": "Gets a Workspace by its resource path."
+        },
+        {
+          "info": {
+            "name": "Google Tag Manager Update a Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://tagmanager.googleapis.com/tagmanager/v2/:workspacePath",
+            "params": [
+              {
+                "name": "workspacePath",
+                "value": "example_value",
+                "type": "path",
+                "description": "GTM Workspace's API relative path."
+              },
+              {
+                "name": "fingerprint",
+                "value": "example_value",
+                "type": "query",
+                "description": "When provided, this fingerprint must match the fingerprint of the workspace in storage."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a Workspace."
+        },
+        {
+          "info": {
+            "name": "Google Tag Manager Delete a Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://tagmanager.googleapis.com/tagmanager/v2/:workspacePath",
+            "params": [
+              {
+                "name": "workspacePath",
+                "value": "example_value",
+                "type": "path",
+                "description": "GTM Workspace's API relative path."
+              }
+            ]
+          },
+          "docs": "Deletes a Workspace."
+        },
+        {
+          "info": {
+            "name": "Google Tag Manager Create a Container Version From a Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://tagmanager.googleapis.com/tagmanager/v2/:workspacePath:create_version",
+            "params": [
+              {
+                "name": "workspacePath",
+                "value": "example_value",
+                "type": "path",
+                "description": "GTM Workspace's API relative path."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a Container Version from the entities present in the workspace, deletes the workspace, and sets the base container version to the newly created version."
+        },
+        {
+          "info": {
+            "name": "Google Tag Manager Get the Status of a Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tagmanager.googleapis.com/tagmanager/v2/:workspacePath/status",
+            "params": [
+              {
+                "name": "workspacePath",
+                "value": "example_value",
+                "type": "path",
+                "description": "GTM Workspace's API relative path."
+              }
+            ]
+          },
+          "docs": "Finds conflicting and modified entities in the workspace. Returns status information about the workspace including workspace changes and conflicts."
+        },
+        {
+          "info": {
+            "name": "Google Tag Manager Sync a Workspace to the Latest Container Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://tagmanager.googleapis.com/tagmanager/v2/:workspacePath:sync",
+            "params": [
+              {
+                "name": "workspacePath",
+                "value": "example_value",
+                "type": "path",
+                "description": "GTM Workspace's API relative path."
+              }
+            ]
+          },
+          "docs": "Syncs a workspace to the latest container version by updating all unmodified workspace entities and displaying conflicts for modified entities."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

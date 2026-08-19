@@ -1,10 +1,19 @@
-generated: '2026-06-20'
+generated: '2026-08-13'
 method: searched
 source: >-
   Google APIs client libraries (https://developers.google.com/tag-platform/tag-manager/api/v2/libraries)
   and the public package registries. Google ships auto-generated per-service
   clients for the Tag Manager API v2 inside its language-wide API client
   libraries; the service module name is "tagmanager" version "v2".
+  Versions and publish dates below were read from each registry's metadata
+  endpoint on 2026-08-13 (registry.npmjs.org, pypi.org/pypi/.../json,
+  rubygems.org/api/v1, api.nuget.org, repo1.maven.org maven-metadata.xml,
+  proxy.golang.org, repo.packagist.org, pub.dev/api).
+currency_note: >-
+  Every entry below is a currently-maintained, actively-released Google client.
+  The Java and .NET packages are per-service generated clients pinned to a
+  discovery revision (v2-rev<YYYYMMDD>), so their version string doubles as the
+  date the Tag Manager discovery document was last regenerated for that language.
 packages:
 - language: python
   registry: pypi
@@ -13,6 +22,8 @@ packages:
   install: pip install google-api-python-client
   usage: build('tagmanager', 'v2', credentials=creds)
   official: true
+  version: 2.198.0
+  published: '2026-06-25'
 - language: javascript
   registry: npm
   name: googleapis
@@ -20,30 +31,46 @@ packages:
   install: npm install googleapis
   usage: google.tagmanager('v2')
   official: true
+  version: 174.0.1
+  published: '2026-08-05'
 - language: go
   registry: pkg.go.dev
   name: google.golang.org/api/tagmanager/v2
   url: https://pkg.go.dev/google.golang.org/api/tagmanager/v2
   install: go get google.golang.org/api/tagmanager/v2
   official: true
+  version: v0.293.0
+  published: '2026-08-11'
+  note: >-
+    Version/date are for the umbrella module google.golang.org/api, which vendors
+    the tagmanager/v2 package; the package is not separately versioned.
 - language: java
   registry: maven
   name: com.google.apis:google-api-services-tagmanager
   url: https://central.sonatype.com/artifact/com.google.apis/google-api-services-tagmanager
-  install: "implementation 'com.google.apis:google-api-services-tagmanager:v2-rev...'"
+  install: "implementation 'com.google.apis:google-api-services-tagmanager:v2-rev20260706-2.0.0'"
   official: true
+  version: v2-rev20260706-2.0.0
+  published: '2026-07-09'
+  note: >-
+    Published date is the maven-metadata.xml lastUpdated stamp (20260709);
+    the rev in the version string is the 2026-07-06 discovery revision.
 - language: dotnet
   registry: nuget
   name: Google.Apis.TagManager.v2
   url: https://www.nuget.org/packages/Google.Apis.TagManager.v2
   install: dotnet add package Google.Apis.TagManager.v2
   official: true
+  version: 1.75.0.4204
+  published: '2026-07-09'
 - language: ruby
   registry: rubygems
   name: google-apis-tagmanager_v2
   url: https://rubygems.org/gems/google-apis-tagmanager_v2
   install: gem install google-apis-tagmanager_v2
   official: true
+  version: 0.40.0
+  published: '2026-07-12'
 - language: php
   registry: packagist
   name: google/apiclient
@@ -51,6 +78,8 @@ packages:
   install: composer require google/apiclient
   usage: new Google\Service\TagManager($client)
   official: true
+  version: v2.19.4
+  published: '2026-06-29'
 - language: dart
   registry: pub.dev
   name: googleapis
@@ -58,3 +87,5 @@ packages:
   install: dart pub add googleapis
   usage: TagManagerApi(client)
   official: true
+  version: 16.0.0
+  published: '2026-02-05'

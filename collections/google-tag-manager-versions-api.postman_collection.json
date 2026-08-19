@@ -1,0 +1,565 @@
+{
+  "item": [
+    {
+      "id": "1032bb4c-4589-4d09-b18a-65242359da34",
+      "name": "Versions",
+      "description": {
+        "content": "Operations for managing container versions, including publishing and rollback.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a6e327f7-cc24-4461-bc61-34674170b87f",
+          "name": "Google Tag Manager List All Container Version Headers",
+          "request": {
+            "name": "Google Tag Manager List All Container Version Headers",
+            "description": {
+              "content": "Lists all Container Version Headers of a GTM Container, providing summary information about each version.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tagmanager",
+                "v2",
+                ":parent",
+                "versions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageToken",
+                  "value": "<string>",
+                  "description": "Continuation token for fetching the next page of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "includeDeleted",
+                  "value": "<boolean>",
+                  "description": "Also retrieve deleted (archived) versions when true."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "parent",
+                  "description": "(Required) GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "312e3be8-8522-48ed-a44b-f5fea5c9f051",
+              "name": "Successful response containing a list of container version headers.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    ":parent",
+                    "versions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageToken",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "includeDeleted",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "parent",
+                      "description": "(Required) GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"containerVersionHeader\": [\n    {\n      \"path\": \"example_value\",\n      \"accountId\": \"500123\",\n      \"containerId\": \"500123\",\n      \"containerVersionId\": \"500123\",\n      \"name\": \"Example Title\",\n      \"numTags\": \"example_value\",\n      \"numTriggers\": \"example_value\",\n      \"numVariables\": \"example_value\",\n      \"deleted\": true\n    }\n  ],\n  \"nextPageToken\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4d72d313-042e-43d7-9324-07323372d734",
+          "name": "Google Tag Manager Get a Container Version",
+          "request": {
+            "name": "Google Tag Manager Get a Container Version",
+            "description": {
+              "content": "Gets a Container Version by its resource path.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tagmanager",
+                "v2",
+                ":versionPath"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "versionPath",
+                  "description": "(Required) GTM ContainerVersion's API relative path."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9798fe35-d32f-46f7-a836-94b12a406d67",
+              "name": "Successful response containing the container version.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    ":versionPath"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "versionPath",
+                      "description": "(Required) GTM ContainerVersion's API relative path."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"path\": \"example_value\",\n  \"accountId\": \"500123\",\n  \"containerId\": \"500123\",\n  \"containerVersionId\": \"500123\",\n  \"name\": \"Example Title\",\n  \"description\": \"A sample description.\",\n  \"container\": {\n    \"path\": \"example_value\",\n    \"accountId\": \"500123\",\n    \"containerId\": \"500123\",\n    \"name\": \"Example Title\",\n    \"domainName\": [\n      {}\n    ],\n    \"publicId\": \"500123\",\n    \"tagIds\": [\n      {}\n    ],\n    \"notes\": \"example_value\",\n    \"usageContext\": [\n      {}\n    ],\n    \"fingerprint\": \"example_value\",\n    \"tagManagerUrl\": \"https://www.example.com\",\n    \"taggingServerUrls\": [\n      {}\n    ]\n  },\n  \"tag\": [\n    {\n      \"path\": \"example_value\",\n      \"accountId\": \"500123\",\n      \"containerId\": \"500123\",\n      \"workspaceId\": \"500123\",\n      \"tagId\": \"500123\",\n      \"name\": \"Example Title\",\n      \"type\": \"example_value\",\n      \"liveOnly\": true,\n      \"notes\": \"example_value\",\n      \"scheduleStartMs\": \"example_value\",\n      \"scheduleEndMs\": \"example_value\",\n      \"parameter\": {},\n      \"fingerprint\": \"example_value\",\n      \"firingTriggerId\": {},\n      \"blockingTriggerId\": {},\n      \"setupTag\": {},\n      \"teardownTag\": {},\n      \"parentFolderId\": \"500123\",\n      \"tagFiringOption\": \"tagFiringOptionUnspecified\",\n      \"tagManagerUrl\": \"https://www.example.com\",\n      \"paused\": true,\n      \"monitoringMetadataTagNameKey\": \"example_value\"\n    }\n  ],\n  \"trigger\": [\n    {\n      \"path\": \"example_value\",\n      \"accountId\": \"500123\",\n      \"containerId\": \"500123\",\n      \"workspaceId\": \"500123\",\n      \"triggerId\": \"500123\",\n      \"name\": \"Example Title\",\n      \"type\": \"eventTypeUnspecified\",\n      \"customEventFilter\": {},\n      \"filter\": {},\n      \"autoEventFilter\": {},\n      \"fingerprint\": \"example_value\",\n      \"parentFolderId\": \"500123\",\n      \"tagManagerUrl\": \"https://www.example.com\",\n      \"notes\": \"example_value\",\n      \"parameter\": {}\n    }\n  ],\n  \"variable\": [\n    {\n      \"path\": \"example_value\",\n      \"accountId\": \"500123\",\n      \"containerId\": \"500123\",\n      \"workspaceId\": \"500123\",\n      \"variableId\": \"500123\",\n      \"name\": \"Example Title\",\n      \"type\": \"example_value\",\n      \"notes\": \"example_value\",\n      \"scheduleStartMs\": \"example_value\",\n      \"scheduleEndMs\": \"example_value\",\n      \"parameter\": {},\n      \"enablingTriggerId\": {},\n      \"disablingTriggerId\": {},\n      \"fingerprint\": \"example_value\",\n      \"parentFolderId\": \"500123\",\n      \"tagManagerUrl\": \"https://www.example.com\"\n    }\n  ],\n  \"fingerprint\": \"example_value\",\n  \"tagManagerUrl\": \"https://www.example.com\",\n  \"deleted\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "42be039b-13a7-4d7c-9da4-66dafa470fd6",
+          "name": "Google Tag Manager Delete a Container Version",
+          "request": {
+            "name": "Google Tag Manager Delete a Container Version",
+            "description": {
+              "content": "Deletes a Container Version.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tagmanager",
+                "v2",
+                ":versionPath"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "versionPath",
+                  "description": "(Required) GTM ContainerVersion's API relative path."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fa9481b1-ccb6-4349-886b-d6fd80a44c22",
+              "name": "Container version successfully deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    ":versionPath"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "versionPath",
+                      "description": "(Required) GTM ContainerVersion's API relative path."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "95ae4aff-5409-43bb-9234-e0448631a1f6",
+          "name": "Google Tag Manager Publish a Container Version",
+          "request": {
+            "name": "Google Tag Manager Publish a Container Version",
+            "description": {
+              "content": "Publishes a Container Version, making it the live version served to users.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tagmanager",
+                "v2",
+                "{{versionPath}}:publish"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fingerprint",
+                  "value": "<string>",
+                  "description": "When provided, this fingerprint must match the fingerprint of the container version in storage."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "59a5e530-fd82-49d1-8713-99b519ba7027",
+              "name": "Successful response containing the published container version.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    "{{versionPath}}:publish"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fingerprint",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"containerVersion\": {\n    \"path\": \"example_value\",\n    \"accountId\": \"500123\",\n    \"containerId\": \"500123\",\n    \"containerVersionId\": \"500123\",\n    \"name\": \"Example Title\",\n    \"description\": \"A sample description.\",\n    \"tag\": [\n      {}\n    ],\n    \"trigger\": [\n      {}\n    ],\n    \"variable\": [\n      {}\n    ],\n    \"fingerprint\": \"example_value\",\n    \"tagManagerUrl\": \"https://www.example.com\",\n    \"deleted\": true\n  },\n  \"compilerError\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "058e8b0e-dae2-4ddf-8932-9b9d2564f050",
+          "name": "Google Tag Manager Get the Live Container Version",
+          "request": {
+            "name": "Google Tag Manager Get the Live Container Version",
+            "description": {
+              "content": "Gets the live (published) container version for a GTM Container.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tagmanager",
+                "v2",
+                ":parent",
+                "versions:live"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "parent",
+                  "description": "(Required) GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "283ad26e-d35c-403b-a058-204e3419368c",
+              "name": "Successful response containing the live container version.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tagmanager",
+                    "v2",
+                    ":parent",
+                    "versions:live"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "parent",
+                      "description": "(Required) GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"path\": \"example_value\",\n  \"accountId\": \"500123\",\n  \"containerId\": \"500123\",\n  \"containerVersionId\": \"500123\",\n  \"name\": \"Example Title\",\n  \"description\": \"A sample description.\",\n  \"container\": {\n    \"path\": \"example_value\",\n    \"accountId\": \"500123\",\n    \"containerId\": \"500123\",\n    \"name\": \"Example Title\",\n    \"domainName\": [\n      {}\n    ],\n    \"publicId\": \"500123\",\n    \"tagIds\": [\n      {}\n    ],\n    \"notes\": \"example_value\",\n    \"usageContext\": [\n      {}\n    ],\n    \"fingerprint\": \"example_value\",\n    \"tagManagerUrl\": \"https://www.example.com\",\n    \"taggingServerUrls\": [\n      {}\n    ]\n  },\n  \"tag\": [\n    {\n      \"path\": \"example_value\",\n      \"accountId\": \"500123\",\n      \"containerId\": \"500123\",\n      \"workspaceId\": \"500123\",\n      \"tagId\": \"500123\",\n      \"name\": \"Example Title\",\n      \"type\": \"example_value\",\n      \"liveOnly\": true,\n      \"notes\": \"example_value\",\n      \"scheduleStartMs\": \"example_value\",\n      \"scheduleEndMs\": \"example_value\",\n      \"parameter\": {},\n      \"fingerprint\": \"example_value\",\n      \"firingTriggerId\": {},\n      \"blockingTriggerId\": {},\n      \"setupTag\": {},\n      \"teardownTag\": {},\n      \"parentFolderId\": \"500123\",\n      \"tagFiringOption\": \"tagFiringOptionUnspecified\",\n      \"tagManagerUrl\": \"https://www.example.com\",\n      \"paused\": true,\n      \"monitoringMetadataTagNameKey\": \"example_value\"\n    }\n  ],\n  \"trigger\": [\n    {\n      \"path\": \"example_value\",\n      \"accountId\": \"500123\",\n      \"containerId\": \"500123\",\n      \"workspaceId\": \"500123\",\n      \"triggerId\": \"500123\",\n      \"name\": \"Example Title\",\n      \"type\": \"eventTypeUnspecified\",\n      \"customEventFilter\": {},\n      \"filter\": {},\n      \"autoEventFilter\": {},\n      \"fingerprint\": \"example_value\",\n      \"parentFolderId\": \"500123\",\n      \"tagManagerUrl\": \"https://www.example.com\",\n      \"notes\": \"example_value\",\n      \"parameter\": {}\n    }\n  ],\n  \"variable\": [\n    {\n      \"path\": \"example_value\",\n      \"accountId\": \"500123\",\n      \"containerId\": \"500123\",\n      \"workspaceId\": \"500123\",\n      \"variableId\": \"500123\",\n      \"name\": \"Example Title\",\n      \"type\": \"example_value\",\n      \"notes\": \"example_value\",\n      \"scheduleStartMs\": \"example_value\",\n      \"scheduleEndMs\": \"example_value\",\n      \"parameter\": {},\n      \"enablingTriggerId\": {},\n      \"disablingTriggerId\": {},\n      \"fingerprint\": \"example_value\",\n      \"parentFolderId\": \"500123\",\n      \"tagManagerUrl\": \"https://www.example.com\"\n    }\n  ],\n  \"fingerprint\": \"example_value\",\n  \"tagManagerUrl\": \"https://www.example.com\",\n  \"deleted\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://tagmanager.googleapis.com",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) GTM ContainerVersion's API relative path.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "versionPath"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "tagmanager.readonly tagmanager.edit.containers tagmanager.manage.accounts tagmanager.manage.users tagmanager.publish tagmanager.edit.containerversions tagmanager.delete.containers"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://oauth2.googleapis.com/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://accounts.google.com/o/oauth2/v2/auth"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9f3be15b-0584-48a4-a5fb-fca581138888",
+    "name": "Google Tag Manager Accounts Versions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Google Tag Manager API v2 allows clients to access and modify Google Tag Manager account, container, workspace, tag, trigger, and variable configurations. It provides programmatic management of tag deployment, trigger conditions, and variable definitions across web, mobile, and server-side containers.\n\nContact Support:\n Name: Google Support",
+      "type": "text/plain"
+    }
+  }
+}

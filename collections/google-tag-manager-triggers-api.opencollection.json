@@ -1,0 +1,164 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Google Tag Manager Accounts Triggers API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/v2/auth",
+      "accessTokenUrl": "https://oauth2.googleapis.com/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Triggers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Google Tag Manager List Triggers in a Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tagmanager.googleapis.com/tagmanager/v2/:parent/triggers",
+            "params": [
+              {
+                "name": "parent",
+                "value": "",
+                "type": "path",
+                "description": "GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers."
+              },
+              {
+                "name": "pageToken",
+                "value": "example_value",
+                "type": "query",
+                "description": "Continuation token for fetching the next page of results."
+              }
+            ]
+          },
+          "docs": "Lists all GTM Triggers of a GTM Container Workspace."
+        },
+        {
+          "info": {
+            "name": "Google Tag Manager Create a Trigger",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://tagmanager.googleapis.com/tagmanager/v2/:parent/triggers",
+            "params": [
+              {
+                "name": "parent",
+                "value": "",
+                "type": "path",
+                "description": "GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a GTM Trigger in a GTM Workspace."
+        },
+        {
+          "info": {
+            "name": "Google Tag Manager Get a Trigger",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tagmanager.googleapis.com/tagmanager/v2/:triggerPath",
+            "params": [
+              {
+                "name": "triggerPath",
+                "value": "example_value",
+                "type": "path",
+                "description": "GTM Trigger's API relative path, e.g. accounts/{accountId}/containers/{containerId}/workspaces/{workspaceId}/triggers/{triggerId}."
+              }
+            ]
+          },
+          "docs": "Gets a GTM Trigger by its resource path."
+        },
+        {
+          "info": {
+            "name": "Google Tag Manager Update a Trigger",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://tagmanager.googleapis.com/tagmanager/v2/:triggerPath",
+            "params": [
+              {
+                "name": "triggerPath",
+                "value": "example_value",
+                "type": "path",
+                "description": "GTM Trigger's API relative path."
+              },
+              {
+                "name": "fingerprint",
+                "value": "example_value",
+                "type": "query",
+                "description": "When provided, this fingerprint must match the fingerprint of the trigger in storage."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a GTM Trigger."
+        },
+        {
+          "info": {
+            "name": "Google Tag Manager Delete a Trigger",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://tagmanager.googleapis.com/tagmanager/v2/:triggerPath",
+            "params": [
+              {
+                "name": "triggerPath",
+                "value": "example_value",
+                "type": "path",
+                "description": "GTM Trigger's API relative path."
+              }
+            ]
+          },
+          "docs": "Deletes a GTM Trigger."
+        },
+        {
+          "info": {
+            "name": "Google Tag Manager Revert Changes to a Trigger in a Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://tagmanager.googleapis.com/tagmanager/v2/:triggerPath:revert",
+            "params": [
+              {
+                "name": "triggerPath",
+                "value": "example_value",
+                "type": "path",
+                "description": "GTM Trigger's API relative path."
+              }
+            ]
+          },
+          "docs": "Reverts changes to a GTM Trigger in a GTM Workspace, restoring it to its original state."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

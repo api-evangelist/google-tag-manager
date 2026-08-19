@@ -1,0 +1,103 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Google Tag Manager Accounts API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/v2/auth",
+      "accessTokenUrl": "https://oauth2.googleapis.com/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Google Tag Manager Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tagmanager.googleapis.com/tagmanager/v2/accounts",
+            "params": [
+              {
+                "name": "pageToken",
+                "value": "example_value",
+                "type": "query",
+                "description": "Continuation token for fetching the next page of results."
+              },
+              {
+                "name": "includeGoogleTags",
+                "value": "true",
+                "type": "query",
+                "description": "Also retrieve accounts associated with Google Tag when true."
+              }
+            ]
+          },
+          "docs": "Lists all GTM Accounts that a user has access to. Returns a list of Account resources."
+        },
+        {
+          "info": {
+            "name": "Get a Google Tag Manager Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://tagmanager.googleapis.com/tagmanager/v2/:path",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path",
+                "description": "GTM resource's API relative path, e.g. accounts/{accountId}."
+              }
+            ]
+          },
+          "docs": "Gets a GTM Account by its resource path."
+        },
+        {
+          "info": {
+            "name": "Update a Google Tag Manager Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://tagmanager.googleapis.com/tagmanager/v2/:path",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path",
+                "description": "GTM resource's API relative path, e.g. accounts/{accountId}."
+              },
+              {
+                "name": "fingerprint",
+                "value": "example_value",
+                "type": "query",
+                "description": "When provided, this fingerprint must match the fingerprint of the account in storage."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a GTM Account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

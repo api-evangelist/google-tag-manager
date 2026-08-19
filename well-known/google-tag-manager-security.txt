@@ -1,0 +1,7 @@
+Contact: https://g.co/vulnz
+Contact: mailto:security@google.com
+Encryption: https://services.google.com/corporate/publickey.txt
+Acknowledgments: https://bughunters.google.com/
+Policy: https://g.co/vrp
+Hiring: https://g.co/SecurityPrivacyEngJobs
+Expires: 2030-04-01T00:00:00z

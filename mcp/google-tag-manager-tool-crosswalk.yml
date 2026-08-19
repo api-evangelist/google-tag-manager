@@ -1,0 +1,393 @@
+generated: '2026-08-13'
+method: derived
+source: mcp/google-tag-manager-mcp.yml + openapi/ (8 refined Tag Manager API v2 specs)
+notes: 'Binds every tool in the CANDIDATE MCP surface to its backing OpenAPI operationId, so each tool
+  inherits a real inputSchema (that operation parameters + requestBody) instead of a guessed one. IMPORTANT:
+  Google publishes no first-party MCP server for Tag Manager - the tool list is derived one-to-one from
+  the REST operations, so this crosswalk is a total bijection with no divergence, not a measurement of
+  a live tool surface. Third-party GTM MCP servers exist but are not Google-operated and are not mapped
+  here. Re-derive this file against tools/list if Google ever ships a real server.'
+surfaces:
+  openapi:
+    files:
+    - openapi/google-tag-manager-accounts-api-openapi.yml
+    - openapi/google-tag-manager-containers-api-openapi.yml
+    - openapi/google-tag-manager-tagmanager-api-openapi.yml
+    - openapi/google-tag-manager-triggers-api-openapi.yml
+    - openapi/google-tag-manager-user-permissions-api-openapi.yml
+    - openapi/google-tag-manager-variables-api-openapi.yml
+    - openapi/google-tag-manager-versions-api-openapi.yml
+    - openapi/google-tag-manager-workspaces-api-openapi.yml
+    operations: 44
+    gated: false
+  graphql:
+    endpoint: null
+    note: Google Tag Manager publishes no GraphQL API.
+  mcp:
+    url: null
+    status: candidate
+    gated: null
+    note: No first-party MCP endpoint; tools/list could not be called because no server exists.
+coverage:
+  tools_named: 44
+  tools_bound: 44
+  mcp_only: 0
+  rest_operations_total: 44
+  rest_operations_with_tool: 44
+  binding_confidence: high (1:1 derivation, not name-matching)
+crosswalk:
+- tool: list_accounts
+  category: accounts
+  rest:
+  - listAccounts
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-accounts-api-openapi.yml
+  http: GET /tagmanager/v2/accounts
+- tool: get_account
+  category: accounts
+  rest:
+  - getAccount
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-accounts-api-openapi.yml
+  http: GET /tagmanager/v2/{path}
+- tool: update_account
+  category: accounts
+  rest:
+  - updateAccount
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-accounts-api-openapi.yml
+  http: PUT /tagmanager/v2/{path}
+- tool: list_containers
+  category: containers
+  rest:
+  - listContainers
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-containers-api-openapi.yml
+  http: GET /tagmanager/v2/{parent}/containers
+- tool: create_container
+  category: containers
+  rest:
+  - createContainer
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-containers-api-openapi.yml
+  http: POST /tagmanager/v2/{parent}/containers
+- tool: get_container
+  category: containers
+  rest:
+  - getContainer
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-containers-api-openapi.yml
+  http: GET /tagmanager/v2/{containerPath}
+- tool: update_container
+  category: containers
+  rest:
+  - updateContainer
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-containers-api-openapi.yml
+  http: PUT /tagmanager/v2/{containerPath}
+- tool: delete_container
+  category: containers
+  rest:
+  - deleteContainer
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-containers-api-openapi.yml
+  http: DELETE /tagmanager/v2/{containerPath}
+- tool: list_workspaces
+  category: workspaces
+  rest:
+  - listWorkspaces
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-workspaces-api-openapi.yml
+  http: GET /tagmanager/v2/{parent}/workspaces
+- tool: create_workspace
+  category: workspaces
+  rest:
+  - createWorkspace
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-workspaces-api-openapi.yml
+  http: POST /tagmanager/v2/{parent}/workspaces
+- tool: get_workspace
+  category: workspaces
+  rest:
+  - getWorkspace
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-workspaces-api-openapi.yml
+  http: GET /tagmanager/v2/{workspacePath}
+- tool: update_workspace
+  category: workspaces
+  rest:
+  - updateWorkspace
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-workspaces-api-openapi.yml
+  http: PUT /tagmanager/v2/{workspacePath}
+- tool: delete_workspace
+  category: workspaces
+  rest:
+  - deleteWorkspace
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-workspaces-api-openapi.yml
+  http: DELETE /tagmanager/v2/{workspacePath}
+- tool: create_workspace_version
+  category: workspaces
+  rest:
+  - createWorkspaceVersion
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-workspaces-api-openapi.yml
+  http: POST /tagmanager/v2/{workspacePath}:create_version
+- tool: get_workspace_status
+  category: workspaces
+  rest:
+  - getWorkspaceStatus
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-workspaces-api-openapi.yml
+  http: GET /tagmanager/v2/{workspacePath}/status
+- tool: sync_workspace
+  category: workspaces
+  rest:
+  - syncWorkspace
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-workspaces-api-openapi.yml
+  http: POST /tagmanager/v2/{workspacePath}:sync
+- tool: list_tags
+  category: tags
+  rest:
+  - listTags
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-tagmanager-api-openapi.yml
+  http: GET /tagmanager/v2/{parent}/tags
+- tool: create_tag
+  category: tags
+  rest:
+  - createTag
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-tagmanager-api-openapi.yml
+  http: POST /tagmanager/v2/{parent}/tags
+- tool: get_tag
+  category: tags
+  rest:
+  - getTag
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-tagmanager-api-openapi.yml
+  http: GET /tagmanager/v2/{tagPath}
+- tool: update_tag
+  category: tags
+  rest:
+  - updateTag
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-tagmanager-api-openapi.yml
+  http: PUT /tagmanager/v2/{tagPath}
+- tool: delete_tag
+  category: tags
+  rest:
+  - deleteTag
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-tagmanager-api-openapi.yml
+  http: DELETE /tagmanager/v2/{tagPath}
+- tool: revert_tag
+  category: tags
+  rest:
+  - revertTag
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-tagmanager-api-openapi.yml
+  http: POST /tagmanager/v2/{tagPath}:revert
+- tool: list_triggers
+  category: triggers
+  rest:
+  - listTriggers
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-triggers-api-openapi.yml
+  http: GET /tagmanager/v2/{parent}/triggers
+- tool: create_trigger
+  category: triggers
+  rest:
+  - createTrigger
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-triggers-api-openapi.yml
+  http: POST /tagmanager/v2/{parent}/triggers
+- tool: get_trigger
+  category: triggers
+  rest:
+  - getTrigger
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-triggers-api-openapi.yml
+  http: GET /tagmanager/v2/{triggerPath}
+- tool: update_trigger
+  category: triggers
+  rest:
+  - updateTrigger
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-triggers-api-openapi.yml
+  http: PUT /tagmanager/v2/{triggerPath}
+- tool: delete_trigger
+  category: triggers
+  rest:
+  - deleteTrigger
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-triggers-api-openapi.yml
+  http: DELETE /tagmanager/v2/{triggerPath}
+- tool: revert_trigger
+  category: triggers
+  rest:
+  - revertTrigger
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-triggers-api-openapi.yml
+  http: POST /tagmanager/v2/{triggerPath}:revert
+- tool: list_variables
+  category: variables
+  rest:
+  - listVariables
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-variables-api-openapi.yml
+  http: GET /tagmanager/v2/{parent}/variables
+- tool: create_variable
+  category: variables
+  rest:
+  - createVariable
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-variables-api-openapi.yml
+  http: POST /tagmanager/v2/{parent}/variables
+- tool: get_variable
+  category: variables
+  rest:
+  - getVariable
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-variables-api-openapi.yml
+  http: GET /tagmanager/v2/{variablePath}
+- tool: update_variable
+  category: variables
+  rest:
+  - updateVariable
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-variables-api-openapi.yml
+  http: PUT /tagmanager/v2/{variablePath}
+- tool: delete_variable
+  category: variables
+  rest:
+  - deleteVariable
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-variables-api-openapi.yml
+  http: DELETE /tagmanager/v2/{variablePath}
+- tool: revert_variable
+  category: variables
+  rest:
+  - revertVariable
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-variables-api-openapi.yml
+  http: POST /tagmanager/v2/{variablePath}:revert
+- tool: list_container_version_headers
+  category: versions
+  rest:
+  - listContainerVersionHeaders
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-versions-api-openapi.yml
+  http: GET /tagmanager/v2/{parent}/versions
+- tool: get_container_version
+  category: versions
+  rest:
+  - getContainerVersion
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-versions-api-openapi.yml
+  http: GET /tagmanager/v2/{versionPath}
+- tool: delete_container_version
+  category: versions
+  rest:
+  - deleteContainerVersion
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-versions-api-openapi.yml
+  http: DELETE /tagmanager/v2/{versionPath}
+- tool: publish_container_version
+  category: versions
+  rest:
+  - publishContainerVersion
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-versions-api-openapi.yml
+  http: POST /tagmanager/v2/{versionPath}:publish
+- tool: get_live_container_version
+  category: versions
+  rest:
+  - getLiveContainerVersion
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-versions-api-openapi.yml
+  http: GET /tagmanager/v2/{parent}/versions:live
+- tool: list_user_permissions
+  category: user-permissions
+  rest:
+  - listUserPermissions
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-user-permissions-api-openapi.yml
+  http: GET /tagmanager/v2/{parent}/user_permissions
+- tool: create_user_permission
+  category: user-permissions
+  rest:
+  - createUserPermission
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-user-permissions-api-openapi.yml
+  http: POST /tagmanager/v2/{parent}/user_permissions
+- tool: get_user_permission
+  category: user-permissions
+  rest:
+  - getUserPermission
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-user-permissions-api-openapi.yml
+  http: GET /tagmanager/v2/{userPermissionPath}
+- tool: update_user_permission
+  category: user-permissions
+  rest:
+  - updateUserPermission
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-user-permissions-api-openapi.yml
+  http: PUT /tagmanager/v2/{userPermissionPath}
+- tool: delete_user_permission
+  category: user-permissions
+  rest:
+  - deleteUserPermission
+  binding: rest
+  confidence: high
+  openapi: openapi/google-tag-manager-user-permissions-api-openapi.yml
+  http: DELETE /tagmanager/v2/{userPermissionPath}
+mcp_only: []
+rest_only: []
+rest_only_note: None. Every one of the 44 REST operations has a candidate tool.
