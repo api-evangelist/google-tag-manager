@@ -67,6 +67,8 @@ apis:
   humanURL: https://developers.google.com/tag-platform/tag-manager/api/v2
   baseURL: https://tagmanager.googleapis.com
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -123,6 +125,8 @@ apis:
   humanURL: https://developers.google.com/tag-platform/tag-manager/api/v2
   baseURL: https://tagmanager.googleapis.com
   tags:
+  - Tag Manager
+  tags_raw:
   - Tagmanager
   properties:
   - type: OpenAPI
