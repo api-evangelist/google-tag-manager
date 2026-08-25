@@ -5,7 +5,7 @@
       "source": "https://blog.google/products/marketingplatform/rss/",
       "feed_url": "https://blog.google/products/marketingplatform/rss/",
       "title": "",
-      "saved": 1,
+      "saved": 0,
       "method": "feed"
     },
     {
@@ -13,10 +13,9 @@
       "feed_url": "https://developers.google.com/tag-platform/tag-manager",
       "title": "",
       "saved": 0,
-      "method": "none",
-      "error": "parse_failed"
+      "method": "none"
     }
   ],
   "post_count": 30,
-  "fetched": "2026-08-15T12:11:08Z"
+  "fetched": "2026-08-22T20:20:02Z"
 }
