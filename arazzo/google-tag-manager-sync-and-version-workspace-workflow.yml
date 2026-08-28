@@ -12,8 +12,8 @@ info:
     without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: googleTagManagerApi
-  url: ../openapi/google-tag-manager-api-v2-openapi.yml
+- name: workspacesApi
+  url: ../openapi/google-tag-manager-workspaces-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: sync-and-version-workspace

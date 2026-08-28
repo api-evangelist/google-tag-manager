@@ -11,8 +11,14 @@ info:
     opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: googleTagManagerApi
-  url: ../openapi/google-tag-manager-api-v2-openapi.yml
+- name: tagmanagerApi
+  url: ../openapi/google-tag-manager-tagmanager-api-openapi.yml
+  type: openapi
+- name: variablesApi
+  url: ../openapi/google-tag-manager-variables-api-openapi.yml
+  type: openapi
+- name: workspacesApi
+  url: ../openapi/google-tag-manager-workspaces-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: build-variable-backed-tag

@@ -11,8 +11,14 @@ info:
     and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: googleTagManagerApi
-  url: ../openapi/google-tag-manager-api-v2-openapi.yml
+- name: containersApi
+  url: ../openapi/google-tag-manager-containers-api-openapi.yml
+  type: openapi
+- name: versionsApi
+  url: ../openapi/google-tag-manager-versions-api-openapi.yml
+  type: openapi
+- name: workspacesApi
+  url: ../openapi/google-tag-manager-workspaces-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: bootstrap-live-container

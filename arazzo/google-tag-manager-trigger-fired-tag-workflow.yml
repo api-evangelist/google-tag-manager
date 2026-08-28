@@ -11,8 +11,14 @@ info:
     and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: googleTagManagerApi
-  url: ../openapi/google-tag-manager-api-v2-openapi.yml
+- name: tagmanagerApi
+  url: ../openapi/google-tag-manager-tagmanager-api-openapi.yml
+  type: openapi
+- name: triggersApi
+  url: ../openapi/google-tag-manager-triggers-api-openapi.yml
+  type: openapi
+- name: workspacesApi
+  url: ../openapi/google-tag-manager-workspaces-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: wire-trigger-fired-tag

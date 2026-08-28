@@ -13,8 +13,8 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: googleTagManagerApi
-  url: ../openapi/google-tag-manager-api-v2-openapi.yml
+- name: userPermissionsApi
+  url: ../openapi/google-tag-manager-user-permissions-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: grant-user-permission
