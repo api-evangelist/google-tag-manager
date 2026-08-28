@@ -9,6 +9,18 @@ description: >-
   immutable container version, and then published to live traffic, with fingerprint-based optimistic concurrency
   guarding every write. Access is OAuth 2.0 only, with seven granular scopes separating read, edit, publish, and
   user-management rights.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
@@ -292,6 +304,9 @@ apis:
   - type: ChangeLog
     url: https://support.google.com/tagmanager/answer/4620708
 common:
+  - type: CapabilityMap
+    url: capabilities/google-tag-manager-capability-edges.yml
+    name: Google Tag Manager Business Capability Map
   - type: AgenticAccess
     url: agentic-access/google-tag-manager-agentic-access.yml
   - type: Packages

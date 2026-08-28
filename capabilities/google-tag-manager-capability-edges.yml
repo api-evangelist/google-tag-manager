@@ -1,0 +1,27 @@
+slug: google-tag-manager
+provider: Google Tag Manager
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Tagmanager
+  spec_file: google-tag-manager-tagmanager-api-openapi.yml
+  capability_id: BC-400.60
+  capability_id_l1: BC-400
+  capability_name: Digital Marketing Management
+  confidence: 0.75
+  evidence: 'POST /tagmanager/v2/{parent}/tags ''Create a Tag''; vendor: ''deploy and update measurement
+    codes ... on a website, mobile app, or server-side container'''
+  reason: Creating and managing marketing/measurement tags deployed on websites is core web analytics
+    and marketing-automation tagging, i.e. Digital Marketing Management. Some ambiguity with product telemetry
+    instrumentation, hence 0.75.
