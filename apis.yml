@@ -137,7 +137,7 @@ apis:
   humanURL: https://developers.google.com/tag-platform/tag-manager/api/v2
   baseURL: https://tagmanager.googleapis.com
   tags:
-  - Tagmanager
+  - Tag Manager
   tags_raw:
   - Tagmanager
   properties:
