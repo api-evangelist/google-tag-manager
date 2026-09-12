@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Google Tag Manager Accounts Variables API
   description: The Google Tag Manager API v2 allows clients to access and modify Google Tag Manager account, container, workspace, tag, trigger, and variable configurations. It provides programmatic management of tag deployment, trigger conditions, and variable definitions across web, mobile, and server-side containers.
@@ -386,46 +386,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RevertVariableResponse:
-      type: object
-      description: The result of reverting a variable in a workspace.
-      properties:
-        variable:
-          $ref: '#/components/schemas/Variable'
-    FormatValue:
-      type: object
-      description: Option to convert a variable value to another value.
-      properties:
-        caseConversionType:
-          type: string
-          description: The option to convert a string-type variable value to either lowercase or uppercase.
-          enum:
-          - none
-          - lowercase
-          - uppercase
-          example: none
-        convertNullToValue:
-          $ref: '#/components/schemas/Parameter'
-        convertUndefinedToValue:
-          $ref: '#/components/schemas/Parameter'
-        convertTrueToValue:
-          $ref: '#/components/schemas/Parameter'
-        convertFalseToValue:
-          $ref: '#/components/schemas/Parameter'
-    ListVariablesResponse:
-      type: object
-      description: List Variables Response.
-      properties:
-        variable:
-          type: array
-          description: All GTM Variables of a GTM Container Workspace.
-          items:
-            $ref: '#/components/schemas/Variable'
-          example: []
-        nextPageToken:
-          type: string
-          description: Continuation token for fetching the next page of results.
-          example: example_value
     Parameter:
       type: object
       description: Represents a Google Tag Manager Parameter. Parameters are key-value pairs that configure tags, triggers, and variables.
@@ -469,6 +429,32 @@ components:
           example: true
       required:
       - type
+    FormatValue:
+      type: object
+      description: Option to convert a variable value to another value.
+      properties:
+        caseConversionType:
+          type: string
+          description: The option to convert a string-type variable value to either lowercase or uppercase.
+          enum:
+          - none
+          - lowercase
+          - uppercase
+          example: none
+        convertNullToValue:
+          $ref: '#/components/schemas/Parameter'
+        convertUndefinedToValue:
+          $ref: '#/components/schemas/Parameter'
+        convertTrueToValue:
+          $ref: '#/components/schemas/Parameter'
+        convertFalseToValue:
+          $ref: '#/components/schemas/Parameter'
+    RevertVariableResponse:
+      type: object
+      description: The result of reverting a variable in a workspace.
+      properties:
+        variable:
+          $ref: '#/components/schemas/Variable'
     Variable:
       type: object
       description: Represents a Google Tag Manager Variable. A variable provides dynamic values that can be used in tags and triggers, such as page URL, click text, or custom JavaScript values.
@@ -558,6 +544,20 @@ components:
       required:
       - name
       - type
+    ListVariablesResponse:
+      type: object
+      description: List Variables Response.
+      properties:
+        variable:
+          type: array
+          description: All GTM Variables of a GTM Container Workspace.
+          items:
+            $ref: '#/components/schemas/Variable'
+          example: []
+        nextPageToken:
+          type: string
+          description: Continuation token for fetching the next page of results.
+          example: example_value
   parameters:
     parentParam:
       name: parent

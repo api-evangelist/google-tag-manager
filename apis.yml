@@ -304,6 +304,8 @@ apis:
   - type: ChangeLog
     url: https://support.google.com/tagmanager/answer/4620708
 common:
+  - type: Website
+    url: https://www.google.com/
   - type: CapabilityMap
     url: capabilities/google-tag-manager-capability-edges.yml
     name: Google Tag Manager Business Capability Map
@@ -513,3 +515,5 @@ x-enrichment:
   status: enriched
   artifacts_added: 20
   pass: local-v1
+x-parent: google
+x-relationship: product

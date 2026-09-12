@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Google Tag Manager Accounts User Permissions API
   description: The Google Tag Manager API v2 allows clients to access and modify Google Tag Manager account, container, workspace, tag, trigger, and variable configurations. It provides programmatic management of tag deployment, trigger conditions, and variable definitions across web, mobile, and server-side containers.
@@ -227,15 +227,20 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    parentParam:
-      name: parent
-      in: path
-      required: true
-      description: GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers.
-      schema:
-        type: string
   schemas:
+    AccountAccess:
+      type: object
+      description: Defines the Google Tag Manager Account access permissions.
+      properties:
+        permission:
+          type: string
+          description: Whether the user has no access, user access, or admin access to the account.
+          enum:
+          - accountPermissionUnspecified
+          - noAccess
+          - user
+          - admin
+          example: accountPermissionUnspecified
     ListUserPermissionsResponse:
       type: object
       description: List user permissions response.
@@ -250,6 +255,25 @@ components:
           type: string
           description: Continuation token for fetching the next page of results.
           example: example_value
+    ContainerAccess:
+      type: object
+      description: Defines the Google Tag Manager Container access permissions.
+      properties:
+        containerId:
+          type: string
+          description: GTM Container ID.
+          example: '500123'
+        permission:
+          type: string
+          description: List of Container permissions. Valid values include noAccess, read, edit, approve, and publish.
+          enum:
+          - containerPermissionUnspecified
+          - noAccess
+          - read
+          - edit
+          - approve
+          - publish
+          example: containerPermissionUnspecified
     UserPermission:
       type: object
       description: Represents a user's permission settings for a Google Tag Manager Account and its Containers.
@@ -277,38 +301,14 @@ components:
           items:
             $ref: '#/components/schemas/ContainerAccess'
           example: []
-    AccountAccess:
-      type: object
-      description: Defines the Google Tag Manager Account access permissions.
-      properties:
-        permission:
-          type: string
-          description: Whether the user has no access, user access, or admin access to the account.
-          enum:
-          - accountPermissionUnspecified
-          - noAccess
-          - user
-          - admin
-          example: accountPermissionUnspecified
-    ContainerAccess:
-      type: object
-      description: Defines the Google Tag Manager Container access permissions.
-      properties:
-        containerId:
-          type: string
-          description: GTM Container ID.
-          example: '500123'
-        permission:
-          type: string
-          description: List of Container permissions. Valid values include noAccess, read, edit, approve, and publish.
-          enum:
-          - containerPermissionUnspecified
-          - noAccess
-          - read
-          - edit
-          - approve
-          - publish
-          example: containerPermissionUnspecified
+  parameters:
+    parentParam:
+      name: parent
+      in: path
+      required: true
+      description: GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers.
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2

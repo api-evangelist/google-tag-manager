@@ -1,42 +1,48 @@
-# Kin Score artifact — google-tag-manager — 2026-08-12T193225
+# Kin Score artifact — google-tag-manager — 2026-09-12T062655
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: google-tag-manager
-  schema_version: 0.11.0
-  scored_at: '2026-08-12'
-  run_ts: 2026-08-12T193225
-  composite: 62.8
+  schema_version: 0.21.0
+  scored_at: '2026-09-12'
+  run_ts: 2026-09-12T062655
+  composite: 63.3
   band: strong
   facets:
-    discoverability: 90.7
-    contract_quality: 73.9
-    governance: 69.8
-    operational_transparency: 39.5
-    developer_ergonomics: 58.7
-    commercial_clarity: 50.0
+    discoverability: 83.3
+    contract_quality: 68.6
+    contract_governance: 31.8
+    operational_transparency: 34.2
+    developer_ergonomics: 69.6
+    access_clarity: 81.6
   agent_readiness:
-    score: 43.2
+    score: 36.9
     band: agent-ready
     dimensions:
       spec_presence: true
       agentic_access: derived
-      mcp_server: derived
-      auth_clarity: true
+      reversibility_documented: false
+      mcp_server: false
+      auth_clarity: served
       idempotency: false
       error_semantics: documented
       openapi_examples: verified
       rate_limit_signal: documented
       event_surface_described: false
-      agent_skills: false
+      agent_skills: derived
       well_known_catalog: false
       consent_identity: false
       agent_card: false
       dry_run_mode: false
+      delegated_identity: served
+      protected_resource_metadata: false
+      dynamic_client_registration: false
+      agentic_commerce: false
   provenance:
     mcp: derived
+    skills: derived
     agentic_access: derived
-    conformance: derived
+    conformance: first-party
     contracts:
       total: 8
       derived: 0

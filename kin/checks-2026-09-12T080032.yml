@@ -1,16 +1,16 @@
 ---
 kin_checks:
   slug: google-tag-manager
-  schema_version: 0.18.2
-  scored_at: '2026-09-04'
-  run_ts: 2026-09-04T062714
+  schema_version: 0.21.0
+  scored_at: '2026-09-12'
+  run_ts: 2026-09-12T080032
   note: Actionable checks only (missed + partial). earned/na are every other check
-    in rubric/scoring-0.18.2.yml; counts below let you verify that.
+    in rubric/scoring-0.21.0.yml; counts below let you verify that.
   counts:
-    total: 132
-    earned: 58
-    partial: 12
-    missed: 36
+    total: 136
+    earned: 57
+    partial: 13
+    missed: 40
     na: 26
   checks:
   - id: multiple_apis
@@ -70,6 +70,14 @@ kin_checks:
   - id: reg_compliance_published
     status: missed
     detail: pointer liveness 0.0
+  - id: upsert_outcome_discriminator
+    status: missed
+  - id: upsert_alternate_key
+    status: missed
+  - id: upsert_named
+    status: missed
+  - id: upsert_declared_conflict
+    status: missed
   - id: reversibility_documented
     status: missed
   - id: mcp_server
@@ -113,6 +121,9 @@ kin_checks:
     status: partial
     earned: 1.0
     detail: pointer liveness 0.5
+  - id: postman_present
+    status: partial
+    earned: 0.5
   - id: agent_skill_present
     status: partial
     earned: 0.75

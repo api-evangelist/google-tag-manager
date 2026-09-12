@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Google Tag Manager Accounts Workspaces API
   description: The Google Tag Manager API v2 allows clients to access and modify Google Tag Manager account, container, workspace, tag, trigger, and variable configurations. It provides programmatic management of tag deployment, trigger conditions, and variable definitions across web, mobile, and server-side containers.
@@ -370,118 +370,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    parentParam:
-      name: parent
-      in: path
-      required: true
-      description: GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers.
-      schema:
-        type: string
   schemas:
-    MergeConflict:
-      type: object
-      description: Represents a merge conflict between workspace and version.
-      properties:
-        entityInWorkspace:
-          $ref: '#/components/schemas/Entity'
-        entityInBaseVersion:
-          $ref: '#/components/schemas/Entity'
-    SetupTag:
-      type: object
-      description: Represents a setup tag relationship. A setup tag fires before the main tag.
-      properties:
-        tagName:
-          type: string
-          description: The name of the setup tag.
-          example: example_value
-        stopOnSetupFailure:
-          type: boolean
-          description: If true, fire the main tag only if the setup tag fires successfully. If false, fire the main tag regardless of setup tag firing status.
-          example: true
-    Container:
-      type: object
-      description: Represents a Google Tag Manager Container, which is a collection of tags, triggers, and variables used on a website or mobile app.
-      properties:
-        path:
-          type: string
-          description: GTM Container's API relative path.
-          readOnly: true
-          example: example_value
-        accountId:
-          type: string
-          description: GTM Account ID.
-          readOnly: true
-          example: '500123'
-        containerId:
-          type: string
-          description: The Container ID uniquely identifies the GTM Container.
-          readOnly: true
-          example: '500123'
-        name:
-          type: string
-          description: Container display name.
-          example: Example Title
-        domainName:
-          type: array
-          description: List of domain names associated with the Container. This is used for auto-event tracking and link decoration.
-          items:
-            type: string
-          example: []
-        publicId:
-          type: string
-          description: Container Public ID (e.g., GTM-XXXX).
-          readOnly: true
-          example: '500123'
-        tagIds:
-          type: array
-          description: All Tag IDs that refer to this Container.
-          items:
-            type: string
-          readOnly: true
-          example: []
-        notes:
-          type: string
-          description: Container Notes.
-          example: example_value
-        usageContext:
-          type: array
-          description: List of Usage Contexts for the Container. Valid values include web, android, ios, and server.
-          items:
-            type: string
-            enum:
-            - usageContextUnspecified
-            - web
-            - android
-            - ios
-            - androidSdk5
-            - iosSdk5
-            - amp
-            - server
-          example: []
-        fingerprint:
-          type: string
-          description: The fingerprint of the GTM Container as computed at storage time. This value is recomputed whenever the container is modified.
-          readOnly: true
-          example: example_value
-        tagManagerUrl:
-          type: string
-          format: uri
-          description: Auto-generated link to the tag manager UI.
-          readOnly: true
-          example: https://www.example.com
-        taggingServerUrls:
-          type: array
-          description: List of server-side container URLs for the Container.
-          items:
-            type: string
-            format: uri
-          example: https://www.example.com
-        features:
-          $ref: '#/components/schemas/ContainerFeatures'
-      required:
-      - name
-      - usageContext
     Trigger:
       type: object
       description: Represents a Google Tag Manager Trigger. A trigger defines conditions under which tags should fire, such as page views, clicks, form submissions, or custom events.
@@ -635,214 +524,6 @@ components:
       required:
       - name
       - type
-    ConsentSettings:
-      type: object
-      description: Tag consent settings.
-      properties:
-        consentStatus:
-          type: string
-          description: The tag's consent status.
-          enum:
-          - notSet
-          - notNeeded
-          - needed
-          example: notSet
-        consentType:
-          $ref: '#/components/schemas/Parameter'
-    FormatValue:
-      type: object
-      description: Option to convert a variable value to another value.
-      properties:
-        caseConversionType:
-          type: string
-          description: The option to convert a string-type variable value to either lowercase or uppercase.
-          enum:
-          - none
-          - lowercase
-          - uppercase
-          example: none
-        convertNullToValue:
-          $ref: '#/components/schemas/Parameter'
-        convertUndefinedToValue:
-          $ref: '#/components/schemas/Parameter'
-        convertTrueToValue:
-          $ref: '#/components/schemas/Parameter'
-        convertFalseToValue:
-          $ref: '#/components/schemas/Parameter'
-    Entity:
-      type: object
-      description: A workspace entity that can represent a tag, trigger, variable, or folder that has been changed.
-      properties:
-        tag:
-          $ref: '#/components/schemas/Tag'
-        trigger:
-          $ref: '#/components/schemas/Trigger'
-        variable:
-          $ref: '#/components/schemas/Variable'
-        changeStatus:
-          type: string
-          description: The status of the entity change.
-          enum:
-          - changeStatusUnspecified
-          - none
-          - added
-          - deleted
-          - updated
-          example: changeStatusUnspecified
-    CreateContainerVersionRequestVersionOptions:
-      type: object
-      description: Options for new container versions.
-      properties:
-        name:
-          type: string
-          description: The name of the container version to be created.
-          example: Example Title
-        notes:
-          type: string
-          description: The notes of the container version to be created.
-          example: example_value
-    Variable:
-      type: object
-      description: Represents a Google Tag Manager Variable. A variable provides dynamic values that can be used in tags and triggers, such as page URL, click text, or custom JavaScript values.
-      properties:
-        path:
-          type: string
-          description: GTM Variable's API relative path.
-          readOnly: true
-          example: example_value
-        accountId:
-          type: string
-          description: GTM Account ID.
-          readOnly: true
-          example: '500123'
-        containerId:
-          type: string
-          description: GTM Container ID.
-          readOnly: true
-          example: '500123'
-        workspaceId:
-          type: string
-          description: GTM Workspace ID.
-          readOnly: true
-          example: '500123'
-        variableId:
-          type: string
-          description: The Variable ID uniquely identifies the GTM Variable.
-          readOnly: true
-          example: '500123'
-        name:
-          type: string
-          description: Variable display name.
-          example: Example Title
-        type:
-          type: string
-          description: GTM Variable Type. Common types include v (Data Layer Variable), j (1st Party Cookie), k (Custom JavaScript), jsm (Custom JavaScript Variable), u (URL), c (Constant), and e (DOM Element).
-          example: example_value
-        notes:
-          type: string
-          description: User notes on how to apply this variable in the container.
-          example: example_value
-        scheduleStartMs:
-          type: string
-          format: int64
-          description: The start timestamp in milliseconds to schedule a variable.
-          example: example_value
-        scheduleEndMs:
-          type: string
-          format: int64
-          description: The end timestamp in milliseconds to schedule a variable.
-          example: example_value
-        parameter:
-          type: array
-          description: The variable's parameters, which configure its behavior.
-          items:
-            $ref: '#/components/schemas/Parameter'
-          example: []
-        enablingTriggerId:
-          type: array
-          description: For mobile containers only. A list of trigger IDs for enabling conditional variables. The variable is enabled if one of the enabling triggers is true while all of the disabling triggers are false.
-          items:
-            type: string
-          example: '500123'
-        disablingTriggerId:
-          type: array
-          description: For mobile containers only. A list of trigger IDs for disabling conditional variables.
-          items:
-            type: string
-          example: '500123'
-        fingerprint:
-          type: string
-          description: The fingerprint of the GTM Variable as computed at storage time. This value is recomputed whenever the variable is modified.
-          readOnly: true
-          example: example_value
-        parentFolderId:
-          type: string
-          description: Parent folder ID.
-          example: '500123'
-        tagManagerUrl:
-          type: string
-          format: uri
-          description: Auto-generated link to the tag manager UI.
-          readOnly: true
-          example: https://www.example.com
-        formatValue:
-          $ref: '#/components/schemas/FormatValue'
-      required:
-      - name
-      - type
-    ListWorkspacesResponse:
-      type: object
-      description: List Workspaces Response.
-      properties:
-        workspace:
-          type: array
-          description: All Workspaces of a GTM Container.
-          items:
-            $ref: '#/components/schemas/Workspace'
-          example: []
-        nextPageToken:
-          type: string
-          description: Continuation token for fetching the next page of results.
-          example: example_value
-    SyncStatus:
-      type: object
-      description: The status of a workspace after syncing.
-      properties:
-        mergeConflict:
-          type: boolean
-          description: Synchornization operation detected a merge conflict.
-          example: true
-        syncError:
-          type: boolean
-          description: An error occurred during the sync operation.
-          example: true
-    Condition:
-      type: object
-      description: Represents a predicate that is evaluated against a data layer value or variable. Used in trigger filter conditions.
-      properties:
-        type:
-          type: string
-          description: The type of operator for this condition.
-          enum:
-          - conditionTypeUnspecified
-          - equals
-          - contains
-          - startsWith
-          - endsWith
-          - matchRegex
-          - greater
-          - greaterOrEquals
-          - less
-          - lessOrEquals
-          - cssSelector
-          - urlMatches
-          example: conditionTypeUnspecified
-        parameter:
-          type: array
-          description: A list of named parameters (key/value), depending on the condition's type. The first parameter is the left-hand operand, the second is the right-hand operand.
-          items:
-            $ref: '#/components/schemas/Parameter'
-          example: []
     Tag:
       type: object
       description: Represents a Google Tag Manager Tag. A tag is a snippet of code that executes on a page when certain conditions (triggers) are met.
@@ -969,6 +650,341 @@ components:
       required:
       - name
       - type
+    Container:
+      type: object
+      description: Represents a Google Tag Manager Container, which is a collection of tags, triggers, and variables used on a website or mobile app.
+      properties:
+        path:
+          type: string
+          description: GTM Container's API relative path.
+          readOnly: true
+          example: example_value
+        accountId:
+          type: string
+          description: GTM Account ID.
+          readOnly: true
+          example: '500123'
+        containerId:
+          type: string
+          description: The Container ID uniquely identifies the GTM Container.
+          readOnly: true
+          example: '500123'
+        name:
+          type: string
+          description: Container display name.
+          example: Example Title
+        domainName:
+          type: array
+          description: List of domain names associated with the Container. This is used for auto-event tracking and link decoration.
+          items:
+            type: string
+          example: []
+        publicId:
+          type: string
+          description: Container Public ID (e.g., GTM-XXXX).
+          readOnly: true
+          example: '500123'
+        tagIds:
+          type: array
+          description: All Tag IDs that refer to this Container.
+          items:
+            type: string
+          readOnly: true
+          example: []
+        notes:
+          type: string
+          description: Container Notes.
+          example: example_value
+        usageContext:
+          type: array
+          description: List of Usage Contexts for the Container. Valid values include web, android, ios, and server.
+          items:
+            type: string
+            enum:
+            - usageContextUnspecified
+            - web
+            - android
+            - ios
+            - androidSdk5
+            - iosSdk5
+            - amp
+            - server
+          example: []
+        fingerprint:
+          type: string
+          description: The fingerprint of the GTM Container as computed at storage time. This value is recomputed whenever the container is modified.
+          readOnly: true
+          example: example_value
+        tagManagerUrl:
+          type: string
+          format: uri
+          description: Auto-generated link to the tag manager UI.
+          readOnly: true
+          example: https://www.example.com
+        taggingServerUrls:
+          type: array
+          description: List of server-side container URLs for the Container.
+          items:
+            type: string
+            format: uri
+          example: https://www.example.com
+        features:
+          $ref: '#/components/schemas/ContainerFeatures'
+      required:
+      - name
+      - usageContext
+    ConsentSettings:
+      type: object
+      description: Tag consent settings.
+      properties:
+        consentStatus:
+          type: string
+          description: The tag's consent status.
+          enum:
+          - notSet
+          - notNeeded
+          - needed
+          example: notSet
+        consentType:
+          $ref: '#/components/schemas/Parameter'
+    Workspace:
+      type: object
+      description: Represents a Google Tag Manager Workspace. A workspace is an isolated editing environment within a container where changes to tags, triggers, and variables can be made and tested before being published.
+      properties:
+        path:
+          type: string
+          description: GTM Workspace's API relative path.
+          readOnly: true
+          example: example_value
+        accountId:
+          type: string
+          description: GTM Account ID.
+          readOnly: true
+          example: '500123'
+        containerId:
+          type: string
+          description: GTM Container ID.
+          readOnly: true
+          example: '500123'
+        workspaceId:
+          type: string
+          description: The Workspace ID uniquely identifies the GTM Workspace.
+          readOnly: true
+          example: '500123'
+        name:
+          type: string
+          description: Workspace display name.
+          example: Example Title
+        description:
+          type: string
+          description: Workspace description.
+          example: A sample description.
+        fingerprint:
+          type: string
+          description: The fingerprint of the GTM Workspace as computed at storage time. This value is recomputed whenever the workspace is modified.
+          readOnly: true
+          example: example_value
+        tagManagerUrl:
+          type: string
+          format: uri
+          description: Auto-generated link to the tag manager UI.
+          readOnly: true
+          example: https://www.example.com
+      required:
+      - name
+    FormatValue:
+      type: object
+      description: Option to convert a variable value to another value.
+      properties:
+        caseConversionType:
+          type: string
+          description: The option to convert a string-type variable value to either lowercase or uppercase.
+          enum:
+          - none
+          - lowercase
+          - uppercase
+          example: none
+        convertNullToValue:
+          $ref: '#/components/schemas/Parameter'
+        convertUndefinedToValue:
+          $ref: '#/components/schemas/Parameter'
+        convertTrueToValue:
+          $ref: '#/components/schemas/Parameter'
+        convertFalseToValue:
+          $ref: '#/components/schemas/Parameter'
+    ContainerFeatures:
+      type: object
+      description: Read-only container feature set.
+      properties:
+        supportUserPermissions:
+          type: boolean
+          readOnly: true
+          example: true
+        supportEnvironments:
+          type: boolean
+          readOnly: true
+          example: true
+        supportWorkspaces:
+          type: boolean
+          readOnly: true
+          example: true
+        supportGtagConfigs:
+          type: boolean
+          readOnly: true
+          example: true
+        supportBuiltInVariables:
+          type: boolean
+          readOnly: true
+          example: true
+        supportClients:
+          type: boolean
+          readOnly: true
+          example: true
+        supportFolders:
+          type: boolean
+          readOnly: true
+          example: true
+        supportTags:
+          type: boolean
+          readOnly: true
+          example: true
+        supportTemplates:
+          type: boolean
+          readOnly: true
+          example: true
+        supportTriggers:
+          type: boolean
+          readOnly: true
+          example: true
+        supportVariables:
+          type: boolean
+          readOnly: true
+          example: true
+        supportVersions:
+          type: boolean
+          readOnly: true
+          example: true
+        supportZones:
+          type: boolean
+          readOnly: true
+          example: true
+        supportTransformations:
+          type: boolean
+          readOnly: true
+          example: true
+    Variable:
+      type: object
+      description: Represents a Google Tag Manager Variable. A variable provides dynamic values that can be used in tags and triggers, such as page URL, click text, or custom JavaScript values.
+      properties:
+        path:
+          type: string
+          description: GTM Variable's API relative path.
+          readOnly: true
+          example: example_value
+        accountId:
+          type: string
+          description: GTM Account ID.
+          readOnly: true
+          example: '500123'
+        containerId:
+          type: string
+          description: GTM Container ID.
+          readOnly: true
+          example: '500123'
+        workspaceId:
+          type: string
+          description: GTM Workspace ID.
+          readOnly: true
+          example: '500123'
+        variableId:
+          type: string
+          description: The Variable ID uniquely identifies the GTM Variable.
+          readOnly: true
+          example: '500123'
+        name:
+          type: string
+          description: Variable display name.
+          example: Example Title
+        type:
+          type: string
+          description: GTM Variable Type. Common types include v (Data Layer Variable), j (1st Party Cookie), k (Custom JavaScript), jsm (Custom JavaScript Variable), u (URL), c (Constant), and e (DOM Element).
+          example: example_value
+        notes:
+          type: string
+          description: User notes on how to apply this variable in the container.
+          example: example_value
+        scheduleStartMs:
+          type: string
+          format: int64
+          description: The start timestamp in milliseconds to schedule a variable.
+          example: example_value
+        scheduleEndMs:
+          type: string
+          format: int64
+          description: The end timestamp in milliseconds to schedule a variable.
+          example: example_value
+        parameter:
+          type: array
+          description: The variable's parameters, which configure its behavior.
+          items:
+            $ref: '#/components/schemas/Parameter'
+          example: []
+        enablingTriggerId:
+          type: array
+          description: For mobile containers only. A list of trigger IDs for enabling conditional variables. The variable is enabled if one of the enabling triggers is true while all of the disabling triggers are false.
+          items:
+            type: string
+          example: '500123'
+        disablingTriggerId:
+          type: array
+          description: For mobile containers only. A list of trigger IDs for disabling conditional variables.
+          items:
+            type: string
+          example: '500123'
+        fingerprint:
+          type: string
+          description: The fingerprint of the GTM Variable as computed at storage time. This value is recomputed whenever the variable is modified.
+          readOnly: true
+          example: example_value
+        parentFolderId:
+          type: string
+          description: Parent folder ID.
+          example: '500123'
+        tagManagerUrl:
+          type: string
+          format: uri
+          description: Auto-generated link to the tag manager UI.
+          readOnly: true
+          example: https://www.example.com
+        formatValue:
+          $ref: '#/components/schemas/FormatValue'
+      required:
+      - name
+      - type
+    CreateContainerVersionRequestVersionOptions:
+      type: object
+      description: Options for new container versions.
+      properties:
+        name:
+          type: string
+          description: The name of the container version to be created.
+          example: Example Title
+        notes:
+          type: string
+          description: The notes of the container version to be created.
+          example: example_value
+    SetupTag:
+      type: object
+      description: Represents a setup tag relationship. A setup tag fires before the main tag.
+      properties:
+        tagName:
+          type: string
+          description: The name of the setup tag.
+          example: example_value
+        stopOnSetupFailure:
+          type: boolean
+          description: If true, fire the main tag only if the setup tag fires successfully. If false, fire the main tag regardless of setup tag firing status.
+          example: true
     TeardownTag:
       type: object
       description: Represents a teardown tag relationship. A teardown tag fires after the main tag.
@@ -981,16 +997,62 @@ components:
           type: boolean
           description: If true, fire the teardown tag if and only if the main tag fires successfully. If false, fire the teardown tag regardless of main tag firing status.
           example: true
-    SyncWorkspaceResponse:
+    MergeConflict:
       type: object
-      description: Sync workspace response.
+      description: Represents a merge conflict between workspace and version.
       properties:
-        mergeConflict:
+        entityInWorkspace:
+          $ref: '#/components/schemas/Entity'
+        entityInBaseVersion:
+          $ref: '#/components/schemas/Entity'
+    Entity:
+      type: object
+      description: A workspace entity that can represent a tag, trigger, variable, or folder that has been changed.
+      properties:
+        tag:
+          $ref: '#/components/schemas/Tag'
+        trigger:
+          $ref: '#/components/schemas/Trigger'
+        variable:
+          $ref: '#/components/schemas/Variable'
+        changeStatus:
+          type: string
+          description: The status of the entity change.
+          enum:
+          - changeStatusUnspecified
+          - none
+          - added
+          - deleted
+          - updated
+          example: changeStatusUnspecified
+    ListWorkspacesResponse:
+      type: object
+      description: List Workspaces Response.
+      properties:
+        workspace:
           type: array
-          description: The merge conflict after sync.
+          description: All Workspaces of a GTM Container.
           items:
-            $ref: '#/components/schemas/MergeConflict'
+            $ref: '#/components/schemas/Workspace'
           example: []
+        nextPageToken:
+          type: string
+          description: Continuation token for fetching the next page of results.
+          example: example_value
+    CreateContainerVersionResponse:
+      type: object
+      description: Create container version response.
+      properties:
+        containerVersion:
+          $ref: '#/components/schemas/ContainerVersion'
+        newWorkspacePath:
+          type: string
+          description: Auto-generated workspace path for the new default workspace, if one was created.
+          example: example_value
+        compilerError:
+          type: boolean
+          description: Compiler errors or not. True indicates that there were compiler errors.
+          example: true
         syncStatus:
           $ref: '#/components/schemas/SyncStatus'
     ContainerVersion:
@@ -1061,127 +1123,6 @@ components:
           description: A value of true indicates this version has been deleted.
           readOnly: true
           example: true
-    ContainerFeatures:
-      type: object
-      description: Read-only container feature set.
-      properties:
-        supportUserPermissions:
-          type: boolean
-          readOnly: true
-          example: true
-        supportEnvironments:
-          type: boolean
-          readOnly: true
-          example: true
-        supportWorkspaces:
-          type: boolean
-          readOnly: true
-          example: true
-        supportGtagConfigs:
-          type: boolean
-          readOnly: true
-          example: true
-        supportBuiltInVariables:
-          type: boolean
-          readOnly: true
-          example: true
-        supportClients:
-          type: boolean
-          readOnly: true
-          example: true
-        supportFolders:
-          type: boolean
-          readOnly: true
-          example: true
-        supportTags:
-          type: boolean
-          readOnly: true
-          example: true
-        supportTemplates:
-          type: boolean
-          readOnly: true
-          example: true
-        supportTriggers:
-          type: boolean
-          readOnly: true
-          example: true
-        supportVariables:
-          type: boolean
-          readOnly: true
-          example: true
-        supportVersions:
-          type: boolean
-          readOnly: true
-          example: true
-        supportZones:
-          type: boolean
-          readOnly: true
-          example: true
-        supportTransformations:
-          type: boolean
-          readOnly: true
-          example: true
-    GetWorkspaceStatusResponse:
-      type: object
-      description: The changes and conflicts in a workspace, providing information about which entities have been modified and any merge conflicts.
-      properties:
-        workspaceChange:
-          type: array
-          description: Entities that have been changed in the workspace.
-          items:
-            $ref: '#/components/schemas/Entity'
-          example: []
-        mergeConflict:
-          type: array
-          description: The merge conflict after sync.
-          items:
-            $ref: '#/components/schemas/MergeConflict'
-          example: []
-    Workspace:
-      type: object
-      description: Represents a Google Tag Manager Workspace. A workspace is an isolated editing environment within a container where changes to tags, triggers, and variables can be made and tested before being published.
-      properties:
-        path:
-          type: string
-          description: GTM Workspace's API relative path.
-          readOnly: true
-          example: example_value
-        accountId:
-          type: string
-          description: GTM Account ID.
-          readOnly: true
-          example: '500123'
-        containerId:
-          type: string
-          description: GTM Container ID.
-          readOnly: true
-          example: '500123'
-        workspaceId:
-          type: string
-          description: The Workspace ID uniquely identifies the GTM Workspace.
-          readOnly: true
-          example: '500123'
-        name:
-          type: string
-          description: Workspace display name.
-          example: Example Title
-        description:
-          type: string
-          description: Workspace description.
-          example: A sample description.
-        fingerprint:
-          type: string
-          description: The fingerprint of the GTM Workspace as computed at storage time. This value is recomputed whenever the workspace is modified.
-          readOnly: true
-          example: example_value
-        tagManagerUrl:
-          type: string
-          format: uri
-          description: Auto-generated link to the tag manager UI.
-          readOnly: true
-          example: https://www.example.com
-      required:
-      - name
     Parameter:
       type: object
       description: Represents a Google Tag Manager Parameter. Parameters are key-value pairs that configure tags, triggers, and variables.
@@ -1225,22 +1166,81 @@ components:
           example: true
       required:
       - type
-    CreateContainerVersionResponse:
+    SyncStatus:
       type: object
-      description: Create container version response.
+      description: The status of a workspace after syncing.
       properties:
-        containerVersion:
-          $ref: '#/components/schemas/ContainerVersion'
-        newWorkspacePath:
-          type: string
-          description: Auto-generated workspace path for the new default workspace, if one was created.
-          example: example_value
-        compilerError:
+        mergeConflict:
           type: boolean
-          description: Compiler errors or not. True indicates that there were compiler errors.
+          description: Synchornization operation detected a merge conflict.
           example: true
+        syncError:
+          type: boolean
+          description: An error occurred during the sync operation.
+          example: true
+    SyncWorkspaceResponse:
+      type: object
+      description: Sync workspace response.
+      properties:
+        mergeConflict:
+          type: array
+          description: The merge conflict after sync.
+          items:
+            $ref: '#/components/schemas/MergeConflict'
+          example: []
         syncStatus:
           $ref: '#/components/schemas/SyncStatus'
+    GetWorkspaceStatusResponse:
+      type: object
+      description: The changes and conflicts in a workspace, providing information about which entities have been modified and any merge conflicts.
+      properties:
+        workspaceChange:
+          type: array
+          description: Entities that have been changed in the workspace.
+          items:
+            $ref: '#/components/schemas/Entity'
+          example: []
+        mergeConflict:
+          type: array
+          description: The merge conflict after sync.
+          items:
+            $ref: '#/components/schemas/MergeConflict'
+          example: []
+    Condition:
+      type: object
+      description: Represents a predicate that is evaluated against a data layer value or variable. Used in trigger filter conditions.
+      properties:
+        type:
+          type: string
+          description: The type of operator for this condition.
+          enum:
+          - conditionTypeUnspecified
+          - equals
+          - contains
+          - startsWith
+          - endsWith
+          - matchRegex
+          - greater
+          - greaterOrEquals
+          - less
+          - lessOrEquals
+          - cssSelector
+          - urlMatches
+          example: conditionTypeUnspecified
+        parameter:
+          type: array
+          description: A list of named parameters (key/value), depending on the condition's type. The first parameter is the left-hand operand, the second is the right-hand operand.
+          items:
+            $ref: '#/components/schemas/Parameter'
+          example: []
+  parameters:
+    parentParam:
+      name: parent
+      in: path
+      required: true
+      description: GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers.
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2

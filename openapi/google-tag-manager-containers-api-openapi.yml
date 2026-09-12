@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Google Tag Manager Accounts Containers API
   description: The Google Tag Manager API v2 allows clients to access and modify Google Tag Manager account, container, workspace, tag, trigger, and variable configurations. It provides programmatic management of tag deployment, trigger conditions, and variable definitions across web, mobile, and server-side containers.
@@ -377,66 +377,6 @@ components:
           type: string
           description: Continuation token for fetching the next page of results.
           example: example_value
-    ContainerFeatures:
-      type: object
-      description: Read-only container feature set.
-      properties:
-        supportUserPermissions:
-          type: boolean
-          readOnly: true
-          example: true
-        supportEnvironments:
-          type: boolean
-          readOnly: true
-          example: true
-        supportWorkspaces:
-          type: boolean
-          readOnly: true
-          example: true
-        supportGtagConfigs:
-          type: boolean
-          readOnly: true
-          example: true
-        supportBuiltInVariables:
-          type: boolean
-          readOnly: true
-          example: true
-        supportClients:
-          type: boolean
-          readOnly: true
-          example: true
-        supportFolders:
-          type: boolean
-          readOnly: true
-          example: true
-        supportTags:
-          type: boolean
-          readOnly: true
-          example: true
-        supportTemplates:
-          type: boolean
-          readOnly: true
-          example: true
-        supportTriggers:
-          type: boolean
-          readOnly: true
-          example: true
-        supportVariables:
-          type: boolean
-          readOnly: true
-          example: true
-        supportVersions:
-          type: boolean
-          readOnly: true
-          example: true
-        supportZones:
-          type: boolean
-          readOnly: true
-          example: true
-        supportTransformations:
-          type: boolean
-          readOnly: true
-          example: true
     Container:
       type: object
       description: Represents a Google Tag Manager Container, which is a collection of tags, triggers, and variables used on a website or mobile app.
@@ -520,6 +460,66 @@ components:
       required:
       - name
       - usageContext
+    ContainerFeatures:
+      type: object
+      description: Read-only container feature set.
+      properties:
+        supportUserPermissions:
+          type: boolean
+          readOnly: true
+          example: true
+        supportEnvironments:
+          type: boolean
+          readOnly: true
+          example: true
+        supportWorkspaces:
+          type: boolean
+          readOnly: true
+          example: true
+        supportGtagConfigs:
+          type: boolean
+          readOnly: true
+          example: true
+        supportBuiltInVariables:
+          type: boolean
+          readOnly: true
+          example: true
+        supportClients:
+          type: boolean
+          readOnly: true
+          example: true
+        supportFolders:
+          type: boolean
+          readOnly: true
+          example: true
+        supportTags:
+          type: boolean
+          readOnly: true
+          example: true
+        supportTemplates:
+          type: boolean
+          readOnly: true
+          example: true
+        supportTriggers:
+          type: boolean
+          readOnly: true
+          example: true
+        supportVariables:
+          type: boolean
+          readOnly: true
+          example: true
+        supportVersions:
+          type: boolean
+          readOnly: true
+          example: true
+        supportZones:
+          type: boolean
+          readOnly: true
+          example: true
+        supportTransformations:
+          type: boolean
+          readOnly: true
+          example: true
   parameters:
     parentParam:
       name: parent

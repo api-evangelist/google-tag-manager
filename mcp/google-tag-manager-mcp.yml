@@ -15,12 +15,10 @@ server:
   url: null
 deployment:
   mode: none
-  auth: oauth
-  verified: searched
+  verified: derived
   tools: 44
-  checked: '2026-08-13'
-  note: 'mode: none - nobody ships a first-party server. Third-party servers exist (local-stdio, plus
-    a hosted one from Stape) but are not published by Google and are not an agent surface Google operates.'
+  checked: '2026-08-12'
+  source: catalog MCP census
 tools:
 - name: list_accounts
   source_operation: openapi/google-tag-manager-accounts-api-openapi.yml#listAccounts
