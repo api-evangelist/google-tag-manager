@@ -131,36 +131,6 @@ apis:
     url: https://developers.google.com/tag-platform/tag-manager/api/v2/limits-quotas
   - type: ChangeLog
     url: https://support.google.com/tagmanager/answer/4620708
-- aid: google-tag-manager:google-tag-manager-tagmanager-api
-  name: Google Tag Manager Tagmanager API
-  description: The Tagmanager API from Google Tag Manager — 3 operation(s) for tagmanager.
-  humanURL: https://developers.google.com/tag-platform/tag-manager/api/v2
-  baseURL: https://tagmanager.googleapis.com
-  tags:
-  - Tag Manager
-  tags_raw:
-  - Tagmanager
-  properties:
-  - type: OpenAPI
-    url: openapi/google-tag-manager-tagmanager-api-openapi.yml
-  - type: JSONSchema
-    url: json-schema/google-tag-manager-container-schema.json
-  - type: JSONLD
-    url: json-ld/google-tag-manager-context.jsonld
-  - type: Documentation
-    url: https://developers.google.com/tag-platform/tag-manager/api/v2
-  - type: APIReference
-    url: https://developers.google.com/tag-platform/tag-manager/api/reference/rest
-  - type: Authentication
-    url: https://developers.google.com/tag-platform/tag-manager/api/v2/authorization
-  - type: GettingStarted
-    url: https://developers.google.com/tag-platform/tag-manager/api/v2/devguide
-  - type: SDKs
-    url: https://developers.google.com/tag-platform/tag-manager/api/v2/libraries
-  - type: RateLimits
-    url: https://developers.google.com/tag-platform/tag-manager/api/v2/limits-quotas
-  - type: ChangeLog
-    url: https://support.google.com/tagmanager/answer/4620708
 - aid: google-tag-manager:google-tag-manager-triggers-api
   name: Google Tag Manager Triggers API
   description: Operations for managing triggers within a workspace that control when tags fire.
@@ -285,6 +255,34 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/google-tag-manager-workspaces-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/google-tag-manager-container-schema.json
+  - type: JSONLD
+    url: json-ld/google-tag-manager-context.jsonld
+  - type: Documentation
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2
+  - type: APIReference
+    url: https://developers.google.com/tag-platform/tag-manager/api/reference/rest
+  - type: Authentication
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/authorization
+  - type: GettingStarted
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/devguide
+  - type: SDKs
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/libraries
+  - type: RateLimits
+    url: https://developers.google.com/tag-platform/tag-manager/api/v2/limits-quotas
+  - type: ChangeLog
+    url: https://support.google.com/tagmanager/answer/4620708
+- aid: google-tag-manager:google-tag-manager-tag-manager-api
+  name: Google Tag Manager Tag Manager API
+  description: The Tag Manager API from Google Tag Manager — 3 operation(s) for tag manager.
+  humanURL: https://developers.google.com/tag-platform/tag-manager/server-side
+  baseURL: https://tagmanager.googleapis.com
+  tags:
+  - Tag Manager
+  properties:
+  - type: OpenAPI
+    url: openapi/google-tag-manager-tag-manager-api-openapi.yml
   - type: JSONSchema
     url: json-schema/google-tag-manager-container-schema.json
   - type: JSONLD
