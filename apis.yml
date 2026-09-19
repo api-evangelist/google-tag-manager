@@ -251,6 +251,8 @@ apis:
   humanURL: https://developers.google.com/tag-platform/tag-manager/api/v2
   baseURL: https://tagmanager.googleapis.com
   tags:
+  - Workspace
+  tags_raw:
   - Workspaces
   properties:
   - type: OpenAPI
