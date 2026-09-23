@@ -171,15 +171,21 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    pathParam:
-      name: path
-      in: path
-      required: true
-      description: GTM resource's API relative path, e.g. accounts/{accountId}.
-      schema:
-        type: string
   schemas:
+    AccountFeatures:
+      type: object
+      description: Read-only account feature set.
+      properties:
+        supportUserPermissions:
+          type: boolean
+          description: Whether this account has user permissions management enabled.
+          readOnly: true
+          example: true
+        supportMultipleContainers:
+          type: boolean
+          description: Whether this account supports multiple containers.
+          readOnly: true
+          example: true
     ListAccountsResponse:
       type: object
       description: List Accounts Response.
@@ -231,20 +237,14 @@ components:
           $ref: '#/components/schemas/AccountFeatures'
       required:
       - name
-    AccountFeatures:
-      type: object
-      description: Read-only account feature set.
-      properties:
-        supportUserPermissions:
-          type: boolean
-          description: Whether this account has user permissions management enabled.
-          readOnly: true
-          example: true
-        supportMultipleContainers:
-          type: boolean
-          description: Whether this account supports multiple containers.
-          readOnly: true
-          example: true
+  parameters:
+    pathParam:
+      name: path
+      in: path
+      required: true
+      description: GTM resource's API relative path, e.g. accounts/{accountId}.
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2

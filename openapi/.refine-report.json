@@ -1,14 +1,7 @@
 {
   "provider": "google-tag-manager",
   "sources": [
-    "google-tag-manager-accounts-api-openapi.yml",
-    "google-tag-manager-containers-api-openapi.yml",
-    "google-tag-manager-tagmanager-api-openapi.yml",
-    "google-tag-manager-triggers-api-openapi.yml",
-    "google-tag-manager-user-permissions-api-openapi.yml",
-    "google-tag-manager-variables-api-openapi.yml",
-    "google-tag-manager-versions-api-openapi.yml",
-    "google-tag-manager-workspaces-api-openapi.yml"
+    "_original/google-tag-manager-api-v2-openapi.yml"
   ],
   "outputs": [
     "google-tag-manager-accounts-api-openapi.yml",
@@ -20,19 +13,32 @@
     "google-tag-manager-versions-api-openapi.yml",
     "google-tag-manager-workspaces-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
   "notes": [
-    "google-tag-manager-accounts-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "google-tag-manager-containers-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "google-tag-manager-tagmanager-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "google-tag-manager-triggers-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "google-tag-manager-user-permissions-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "google-tag-manager-variables-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "google-tag-manager-versions-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "google-tag-manager-workspaces-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "apis.yml register: already-registered"
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "google-tag-manager-api-v2-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "google-tag-manager-api-v2-openapi.yml: tagged paths GET /tagmanager/v2/{parent}/tags -> Tagmanager",
+    "google-tag-manager-api-v2-openapi.yml: tagged paths POST /tagmanager/v2/{parent}/tags -> Tagmanager",
+    "google-tag-manager-api-v2-openapi.yml: tagged paths GET /tagmanager/v2/{tagPath} -> Tagmanager",
+    "google-tag-manager-api-v2-openapi.yml: tagged paths PUT /tagmanager/v2/{tagPath} -> Tagmanager",
+    "google-tag-manager-api-v2-openapi.yml: tagged paths DELETE /tagmanager/v2/{tagPath} -> Tagmanager",
+    "google-tag-manager-api-v2-openapi.yml: tagged paths POST /tagmanager/v2/{tagPath}:revert -> Tagmanager",
+    "google-tag-manager-api-v2-openapi.yml: declared missing tag: Tagmanager",
+    "superseded outputs removed: google-tag-manager-tag-manager-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 9 total)"
   ],
-  "skipped": []
+  "skipped": [
+    "google-tag-manager-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "google-tag-manager-containers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "google-tag-manager-tag-manager-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "google-tag-manager-triggers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "google-tag-manager-user-permissions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "google-tag-manager-variables-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "google-tag-manager-versions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "google-tag-manager-workspaces-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

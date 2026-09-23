@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Google Tag Manager Accounts Triggers API
+  title: Google Tag Manager Triggers API
   description: The Google Tag Manager API v2 allows clients to access and modify Google Tag Manager account, container, workspace, tag, trigger, and variable configurations. It provides programmatic management of tag deployment, trigger conditions, and variable definitions across web, mobile, and server-side containers.
   version: 2.0.0
   termsOfService: https://policies.google.com/terms
@@ -1155,6 +1155,33 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Condition:
+      type: object
+      description: Represents a predicate that is evaluated against a data layer value or variable. Used in trigger filter conditions.
+      properties:
+        type:
+          type: string
+          description: The type of operator for this condition.
+          enum:
+          - conditionTypeUnspecified
+          - equals
+          - contains
+          - startsWith
+          - endsWith
+          - matchRegex
+          - greater
+          - greaterOrEquals
+          - less
+          - lessOrEquals
+          - cssSelector
+          - urlMatches
+          example: conditionTypeUnspecified
+        parameter:
+          type: array
+          description: A list of named parameters (key/value), depending on the condition's type. The first parameter is the left-hand operand, the second is the right-hand operand.
+          items:
+            $ref: '#/components/schemas/Parameter'
+          example: []
     Parameter:
       type: object
       description: Represents a Google Tag Manager Parameter. Parameters are key-value pairs that configure tags, triggers, and variables.
@@ -1198,6 +1225,26 @@ components:
           example: true
       required:
       - type
+    ListTriggersResponse:
+      type: object
+      description: List Triggers Response.
+      properties:
+        trigger:
+          type: array
+          description: All GTM Triggers of a GTM Container Workspace.
+          items:
+            $ref: '#/components/schemas/Trigger'
+          example: []
+        nextPageToken:
+          type: string
+          description: Continuation token for fetching the next page of results.
+          example: example_value
+    RevertTriggerResponse:
+      type: object
+      description: The result of reverting a trigger in a workspace.
+      properties:
+        trigger:
+          $ref: '#/components/schemas/Trigger'
     Trigger:
       type: object
       description: Represents a Google Tag Manager Trigger. A trigger defines conditions under which tags should fire, such as page views, clicks, form submissions, or custom events.
@@ -1351,53 +1398,6 @@ components:
       required:
       - name
       - type
-    RevertTriggerResponse:
-      type: object
-      description: The result of reverting a trigger in a workspace.
-      properties:
-        trigger:
-          $ref: '#/components/schemas/Trigger'
-    ListTriggersResponse:
-      type: object
-      description: List Triggers Response.
-      properties:
-        trigger:
-          type: array
-          description: All GTM Triggers of a GTM Container Workspace.
-          items:
-            $ref: '#/components/schemas/Trigger'
-          example: []
-        nextPageToken:
-          type: string
-          description: Continuation token for fetching the next page of results.
-          example: example_value
-    Condition:
-      type: object
-      description: Represents a predicate that is evaluated against a data layer value or variable. Used in trigger filter conditions.
-      properties:
-        type:
-          type: string
-          description: The type of operator for this condition.
-          enum:
-          - conditionTypeUnspecified
-          - equals
-          - contains
-          - startsWith
-          - endsWith
-          - matchRegex
-          - greater
-          - greaterOrEquals
-          - less
-          - lessOrEquals
-          - cssSelector
-          - urlMatches
-          example: conditionTypeUnspecified
-        parameter:
-          type: array
-          description: A list of named parameters (key/value), depending on the condition's type. The first parameter is the left-hand operand, the second is the right-hand operand.
-          items:
-            $ref: '#/components/schemas/Parameter'
-          example: []
   parameters:
     parentParam:
       name: parent

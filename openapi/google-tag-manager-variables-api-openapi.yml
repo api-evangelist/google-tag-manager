@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Google Tag Manager Accounts Variables API
+  title: Google Tag Manager Variables API
   description: The Google Tag Manager API v2 allows clients to access and modify Google Tag Manager account, container, workspace, tag, trigger, and variable configurations. It provides programmatic management of tag deployment, trigger conditions, and variable definitions across web, mobile, and server-side containers.
   version: 2.0.0
   termsOfService: https://policies.google.com/terms
@@ -386,75 +386,20 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Parameter:
+    ListVariablesResponse:
       type: object
-      description: Represents a Google Tag Manager Parameter. Parameters are key-value pairs that configure tags, triggers, and variables.
-      properties:
-        type:
-          type: string
-          description: The parameter type.
-          enum:
-          - typeUnspecified
-          - template
-          - integer
-          - boolean
-          - list
-          - map
-          - triggerReference
-          - tagReference
-          example: typeUnspecified
-        key:
-          type: string
-          description: The named key that uniquely identifies a parameter. Required for top-level parameters, as well as map values. Ignored for list values.
-          example: example_value
-        value:
-          type: string
-          description: A parameter's value (may contain variable references) as appropriate to the specified type.
-          example: example_value
-        list:
-          type: array
-          description: This list parameter's parameters (keys will be ignored). Used when type is list.
-          items:
-            $ref: '#/components/schemas/Parameter'
-          example: []
-        map:
-          type: array
-          description: This map parameter's parameters (must have keys; keys must be unique). Used when type is map.
-          items:
-            $ref: '#/components/schemas/Parameter'
-          example: []
-        isWeakReference:
-          type: boolean
-          description: Whether or not the parameter is a weak reference. Used to determine which parameters should be included in exported containers.
-          example: true
-      required:
-      - type
-    FormatValue:
-      type: object
-      description: Option to convert a variable value to another value.
-      properties:
-        caseConversionType:
-          type: string
-          description: The option to convert a string-type variable value to either lowercase or uppercase.
-          enum:
-          - none
-          - lowercase
-          - uppercase
-          example: none
-        convertNullToValue:
-          $ref: '#/components/schemas/Parameter'
-        convertUndefinedToValue:
-          $ref: '#/components/schemas/Parameter'
-        convertTrueToValue:
-          $ref: '#/components/schemas/Parameter'
-        convertFalseToValue:
-          $ref: '#/components/schemas/Parameter'
-    RevertVariableResponse:
-      type: object
-      description: The result of reverting a variable in a workspace.
+      description: List Variables Response.
       properties:
         variable:
-          $ref: '#/components/schemas/Variable'
+          type: array
+          description: All GTM Variables of a GTM Container Workspace.
+          items:
+            $ref: '#/components/schemas/Variable'
+          example: []
+        nextPageToken:
+          type: string
+          description: Continuation token for fetching the next page of results.
+          example: example_value
     Variable:
       type: object
       description: Represents a Google Tag Manager Variable. A variable provides dynamic values that can be used in tags and triggers, such as page URL, click text, or custom JavaScript values.
@@ -544,20 +489,75 @@ components:
       required:
       - name
       - type
-    ListVariablesResponse:
+    Parameter:
       type: object
-      description: List Variables Response.
+      description: Represents a Google Tag Manager Parameter. Parameters are key-value pairs that configure tags, triggers, and variables.
+      properties:
+        type:
+          type: string
+          description: The parameter type.
+          enum:
+          - typeUnspecified
+          - template
+          - integer
+          - boolean
+          - list
+          - map
+          - triggerReference
+          - tagReference
+          example: typeUnspecified
+        key:
+          type: string
+          description: The named key that uniquely identifies a parameter. Required for top-level parameters, as well as map values. Ignored for list values.
+          example: example_value
+        value:
+          type: string
+          description: A parameter's value (may contain variable references) as appropriate to the specified type.
+          example: example_value
+        list:
+          type: array
+          description: This list parameter's parameters (keys will be ignored). Used when type is list.
+          items:
+            $ref: '#/components/schemas/Parameter'
+          example: []
+        map:
+          type: array
+          description: This map parameter's parameters (must have keys; keys must be unique). Used when type is map.
+          items:
+            $ref: '#/components/schemas/Parameter'
+          example: []
+        isWeakReference:
+          type: boolean
+          description: Whether or not the parameter is a weak reference. Used to determine which parameters should be included in exported containers.
+          example: true
+      required:
+      - type
+    FormatValue:
+      type: object
+      description: Option to convert a variable value to another value.
+      properties:
+        caseConversionType:
+          type: string
+          description: The option to convert a string-type variable value to either lowercase or uppercase.
+          enum:
+          - none
+          - lowercase
+          - uppercase
+          example: none
+        convertNullToValue:
+          $ref: '#/components/schemas/Parameter'
+        convertUndefinedToValue:
+          $ref: '#/components/schemas/Parameter'
+        convertTrueToValue:
+          $ref: '#/components/schemas/Parameter'
+        convertFalseToValue:
+          $ref: '#/components/schemas/Parameter'
+    RevertVariableResponse:
+      type: object
+      description: The result of reverting a variable in a workspace.
       properties:
         variable:
-          type: array
-          description: All GTM Variables of a GTM Container Workspace.
-          items:
-            $ref: '#/components/schemas/Variable'
-          example: []
-        nextPageToken:
-          type: string
-          description: Continuation token for fetching the next page of results.
-          example: example_value
+          $ref: '#/components/schemas/Variable'
   parameters:
     parentParam:
       name: parent

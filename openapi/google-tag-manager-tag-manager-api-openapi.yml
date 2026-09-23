@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Google Tag Manager Accounts Tagmanager API
+  title: Google Tag Manager Tagmanager API
   description: The Google Tag Manager API v2 allows clients to access and modify Google Tag Manager account, container, workspace, tag, trigger, and variable configurations. It provides programmatic management of tag deployment, trigger conditions, and variable definitions across web, mobile, and server-side containers.
   version: 2.0.0
   termsOfService: https://policies.google.com/terms
@@ -23,7 +23,7 @@ security:
   - tagmanager.edit.containerversions
   - tagmanager.delete.containers
 tags:
-- name: Tagmanager
+- name: Tag Manager
 paths:
   /tagmanager/v2/{parent}/tags:
     get:
@@ -31,7 +31,7 @@ paths:
       summary: Google Tag Manager List Tags in a Workspace
       description: Lists all GTM Tags of a GTM Container Workspace.
       tags:
-      - Tagmanager
+      - Tag Manager
       parameters:
       - $ref: '#/components/parameters/parentParam'
       - name: pageToken
@@ -84,7 +84,7 @@ paths:
       summary: Google Tag Manager Create a Tag
       description: Creates a GTM Tag in a GTM Workspace.
       tags:
-      - Tagmanager
+      - Tag Manager
       parameters:
       - $ref: '#/components/parameters/parentParam'
       requestBody:
@@ -227,7 +227,7 @@ paths:
       summary: Google Tag Manager Get a Tag
       description: Gets a GTM Tag by its resource path.
       tags:
-      - Tagmanager
+      - Tag Manager
       parameters:
       - name: tagPath
         in: path
@@ -310,7 +310,7 @@ paths:
       summary: Google Tag Manager Update a Tag
       description: Updates a GTM Tag.
       tags:
-      - Tagmanager
+      - Tag Manager
       parameters:
       - name: tagPath
         in: path
@@ -464,7 +464,7 @@ paths:
       summary: Google Tag Manager Delete a Tag
       description: Deletes a GTM Tag.
       tags:
-      - Tagmanager
+      - Tag Manager
       parameters:
       - name: tagPath
         in: path
@@ -485,7 +485,7 @@ paths:
       summary: Google Tag Manager Revert Changes to a Tag in a Workspace
       description: Reverts changes to a GTM Tag in a GTM Workspace, restoring it to its original state.
       tags:
-      - Tagmanager
+      - Tag Manager
       parameters:
       - name: tagPath
         in: path
@@ -539,63 +539,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Parameter:
-      type: object
-      description: Represents a Google Tag Manager Parameter. Parameters are key-value pairs that configure tags, triggers, and variables.
-      properties:
-        type:
-          type: string
-          description: The parameter type.
-          enum:
-          - typeUnspecified
-          - template
-          - integer
-          - boolean
-          - list
-          - map
-          - triggerReference
-          - tagReference
-          example: typeUnspecified
-        key:
-          type: string
-          description: The named key that uniquely identifies a parameter. Required for top-level parameters, as well as map values. Ignored for list values.
-          example: example_value
-        value:
-          type: string
-          description: A parameter's value (may contain variable references) as appropriate to the specified type.
-          example: example_value
-        list:
-          type: array
-          description: This list parameter's parameters (keys will be ignored). Used when type is list.
-          items:
-            $ref: '#/components/schemas/Parameter'
-          example: []
-        map:
-          type: array
-          description: This map parameter's parameters (must have keys; keys must be unique). Used when type is map.
-          items:
-            $ref: '#/components/schemas/Parameter'
-          example: []
-        isWeakReference:
-          type: boolean
-          description: Whether or not the parameter is a weak reference. Used to determine which parameters should be included in exported containers.
-          example: true
-      required:
-      - type
-    ListTagsResponse:
-      type: object
-      description: List Tags Response.
-      properties:
-        tag:
-          type: array
-          description: All GTM Tags of a GTM Container Workspace.
-          items:
-            $ref: '#/components/schemas/Tag'
-          example: []
-        nextPageToken:
-          type: string
-          description: Continuation token for fetching the next page of results.
-          example: example_value
     Tag:
       type: object
       description: Represents a Google Tag Manager Tag. A tag is a snippet of code that executes on a page when certain conditions (triggers) are met.
@@ -722,12 +665,18 @@ components:
       required:
       - name
       - type
-    RevertTagResponse:
+    TeardownTag:
       type: object
-      description: The result of reverting a tag in a workspace.
+      description: Represents a teardown tag relationship. A teardown tag fires after the main tag.
       properties:
-        tag:
-          $ref: '#/components/schemas/Tag'
+        tagName:
+          type: string
+          description: The name of the teardown tag.
+          example: example_value
+        stopTeardownOnFailure:
+          type: boolean
+          description: If true, fire the teardown tag if and only if the main tag fires successfully. If false, fire the teardown tag regardless of main tag firing status.
+          example: true
     SetupTag:
       type: object
       description: Represents a setup tag relationship. A setup tag fires before the main tag.
@@ -740,6 +689,69 @@ components:
           type: boolean
           description: If true, fire the main tag only if the setup tag fires successfully. If false, fire the main tag regardless of setup tag firing status.
           example: true
+    Parameter:
+      type: object
+      description: Represents a Google Tag Manager Parameter. Parameters are key-value pairs that configure tags, triggers, and variables.
+      properties:
+        type:
+          type: string
+          description: The parameter type.
+          enum:
+          - typeUnspecified
+          - template
+          - integer
+          - boolean
+          - list
+          - map
+          - triggerReference
+          - tagReference
+          example: typeUnspecified
+        key:
+          type: string
+          description: The named key that uniquely identifies a parameter. Required for top-level parameters, as well as map values. Ignored for list values.
+          example: example_value
+        value:
+          type: string
+          description: A parameter's value (may contain variable references) as appropriate to the specified type.
+          example: example_value
+        list:
+          type: array
+          description: This list parameter's parameters (keys will be ignored). Used when type is list.
+          items:
+            $ref: '#/components/schemas/Parameter'
+          example: []
+        map:
+          type: array
+          description: This map parameter's parameters (must have keys; keys must be unique). Used when type is map.
+          items:
+            $ref: '#/components/schemas/Parameter'
+          example: []
+        isWeakReference:
+          type: boolean
+          description: Whether or not the parameter is a weak reference. Used to determine which parameters should be included in exported containers.
+          example: true
+      required:
+      - type
+    RevertTagResponse:
+      type: object
+      description: The result of reverting a tag in a workspace.
+      properties:
+        tag:
+          $ref: '#/components/schemas/Tag'
+    ListTagsResponse:
+      type: object
+      description: List Tags Response.
+      properties:
+        tag:
+          type: array
+          description: All GTM Tags of a GTM Container Workspace.
+          items:
+            $ref: '#/components/schemas/Tag'
+          example: []
+        nextPageToken:
+          type: string
+          description: Continuation token for fetching the next page of results.
+          example: example_value
     ConsentSettings:
       type: object
       description: Tag consent settings.
@@ -754,18 +766,6 @@ components:
           example: notSet
         consentType:
           $ref: '#/components/schemas/Parameter'
-    TeardownTag:
-      type: object
-      description: Represents a teardown tag relationship. A teardown tag fires after the main tag.
-      properties:
-        tagName:
-          type: string
-          description: The name of the teardown tag.
-          example: example_value
-        stopTeardownOnFailure:
-          type: boolean
-          description: If true, fire the teardown tag if and only if the main tag fires successfully. If false, fire the teardown tag regardless of main tag firing status.
-          example: true
   parameters:
     parentParam:
       name: parent
