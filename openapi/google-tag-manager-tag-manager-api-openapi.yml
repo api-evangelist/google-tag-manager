@@ -539,6 +539,12 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    RevertTagResponse:
+      type: object
+      description: The result of reverting a tag in a workspace.
+      properties:
+        tag:
+          $ref: '#/components/schemas/Tag'
     Tag:
       type: object
       description: Represents a Google Tag Manager Tag. A tag is a snippet of code that executes on a page when certain conditions (triggers) are met.
@@ -677,18 +683,6 @@ components:
           type: boolean
           description: If true, fire the teardown tag if and only if the main tag fires successfully. If false, fire the teardown tag regardless of main tag firing status.
           example: true
-    SetupTag:
-      type: object
-      description: Represents a setup tag relationship. A setup tag fires before the main tag.
-      properties:
-        tagName:
-          type: string
-          description: The name of the setup tag.
-          example: example_value
-        stopOnSetupFailure:
-          type: boolean
-          description: If true, fire the main tag only if the setup tag fires successfully. If false, fire the main tag regardless of setup tag firing status.
-          example: true
     Parameter:
       type: object
       description: Represents a Google Tag Manager Parameter. Parameters are key-value pairs that configure tags, triggers, and variables.
@@ -732,26 +726,6 @@ components:
           example: true
       required:
       - type
-    RevertTagResponse:
-      type: object
-      description: The result of reverting a tag in a workspace.
-      properties:
-        tag:
-          $ref: '#/components/schemas/Tag'
-    ListTagsResponse:
-      type: object
-      description: List Tags Response.
-      properties:
-        tag:
-          type: array
-          description: All GTM Tags of a GTM Container Workspace.
-          items:
-            $ref: '#/components/schemas/Tag'
-          example: []
-        nextPageToken:
-          type: string
-          description: Continuation token for fetching the next page of results.
-          example: example_value
     ConsentSettings:
       type: object
       description: Tag consent settings.
@@ -766,6 +740,32 @@ components:
           example: notSet
         consentType:
           $ref: '#/components/schemas/Parameter'
+    SetupTag:
+      type: object
+      description: Represents a setup tag relationship. A setup tag fires before the main tag.
+      properties:
+        tagName:
+          type: string
+          description: The name of the setup tag.
+          example: example_value
+        stopOnSetupFailure:
+          type: boolean
+          description: If true, fire the main tag only if the setup tag fires successfully. If false, fire the main tag regardless of setup tag firing status.
+          example: true
+    ListTagsResponse:
+      type: object
+      description: List Tags Response.
+      properties:
+        tag:
+          type: array
+          description: All GTM Tags of a GTM Container Workspace.
+          items:
+            $ref: '#/components/schemas/Tag'
+          example: []
+        nextPageToken:
+          type: string
+          description: Continuation token for fetching the next page of results.
+          example: example_value
   parameters:
     parentParam:
       name: parent

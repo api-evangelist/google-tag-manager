@@ -386,20 +386,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ListVariablesResponse:
-      type: object
-      description: List Variables Response.
-      properties:
-        variable:
-          type: array
-          description: All GTM Variables of a GTM Container Workspace.
-          items:
-            $ref: '#/components/schemas/Variable'
-          example: []
-        nextPageToken:
-          type: string
-          description: Continuation token for fetching the next page of results.
-          example: example_value
     Variable:
       type: object
       description: Represents a Google Tag Manager Variable. A variable provides dynamic values that can be used in tags and triggers, such as page URL, click text, or custom JavaScript values.
@@ -552,6 +538,20 @@ components:
           $ref: '#/components/schemas/Parameter'
         convertFalseToValue:
           $ref: '#/components/schemas/Parameter'
+    ListVariablesResponse:
+      type: object
+      description: List Variables Response.
+      properties:
+        variable:
+          type: array
+          description: All GTM Variables of a GTM Container Workspace.
+          items:
+            $ref: '#/components/schemas/Variable'
+          example: []
+        nextPageToken:
+          type: string
+          description: Continuation token for fetching the next page of results.
+          example: example_value
     RevertVariableResponse:
       type: object
       description: The result of reverting a variable in a workspace.
