@@ -539,12 +539,49 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RevertTagResponse:
+    Parameter:
       type: object
-      description: The result of reverting a tag in a workspace.
+      description: Represents a Google Tag Manager Parameter. Parameters are key-value pairs that configure tags, triggers, and variables.
       properties:
-        tag:
-          $ref: '#/components/schemas/Tag'
+        type:
+          type: string
+          description: The parameter type.
+          enum:
+          - typeUnspecified
+          - template
+          - integer
+          - boolean
+          - list
+          - map
+          - triggerReference
+          - tagReference
+          example: typeUnspecified
+        key:
+          type: string
+          description: The named key that uniquely identifies a parameter. Required for top-level parameters, as well as map values. Ignored for list values.
+          example: example_value
+        value:
+          type: string
+          description: A parameter's value (may contain variable references) as appropriate to the specified type.
+          example: example_value
+        list:
+          type: array
+          description: This list parameter's parameters (keys will be ignored). Used when type is list.
+          items:
+            $ref: '#/components/schemas/Parameter'
+          example: []
+        map:
+          type: array
+          description: This map parameter's parameters (must have keys; keys must be unique). Used when type is map.
+          items:
+            $ref: '#/components/schemas/Parameter'
+          example: []
+        isWeakReference:
+          type: boolean
+          description: Whether or not the parameter is a weak reference. Used to determine which parameters should be included in exported containers.
+          example: true
+      required:
+      - type
     Tag:
       type: object
       description: Represents a Google Tag Manager Tag. A tag is a snippet of code that executes on a page when certain conditions (triggers) are met.
@@ -671,75 +708,6 @@ components:
       required:
       - name
       - type
-    TeardownTag:
-      type: object
-      description: Represents a teardown tag relationship. A teardown tag fires after the main tag.
-      properties:
-        tagName:
-          type: string
-          description: The name of the teardown tag.
-          example: example_value
-        stopTeardownOnFailure:
-          type: boolean
-          description: If true, fire the teardown tag if and only if the main tag fires successfully. If false, fire the teardown tag regardless of main tag firing status.
-          example: true
-    Parameter:
-      type: object
-      description: Represents a Google Tag Manager Parameter. Parameters are key-value pairs that configure tags, triggers, and variables.
-      properties:
-        type:
-          type: string
-          description: The parameter type.
-          enum:
-          - typeUnspecified
-          - template
-          - integer
-          - boolean
-          - list
-          - map
-          - triggerReference
-          - tagReference
-          example: typeUnspecified
-        key:
-          type: string
-          description: The named key that uniquely identifies a parameter. Required for top-level parameters, as well as map values. Ignored for list values.
-          example: example_value
-        value:
-          type: string
-          description: A parameter's value (may contain variable references) as appropriate to the specified type.
-          example: example_value
-        list:
-          type: array
-          description: This list parameter's parameters (keys will be ignored). Used when type is list.
-          items:
-            $ref: '#/components/schemas/Parameter'
-          example: []
-        map:
-          type: array
-          description: This map parameter's parameters (must have keys; keys must be unique). Used when type is map.
-          items:
-            $ref: '#/components/schemas/Parameter'
-          example: []
-        isWeakReference:
-          type: boolean
-          description: Whether or not the parameter is a weak reference. Used to determine which parameters should be included in exported containers.
-          example: true
-      required:
-      - type
-    ConsentSettings:
-      type: object
-      description: Tag consent settings.
-      properties:
-        consentStatus:
-          type: string
-          description: The tag's consent status.
-          enum:
-          - notSet
-          - notNeeded
-          - needed
-          example: notSet
-        consentType:
-          $ref: '#/components/schemas/Parameter'
     SetupTag:
       type: object
       description: Represents a setup tag relationship. A setup tag fires before the main tag.
@@ -766,6 +734,38 @@ components:
           type: string
           description: Continuation token for fetching the next page of results.
           example: example_value
+    RevertTagResponse:
+      type: object
+      description: The result of reverting a tag in a workspace.
+      properties:
+        tag:
+          $ref: '#/components/schemas/Tag'
+    ConsentSettings:
+      type: object
+      description: Tag consent settings.
+      properties:
+        consentStatus:
+          type: string
+          description: The tag's consent status.
+          enum:
+          - notSet
+          - notNeeded
+          - needed
+          example: notSet
+        consentType:
+          $ref: '#/components/schemas/Parameter'
+    TeardownTag:
+      type: object
+      description: Represents a teardown tag relationship. A teardown tag fires after the main tag.
+      properties:
+        tagName:
+          type: string
+          description: The name of the teardown tag.
+          example: example_value
+        stopTeardownOnFailure:
+          type: boolean
+          description: If true, fire the teardown tag if and only if the main tag fires successfully. If false, fire the teardown tag regardless of main tag firing status.
+          example: true
   parameters:
     parentParam:
       name: parent

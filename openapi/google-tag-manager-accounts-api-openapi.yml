@@ -171,15 +171,35 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    pathParam:
-      name: path
-      in: path
-      required: true
-      description: GTM resource's API relative path, e.g. accounts/{accountId}.
-      schema:
-        type: string
   schemas:
+    ListAccountsResponse:
+      type: object
+      description: List Accounts Response.
+      properties:
+        account:
+          type: array
+          description: List of GTM Accounts that a user has access to.
+          items:
+            $ref: '#/components/schemas/Account'
+          example: []
+        nextPageToken:
+          type: string
+          description: Continuation token for fetching the next page of results.
+          example: example_value
+    AccountFeatures:
+      type: object
+      description: Read-only account feature set.
+      properties:
+        supportUserPermissions:
+          type: boolean
+          description: Whether this account has user permissions management enabled.
+          readOnly: true
+          example: true
+        supportMultipleContainers:
+          type: boolean
+          description: Whether this account supports multiple containers.
+          readOnly: true
+          example: true
     Account:
       type: object
       description: Represents a Google Tag Manager Account.
@@ -217,34 +237,14 @@ components:
           $ref: '#/components/schemas/AccountFeatures'
       required:
       - name
-    AccountFeatures:
-      type: object
-      description: Read-only account feature set.
-      properties:
-        supportUserPermissions:
-          type: boolean
-          description: Whether this account has user permissions management enabled.
-          readOnly: true
-          example: true
-        supportMultipleContainers:
-          type: boolean
-          description: Whether this account supports multiple containers.
-          readOnly: true
-          example: true
-    ListAccountsResponse:
-      type: object
-      description: List Accounts Response.
-      properties:
-        account:
-          type: array
-          description: List of GTM Accounts that a user has access to.
-          items:
-            $ref: '#/components/schemas/Account'
-          example: []
-        nextPageToken:
-          type: string
-          description: Continuation token for fetching the next page of results.
-          example: example_value
+  parameters:
+    pathParam:
+      name: path
+      in: path
+      required: true
+      description: GTM resource's API relative path, e.g. accounts/{accountId}.
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2
