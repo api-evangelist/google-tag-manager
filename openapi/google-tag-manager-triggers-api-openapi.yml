@@ -1154,97 +1154,15 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    parentParam:
+      name: parent
+      in: path
+      required: true
+      description: GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers.
+      schema:
+        type: string
   schemas:
-    Parameter:
-      type: object
-      description: Represents a Google Tag Manager Parameter. Parameters are key-value pairs that configure tags, triggers, and variables.
-      properties:
-        type:
-          type: string
-          description: The parameter type.
-          enum:
-          - typeUnspecified
-          - template
-          - integer
-          - boolean
-          - list
-          - map
-          - triggerReference
-          - tagReference
-          example: typeUnspecified
-        key:
-          type: string
-          description: The named key that uniquely identifies a parameter. Required for top-level parameters, as well as map values. Ignored for list values.
-          example: example_value
-        value:
-          type: string
-          description: A parameter's value (may contain variable references) as appropriate to the specified type.
-          example: example_value
-        list:
-          type: array
-          description: This list parameter's parameters (keys will be ignored). Used when type is list.
-          items:
-            $ref: '#/components/schemas/Parameter'
-          example: []
-        map:
-          type: array
-          description: This map parameter's parameters (must have keys; keys must be unique). Used when type is map.
-          items:
-            $ref: '#/components/schemas/Parameter'
-          example: []
-        isWeakReference:
-          type: boolean
-          description: Whether or not the parameter is a weak reference. Used to determine which parameters should be included in exported containers.
-          example: true
-      required:
-      - type
-    ListTriggersResponse:
-      type: object
-      description: List Triggers Response.
-      properties:
-        trigger:
-          type: array
-          description: All GTM Triggers of a GTM Container Workspace.
-          items:
-            $ref: '#/components/schemas/Trigger'
-          example: []
-        nextPageToken:
-          type: string
-          description: Continuation token for fetching the next page of results.
-          example: example_value
-    Condition:
-      type: object
-      description: Represents a predicate that is evaluated against a data layer value or variable. Used in trigger filter conditions.
-      properties:
-        type:
-          type: string
-          description: The type of operator for this condition.
-          enum:
-          - conditionTypeUnspecified
-          - equals
-          - contains
-          - startsWith
-          - endsWith
-          - matchRegex
-          - greater
-          - greaterOrEquals
-          - less
-          - lessOrEquals
-          - cssSelector
-          - urlMatches
-          example: conditionTypeUnspecified
-        parameter:
-          type: array
-          description: A list of named parameters (key/value), depending on the condition's type. The first parameter is the left-hand operand, the second is the right-hand operand.
-          items:
-            $ref: '#/components/schemas/Parameter'
-          example: []
-    RevertTriggerResponse:
-      type: object
-      description: The result of reverting a trigger in a workspace.
-      properties:
-        trigger:
-          $ref: '#/components/schemas/Trigger'
     Trigger:
       type: object
       description: Represents a Google Tag Manager Trigger. A trigger defines conditions under which tags should fire, such as page views, clicks, form submissions, or custom events.
@@ -1398,14 +1316,96 @@ components:
       required:
       - name
       - type
-  parameters:
-    parentParam:
-      name: parent
-      in: path
-      required: true
-      description: GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers.
-      schema:
-        type: string
+    ListTriggersResponse:
+      type: object
+      description: List Triggers Response.
+      properties:
+        trigger:
+          type: array
+          description: All GTM Triggers of a GTM Container Workspace.
+          items:
+            $ref: '#/components/schemas/Trigger'
+          example: []
+        nextPageToken:
+          type: string
+          description: Continuation token for fetching the next page of results.
+          example: example_value
+    Condition:
+      type: object
+      description: Represents a predicate that is evaluated against a data layer value or variable. Used in trigger filter conditions.
+      properties:
+        type:
+          type: string
+          description: The type of operator for this condition.
+          enum:
+          - conditionTypeUnspecified
+          - equals
+          - contains
+          - startsWith
+          - endsWith
+          - matchRegex
+          - greater
+          - greaterOrEquals
+          - less
+          - lessOrEquals
+          - cssSelector
+          - urlMatches
+          example: conditionTypeUnspecified
+        parameter:
+          type: array
+          description: A list of named parameters (key/value), depending on the condition's type. The first parameter is the left-hand operand, the second is the right-hand operand.
+          items:
+            $ref: '#/components/schemas/Parameter'
+          example: []
+    RevertTriggerResponse:
+      type: object
+      description: The result of reverting a trigger in a workspace.
+      properties:
+        trigger:
+          $ref: '#/components/schemas/Trigger'
+    Parameter:
+      type: object
+      description: Represents a Google Tag Manager Parameter. Parameters are key-value pairs that configure tags, triggers, and variables.
+      properties:
+        type:
+          type: string
+          description: The parameter type.
+          enum:
+          - typeUnspecified
+          - template
+          - integer
+          - boolean
+          - list
+          - map
+          - triggerReference
+          - tagReference
+          example: typeUnspecified
+        key:
+          type: string
+          description: The named key that uniquely identifies a parameter. Required for top-level parameters, as well as map values. Ignored for list values.
+          example: example_value
+        value:
+          type: string
+          description: A parameter's value (may contain variable references) as appropriate to the specified type.
+          example: example_value
+        list:
+          type: array
+          description: This list parameter's parameters (keys will be ignored). Used when type is list.
+          items:
+            $ref: '#/components/schemas/Parameter'
+          example: []
+        map:
+          type: array
+          description: This map parameter's parameters (must have keys; keys must be unique). Used when type is map.
+          items:
+            $ref: '#/components/schemas/Parameter'
+          example: []
+        isWeakReference:
+          type: boolean
+          description: Whether or not the parameter is a weak reference. Used to determine which parameters should be included in exported containers.
+          example: true
+      required:
+      - type
   securitySchemes:
     oauth2:
       type: oauth2
