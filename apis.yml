@@ -304,6 +304,8 @@ apis:
   - type: ChangeLog
     url: https://support.google.com/tagmanager/answer/4620708
 common:
+  - type: FinOps
+    url: finops/google-tag-manager-finops.yml
   - type: Website
     url: https://www.google.com/
   - type: CapabilityMap
