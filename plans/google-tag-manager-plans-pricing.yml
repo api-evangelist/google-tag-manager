@@ -103,3 +103,23 @@ notes:
     The API is not a separately priced product on either tier. The commercial gate
     on Tag Manager is the product tier, not API metering - which is why the quota in
     rate-limits/ is the real constraint an integrator plans against.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - metered
+  units: []
+  plans:
+  - name: Google Tag Manager
+    access: free
+    model: metered
+    model_how: derived
+    units: []
+    periods: []
+  - name: Tag Manager 360
+    access: enterprise
+    model: free
+    model_how: derived
+    units: []
+    periods: []
