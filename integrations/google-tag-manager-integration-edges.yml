@@ -1,0 +1,52 @@
+generated: '2026-10-14'
+edges:
+- partner_name: Twilio Segment
+  partner: segment
+  partner_match: aggregator
+  marketplace: coverage
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://www.twilio.com/docs/segment/connections/destinations/catalog/google-tag-manager
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - google-tag-manager
+      status: PUBLIC
+      partner_owned: false
+      connection_modes:
+      - device:web
+      accepted_methods:
+      - Page
+      - Track
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: mParticle
+  partner: mparticle
+  partner_match: aggregator
+  marketplace: coverage
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/google-tag-manager/event/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - google-tag-manager
+      integration_types:
+      - event
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+method: searched
+checked:
+- https://docs.mparticle.com/integrations/google-tag-manager/event/
+- https://www.twilio.com/docs/segment/connections/destinations/catalog/google-tag-manager
+source:
+- https://docs.mparticle.com/integrations/google-tag-manager/event/
+- https://www.twilio.com/docs/segment/connections/destinations/catalog/google-tag-manager
