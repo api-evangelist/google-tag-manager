@@ -227,20 +227,34 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    parentParam:
+      name: parent
+      in: path
+      required: true
+      description: GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers.
+      schema:
+        type: string
   schemas:
-    AccountAccess:
+    ContainerAccess:
       type: object
-      description: Defines the Google Tag Manager Account access permissions.
+      description: Defines the Google Tag Manager Container access permissions.
       properties:
+        containerId:
+          type: string
+          description: GTM Container ID.
+          example: '500123'
         permission:
           type: string
-          description: Whether the user has no access, user access, or admin access to the account.
+          description: List of Container permissions. Valid values include noAccess, read, edit, approve, and publish.
           enum:
-          - accountPermissionUnspecified
+          - containerPermissionUnspecified
           - noAccess
-          - user
-          - admin
-          example: accountPermissionUnspecified
+          - read
+          - edit
+          - approve
+          - publish
+          example: containerPermissionUnspecified
     UserPermission:
       type: object
       description: Represents a user's permission settings for a Google Tag Manager Account and its Containers.
@@ -282,33 +296,19 @@ components:
           type: string
           description: Continuation token for fetching the next page of results.
           example: example_value
-    ContainerAccess:
+    AccountAccess:
       type: object
-      description: Defines the Google Tag Manager Container access permissions.
+      description: Defines the Google Tag Manager Account access permissions.
       properties:
-        containerId:
-          type: string
-          description: GTM Container ID.
-          example: '500123'
         permission:
           type: string
-          description: List of Container permissions. Valid values include noAccess, read, edit, approve, and publish.
+          description: Whether the user has no access, user access, or admin access to the account.
           enum:
-          - containerPermissionUnspecified
+          - accountPermissionUnspecified
           - noAccess
-          - read
-          - edit
-          - approve
-          - publish
-          example: containerPermissionUnspecified
-  parameters:
-    parentParam:
-      name: parent
-      in: path
-      required: true
-      description: GTM parent resource's API relative path, e.g. accounts/{accountId} for listing containers.
-      schema:
-        type: string
+          - user
+          - admin
+          example: accountPermissionUnspecified
   securitySchemes:
     oauth2:
       type: oauth2

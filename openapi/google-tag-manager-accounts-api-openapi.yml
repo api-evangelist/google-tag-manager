@@ -186,20 +186,6 @@ components:
           type: string
           description: Continuation token for fetching the next page of results.
           example: example_value
-    AccountFeatures:
-      type: object
-      description: Read-only account feature set.
-      properties:
-        supportUserPermissions:
-          type: boolean
-          description: Whether this account has user permissions management enabled.
-          readOnly: true
-          example: true
-        supportMultipleContainers:
-          type: boolean
-          description: Whether this account supports multiple containers.
-          readOnly: true
-          example: true
     Account:
       type: object
       description: Represents a Google Tag Manager Account.
@@ -237,6 +223,20 @@ components:
           $ref: '#/components/schemas/AccountFeatures'
       required:
       - name
+    AccountFeatures:
+      type: object
+      description: Read-only account feature set.
+      properties:
+        supportUserPermissions:
+          type: boolean
+          description: Whether this account has user permissions management enabled.
+          readOnly: true
+          example: true
+        supportMultipleContainers:
+          type: boolean
+          description: Whether this account supports multiple containers.
+          readOnly: true
+          example: true
   parameters:
     pathParam:
       name: path
