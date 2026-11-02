@@ -1,0 +1,49 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-28'
+method: searched
+source: https://marketingplatform.google.com/about/tag-manager/
+sources:
+- https://marketingplatform.google.com/about/tag-manager/
+provenance:
+  tool: engine/economics/harvest_pricing.py
+  run: 20261028T141238
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: free
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-10-28'
+  managed_tier: Tag Manager 360
+published: false
+note: No numeric price is published on the pricing page; Product overview page; states Tag Manager is
+  free but shows no numeric prices. Tag Manager 360 has no price listed.
+plan_count: 2
+plans:
+- name: Tag Manager
+  price_text: for free
+  period: none
+  included_quota: Manage all your tags without editing code - for free.
+- name: Tag Manager 360
+  price_text: Manage all your tags in one place for a smarter, simpler way to oversee your marketing.
+  period: none
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models: []
+  units: []
+  plans:
+  - name: Tag Manager
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
+  - name: Tag Manager 360
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
