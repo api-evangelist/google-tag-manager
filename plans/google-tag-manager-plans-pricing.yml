@@ -2,6 +2,7 @@
 generated: '2026-10-28'
 method: searched
 source: https://marketingplatform.google.com/about/tag-manager/
+name: Google Tag Manager API Plans
 sources:
 - https://marketingplatform.google.com/about/tag-manager/
 provenance:
@@ -28,7 +29,7 @@ plans:
   price_text: Manage all your tags in one place for a smarter, simpler way to oversee your marketing.
   period: none
 x-canonical:
-  generated: '2026-11-02'
+  generated: '2026-11-06'
   vocabulary: engine/economics/plans-canonical.yml
   models: []
   units: []

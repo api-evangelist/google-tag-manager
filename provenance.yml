@@ -239,6 +239,9 @@ artifacts:
   front-door-ai/2026-09-17.yml:
     method: unknown
     evidence: no authorship recorded
+  hosts/google-tag-manager-hosts.yml:
+    method: derived
+    evidence: declared in the artifact
   integrations/_index.yml:
     method: generated
     evidence: carries an API Evangelist house phrase
@@ -554,6 +557,9 @@ artifacts:
   lifecycle/google-tag-manager-lifecycle.yml:
     method: searched
     evidence: declared in the artifact
+  llms/google-tag-manager-llms-provenance.yml:
+    method: searched
+    evidence: 'derive-llms-provenance.py: harvested'
   llms/google-tag-manager-llms.txt:
     method: searched
     evidence: 'derive-llms-provenance.py: harvested'
@@ -601,6 +607,9 @@ artifacts:
   overlays/google-tag-manager-containers-api-overlay.yaml:
     method: derived
     evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/google-tag-manager-tag-manager-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
   overlays/google-tag-manager-tagmanager-api-overlay.yaml:
     method: derived
     evidence: an API Evangelist overlay (title) over the provider's contract
@@ -622,6 +631,9 @@ artifacts:
   packages/google-tag-manager-packages.yml:
     method: searched
     evidence: declared in the artifact
+  patterns/google-tag-manager-patterns.yml:
+    method: derived
+    evidence: declared in the artifact
   plans/google-tag-manager-plans-pricing.yml:
     method: searched
     evidence: declared in the artifact
@@ -632,6 +644,9 @@ artifacts:
     method: searched
     evidence: declared in the artifact
   rules/google-tag-manager-jsonschema-spectral-rules.yml:
+    method: generated
+    evidence: declared in the artifact
+  rules/google-tag-manager-rules.yml:
     method: generated
     evidence: declared in the artifact
   rules/google-tag-manager-spectral-rules.yml:
@@ -676,9 +691,15 @@ artifacts:
   sla/google-tag-manager-sla.yml:
     method: generated
     evidence: declared in the artifact
+  vendors/google-tag-manager-vendors.yml:
+    method: unknown
+    evidence: no authorship recorded
   vocabulary/google-tag-manager-vocabulary.yaml:
     method: unknown
     evidence: no authorship recorded
+  vocabulary/google-tag-manager-vocabulary.yml:
+    method: derived
+    evidence: declared in the artifact
   well-known/google-tag-manager-oauth-authorization-server.json:
     method: unknown
     evidence: no authorship recorded
