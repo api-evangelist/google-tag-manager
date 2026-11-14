@@ -5,6 +5,9 @@ artifacts:
   agentic-access/google-tag-manager-agentic-access.yml:
     method: generated
     evidence: declared in the artifact
+  ai-preferences/google-tag-manager-ai-preferences.yml:
+    method: harvested
+    evidence: declared in the artifact
   arazzo/google-tag-manager-audit-container-versions-workflow.yml:
     method: derived
     evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
@@ -47,6 +50,12 @@ artifacts:
   capabilities/google-tag-manager-capability-edges.yml:
     method: unknown
     evidence: no authorship recorded
+  certification/observations-2026-11-11.jsonl:
+    method: unknown
+    evidence: no authorship recorded
+  certification/status.yml:
+    method: unknown
+    evidence: no authorship recorded
   changelog/google-tag-manager-changelog.yml:
     method: searched
     evidence: declared in the artifact
@@ -63,11 +72,11 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   collections/google-tag-manager-containers-api.opencollection.json:
-    method: derived
-    evidence: openapi/google-tag-manager-containers-api
+    method: unknown
+    evidence: no authorship recorded
   collections/google-tag-manager-containers-api.postman_collection.json:
-    method: derived
-    evidence: openapi/google-tag-manager-containers-api
+    method: unknown
+    evidence: no authorship recorded
   collections/google-tag-manager-tagmanager-api.opencollection.json:
     method: unknown
     evidence: no authorship recorded
@@ -75,35 +84,38 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   collections/google-tag-manager-triggers-api.opencollection.json:
-    method: derived
-    evidence: openapi/google-tag-manager-triggers-api
+    method: unknown
+    evidence: no authorship recorded
   collections/google-tag-manager-triggers-api.postman_collection.json:
-    method: derived
-    evidence: openapi/google-tag-manager-triggers-api
+    method: unknown
+    evidence: no authorship recorded
   collections/google-tag-manager-user-permissions-api.opencollection.json:
-    method: derived
-    evidence: openapi/google-tag-manager-user-permissions-api
+    method: unknown
+    evidence: no authorship recorded
   collections/google-tag-manager-user-permissions-api.postman_collection.json:
-    method: derived
-    evidence: openapi/google-tag-manager-user-permissions-api
+    method: unknown
+    evidence: no authorship recorded
   collections/google-tag-manager-variables-api.opencollection.json:
-    method: derived
-    evidence: openapi/google-tag-manager-variables-api
+    method: unknown
+    evidence: no authorship recorded
   collections/google-tag-manager-variables-api.postman_collection.json:
-    method: derived
-    evidence: openapi/google-tag-manager-variables-api
+    method: unknown
+    evidence: no authorship recorded
   collections/google-tag-manager-versions-api.opencollection.json:
-    method: derived
-    evidence: openapi/google-tag-manager-versions-api
+    method: unknown
+    evidence: no authorship recorded
   collections/google-tag-manager-versions-api.postman_collection.json:
-    method: derived
-    evidence: openapi/google-tag-manager-versions-api
+    method: unknown
+    evidence: no authorship recorded
   collections/google-tag-manager-workspaces-api.opencollection.json:
-    method: derived
-    evidence: openapi/google-tag-manager-workspaces-api
+    method: unknown
+    evidence: no authorship recorded
   collections/google-tag-manager-workspaces-api.postman_collection.json:
-    method: derived
-    evidence: openapi/google-tag-manager-workspaces-api
+    method: unknown
+    evidence: no authorship recorded
+  compliance/google-tag-manager-compliance.yml:
+    method: harvested
+    evidence: declared in the artifact
   components/google-tag-manager-components.yml:
     method: searched
     evidence: declared in the artifact
@@ -113,8 +125,18 @@ artifacts:
   conventions/google-tag-manager-conventions.yml:
     method: derived
     evidence: declared in the artifact
+  data-license/google-tag-manager-data-license.yml:
+    method: harvested
+    evidence: declared in the artifact
   data-model/google-tag-manager-data-model.yml:
     method: derived
+    evidence: declared in the artifact
+  discovery/tagmanager-v2.json:
+    method: harvested
+    evidence: byte-identical to https://tagmanager.googleapis.com/$discovery/rest?version=v2 (sha256 692d156085b8,
+      fetched 2026-11-12T01:35:14+00:00)
+  eligibility/google-tag-manager-eligibility.yml:
+    method: harvested
     evidence: declared in the artifact
   errors/google-tag-manager-problem-types.yml:
     method: searched
@@ -488,7 +510,7 @@ artifacts:
   kin/checks-2026-10-23T222754.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
-  kin/checks-2026-11-02T082323.yml:
+  kin/checks-2026-11-06T143934.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-09-23T000603.yml:
@@ -554,6 +576,9 @@ artifacts:
   kin/score-2026-11-02T082323.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-11-06T143934.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
   lifecycle/google-tag-manager-lifecycle.yml:
     method: searched
     evidence: declared in the artifact
@@ -569,38 +594,9 @@ artifacts:
   mcp/google-tag-manager-tool-crosswalk.yml:
     method: derived
     evidence: declared in the artifact
-  openapi/_original/google-tag-manager-api-v2-openapi.yml:
-    method: harvested
-    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
-      to the provider's source is unverified
-  openapi/_original/google-tag-manager-tagmanager-v2-discovery.json:
-    method: harvested
-    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
-      to the provider's source is unverified
   openapi/google-tag-manager-accounts-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/google-tag-manager-containers-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/google-tag-manager-tag-manager-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/google-tag-manager-triggers-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/google-tag-manager-user-permissions-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/google-tag-manager-variables-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/google-tag-manager-versions-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/google-tag-manager-workspaces-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+    method: unknown
+    evidence: no authorship recorded
   overlays/google-tag-manager-accounts-api-overlay.yaml:
     method: derived
     evidence: an API Evangelist overlay (title) over the provider's contract
@@ -640,6 +636,9 @@ artifacts:
   postman/google-tag-manager-api-v2.postman_collection.json:
     method: unknown
     evidence: no authorship recorded
+  privacy/google-tag-manager-privacy-policy.yml:
+    method: harvested
+    evidence: declared in the artifact
   rate-limits/google-tag-manager-rate-limits.yml:
     method: searched
     evidence: declared in the artifact
@@ -690,6 +689,9 @@ artifacts:
     evidence: declared in the artifact
   sla/google-tag-manager-sla.yml:
     method: generated
+    evidence: declared in the artifact
+  terms/google-tag-manager-terms-of-service.yml:
+    method: harvested
     evidence: declared in the artifact
   vendors/google-tag-manager-vendors.yml:
     method: unknown
